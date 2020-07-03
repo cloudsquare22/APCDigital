@@ -14,6 +14,7 @@
 		8D9EEF6624AE8D0000E855C4 /* APCDigital.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8D9EEF6424AE8D0000E855C4 /* APCDigital.xcdatamodeld */; };
 		8D9EEF6824AE8D0100E855C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D9EEF6724AE8D0100E855C4 /* Assets.xcassets */; };
 		8D9EEF6B24AE8D0100E855C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D9EEF6924AE8D0100E855C4 /* LaunchScreen.storyboard */; };
+		8D9EEF7324AFF6F700E855C4 /* Pages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9EEF7224AFF6F700E855C4 /* Pages.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		8D9EEF6724AE8D0100E855C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D9EEF6A24AE8D0100E855C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D9EEF6C24AE8D0100E855C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D9EEF7224AFF6F700E855C4 /* Pages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pages.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				8D9EEF6924AE8D0100E855C4 /* LaunchScreen.storyboard */,
 				8D9EEF6C24AE8D0100E855C4 /* Info.plist */,
 				8D9EEF6424AE8D0000E855C4 /* APCDigital.xcdatamodeld */,
+				8D9EEF7224AFF6F700E855C4 /* Pages.swift */,
 			);
 			path = APCDigital;
 			sourceTree = "<group>";
@@ -143,6 +146,7 @@
 			files = (
 				8D9EEF6024AE8D0000E855C4 /* ViewController.swift in Sources */,
 				8D9EEF6624AE8D0000E855C4 /* APCDigital.xcdatamodeld in Sources */,
+				8D9EEF7324AFF6F700E855C4 /* Pages.swift in Sources */,
 				8D9EEF5C24AE8D0000E855C4 /* AppDelegate.swift in Sources */,
 				8D9EEF5E24AE8D0000E855C4 /* SceneDelegate.swift in Sources */,
 			);
