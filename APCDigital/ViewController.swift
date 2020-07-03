@@ -12,9 +12,12 @@ import PencilKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var pKCanvasView: PKCanvasView!
+    @IBOutlet weak var month: UILabel!
     @IBOutlet weak var day1: UILabel!
+    @IBOutlet weak var day2: UILabel!
     
     var week = 1
+    var dateMonday = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +35,14 @@ class ViewController: UIViewController {
         swipeRight .direction = .right
         pKCanvasView.addGestureRecognizer(swipeRight)
 
+        print(Date().description(with: Calendar.current.locale))
+
+        let matching = DateComponents(weekday: 2)
+        dateMonday = Calendar.current.nextDate(after: dateMonday, matching: matching, matchingPolicy: .nextTime, direction: .backward)!
+        let monday = Calendar.current.dateComponents(in: .current, from: dateMonday)
+        print(monday)
+        self.day1.text = String(monday.day!)
+        self.month.text = String(monday.month!)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -50,11 +61,24 @@ class ViewController: UIViewController {
     @objc func swipeLeft(sender: UISwipeGestureRecognizer) {
         week = week + 1
         print(week)
+
+        let matching = DateComponents(weekday: 2)
+        dateMonday = Calendar.current.nextDate(after: dateMonday, matching: matching, matchingPolicy: .nextTime, direction: .forward)!
+        let monday = Calendar.current.dateComponents(in: .current, from: dateMonday)
+        print(monday)
+        self.day1.text = String(monday.day!)
+        self.month.text = String(monday.month!)
     }
 
     @objc func swipeRight(sender: UISwipeGestureRecognizer) {
         week = week - 1
         print(week)
+        let matching = DateComponents(weekday: 2)
+        dateMonday = Calendar.current.nextDate(after: dateMonday, matching: matching, matchingPolicy: .nextTime, direction: .backward)!
+        let monday = Calendar.current.dateComponents(in: .current, from: dateMonday)
+        print(monday)
+        self.day1.text = String(monday.day!)
+        self.month.text = String(monday.month!)
     }
 }
 
