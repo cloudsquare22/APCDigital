@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8D9EEF5824AE8D0000E855C4 /* APCDigital.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APCDigital.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D9EEF5824AE8D0000E855C4 /* Action Planner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Action Planner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D9EEF5B24AE8D0000E855C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D9EEF5D24AE8D0000E855C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8D9EEF5F24AE8D0000E855C4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -50,7 +50,7 @@
 		8D9EEF5924AE8D0000E855C4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D9EEF5824AE8D0000E855C4 /* APCDigital.app */,
+				8D9EEF5824AE8D0000E855C4 /* Action Planner.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -87,7 +87,7 @@
 			);
 			name = APCDigital;
 			productName = APCDigital;
-			productReference = 8D9EEF5824AE8D0000E855C4 /* APCDigital.app */;
+			productReference = 8D9EEF5824AE8D0000E855C4 /* Action Planner.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -296,9 +296,9 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.cloudsquare.ios.APCDigital;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Action Planner";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -314,9 +314,9 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.cloudsquare.ios.APCDigital;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Action Planner";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
