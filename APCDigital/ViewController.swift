@@ -54,10 +54,30 @@ class ViewController: UIViewController {
             pageMonday = Date()
         }
         updateDays()
+        
+        if let page = Pages.select(year: 2020, week: 27) {
+            print("select page")
+            do {
+                self.pKCanvasView.drawing = try PKDrawing(data: page)
+            }
+            catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+        else {
+            print("select no page")
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("viewWillAppear")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        print("viewDidAppear")
 
         if let window = self.pKCanvasView.window {
             let toolPicker = PKToolPicker.shared(for: window)
@@ -70,12 +90,19 @@ class ViewController: UIViewController {
     }
 
     @objc func swipeLeft(sender: UISwipeGestureRecognizer) {
+        let saveWeek = Calendar.current.dateComponents(in: .current, from: pageMonday)
+        Pages.upsert(year: saveWeek.year!, week: saveWeek.weekOfYear!, page: self.pKCanvasView.drawing.dataRepresentation())
+        
+        
         let matching = DateComponents(weekday: 2)
         pageMonday = Calendar.current.nextDate(after: pageMonday, matching: matching, matchingPolicy: .nextTime, direction: .forward)!
         updateDays()
     }
 
     @objc func swipeRight(sender: UISwipeGestureRecognizer) {
+        let saveWeek = Calendar.current.dateComponents(in: .current, from: pageMonday)
+        Pages.upsert(year: saveWeek.year!, week: saveWeek.weekOfYear!, page: self.pKCanvasView.drawing.dataRepresentation())
+
         let matching = DateComponents(weekday: 2)
         pageMonday = Calendar.current.nextDate(after: pageMonday, matching: matching, matchingPolicy: .nextTime, direction: .backward)!
         updateDays()
@@ -101,6 +128,22 @@ class ViewController: UIViewController {
         self.fromDay.text = Calendar.current.shortStandaloneMonthSymbols[monday.month! - 1].uppercased() + " " + String(monday.day!)
         self.toDay.text = "to " + Calendar.current.shortStandaloneMonthSymbols[sunday.month! - 1].uppercased() + " " + String(sunday.day!)
         self.weekOfYear.text = String(Calendar.current.component(.weekOfYear, from: pageMonday)) + " week"
+        
+        if let page = Pages.select(year: monday.year!, week: monday.weekOfYear!) {
+            print("select page")
+            do {
+                print(page.count)
+                self.pKCanvasView.drawing = try PKDrawing(data: page)
+            }
+            catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+        else {
+            self.pKCanvasView.drawing = PKDrawing()
+            print("select no page")
+        }
     }
     
 }
