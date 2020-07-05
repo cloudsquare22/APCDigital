@@ -15,10 +15,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="aptemplate" translatesAutoresizingMaskIntoConstraints="NO" id="sFW-U5-tyy">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="aptemplate" translatesAutoresizingMaskIntoConstraints="NO" id="sFW-U5-tyy">
                                 <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="omt-Zi-HtB" customClass="CalendarView" customModule="Action_Planner" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZzT-sx-gQf" customClass="PKCanvasView">
                                 <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                                 <subviews>
@@ -110,14 +112,23 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="sFW-U5-tyy" secondAttribute="trailing" id="8DN-Pf-FCV"/>
+                            <constraint firstAttribute="bottom" secondItem="sFW-U5-tyy" secondAttribute="bottom" id="Egg-fl-7xR"/>
+                            <constraint firstItem="sFW-U5-tyy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="RiN-bq-Du6"/>
+                            <constraint firstAttribute="trailing" secondItem="omt-Zi-HtB" secondAttribute="trailing" id="XmK-0T-4bm"/>
+                            <constraint firstItem="omt-Zi-HtB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="fRf-Su-EQM"/>
+                            <constraint firstItem="omt-Zi-HtB" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="hnR-sq-KKq"/>
                             <constraint firstAttribute="trailing" secondItem="ZzT-sx-gQf" secondAttribute="trailing" id="iH3-rw-ztp"/>
                             <constraint firstItem="ZzT-sx-gQf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="jbx-fb-yJn"/>
+                            <constraint firstAttribute="bottom" secondItem="omt-Zi-HtB" secondAttribute="bottom" id="mgH-KR-pe4"/>
+                            <constraint firstItem="sFW-U5-tyy" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="nwg-AX-ceP"/>
                             <constraint firstAttribute="bottom" secondItem="ZzT-sx-gQf" secondAttribute="bottom" id="tGH-Kx-7aw"/>
                             <constraint firstItem="ZzT-sx-gQf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="xXP-Jh-Bw4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="calendarView" destination="omt-Zi-HtB" id="BuX-UM-0kM"/>
                         <outlet property="day1" destination="yUv-DR-UYg" id="KPU-g8-oam"/>
                         <outlet property="day2" destination="wCY-L6-jrr" id="7rp-Fj-Xu8"/>
                         <outlet property="day3" destination="Pro-mw-Klr" id="mgA-cP-MgI"/>

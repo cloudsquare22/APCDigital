@@ -11,6 +11,7 @@ import PencilKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var calendarView: CalendarView!
     @IBOutlet weak var pKCanvasView: PKCanvasView!
     @IBOutlet weak var month: UILabel!
     @IBOutlet weak var day1: UILabel!
@@ -84,12 +85,17 @@ class ViewController: UIViewController {
             pKCanvasView.becomeFirstResponder()
             print("PKToolPicker Set")
         }
+        
+        calendarView.lalala()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("viewWillDisappear")
     }
 
     @objc func swipeLeft(sender: UISwipeGestureRecognizer) {
-        let saveWeek = Calendar.current.dateComponents(in: .current, from: pageMonday)
-        Pages.upsert(year: saveWeek.year!, week: saveWeek.weekOfYear!, page: self.pKCanvasView.drawing.dataRepresentation())
-        
+        pageUpsert()
         
         let matching = DateComponents(weekday: 2)
         pageMonday = Calendar.current.nextDate(after: pageMonday, matching: matching, matchingPolicy: .nextTime, direction: .forward)!
@@ -97,8 +103,7 @@ class ViewController: UIViewController {
     }
 
     @objc func swipeRight(sender: UISwipeGestureRecognizer) {
-        let saveWeek = Calendar.current.dateComponents(in: .current, from: pageMonday)
-        Pages.upsert(year: saveWeek.year!, week: saveWeek.weekOfYear!, page: self.pKCanvasView.drawing.dataRepresentation())
+        pageUpsert()
 
         let matching = DateComponents(weekday: 2)
         pageMonday = Calendar.current.nextDate(after: pageMonday, matching: matching, matchingPolicy: .nextTime, direction: .backward)!
@@ -145,6 +150,11 @@ class ViewController: UIViewController {
             self.pKCanvasView.drawing = PKDrawing()
             print("select no page")
         }
+    }
+    
+    func pageUpsert() {
+        let saveWeek = Calendar.current.dateComponents(in: .current, from: pageMonday)
+        Pages.upsert(year: saveWeek.year!, week: saveWeek.weekOfYear!, page: self.pKCanvasView.drawing.dataRepresentation())
     }
     
 }
