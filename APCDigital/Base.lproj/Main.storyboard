@@ -102,6 +102,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V51-NI-Mzf">
+                                <rect key="frame" x="0.0" y="0.0" width="1366" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -121,6 +126,7 @@
                         <outlet property="day6" destination="auM-dG-37P" id="pdP-Ds-Zy1"/>
                         <outlet property="day7" destination="wbc-Ns-15e" id="KfO-y1-D8v"/>
                         <outlet property="fromDay" destination="Rhs-U2-0Ze" id="Wdx-Xf-b9o"/>
+                        <outlet property="menuView" destination="V51-NI-Mzf" id="lUI-U5-4fF"/>
                         <outlet property="month" destination="sNn-CJ-hKd" id="d1L-ZG-cH1"/>
                         <outlet property="pKCanvasView" destination="ZzT-sx-gQf" id="aCO-X9-aWg"/>
                         <outlet property="toDay" destination="DrL-Uq-ZWk" id="0Nn-Vi-uJj"/>

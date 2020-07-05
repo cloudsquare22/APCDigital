@@ -23,16 +23,27 @@ class ViewController: UIViewController {
     @IBOutlet weak var fromDay: UILabel!
     @IBOutlet weak var toDay: UILabel!
     @IBOutlet weak var weekOfYear: UILabel!
+    @IBOutlet weak var menuView: UIView!
     
     var pageMonday = Date()
-    
+
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        menuView.isHidden = true
 
         pKCanvasView.allowsFingerDrawing = false
         pKCanvasView.isOpaque = false
         pKCanvasView.backgroundColor = .clear
         pKCanvasView.overrideUserInterfaceStyle = .light
+
+        let tapPKCanvasView = UITapGestureRecognizer(target: self, action: #selector(self.tapPKCanvasView(sender:)))
+        tapPKCanvasView.numberOfTapsRequired = 1
+        pKCanvasView.addGestureRecognizer(tapPKCanvasView)
 
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeLeft(sender:)))
         swipeLeft.direction = .left
@@ -54,20 +65,6 @@ class ViewController: UIViewController {
             pageMonday = Date()
         }
         updateDays()
-        
-        if let page = Pages.select(year: 2020, week: 27) {
-            print("select page")
-            do {
-                self.pKCanvasView.drawing = try PKDrawing(data: page)
-            }
-            catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
-        else {
-            print("select no page")
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,6 +103,10 @@ class ViewController: UIViewController {
         let matching = DateComponents(weekday: 2)
         pageMonday = Calendar.current.nextDate(after: pageMonday, matching: matching, matchingPolicy: .nextTime, direction: .backward)!
         updateDays()
+    }
+
+    @objc func tapPKCanvasView(sender: UITapGestureRecognizer) {
+        menuView.isHidden.toggle()
     }
     
     func updateDays() {
