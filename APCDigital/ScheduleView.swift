@@ -10,7 +10,8 @@ import UIKit
 
 class ScheduleView: UIView {
 
-    @IBOutlet var baseView: UIView!
+    @IBOutlet weak var baseView: UIView!
+    @IBOutlet weak var label: UILabel!
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -23,8 +24,12 @@ class ScheduleView: UIView {
         let leftBorder = CALayer()
         leftBorder.frame = CGRect(x: 0, y: 0, width: 1.0, height: baseView.frame.height)
         leftBorder.backgroundColor = UIColor.black.cgColor
+        let bottomBorder = CALayer()
+        bottomBorder.frame = CGRect(x: 0, y: baseView.frame.height, width: baseView.frame.width, height: 1.0)
+        bottomBorder.backgroundColor = UIColor.black.cgColor
         baseView.layer.addSublayer(topBorder)
         baseView.layer.addSublayer(leftBorder)
+        baseView.layer.addSublayer(bottomBorder)
     }
 
     required init(coder aDecoder: NSCoder) {

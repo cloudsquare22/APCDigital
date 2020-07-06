@@ -10,6 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScheduleView" customModule="Action_Planner" customModuleProvider="target">
             <connections>
                 <outlet property="baseView" destination="iN0-l3-epB" id="JIO-bb-lvb"/>
+                <outlet property="label" destination="eap-rL-4Ls" id="4lG-jL-sY0"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -19,8 +20,8 @@
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eap-rL-4Ls">
                     <rect key="frame" x="8" y="0.0" width="132" height="12"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>

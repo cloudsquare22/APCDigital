@@ -8,6 +8,7 @@
 
 import UIKit
 import PencilKit
+import EventKit
 
 class ViewController: UIViewController {
 
@@ -27,6 +28,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var menuView: UIView!
     
     var pageMonday = Date()
+    
+    var eventStore = EKEventStore()
 
     override var prefersStatusBarHidden: Bool {
         return true
@@ -34,6 +37,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        checkAuthorization()
         
         menuView.isHidden = true
 
@@ -86,7 +91,24 @@ class ViewController: UIViewController {
             print("PKToolPicker Set")
         }
         
-        calendarView.lalala()
+        print(pageMonday)
+        var startDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday)
+        startDateComponents.hour = 0
+        startDateComponents.minute = 0
+        startDateComponents.second = 0
+        startDateComponents.nanosecond = 0
+//        var endDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday + (86400 * 6))
+        var endDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday  + (86400 * 6))
+        endDateComponents.hour = 23
+        endDateComponents.minute = 59
+        endDateComponents.second = 59
+        endDateComponents.nanosecond = 0
+
+        calendarView.clearSchedule()
+        let predicate = eventStore.predicateForEvents(withStart: startDateComponents.date!, end: endDateComponents.date!, calendars: nil)
+        let eventArray = eventStore.events(matching: predicate)
+        calendarView.dispSchedule(eventArray: eventArray)
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -150,6 +172,24 @@ class ViewController: UIViewController {
             self.pKCanvasView.drawing = PKDrawing()
             print("select no page")
         }
+        
+        print(pageMonday)
+        var startDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday)
+        startDateComponents.hour = 0
+        startDateComponents.minute = 0
+        startDateComponents.second = 0
+        startDateComponents.nanosecond = 0
+        //        var endDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday + (86400 * 6))
+        var endDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday  + (86400 * 6))
+        endDateComponents.hour = 23
+        endDateComponents.minute = 59
+        endDateComponents.second = 59
+        endDateComponents.nanosecond = 0
+        calendarView.clearSchedule()
+
+        let predicate = eventStore.predicateForEvents(withStart: startDateComponents.date!, end: endDateComponents.date!, calendars: nil)
+        let eventArray = eventStore.events(matching: predicate)
+        calendarView.dispSchedule(eventArray: eventArray)
     }
     
     func pageUpsert() {
@@ -157,5 +197,22 @@ class ViewController: UIViewController {
         Pages.upsert(year: saveWeek.year!, week: saveWeek.weekOfYear!, page: self.pKCanvasView.drawing.dataRepresentation())
     }
     
+    func checkAuthorization() {
+        let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
+
+        if status == .authorized {
+            print("アクセスできます！！")
+        }
+        else if status == .notDetermined {
+            // アクセス権限のアラートを送る。
+            eventStore.requestAccess(to: EKEntityType.event) { (granted, error) in
+                if granted { // 許可されたら
+                    print("アクセス可能になりました。")
+                }else { // 拒否されたら
+                    print("アクセスが拒否されました。")
+                }
+            }
+        }
+    }
 }
 
