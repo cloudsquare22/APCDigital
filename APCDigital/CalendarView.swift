@@ -59,15 +59,15 @@ class CalendarView: UIView {
                     default:
                         x = 0.0
                     }
-                    var y: Double = Double(169 + (46 * (startDateComponents.hour! - 6)))
+                    var y: Double = 169.0 + 45.5 * Double(startDateComponents.hour! - 6)
                     if let minutes = startDateComponents.minute {
                         if minutes != 0 {
-                            y = y + 46.0 * (Double(minutes) / Double(60))
+                            y = y + 45.5 * (Double(minutes) / Double(60))
                         }
                     }
                     print(y)
                     let diff = event.endDate.timeIntervalSince(event.startDate) / 900
-                    let scheduleView = ScheduleView(frame: CGRect(x: x, y: y, width: 140.0, height: 11.5 * diff))
+                    let scheduleView = ScheduleView(frame: CGRect(x: x, y: y, width: 140.0, height: 11.375 * diff))
 //                    scheduleView.baseView.backgroundColor = UIColor(red: 1, green: 0.58, blue: 0, alpha: 0.3)
 //                    scheduleView.baseView.backgroundColor = UIColor(cgColor: event.calendar.cgColor)
                     scheduleView.baseView.backgroundColor = UIColor(red: event.calendar.cgColor.components![0],
@@ -81,9 +81,24 @@ class CalendarView: UIView {
                 }
             }
         }
-        let scheduleView = ScheduleView(frame: CGRect(x: 55, y: 169, width: 140, height: 46))
-        scheduleView.baseView.backgroundColor = UIColor(red: 1, green: 0.58, blue: 0, alpha: 0.3)
-        self.addSubview(scheduleView)
+//        let scheduleView = ScheduleView(frame: CGRect(x: 55, y: 169, width: 140, height: 45.5))
+//        scheduleView.baseView.backgroundColor = UIColor(red: 1, green: 0.58, blue: 0, alpha: 0.3)
+//        let scheduleView2 = ScheduleView(frame: CGRect(x: 55, y: 214.5, width: 140, height: 45.5))
+//        scheduleView2.baseView.backgroundColor = UIColor(red: 1, green: 0.58, blue: 0, alpha: 0.3)
+//        let scheduleView3 = ScheduleView(frame: CGRect(x: 55, y: 260, width: 140, height: 45.5))
+//        scheduleView3.baseView.backgroundColor = UIColor(red: 1, green: 0.58, blue: 0, alpha: 0.3)
+//        let scheduleView4 = ScheduleView(frame: CGRect(x: 55, y: 305.5, width: 140, height: 45.5))
+//        scheduleView4.baseView.backgroundColor = UIColor(red: 1, green: 0.58, blue: 0, alpha: 0.3)
+//        let scheduleView5 = ScheduleView(frame: CGRect(x: 55, y: 351, width: 140, height: 45.5))
+//        scheduleView5.baseView.backgroundColor = UIColor(red: 1, green: 0.58, blue: 0, alpha: 0.3)
+//        let scheduleView6 = ScheduleView(frame: CGRect(x: 55, y: 396.5, width: 140, height: 45.5))
+//        scheduleView6.baseView.backgroundColor = UIColor(red: 1, green: 0.58, blue: 0, alpha: 0.3)
+//        self.addSubview(scheduleView)
+//        self.addSubview(scheduleView2)
+//        self.addSubview(scheduleView3)
+//        self.addSubview(scheduleView4)
+//        self.addSubview(scheduleView5)
+//        self.addSubview(scheduleView6)
     }
     
     override func draw(_ rect: CGRect) {
