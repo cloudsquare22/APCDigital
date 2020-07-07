@@ -75,6 +75,17 @@ class CalendarView: UIView {
                                                                     blue: event.calendar.cgColor.components![2],
                                                                     alpha: 0.3)
                     scheduleView.label.text = event.title
+                    var minuteSFSymbol = "circle"
+                    switch startDateComponents.minute {
+                    case 0, 30:
+                        minuteSFSymbol = "circle"
+                    case 51, 52, 53, 54, 55, 56, 57, 58, 59:
+                        minuteSFSymbol = "circle"
+                    default:
+                        minuteSFSymbol = String(startDateComponents.minute!) + ".circle"
+                    }
+                    scheduleView.minute.image = UIImage(systemName: minuteSFSymbol)
+                    
                     if event.title.hasPrefix("🚗") == true || event.title.hasPrefix("🚃") {
                         scheduleView.addLine(isMove: true)
                     }
