@@ -41,6 +41,7 @@ class CalendarView: UIView {
                     print(endDateComponents)
                     print(startDateComponents.weekday!)
                     var x = 55.0
+                    var widthAdd = 0.0
                     switch startDateComponents.weekday! {
                     case 2:
                         x = 55.0
@@ -50,12 +51,14 @@ class CalendarView: UIView {
                         x = 55.0 + 148.0 * 2.0
                     case 5:
                         x = 55.0 + 148.0 * 3.0
+                        widthAdd = 3.5
                     case 6:
                         x = 55.0 + 73 + 148.0 * 4.0
                     case 7:
                         x = 55.0 + 73 + 148.0 * 5.0
                     case 1:
                         x = 55.0 + 73 + 148.0 * 6.0
+                        widthAdd = 3.5
                     default:
                         x = 0.0
                     }
@@ -67,7 +70,7 @@ class CalendarView: UIView {
                     }
                     print(y)
                     let diff = event.endDate.timeIntervalSince(event.startDate) / 900
-                    let scheduleView = ScheduleView(frame: CGRect(x: x, y: y, width: 140.0, height: 11.375 * diff))
+                    let scheduleView = ScheduleView(frame: CGRect(x: x, y: y, width: 140.0 + widthAdd, height: 11.375 * diff))
 //                    scheduleView.baseView.backgroundColor = UIColor(red: 1, green: 0.58, blue: 0, alpha: 0.3)
 //                    scheduleView.baseView.backgroundColor = UIColor(cgColor: event.calendar.cgColor)
                     scheduleView.baseView.backgroundColor = UIColor(red: event.calendar.cgColor.components![0],
