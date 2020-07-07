@@ -75,6 +75,12 @@ class CalendarView: UIView {
                                                                     blue: event.calendar.cgColor.components![2],
                                                                     alpha: 0.3)
                     scheduleView.label.text = event.title
+                    if event.title.hasPrefix("🚗") == true || event.title.hasPrefix("🚃") {
+                        scheduleView.addLine(isMove: true)
+                    }
+                    else {
+                        scheduleView.addLine(isMove: false)
+                    }
                     print(event.calendar.cgColor.components)
                     self.addSubview(scheduleView)
 
