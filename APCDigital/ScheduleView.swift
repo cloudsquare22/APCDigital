@@ -31,7 +31,7 @@ class ScheduleView: UIView {
         self.addSubview(view)
     }
     
-    func addLine(isMove: Bool) {
+    func addLine(isMove: Bool, isStartLineHideen: Bool) {
         let topBorder = CALayer()
         topBorder.frame = CGRect(x: 7, y: 0, width: baseView.frame.width - 7, height: 1.0)
         topBorder.backgroundColor = UIColor.black.cgColor
@@ -45,7 +45,9 @@ class ScheduleView: UIView {
         centerBorder.frame = CGRect(x: baseView.frame.width / 2, y: 0, width: 1.5, height: baseView.frame.height)
         centerBorder.backgroundColor = UIColor.black.cgColor
 
-        baseView.layer.addSublayer(topBorder)
+        if isStartLineHideen == false {
+            baseView.layer.addSublayer(topBorder)
+        }
         if isMove == false {
             baseView.layer.addSublayer(leftBorder)
         }

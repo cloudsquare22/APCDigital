@@ -31,14 +31,34 @@ class CalendarView: UIView {
     }
     
     func dispSchedule(eventArray: [EKEvent]) {
+//        print(eventArray)
         for event in eventArray {
-            if event.calendar.title == "work" || event.calendar.title == "oneself" {
-//                print(event)
+            if event.calendar.title == "work" || event.calendar.title == "oneself" || event.calendar.title == "FC Barcelona" {
                 if event.isAllDay == false {
-                    let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
+                    var startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
                     print(startDateComponents)
                     let endDateComponents = Calendar.current.dateComponents(in: .current, from: event.endDate)
                     print(endDateComponents)
+                    
+                    var startDate: Date = event.startDate
+                    var startLineHidden = false
+                    if let startH = startDateComponents.hour, let startM = startDateComponents.minute,
+                        let endH = endDateComponents.hour, let endM = endDateComponents.minute {
+                        if startH < 6 , endH < 6 {
+                            print("Out range")
+                            continue
+                        }
+                        if startH < 6 , 6 <= endH {
+                            startDateComponents.hour = 6
+                            event.title = String(format: "%d:%02d-", startH, startM) + event.title
+                            print("start Out range")
+                            print(startDateComponents)
+                            startDate = Calendar.current.date(from: startDateComponents)!
+                            print(startDate)
+                            startLineHidden = true
+                        }
+                    }
+
                     print(startDateComponents.weekday!)
                     var x = 55.0
                     var widthAdd = 0.0
@@ -69,7 +89,7 @@ class CalendarView: UIView {
                         }
                     }
                     print(y)
-                    let diff = event.endDate.timeIntervalSince(event.startDate) / 900
+                    let diff = event.endDate.timeIntervalSince(startDate) / 900
                     let scheduleView = ScheduleView(frame: CGRect(x: x, y: y, width: 140.0 + widthAdd, height: 11.375 * diff))
 //                    scheduleView.baseView.backgroundColor = UIColor(red: 1, green: 0.58, blue: 0, alpha: 0.3)
 //                    scheduleView.baseView.backgroundColor = UIColor(cgColor: event.calendar.cgColor)
@@ -87,13 +107,16 @@ class CalendarView: UIView {
                     default:
                         minuteSFSymbol = String(startDateComponents.minute!) + ".circle"
                     }
+                    if startLineHidden == true {
+                        minuteSFSymbol = "arrowtriangle.down"
+                    }
                     scheduleView.minute.image = UIImage(systemName: minuteSFSymbol)
                     
                     if event.title.hasPrefix("🚗") == true || event.title.hasPrefix("🚃") {
-                        scheduleView.addLine(isMove: true)
+                        scheduleView.addLine(isMove: true, isStartLineHideen: startLineHidden)
                     }
                     else {
-                        scheduleView.addLine(isMove: false)
+                        scheduleView.addLine(isMove: false, isStartLineHideen: startLineHidden)
                     }
                     print(event.calendar.cgColor.components)
                     self.addSubview(scheduleView)
