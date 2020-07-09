@@ -52,10 +52,15 @@ class CalendarView: UIView {
                     print(startDateComponents)
                     var endDateComponents = Calendar.current.dateComponents(in: .current, from: event.endDate)
                     print(endDateComponents)
-                    
+
+                    if base.days.contains(startDateComponents.day!) == false {
+                        continue
+                    }
+
                     var startDate: Date = event.startDate
                     var endDate: Date = event.endDate
                     var startLineHidden = false
+                    var endLineHidden = false
                     if let startH = startDateComponents.hour, let startM = startDateComponents.minute,
                         let endH = endDateComponents.hour, let endM = endDateComponents.minute {
                         if startH < 6 , endH < 6 {
@@ -97,16 +102,12 @@ class CalendarView: UIView {
                             startLineHidden = true
                         }
                         else if startH <= 23, 0 <= endH, startDateComponents.day != endDateComponents.day {
-                            switch startDateComponents.weekday {
-                            case 1:
-                                event.title = event.title + String(format: "〜%d:%02d", endH, endM)
-                                endDateComponents.day = startDateComponents.day
-                                endDateComponents.hour = 23
-                                endDateComponents.minute = 30
-                                endDate = Calendar.current.date(from: endDateComponents)!
-                            default:
-                                continue
-                            }
+                            event.title = event.title + String(format: "〜%d:%02d", endH, endM)
+                            endDateComponents.day = startDateComponents.day
+                            endDateComponents.hour = 23
+                            endDateComponents.minute = 30
+                            endDate = Calendar.current.date(from: endDateComponents)!
+                            endLineHidden = true
                         }
                     }
 
@@ -164,10 +165,10 @@ class CalendarView: UIView {
                     scheduleView.minute.image = UIImage(systemName: minuteSFSymbol)
                     
                     if event.title.hasPrefix("🚗") == true || event.title.hasPrefix("🚃") {
-                        scheduleView.addLine(isMove: true, isStartLineHideen: startLineHidden)
+                        scheduleView.addLine(isMove: true, isStartLineHidden: startLineHidden, isEndLineHidden: endLineHidden)
                     }
                     else {
-                        scheduleView.addLine(isMove: false, isStartLineHideen: startLineHidden)
+                        scheduleView.addLine(isMove: false, isStartLineHidden: startLineHidden, isEndLineHidden: endLineHidden)
                     }
                     print(event.calendar.cgColor.components)
                     self.addSubview(scheduleView)

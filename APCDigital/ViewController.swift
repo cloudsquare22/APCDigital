@@ -35,6 +35,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var day7outPeriod: UILabel!
     
     var pageMonday = Date()
+    var days: [Int] = []
     
     var eventStore = EKEventStore()
 
@@ -159,6 +160,14 @@ class ViewController: UIViewController {
         self.day5.text = String(friday.day!)
         self.day6.text = String(saturday.day!)
         self.day7.text = String(sunday.day!)
+        days = []
+        days.append(monday.day!)
+        days.append(tuesday.day!)
+        days.append(wednesday.day!)
+        days.append(thursday.day!)
+        days.append(friday.day!)
+        days.append(saturday.day!)
+        days.append(sunday.day!)
         self.month.text = String(monday.month!)
         self.fromDay.text = Calendar.current.shortStandaloneMonthSymbols[monday.month! - 1].uppercased() + " " + String(monday.day!)
         self.toDay.text = "to " + Calendar.current.shortStandaloneMonthSymbols[sunday.month! - 1].uppercased() + " " + String(sunday.day!)
