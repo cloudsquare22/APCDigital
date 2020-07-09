@@ -26,6 +26,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var toDay: UILabel!
     @IBOutlet weak var weekOfYear: UILabel!
     @IBOutlet weak var menuView: UIView!
+    @IBOutlet weak var day1outPeriod: UILabel!
+    @IBOutlet weak var day2outPeriod: UILabel!
+    @IBOutlet weak var day3outPeriod: UILabel!
+    @IBOutlet weak var day4outPeriod: UILabel!
+    @IBOutlet weak var day5outPeriod: UILabel!
+    @IBOutlet weak var day6outPeriod: UILabel!
+    @IBOutlet weak var day7outPeriod: UILabel!
     
     var pageMonday = Date()
     
@@ -107,7 +114,7 @@ class ViewController: UIViewController {
         calendarView.clearSchedule()
         let predicate = eventStore.predicateForEvents(withStart: startDateComponents.date!, end: endDateComponents.date!, calendars: nil)
         let eventArray = eventStore.events(matching: predicate)
-        calendarView.dispSchedule(eventArray: eventArray)
+        calendarView.dispSchedule(eventArray: eventArray,base: self)
 
     }
     
@@ -189,7 +196,7 @@ class ViewController: UIViewController {
 
         let predicate = eventStore.predicateForEvents(withStart: startDateComponents.date!, end: endDateComponents.date!, calendars: nil)
         let eventArray = eventStore.events(matching: predicate)
-        calendarView.dispSchedule(eventArray: eventArray)
+        calendarView.dispSchedule(eventArray: eventArray, base: self)
     }
     
     func pageUpsert() {

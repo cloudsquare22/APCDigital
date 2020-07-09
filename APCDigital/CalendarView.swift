@@ -30,32 +30,83 @@ class CalendarView: UIView {
         }
     }
     
-    func dispSchedule(eventArray: [EKEvent]) {
+    func dispSchedule(eventArray: [EKEvent], base: ViewController) {
 //        print(eventArray)
+        var day1outPeriod: [String] = []
+        var day2outPeriod: [String] = []
+        var day3outPeriod: [String] = []
+        var day4outPeriod: [String] = []
+        var day5outPeriod: [String] = []
+        var day6outPeriod: [String] = []
+        var day7outPeriod: [String] = []
         for event in eventArray {
-            if event.calendar.title == "work" || event.calendar.title == "oneself" || event.calendar.title == "FC Barcelona" {
+            if event.calendar.title == "work" || event.calendar.title == "oneself" || event.calendar.title == "FC Barcelona" || event.calendar.title == "2020 FIA Formula One World Championship Race Calendar" {
+                if event.calendar.title == "2020 FIA Formula One World Championship Race Calendar" {
+                    if event.title.contains("PRACTICE") == true {
+                        continue
+                    }
+                }
+                
                 if event.isAllDay == false {
                     var startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
                     print(startDateComponents)
-                    let endDateComponents = Calendar.current.dateComponents(in: .current, from: event.endDate)
+                    var endDateComponents = Calendar.current.dateComponents(in: .current, from: event.endDate)
                     print(endDateComponents)
                     
                     var startDate: Date = event.startDate
+                    var endDate: Date = event.endDate
                     var startLineHidden = false
                     if let startH = startDateComponents.hour, let startM = startDateComponents.minute,
                         let endH = endDateComponents.hour, let endM = endDateComponents.minute {
                         if startH < 6 , endH < 6 {
                             print("Out range")
+                            switch startDateComponents.weekday {
+                            case 2:
+                                let outSchedule = String(format: "%d:%02d〜", startH, startM, endH, endM) + event.title
+                                day1outPeriod.append(outSchedule)
+                            case 3:
+                                let outSchedule = String(format: "%d:%02d〜", startH, startM, endH, endM) + event.title
+                                day2outPeriod.append(outSchedule)
+                            case 4:
+                                let outSchedule = String(format: "%d:%02d〜", startH, startM, endH, endM) + event.title
+                                day3outPeriod.append(outSchedule)
+                            case 5:
+                                let outSchedule = String(format: "%d:%02d〜", startH, startM, endH, endM) + event.title
+                                day4outPeriod.append(outSchedule)
+                            case 6:
+                                let outSchedule = String(format: "%d:%02d〜", startH, startM, endH, endM) + event.title
+                                day5outPeriod.append(outSchedule)
+                            case 7:
+                                let outSchedule = String(format: "%d:%02d〜", startH, startM, endH, endM) + event.title
+                                day6outPeriod.append(outSchedule)
+                            case 1:
+                                let outSchedule = String(format: "%d:%02d〜", startH, startM, endH, endM) + event.title
+                                day7outPeriod.append(outSchedule)
+                            default:
+                                break
+                            }
                             continue
                         }
-                        if startH < 6 , 6 <= endH {
+                        else if startH < 6 , 6 <= endH {
                             startDateComponents.hour = 6
-                            event.title = String(format: "%d:%02d-", startH, startM) + event.title
+                            event.title = String(format: "%d:%02d〜", startH, startM) + event.title
                             print("start Out range")
                             print(startDateComponents)
                             startDate = Calendar.current.date(from: startDateComponents)!
                             print(startDate)
                             startLineHidden = true
+                        }
+                        else if startH <= 23, 0 <= endH, startDateComponents.day != endDateComponents.day {
+                            switch startDateComponents.weekday {
+                            case 1:
+                                event.title = event.title + String(format: "〜%d:%02d", endH, endM)
+                                endDateComponents.day = startDateComponents.day
+                                endDateComponents.hour = 23
+                                endDateComponents.minute = 30
+                                endDate = Calendar.current.date(from: endDateComponents)!
+                            default:
+                                continue
+                            }
                         }
                     }
 
@@ -89,7 +140,7 @@ class CalendarView: UIView {
                         }
                     }
                     print(y)
-                    let diff = event.endDate.timeIntervalSince(startDate) / 900
+                    let diff = endDate.timeIntervalSince(startDate) / 900
                     let scheduleView = ScheduleView(frame: CGRect(x: x, y: y, width: 140.0 + widthAdd, height: 11.375 * diff))
 //                    scheduleView.baseView.backgroundColor = UIColor(red: 1, green: 0.58, blue: 0, alpha: 0.3)
 //                    scheduleView.baseView.backgroundColor = UIColor(cgColor: event.calendar.cgColor)
@@ -123,26 +174,34 @@ class CalendarView: UIView {
 
                 }
             }
+            
+            dispOutPeriod(label: base.day1outPeriod, texts: day1outPeriod)
+            dispOutPeriod(label: base.day2outPeriod, texts: day2outPeriod)
+            dispOutPeriod(label: base.day3outPeriod, texts: day3outPeriod)
+            dispOutPeriod(label: base.day4outPeriod, texts: day4outPeriod)
+            dispOutPeriod(label: base.day5outPeriod, texts: day5outPeriod)
+            dispOutPeriod(label: base.day6outPeriod, texts: day6outPeriod)
+            dispOutPeriod(label: base.day7outPeriod, texts: day7outPeriod)
         }
-//        let scheduleView = ScheduleView(frame: CGRect(x: 55, y: 169, width: 140, height: 45.5))
-//        scheduleView.baseView.backgroundColor = UIColor(red: 1, green: 0.58, blue: 0, alpha: 0.3)
-//        let scheduleView2 = ScheduleView(frame: CGRect(x: 55, y: 214.5, width: 140, height: 45.5))
-//        scheduleView2.baseView.backgroundColor = UIColor(red: 1, green: 0.58, blue: 0, alpha: 0.3)
-//        let scheduleView3 = ScheduleView(frame: CGRect(x: 55, y: 260, width: 140, height: 45.5))
-//        scheduleView3.baseView.backgroundColor = UIColor(red: 1, green: 0.58, blue: 0, alpha: 0.3)
-//        let scheduleView4 = ScheduleView(frame: CGRect(x: 55, y: 305.5, width: 140, height: 45.5))
-//        scheduleView4.baseView.backgroundColor = UIColor(red: 1, green: 0.58, blue: 0, alpha: 0.3)
-//        let scheduleView5 = ScheduleView(frame: CGRect(x: 55, y: 351, width: 140, height: 45.5))
-//        scheduleView5.baseView.backgroundColor = UIColor(red: 1, green: 0.58, blue: 0, alpha: 0.3)
-//        let scheduleView6 = ScheduleView(frame: CGRect(x: 55, y: 396.5, width: 140, height: 45.5))
-//        scheduleView6.baseView.backgroundColor = UIColor(red: 1, green: 0.58, blue: 0, alpha: 0.3)
-//        self.addSubview(scheduleView)
-//        self.addSubview(scheduleView2)
-//        self.addSubview(scheduleView3)
-//        self.addSubview(scheduleView4)
-//        self.addSubview(scheduleView5)
-//        self.addSubview(scheduleView6)
     }
+    
+    func dispOutPeriod(label: UILabel, texts: [String]) {
+        label.text = ""
+        if texts.isEmpty == false {
+            label.isHidden = false
+            for (index, schedule) in texts.enumerated() {
+                label.text?.append(contentsOf: schedule)
+                if index + 1 != texts.count {
+                    label.text?.append(contentsOf: "\n")
+                }
+            }
+            label.sizeToFit()
+        }
+        else {
+            label.isHidden = true
+        }
+    }
+    
     
     override func draw(_ rect: CGRect) {
 //        let rectangle = UIBezierPath(rect: CGRect(x: 100.0, y: 100.0, width: 300, height: 100))

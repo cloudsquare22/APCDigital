@@ -36,7 +36,7 @@ class ScheduleView: UIView {
         topBorder.frame = CGRect(x: 7, y: 0, width: baseView.frame.width - 7, height: 1.0)
         topBorder.backgroundColor = UIColor.black.cgColor
         let leftBorder = CALayer()
-        leftBorder.frame = CGRect(x: 0, y: 7, width: 1.5, height: baseView.frame.height - 7)
+        leftBorder.frame = CGRect(x: -1, y: 7, width: 1.5, height: baseView.frame.height - 7)
         leftBorder.backgroundColor = UIColor.black.cgColor
         let bottomBorder = CALayer()
         bottomBorder.frame = CGRect(x: 0, y: baseView.frame.height, width: baseView.frame.width, height: 1.0)
