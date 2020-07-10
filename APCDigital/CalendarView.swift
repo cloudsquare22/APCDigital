@@ -39,8 +39,13 @@ class CalendarView: UIView {
         var day5outPeriod: [String] = []
         var day6outPeriod: [String] = []
         var day7outPeriod: [String] = []
+        base.day1Holiday.isHidden = true
+        base.day2Holiday.isHidden = true
+        base.day3Holiday.isHidden = true
         base.day4Holiday.isHidden = true
         base.day5Holiday.isHidden = true
+        base.day6Holiday.isHidden = true
+        base.day7Holiday.isHidden = true
         for event in eventArray {
             if event.calendar.title == "日本の祝日" {
                 let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
@@ -48,11 +53,14 @@ class CalendarView: UIView {
                 if let title = event.title {
                     switch startDateComponents.weekday {
                     case 2:
-                        break
+                        base.day1Holiday.text = title
+                        base.day1Holiday.isHidden = false
                     case 3:
-                        break
+                        base.day2Holiday.text = title
+                        base.day2Holiday.isHidden = false
                     case 4:
-                        break
+                        base.day3Holiday.text = title
+                        base.day3Holiday.isHidden = false
                     case 5:
                         base.day4Holiday.text = title
                         base.day4Holiday.isHidden = false
@@ -60,9 +68,11 @@ class CalendarView: UIView {
                         base.day5Holiday.text = title
                         base.day5Holiday.isHidden = false
                     case 7:
-                        break
+                        base.day6Holiday.text = title
+                        base.day6Holiday.isHidden = false
                     case 1:
-                        break
+                        base.day7Holiday.text = title
+                        base.day7Holiday.isHidden = false
                     default:
                         break
                     }
