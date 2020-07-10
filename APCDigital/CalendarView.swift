@@ -39,8 +39,37 @@ class CalendarView: UIView {
         var day5outPeriod: [String] = []
         var day6outPeriod: [String] = []
         var day7outPeriod: [String] = []
+        base.day4Holiday.isHidden = true
+        base.day5Holiday.isHidden = true
         for event in eventArray {
-            if event.calendar.title == "work" || event.calendar.title == "oneself" || event.calendar.title == "FC Barcelona" || event.calendar.title == "2020 FIA Formula One World Championship Race Calendar" {
+            if event.calendar.title == "日本の祝日" {
+                let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
+                print(startDateComponents)
+                if let title = event.title {
+                    switch startDateComponents.weekday {
+                    case 2:
+                        break
+                    case 3:
+                        break
+                    case 4:
+                        break
+                    case 5:
+                        base.day4Holiday.text = title
+                        base.day4Holiday.isHidden = false
+                    case 6:
+                        base.day5Holiday.text = title
+                        base.day5Holiday.isHidden = false
+                    case 7:
+                        break
+                    case 1:
+                        break
+                    default:
+                        break
+                    }
+                }
+                continue
+            }
+            if event.calendar.title == "work" || event.calendar.title == "oneself" || event.calendar.title == "FC Barcelona" || event.calendar.title == "2020 FIA Formula One World Championship Race Calendar" || event.calendar.title == "buy" {
                 if event.calendar.title == "2020 FIA Formula One World Championship Race Calendar" {
                     if event.title.contains("PRACTICE") == true {
                         continue
@@ -63,7 +92,7 @@ class CalendarView: UIView {
                     var endLineHidden = false
                     if let startH = startDateComponents.hour, let startM = startDateComponents.minute,
                         let endH = endDateComponents.hour, let endM = endDateComponents.minute {
-                        if startH < 6 , endH < 6 {
+                        if startH < 6 && (endH < 6 || (endH <= 6 && endM == 0)) {
                             print("Out range")
                             switch startDateComponents.weekday {
                             case 2:
@@ -102,7 +131,7 @@ class CalendarView: UIView {
                             startLineHidden = true
                         }
                         else if startH <= 23, 0 <= endH, startDateComponents.day != endDateComponents.day {
-                            event.title = event.title + String(format: "〜%d:%02d", endH, endM)
+                            event.title = event.title + String(format: "\n〜%d:%02d", endH, endM)
                             endDateComponents.day = startDateComponents.day
                             endDateComponents.hour = 23
                             endDateComponents.minute = 30
@@ -163,6 +192,7 @@ class CalendarView: UIView {
                         minuteSFSymbol = "arrowtriangle.down"
                     }
                     scheduleView.minute.image = UIImage(systemName: minuteSFSymbol)
+                    scheduleView.endTime.frame = CGRect(x: -8.0, y: 11.375 * diff - 2, width: 16, height: 16)
                     
                     if event.title.hasPrefix("🚗") == true || event.title.hasPrefix("🚃") {
                         scheduleView.addLine(isMove: true, isStartLineHidden: startLineHidden, isEndLineHidden: endLineHidden)
@@ -173,6 +203,30 @@ class CalendarView: UIView {
                     print(event.calendar.cgColor.components)
                     self.addSubview(scheduleView)
 
+                }
+                else {
+                    let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
+                    print(startDateComponents)
+                    if let outSchedule = event.title {
+                        switch startDateComponents.weekday {
+                        case 2:
+                            day1outPeriod.append(outSchedule)
+                        case 3:
+                            day2outPeriod.append(outSchedule)
+                        case 4:
+                            day3outPeriod.append(outSchedule)
+                        case 5:
+                            day4outPeriod.append(outSchedule)
+                        case 6:
+                            day5outPeriod.append(outSchedule)
+                        case 7:
+                            day6outPeriod.append(outSchedule)
+                        case 1:
+                            day7outPeriod.append(outSchedule)
+                        default:
+                            break
+                        }
+                    }
                 }
             }
             
@@ -196,7 +250,7 @@ class CalendarView: UIView {
                     label.text?.append(contentsOf: "\n")
                 }
             }
-            label.sizeToFit()
+//            label.sizeToFit()
         }
         else {
             label.isHidden = true

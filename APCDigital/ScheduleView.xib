@@ -10,6 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScheduleView" customModule="Action_Planner" customModuleProvider="target">
             <connections>
                 <outlet property="baseView" destination="iN0-l3-epB" id="JIO-bb-lvb"/>
+                <outlet property="endTime" destination="YmW-K4-IDK" id="3YI-c7-UIQ"/>
                 <outlet property="label" destination="eap-rL-4Ls" id="4lG-jL-sY0"/>
                 <outlet property="minute" destination="Gry-we-MLV" id="2ru-ti-FmO"/>
             </connections>
@@ -31,6 +32,12 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="arrowtriangle.up" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="YmW-K4-IDK">
+                    <rect key="frame" x="-8" y="16" width="16" height="16"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -44,6 +51,7 @@
         </view>
     </objects>
     <resources>
+        <image name="arrowtriangle.up" catalog="system" width="128" height="124"/>
         <image name="circle" catalog="system" width="128" height="121"/>
     </resources>
 </document>

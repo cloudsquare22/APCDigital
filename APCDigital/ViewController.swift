@@ -33,6 +33,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var day5outPeriod: UILabel!
     @IBOutlet weak var day6outPeriod: UILabel!
     @IBOutlet weak var day7outPeriod: UILabel!
+    @IBOutlet weak var day4Holiday: UILabel!
+    @IBOutlet weak var day5Holiday: UILabel!
     
     var pageMonday = Date()
     var days: [Int] = []

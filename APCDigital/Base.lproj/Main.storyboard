@@ -136,6 +136,13 @@
                                         <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HOLIDAY" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QkG-pe-uiP">
+                                        <rect key="frame" x="765" y="93" width="99" height="13"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
+                                        <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="XXX XX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rhs-U2-0Ze">
                                         <rect key="frame" x="1193" y="101" width="137" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -154,6 +161,13 @@
                                         <rect key="frame" x="1216" y="230" width="90" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HOLIDAY" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ovd-Vq-wNw">
+                                        <rect key="frame" x="543" y="93" width="99" height="13"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
                                         <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -192,8 +206,10 @@
                         <outlet property="day3" destination="Pro-mw-Klr" id="mgA-cP-MgI"/>
                         <outlet property="day3outPeriod" destination="hXX-Wx-GtS" id="yHE-ew-dJc"/>
                         <outlet property="day4" destination="ape-8v-IFz" id="3fh-0M-gAg"/>
+                        <outlet property="day4Holiday" destination="Ovd-Vq-wNw" id="zOX-Jv-ONr"/>
                         <outlet property="day4outPeriod" destination="muc-gw-r99" id="h7Y-Bs-lIJ"/>
                         <outlet property="day5" destination="b6l-bb-cZT" id="b5e-zj-bBg"/>
+                        <outlet property="day5Holiday" destination="QkG-pe-uiP" id="mDv-3V-dft"/>
                         <outlet property="day5outPeriod" destination="2Nb-tP-2FX" id="ulP-Ce-foy"/>
                         <outlet property="day6" destination="auM-dG-37P" id="pdP-Ds-Zy1"/>
                         <outlet property="day6outPeriod" destination="NFL-La-TYF" id="4oX-Zi-6bz"/>

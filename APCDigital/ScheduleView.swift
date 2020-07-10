@@ -13,6 +13,7 @@ class ScheduleView: UIView {
     @IBOutlet weak var baseView: UIView!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var minute: UIImageView!
+    @IBOutlet weak var endTime: UIImageView!
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -56,6 +57,10 @@ class ScheduleView: UIView {
         }
         if isEndLineHidden == false {
             baseView.layer.addSublayer(bottomBorder)
+            endTime.isHidden = true
+        }
+        else {
+            endTime.isHidden = false
         }
     }
     
