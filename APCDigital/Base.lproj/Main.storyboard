@@ -185,6 +185,55 @@
                                         <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="REMAINING" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UvZ-Pk-e30">
+                                        <rect key="frame" x="92" y="83" width="99" height="13"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
+                                        <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="REMAINING" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fue-Bf-idN">
+                                        <rect key="frame" x="242" y="83" width="99" height="13"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
+                                        <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="REMAINING" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6a5-6H-pJ5">
+                                        <rect key="frame" x="388" y="83" width="99" height="13"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
+                                        <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="REMAINING" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mbh-XW-TJb">
+                                        <rect key="frame" x="536" y="83" width="99" height="13"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
+                                        <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="REMAINING" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kBo-iv-cJ8">
+                                        <rect key="frame" x="757" y="83" width="99" height="13"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
+                                        <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="REMAINING" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F16-Ei-adl">
+                                        <rect key="frame" x="904" y="83" width="99" height="13"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
+                                        <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="REMAINING" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAg-LA-Gtm">
+                                        <rect key="frame" x="1052" y="83" width="99" height="13"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
+                                        <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="XXX XX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rhs-U2-0Ze">
                                         <rect key="frame" x="1193" y="101" width="137" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -215,7 +264,7 @@
                                 <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="sFW-U5-tyy" secondAttribute="trailing" id="8DN-Pf-FCV"/>
                             <constraint firstAttribute="bottom" secondItem="sFW-U5-tyy" secondAttribute="bottom" id="Egg-fl-7xR"/>
@@ -236,24 +285,31 @@
                         <outlet property="calendarView" destination="omt-Zi-HtB" id="BuX-UM-0kM"/>
                         <outlet property="day1" destination="yUv-DR-UYg" id="KPU-g8-oam"/>
                         <outlet property="day1Holiday" destination="dpk-W5-BWZ" id="MCW-Gr-Z6Y"/>
+                        <outlet property="day1Remaining" destination="UvZ-Pk-e30" id="nyb-Uc-k5c"/>
                         <outlet property="day1outPeriod" destination="7oe-rK-zh9" id="l6K-Zk-GNi"/>
                         <outlet property="day2" destination="wCY-L6-jrr" id="7rp-Fj-Xu8"/>
                         <outlet property="day2Holiday" destination="lBu-Ng-8Vj" id="YNX-IO-7HA"/>
+                        <outlet property="day2Remaining" destination="Fue-Bf-idN" id="aa8-5y-tHA"/>
                         <outlet property="day2outPeriod" destination="ifR-AY-6hk" id="iYt-ek-CGs"/>
                         <outlet property="day3" destination="Pro-mw-Klr" id="mgA-cP-MgI"/>
                         <outlet property="day3Holiday" destination="GPg-b5-UEs" id="1mI-Ih-L5E"/>
+                        <outlet property="day3Remaining" destination="6a5-6H-pJ5" id="vS9-fl-z6H"/>
                         <outlet property="day3outPeriod" destination="hXX-Wx-GtS" id="yHE-ew-dJc"/>
                         <outlet property="day4" destination="ape-8v-IFz" id="3fh-0M-gAg"/>
                         <outlet property="day4Holiday" destination="Ovd-Vq-wNw" id="zOX-Jv-ONr"/>
+                        <outlet property="day4Remaining" destination="Mbh-XW-TJb" id="Ji1-LL-sd9"/>
                         <outlet property="day4outPeriod" destination="muc-gw-r99" id="h7Y-Bs-lIJ"/>
                         <outlet property="day5" destination="b6l-bb-cZT" id="b5e-zj-bBg"/>
                         <outlet property="day5Holiday" destination="QkG-pe-uiP" id="mDv-3V-dft"/>
+                        <outlet property="day5Remaining" destination="kBo-iv-cJ8" id="hmq-mM-XFT"/>
                         <outlet property="day5outPeriod" destination="2Nb-tP-2FX" id="ulP-Ce-foy"/>
                         <outlet property="day6" destination="auM-dG-37P" id="pdP-Ds-Zy1"/>
                         <outlet property="day6Holiday" destination="Xhr-H7-cVd" id="Vge-40-BGd"/>
+                        <outlet property="day6Remaining" destination="F16-Ei-adl" id="LIA-9n-tId"/>
                         <outlet property="day6outPeriod" destination="NFL-La-TYF" id="4oX-Zi-6bz"/>
                         <outlet property="day7" destination="wbc-Ns-15e" id="KfO-y1-D8v"/>
                         <outlet property="day7Holiday" destination="37E-lR-tTN" id="rvA-gW-urr"/>
+                        <outlet property="day7Remaining" destination="dAg-LA-Gtm" id="Afv-QN-476"/>
                         <outlet property="day7outPeriod" destination="tWe-M5-VvH" id="ENR-GR-86T"/>
                         <outlet property="fromDay" destination="Rhs-U2-0Ze" id="Wdx-Xf-b9o"/>
                         <outlet property="menuView" destination="V51-NI-Mzf" id="lUI-U5-4fF"/>

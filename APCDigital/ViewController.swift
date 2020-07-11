@@ -40,6 +40,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var day5Holiday: UILabel!
     @IBOutlet weak var day6Holiday: UILabel!
     @IBOutlet weak var day7Holiday: UILabel!
+    @IBOutlet weak var day1Remaining: UILabel!
+    @IBOutlet weak var day2Remaining: UILabel!
+    @IBOutlet weak var day3Remaining: UILabel!
+    @IBOutlet weak var day4Remaining: UILabel!
+    @IBOutlet weak var day5Remaining: UILabel!
+    @IBOutlet weak var day6Remaining: UILabel!
+    @IBOutlet weak var day7Remaining: UILabel!
     
     var pageMonday = Date()
     var days: [Int] = []
@@ -179,7 +186,15 @@ class ViewController: UIViewController {
         self.fromDay.text = Calendar.current.shortStandaloneMonthSymbols[monday.month! - 1].uppercased() + " " + String(monday.day!)
         self.toDay.text = "to " + Calendar.current.shortStandaloneMonthSymbols[sunday.month! - 1].uppercased() + " " + String(sunday.day!)
         self.weekOfYear.text = String(Calendar.current.component(.weekOfYear, from: pageMonday)) + " week"
-        
+
+        self.day1Remaining.text = countElapsedRemaining(day: pageMonday)
+        self.day2Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 1))
+        self.day3Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 2))
+        self.day4Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 3))
+        self.day5Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 4))
+        self.day6Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 5))
+        self.day7Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 6))
+
         if let page = Pages.select(year: monday.year!, week: monday.weekOfYear!) {
             print("select page")
             do {
@@ -236,6 +251,19 @@ class ViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func countElapsedRemaining(day: Date) -> String {
+        var result = ""
+        let dayComponentes = Calendar.current.dateComponents(in: .current, from: day)
+        let dateYearFirst = Calendar.current.date(from: DateComponents(year: dayComponentes.year, month: 1, day: 1))!
+        let dateYearEnd = Calendar.current.date(from: DateComponents(year: dayComponentes.year, month: 12, day: 31))!
+
+        let elapsed = Calendar.current.dateComponents([.day], from: dateYearFirst, to: day)
+        let remaining = Calendar.current.dateComponents([.day], from: day, to: dateYearEnd)
+        
+        result = String(format: "%d-%d", elapsed.day! + 1, remaining.day!)
+        return result
     }
 }
 
