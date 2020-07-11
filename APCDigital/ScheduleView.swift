@@ -14,6 +14,7 @@ class ScheduleView: UIView {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var minute: UIImageView!
     @IBOutlet weak var endTime: UIImageView!
+    @IBOutlet weak var chevronDown: UIImageView!
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -51,9 +52,18 @@ class ScheduleView: UIView {
         }
         if isMove == false {
             baseView.layer.addSublayer(leftBorder)
+            if isEndLineHidden == false {
+                self.chevronDown.isHidden = false
+                self.chevronDown.frame = CGRect(x: -9, y: baseView.frame.height - 12, width: 16, height: 16)
+            }
+            else {
+                self.chevronDown.isHidden = true
+            }
         }
         else {
             baseView.layer.addSublayer(centerBorder)
+            self.chevronDown.isHidden = false
+            self.chevronDown.frame = CGRect(x: baseView.frame.width / 2 - 8, y: baseView.frame.height - 12, width: 16, height: 16)
         }
         if isEndLineHidden == false {
             baseView.layer.addSublayer(bottomBorder)
