@@ -227,6 +227,10 @@ class ViewController: UIViewController {
 
         let predicate = eventStore.predicateForEvents(withStart: startDateComponents.date!, end: endDateComponents.date!, calendars: nil)
         let eventArray = eventStore.events(matching: predicate)
+        
+        let calendars = eventStore.calendars(for: .event)
+        print(calendars)
+            
         calendarView.dispSchedule(eventArray: eventArray, base: self)
     }
     
