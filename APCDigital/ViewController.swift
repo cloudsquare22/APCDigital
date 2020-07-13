@@ -269,5 +269,9 @@ class ViewController: UIViewController {
         result = String(format: "%d-%d", elapsed.day! + 1, remaining.day!)
         return result
     }
+    
+    @IBAction func tapCalendarSelect(_ sender: Any) {
+    }
+    
 }
 
