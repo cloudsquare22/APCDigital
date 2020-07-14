@@ -50,8 +50,11 @@ class ViewController: UIViewController {
     
     var pageMonday = Date()
     var days: [Int] = []
+    var calendars: [EKCalendar] = []
+    var displayCalendars: [String] = []
     
     var eventStore = EKEventStore()
+    let storyBoard = UIStoryboard(name: "Main", bundle: nil)
 
 //    override var prefersStatusBarHidden: Bool {
 //        return true
@@ -228,8 +231,30 @@ class ViewController: UIViewController {
         let predicate = eventStore.predicateForEvents(withStart: startDateComponents.date!, end: endDateComponents.date!, calendars: nil)
         let eventArray = eventStore.events(matching: predicate)
         
-        let calendars = eventStore.calendars(for: .event)
+        let calendarAll = eventStore.calendars(for: .event)
+        self.calendars = []
+        for calendar in calendarAll {
+            switch calendar.type {
+            case .local, .calDAV,
+                 .subscription where calendar.title != "日本の祝日":
+                self.calendars.append(calendar)
+            default:
+                break
+            }
+        }
+        self.calendars.sort() { (c1, c2) -> Bool in
+            c1.title < c2.title
+        }
         print(calendars)
+        
+        if let displays = UserDefaults.standard.array(forKey: "displayCalendars") {
+            // 読み込めた時処理
+        }
+        else {
+            for calendar in self.calendars {
+                displayCalendars.append(calendar.title)
+            }
+        }
             
         calendarView.dispSchedule(eventArray: eventArray, base: self)
     }
@@ -271,7 +296,23 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapCalendarSelect(_ sender: Any) {
+        let calendarSelectViewController = storyBoard.instantiateViewController(withIdentifier: "CalendarSelectView") as? CalendarSelectViewController
+        if let controller = calendarSelectViewController {
+            controller.viewController = self
+            self.setPopoverPresentationController(sender: sender, controller: controller)
+            present(controller, animated: false, completion: nil)
+        }
     }
     
 }
 
+extension ViewController: UIPopoverPresentationControllerDelegate {
+    func setPopoverPresentationController(sender: Any, controller: UIViewController) {
+        controller.modalPresentationStyle = .popover
+        controller.popoverPresentationController?.sourceView = self.view
+        controller.popoverPresentationController?.sourceRect = (sender as! UIButton).frame
+        controller.popoverPresentationController?.permittedArrowDirections = .any
+        controller.popoverPresentationController?.delegate = self
+        controller.preferredContentSize = CGSize(width: 600, height: 800)
+    }
+}

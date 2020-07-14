@@ -335,20 +335,20 @@
             </objects>
             <point key="canvasLocation" x="138.79941434846265" y="137.6953125"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Calendar Select View Controller-->
         <scene sceneID="7R5-Yx-FIr">
             <objects>
-                <tableViewController storyboardIdentifier="CalendarSelectView" id="dJo-Mq-yZ6" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="CalendarSelectView" id="dJo-Mq-yZ6" customClass="CalendarSelectViewController" customModule="Action_Planner" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="PhM-5X-WVI">
-                        <rect key="frame" x="0.0" y="0.0" width="500" height="800"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="IsS-3q-Ewu">
-                                <rect key="frame" x="0.0" y="28" width="500" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="calendar" id="IsS-3q-Ewu" customClass="CalendarSelectViewCell" customModule="Action_Planner" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="600" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IsS-3q-Ewu" id="wcb-RS-ot6">
-                                    <rect key="frame" x="0.0" y="0.0" width="500" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n06-QT-5Rh">
@@ -356,7 +356,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </switch>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Calendar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tZS-cu-5T8">
-                                            <rect key="frame" x="75" y="11" width="69" height="21"/>
+                                            <rect key="frame" x="75" y="11" width="505" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -364,6 +364,10 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="display" destination="n06-QT-5Rh" id="8cw-cR-2GG"/>
+                                    <outlet property="title" destination="tZS-cu-5T8" id="zi7-ck-Lfa"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -371,11 +375,11 @@
                             <outlet property="delegate" destination="dJo-Mq-yZ6" id="OTe-Jb-vvZ"/>
                         </connections>
                     </tableView>
-                    <size key="freeformSize" width="500" height="800"/>
+                    <size key="freeformSize" width="600" height="800"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ja-ZZ-qUR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="568" y="77"/>
+            <point key="canvasLocation" x="576.28111273792092" y="72.0703125"/>
         </scene>
     </scenes>
     <resources>

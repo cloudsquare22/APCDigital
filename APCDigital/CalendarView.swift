@@ -79,7 +79,10 @@ class CalendarView: UIView {
                 }
                 continue
             }
-            if event.calendar.title == "work" || event.calendar.title == "oneself" || event.calendar.title == "FC Barcelona" || event.calendar.title == "2020 FIA Formula One World Championship Race Calendar" || event.calendar.title == "buy" {
+            if base.displayCalendars.contains(event.calendar.title) == true {
+//            if base.calendars.contains(event.calendar) == true {
+//
+//            if event.calendar.title == "work" || event.calendar.title == "oneself" || event.calendar.title == "FC Barcelona" || event.calendar.title == "2020 FIA Formula One World Championship Race Calendar" || event.calendar.title == "buy" {
                 if event.calendar.title == "2020 FIA Formula One World Championship Race Calendar" {
                     if event.title.contains("PRACTICE") == true {
                         continue
