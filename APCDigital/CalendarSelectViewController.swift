@@ -33,6 +33,7 @@ class CalendarSelectViewController: UITableViewController {
             }
         }
         print(viewController!.displayCalendars)
+        self.viewController!.updateDays()
     }
 
     // MARK: - Table view data source

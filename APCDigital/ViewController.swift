@@ -129,6 +129,32 @@ class ViewController: UIViewController {
         endDateComponents.second = 59
         endDateComponents.nanosecond = 0
 
+        let calendarAll = eventStore.calendars(for: .event)
+        self.calendars = []
+        for calendar in calendarAll {
+            switch calendar.type {
+            case .local, .calDAV,
+                 .subscription where calendar.title != "日本の祝日":
+                self.calendars.append(calendar)
+            default:
+                break
+            }
+        }
+        self.calendars.sort() { (c1, c2) -> Bool in
+            c1.title < c2.title
+        }
+        print(calendars)
+        
+        if let displays = UserDefaults.standard.array(forKey: "displayCalendars") {
+            // 読み込めた時処理
+        }
+        else {
+            for calendar in self.calendars {
+                displayCalendars.append(calendar.title)
+            }
+        }
+            
+
         calendarView.clearSchedule()
         let predicate = eventStore.predicateForEvents(withStart: startDateComponents.date!, end: endDateComponents.date!, calendars: nil)
         let eventArray = eventStore.events(matching: predicate)
@@ -231,31 +257,6 @@ class ViewController: UIViewController {
         let predicate = eventStore.predicateForEvents(withStart: startDateComponents.date!, end: endDateComponents.date!, calendars: nil)
         let eventArray = eventStore.events(matching: predicate)
         
-        let calendarAll = eventStore.calendars(for: .event)
-        self.calendars = []
-        for calendar in calendarAll {
-            switch calendar.type {
-            case .local, .calDAV,
-                 .subscription where calendar.title != "日本の祝日":
-                self.calendars.append(calendar)
-            default:
-                break
-            }
-        }
-        self.calendars.sort() { (c1, c2) -> Bool in
-            c1.title < c2.title
-        }
-        print(calendars)
-        
-        if let displays = UserDefaults.standard.array(forKey: "displayCalendars") {
-            // 読み込めた時処理
-        }
-        else {
-            for calendar in self.calendars {
-                displayCalendars.append(calendar.title)
-            }
-        }
-            
         calendarView.dispSchedule(eventArray: eventArray, base: self)
     }
     
