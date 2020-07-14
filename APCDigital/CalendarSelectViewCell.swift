@@ -13,6 +13,8 @@ class CalendarSelectViewCell: UITableViewCell {
     @IBOutlet weak var display: UISwitch!
     @IBOutlet weak var title: UILabel!
     
+    var index: Int = 0
+    weak var tableView: CalendarSelectViewController? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,8 +23,11 @@ class CalendarSelectViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
-
+    
+    @IBAction func tapDisplay(_ sender: Any) {
+        tableView?.displayOnOff[index] = self.display.isOn
+    }
+    
 }

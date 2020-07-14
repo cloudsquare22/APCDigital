@@ -9,7 +9,9 @@
 import UIKit
 
 class CalendarSelectViewController: UITableViewController {
-    var viewController: ViewController? = nil
+    weak var viewController: ViewController? = nil
+    
+    var displayOnOff: [Bool] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +21,18 @@ class CalendarSelectViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print(self.displayOnOff)
+        viewController!.displayCalendars = []
+        for (index, calendar) in self.viewController!.calendars.enumerated() {
+            if displayOnOff[index] == true {
+                viewController!.displayCalendars.append(calendar.title)
+            }
+        }
+        print(viewController!.displayCalendars)
     }
 
     // MARK: - Table view data source
@@ -37,7 +51,9 @@ class CalendarSelectViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "calendar", for: indexPath) as! CalendarSelectViewCell
         cell.display.isOn = true
         cell.title.text = viewController!.calendars[indexPath.row].title
-
+        cell.index = indexPath.row
+        cell.tableView = self
+        self.displayOnOff.append(true)
         return cell
     }
 
