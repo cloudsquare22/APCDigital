@@ -33,6 +33,7 @@ class CalendarSelectViewController: UITableViewController {
             }
         }
         print(viewController!.displayCalendars)
+        UserDefaults.standard.set(viewController!.displayCalendars, forKey: "displayCalendars")
         self.viewController!.updateDays()
     }
 
@@ -50,11 +51,18 @@ class CalendarSelectViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "calendar", for: indexPath) as! CalendarSelectViewCell
-        cell.display.isOn = true
         cell.title.text = viewController!.calendars[indexPath.row].title
         cell.index = indexPath.row
         cell.tableView = self
-        self.displayOnOff.append(true)
+        if viewController!.displayCalendars.contains(viewController!.calendars[indexPath.row].title) == true {
+            cell.display.isOn = true
+            self.displayOnOff.append(true)
+        }
+        else {
+            cell.display.isOn = false
+            self.displayOnOff.append(false)
+
+        }
         return cell
     }
 

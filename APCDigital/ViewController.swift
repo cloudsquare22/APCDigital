@@ -145,8 +145,9 @@ class ViewController: UIViewController {
         }
         print(calendars)
         
-        if let displays = UserDefaults.standard.array(forKey: "displayCalendars") {
-            // 読み込めた時処理
+        if let displays = UserDefaults.standard.stringArray(forKey: "displayCalendars") {
+            print(displays)
+            self.displayCalendars = displays
         }
         else {
             for calendar in self.calendars {
