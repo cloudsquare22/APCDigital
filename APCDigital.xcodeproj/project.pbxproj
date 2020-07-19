@@ -10,6 +10,7 @@
 		8D0E63ED24B16F6500D47A47 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E63EC24B16F6500D47A47 /* CalendarView.swift */; };
 		8D0E63F524B1A9A000D47A47 /* ScheduleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D0E63F424B1A9A000D47A47 /* ScheduleView.xib */; };
 		8D0E63F724B1A9CF00D47A47 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E63F624B1A9CF00D47A47 /* ScheduleView.swift */; };
+		8D13775024C42CE900A6938C /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D13774F24C42CE900A6938C /* AboutViewController.swift */; };
 		8D9EEF5C24AE8D0000E855C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9EEF5B24AE8D0000E855C4 /* AppDelegate.swift */; };
 		8D9EEF5E24AE8D0000E855C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9EEF5D24AE8D0000E855C4 /* SceneDelegate.swift */; };
 		8D9EEF6024AE8D0000E855C4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9EEF5F24AE8D0000E855C4 /* ViewController.swift */; };
@@ -26,6 +27,7 @@
 		8D0E63EC24B16F6500D47A47 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		8D0E63F424B1A9A000D47A47 /* ScheduleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScheduleView.xib; sourceTree = "<group>"; };
 		8D0E63F624B1A9CF00D47A47 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		8D13774F24C42CE900A6938C /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		8D9EEF5824AE8D0000E855C4 /* Action Planner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Action Planner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D9EEF5B24AE8D0000E855C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D9EEF5D24AE8D0000E855C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				8D0E63F624B1A9CF00D47A47 /* ScheduleView.swift */,
 				8DECD8AC24BDD099005062B1 /* CalendarSelectViewController.swift */,
 				8DECD8AE24BDD2EF005062B1 /* CalendarSelectViewCell.swift */,
+				8D13774F24C42CE900A6938C /* AboutViewController.swift */,
 			);
 			path = APCDigital;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 				8D9EEF7324AFF6F700E855C4 /* Pages.swift in Sources */,
 				8D9EEF5C24AE8D0000E855C4 /* AppDelegate.swift in Sources */,
 				8DECD8AD24BDD099005062B1 /* CalendarSelectViewController.swift in Sources */,
+				8D13775024C42CE900A6938C /* AboutViewController.swift in Sources */,
 				8D9EEF5E24AE8D0000E855C4 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

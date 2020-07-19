@@ -84,6 +84,10 @@ class ViewController: UIViewController {
         swipeRight .direction = .right
         pKCanvasView.addGestureRecognizer(swipeRight)
 
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeUp(sender:)))
+        swipeUp .direction = .up
+        pKCanvasView.addGestureRecognizer(swipeUp)
+
         print(Date().description(with: Calendar.current.locale))
         
         let weekday = Calendar.current.component(.weekday, from: Date())
@@ -181,6 +185,21 @@ class ViewController: UIViewController {
 
         let matching = DateComponents(weekday: 2)
         pageMonday = Calendar.current.nextDate(after: pageMonday, matching: matching, matchingPolicy: .nextTime, direction: .backward)!
+        updateDays()
+    }
+
+    @objc func swipeUp(sender: UISwipeGestureRecognizer) {
+        pageUpsert()
+
+        pageMonday = Date()
+        let weekday = Calendar.current.component(.weekday, from: pageMonday)
+        if weekday != 2 {
+            let matching = DateComponents(weekday: 2)
+            pageMonday = Calendar.current.nextDate(after: pageMonday, matching: matching, matchingPolicy: .nextTime, direction: .backward)!
+        }
+        else {
+            pageMonday = Date()
+        }
         updateDays()
     }
 
@@ -301,6 +320,14 @@ class ViewController: UIViewController {
         let calendarSelectViewController = storyBoard.instantiateViewController(withIdentifier: "CalendarSelectView") as? CalendarSelectViewController
         if let controller = calendarSelectViewController {
             controller.viewController = self
+            self.setPopoverPresentationController(sender: sender, controller: controller)
+            present(controller, animated: false, completion: nil)
+        }
+    }
+    
+    @IBAction func tapAbout(_ sender: Any) {
+        let aboutViewController = storyBoard.instantiateViewController(withIdentifier: "AboutView") as? AboutViewController
+        if let controller = aboutViewController {
             self.setPopoverPresentationController(sender: sender, controller: controller)
             present(controller, animated: false, completion: nil)
         }
