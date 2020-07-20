@@ -333,6 +333,12 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func tapCalendar(_ sender: Any) {
+        if let url = URL(string: "calshow:") {
+            UIApplication.shared.open(url)
+        }
+    }
+    
 }
 
 extension ViewController: UIPopoverPresentationControllerDelegate {
