@@ -111,27 +111,21 @@ class CalendarView: UIView {
                         let endH = endDateComponents.hour, let endM = endDateComponents.minute {
                         if startH < 6 && (endH < 6 || (endH <= 6 && endM == 0)) {
                             print("Out range")
+                            let outSchedule = String(format: "%d:%02d〜", startH, startM) + event.title
                             switch startDateComponents.weekday {
                             case 2:
-                                let outSchedule = String(format: "%d:%02d〜", startH, startM, endH, endM) + event.title
                                 day1outPeriod.append(outSchedule)
                             case 3:
-                                let outSchedule = String(format: "%d:%02d〜", startH, startM, endH, endM) + event.title
                                 day2outPeriod.append(outSchedule)
                             case 4:
-                                let outSchedule = String(format: "%d:%02d〜", startH, startM, endH, endM) + event.title
                                 day3outPeriod.append(outSchedule)
                             case 5:
-                                let outSchedule = String(format: "%d:%02d〜", startH, startM, endH, endM) + event.title
                                 day4outPeriod.append(outSchedule)
                             case 6:
-                                let outSchedule = String(format: "%d:%02d〜", startH, startM, endH, endM) + event.title
                                 day5outPeriod.append(outSchedule)
                             case 7:
-                                let outSchedule = String(format: "%d:%02d〜", startH, startM, endH, endM) + event.title
                                 day6outPeriod.append(outSchedule)
                             case 1:
-                                let outSchedule = String(format: "%d:%02d〜", startH, startM, endH, endM) + event.title
                                 day7outPeriod.append(outSchedule)
                             default:
                                 break
@@ -148,12 +142,37 @@ class CalendarView: UIView {
                             startLineHidden = true
                         }
                         else if startH <= 23, 0 <= endH, startDateComponents.day != endDateComponents.day {
-                            event.title = event.title + String(format: "\n〜%d:%02d", endH, endM)
-                            endDateComponents.day = startDateComponents.day
-                            endDateComponents.hour = 23
-                            endDateComponents.minute = 30
-                            endDate = Calendar.current.date(from: endDateComponents)!
-                            endLineHidden = true
+                            if startH == 23, 30 <= startM {
+                                print("Out range 23:30")
+                                let outSchedule = String(format: "%d:%02d〜", startH, startM) + event.title
+                                switch startDateComponents.weekday {
+                                case 2:
+                                    day1outPeriod.append(outSchedule)
+                                case 3:
+                                    day2outPeriod.append(outSchedule)
+                                case 4:
+                                    day3outPeriod.append(outSchedule)
+                                case 5:
+                                    day4outPeriod.append(outSchedule)
+                                case 6:
+                                    day5outPeriod.append(outSchedule)
+                                case 7:
+                                    day6outPeriod.append(outSchedule)
+                                case 1:
+                                    day7outPeriod.append(outSchedule)
+                                default:
+                                    break
+                                }
+                                continue
+                            }
+                            else {
+                                event.title = event.title + String(format: "\n〜%d:%02d", endH, endM)
+                                endDateComponents.day = startDateComponents.day
+                                endDateComponents.hour = 23
+                                endDateComponents.minute = 30
+                                endDate = Calendar.current.date(from: endDateComponents)!
+                                endLineHidden = true
+                            }
                         }
                     }
 
