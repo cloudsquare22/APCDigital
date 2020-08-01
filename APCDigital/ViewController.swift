@@ -278,6 +278,10 @@ class ViewController: UIViewController {
         let eventArray = eventStore.events(matching: predicate)
         
         calendarView.dispSchedule(eventArray: eventArray, base: self)
+        
+        let monthlyCalendarView = MonthlyCarendarView(frame: CGRect(x: 1170, y: 215, width: 145, height: 105))
+        self.view.addSubview(monthlyCalendarView)
+        
     }
     
     func pageUpsert() {
