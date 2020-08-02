@@ -28,7 +28,7 @@ class MonthlyCarendarView: UIView {
     }
     
     func createCalendar() {
-        var todayDateComponents = Calendar.current.dateComponents(in: .current, from: monday)
+        let mondayDateComponents = Calendar.current.dateComponents(in: .current, from: monday)
 
         let topBorder = CALayer()
         topBorder.frame = CGRect(x: 0, y: 0, width: 145, height: 1.0)
@@ -52,13 +52,13 @@ class MonthlyCarendarView: UIView {
         self.layer.addSublayer(rightBorder)
 
         let baseColor = UIColor(red: 0.0, green: 143.0 / 255.0 , blue: 0.0, alpha: 1.0)
-        let mmyy = UILabel(frame: CGRect(x: 1.0, y: 1.0, width: 143.0, height: 15.0))
-        let monthText = String("\(Calendar.current.shortStandaloneMonthSymbols[todayDateComponents.month! - 1].uppercased()) \(todayDateComponents.year!)")
+        let mmyy = UILabel(frame: CGRect(x: 1.0, y: 1.0, width: 144.0, height: 15.0))
+        let monthText = String("\(Calendar.current.shortStandaloneMonthSymbols[mondayDateComponents.month! - 1].uppercased()) \(mondayDateComponents.year!)")
         mmyy.text = monthText
         mmyy.font = UIFont.systemFont(ofSize: 9.0)
         mmyy.textAlignment = .center
         mmyy.textColor = baseColor
-        mmyy.backgroundColor = .systemGray6
+        mmyy.backgroundColor = UIColor(red: 229.0 / 255.0, green: 229.0 / 255.0, blue: 229.0 / 255.0, alpha: 1.0)
         self.addSubview(mmyy)
         
         let weekname = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"]
@@ -94,9 +94,9 @@ class MonthlyCarendarView: UIView {
             weeknameView.addSubview(end)
             self.addSubview(weeknameView)
         }
-        
-        todayDateComponents.day = 1
-        let firstDateComponents = Calendar.current.dateComponents(in: .current, from: Calendar.current.date(from: todayDateComponents)!)
+        var firstDateComponents = mondayDateComponents
+        firstDateComponents.day = 1
+        firstDateComponents = Calendar.current.dateComponents(in: .current, from: Calendar.current.date(from: firstDateComponents)!)
         print("--^-- \(firstDateComponents)")
         var countDateComponents = DateComponents()
         countDateComponents.year = firstDateComponents.year
@@ -109,6 +109,14 @@ class MonthlyCarendarView: UIView {
         var weekdayIndex = weekday - 1 == 0 ? 6 : weekday - 2
         var weekIndex = 0
         for day in 1...31 {
+            if day == mondayDateComponents.day! {
+                let weekBackView = UIView(frame: CGRect(x: 1,
+                                                        y: 34 + (11.5 * CGFloat(weekIndex)),
+                                                        width: 144,
+                                                        height: 9))
+                weekBackView.backgroundColor = UIColor(red: 229.0 / 255.0, green: 229.0 / 255.0, blue: 229.0 / 255.0, alpha: 1.0)
+                self.addSubview(weekBackView)
+            }
             let dayView = UILabel(frame: CGRect(x: 4.0 + (20.0 * CGFloat(weekdayIndex)),
                                                 y: 31.5 + (11.5 * CGFloat(weekIndex)),
                                             width: 20,
