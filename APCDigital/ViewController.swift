@@ -165,6 +165,7 @@ class ViewController: UIViewController {
         let eventArray = eventStore.events(matching: predicate)
         calendarView.dispSchedule(eventArray: eventArray,base: self)
 
+        self.dispMonthlyCalendar()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -231,9 +232,14 @@ class ViewController: UIViewController {
         days.append(friday.day!)
         days.append(saturday.day!)
         days.append(sunday.day!)
-        self.month.text = String(monday.month!)
-        self.fromDay.text = Calendar.current.shortStandaloneMonthSymbols[monday.month! - 1].uppercased() + " " + String(monday.day!)
-        self.toDay.text = "to " + Calendar.current.shortStandaloneMonthSymbols[sunday.month! - 1].uppercased() + " " + String(sunday.day!)
+        if monday.month! == sunday.month! {
+            self.month.text = String(monday.month!)
+        }
+        else {
+            self.month.text = String(monday.month!) + "/" + String(sunday.month!)
+        }
+        self.fromDay.text = Calendar.current.standaloneMonthSymbols[monday.month! - 1].uppercased() + " " + String(monday.day!)
+        self.toDay.text = "to " + Calendar.current.standaloneMonthSymbols[sunday.month! - 1].uppercased() + " " + String(sunday.day!)
         self.weekOfYear.text = String(Calendar.current.component(.weekOfYear, from: pageMonday)) + " week"
 
         self.day1Remaining.text = countElapsedRemaining(day: pageMonday)
@@ -278,11 +284,7 @@ class ViewController: UIViewController {
         let eventArray = eventStore.events(matching: predicate)
         
         calendarView.dispSchedule(eventArray: eventArray, base: self)
-        
-        let monthlyCalendarView = MonthlyCarendarView(frame: CGRect(x: 1170, y: 215, width: 145, height: 105))
-        monthlyCalendarView.monday = self.pageMonday
-        monthlyCalendarView.createCalendar()
-        self.calendarView.addSubview(monthlyCalendarView)
+        self.dispMonthlyCalendar()
     }
     
     func pageUpsert() {
@@ -319,6 +321,12 @@ class ViewController: UIViewController {
         
         result = String(format: "%d-%d", elapsed.day! + 1, remaining.day!)
         return result
+    }
+    
+    func dispMonthlyCalendar() {
+        self.calendarView.addSubview(MonthlyCarendarView(frame: CGRect(x: 1170, y: 168, width: 145, height: 105), day: self.pageMonday).view)
+        let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: self.pageMonday)
+        self.calendarView.addSubview(MonthlyCarendarView(frame: CGRect(x: 1170, y: 273, width: 145, height: 105), day: nextMonth!, selectWeek: false).view)
     }
     
     @IBAction func tapCalendarSelect(_ sender: Any) {

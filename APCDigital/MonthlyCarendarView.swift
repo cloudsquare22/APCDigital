@@ -8,58 +8,62 @@
 
 import UIKit
 
-class MonthlyCarendarView: UIView {
-    var monday: Date = Date()
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        loadNib()
-    }
+class MonthlyCarendarView {
+    let view: UIView
+    let day: Date
+    var selectWeek: Bool
+    let selectWeekMonday: Date
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        loadNib()
-    }
-    
-    func loadNib(){
-        let view = Bundle.main.loadNibNamed("MonthlyCalendarView", owner: self, options: nil)?.first as! UIView
-        view.frame = self.bounds
-        self.addSubview(view)
+    init(frame: CGRect, day: Date, selectWeek: Bool = true) {
+        self.view = UIView(frame: frame)
+        self.day = day
+        self.selectWeek = selectWeek
+        let weekday = Calendar.current.component(.weekday, from: day)
+        if weekday != 2 {
+            let matching = DateComponents(weekday: 2)
+            selectWeekMonday = Calendar.current.nextDate(after: day, matching: matching, matchingPolicy: .nextTime, direction: .backward)!
+        }
+        else {
+            selectWeekMonday = day
+        }
+        createCalendar()
     }
     
     func createCalendar() {
-        let mondayDateComponents = Calendar.current.dateComponents(in: .current, from: monday)
+        let dayDateComponents = Calendar.current.dateComponents(in: .current, from: day)
+        let mondayDateComponents = Calendar.current.dateComponents(in: .current, from: selectWeekMonday)
 
+        let lineColor = UIColor(red: 165.0 / 255.0, green: 165.0 / 255.0, blue: 165.0 / 255.0, alpha: 1.0).cgColor
         let topBorder = CALayer()
         topBorder.frame = CGRect(x: 0, y: 0, width: 145, height: 1.0)
-        topBorder.backgroundColor = UIColor.black.cgColor
-        self.layer.addSublayer(topBorder)
+        topBorder.backgroundColor = lineColor
+        self.view.layer.addSublayer(topBorder)
         let middleBorder = CALayer()
         middleBorder.frame = CGRect(x: 0, y: 16, width: 145, height: 1.0)
-        middleBorder.backgroundColor = UIColor.black.cgColor
-        self.layer.addSublayer(middleBorder)
+        middleBorder.backgroundColor = lineColor
+        self.view.layer.addSublayer(middleBorder)
         let bottomBorder = CALayer()
         bottomBorder.frame = CGRect(x: 0, y: 105, width: 145, height: 1.0)
-        bottomBorder.backgroundColor = UIColor.black.cgColor
-        self.layer.addSublayer(bottomBorder)
+        bottomBorder.backgroundColor = lineColor
+        self.view.layer.addSublayer(bottomBorder)
         let leftBorder = CALayer()
         leftBorder.frame = CGRect(x: 0, y: 0, width: 1.0, height: 105)
-        leftBorder.backgroundColor = UIColor.black.cgColor
-        self.layer.addSublayer(leftBorder)
+        leftBorder.backgroundColor = lineColor
+        self.view.layer.addSublayer(leftBorder)
         let rightBorder = CALayer()
         rightBorder.frame = CGRect(x: 145, y: 0, width: 1.0, height: 105)
-        rightBorder.backgroundColor = UIColor.black.cgColor
-        self.layer.addSublayer(rightBorder)
+        rightBorder.backgroundColor = lineColor
+        self.view.layer.addSublayer(rightBorder)
 
         let baseColor = UIColor(red: 0.0, green: 143.0 / 255.0 , blue: 0.0, alpha: 1.0)
         let mmyy = UILabel(frame: CGRect(x: 1.0, y: 1.0, width: 144.0, height: 15.0))
-        let monthText = String("\(Calendar.current.shortStandaloneMonthSymbols[mondayDateComponents.month! - 1].uppercased()) \(mondayDateComponents.year!)")
+        let monthText = String("\(Calendar.current.shortStandaloneMonthSymbols[dayDateComponents.month! - 1].uppercased()) \(dayDateComponents.year!)")
         mmyy.text = monthText
         mmyy.font = UIFont.systemFont(ofSize: 9.0)
         mmyy.textAlignment = .center
         mmyy.textColor = baseColor
         mmyy.backgroundColor = UIColor(red: 229.0 / 255.0, green: 229.0 / 255.0, blue: 229.0 / 255.0, alpha: 1.0)
-        self.addSubview(mmyy)
+        self.view.addSubview(mmyy)
         
         let weekname = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"]
         for index in 0..<7 {
@@ -92,9 +96,9 @@ class MonthlyCarendarView: UIView {
             end.textColor = .black
             weeknameView.addSubview(first)
             weeknameView.addSubview(end)
-            self.addSubview(weeknameView)
+            self.view.addSubview(weeknameView)
         }
-        var firstDateComponents = mondayDateComponents
+        var firstDateComponents = dayDateComponents
         firstDateComponents.day = 1
         firstDateComponents = Calendar.current.dateComponents(in: .current, from: Calendar.current.date(from: firstDateComponents)!)
         print("--^-- \(firstDateComponents)")
@@ -108,14 +112,14 @@ class MonthlyCarendarView: UIView {
         let weekday = firstDateComponents.weekday!
         var weekdayIndex = weekday - 1 == 0 ? 6 : weekday - 2
         var weekIndex = 0
-        for day in 1...31 {
-            if day == mondayDateComponents.day! {
+        for day in 1...dayCount {
+            if (self.selectWeek == true) && (day == mondayDateComponents.day!) {
                 let weekBackView = UIView(frame: CGRect(x: 1,
                                                         y: 34 + (11.5 * CGFloat(weekIndex)),
                                                         width: 144,
                                                         height: 9))
                 weekBackView.backgroundColor = UIColor(red: 229.0 / 255.0, green: 229.0 / 255.0, blue: 229.0 / 255.0, alpha: 1.0)
-                self.addSubview(weekBackView)
+                self.view.addSubview(weekBackView)
             }
             let dayView = UILabel(frame: CGRect(x: 4.0 + (20.0 * CGFloat(weekdayIndex)),
                                                 y: 31.5 + (11.5 * CGFloat(weekIndex)),
@@ -125,7 +129,7 @@ class MonthlyCarendarView: UIView {
             dayView.font = UIFont.systemFont(ofSize: 9.0)
             dayView.textAlignment = .center
             dayView.textColor = baseColor
-            self.addSubview(dayView)
+            self.view.addSubview(dayView)
             if weekdayIndex + 1 > 6 {
                 weekdayIndex = 0
                 weekIndex = weekIndex + 1
@@ -134,14 +138,21 @@ class MonthlyCarendarView: UIView {
                 weekdayIndex = weekdayIndex + 1
             }
         }
+        if (self.selectWeek == true) && (weekdayIndex != 0) && ((dayCount - (weekdayIndex - 1)) == mondayDateComponents.day!) {
+            var day = 1
+            for index in weekdayIndex...6 {
+                let dayView = UILabel(frame: CGRect(x: 4.0 + (20.0 * CGFloat(index)),
+                                                    y: 31.5 + (11.5 * CGFloat(weekIndex)),
+                                                width: 20,
+                                                height: 15))
+                dayView.text = String(day)
+                dayView.font = UIFont.systemFont(ofSize: 9.0)
+                dayView.textAlignment = .center
+                dayView.textColor = baseColor
+                self.view.addSubview(dayView)
+                day = day + 1
+            }
+        }
     }
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
 
 }

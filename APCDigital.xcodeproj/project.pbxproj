@@ -19,7 +19,6 @@
 		8D9EEF6824AE8D0100E855C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D9EEF6724AE8D0100E855C4 /* Assets.xcassets */; };
 		8D9EEF6B24AE8D0100E855C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D9EEF6924AE8D0100E855C4 /* LaunchScreen.storyboard */; };
 		8D9EEF7324AFF6F700E855C4 /* Pages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9EEF7224AFF6F700E855C4 /* Pages.swift */; };
-		8DD1739824D5503E00E907EB /* MonthlyCalendarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD1739724D5503E00E907EB /* MonthlyCalendarView.xib */; };
 		8DD1739A24D5509700E907EB /* MonthlyCarendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD1739924D5509700E907EB /* MonthlyCarendarView.swift */; };
 		8DECD8AD24BDD099005062B1 /* CalendarSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DECD8AC24BDD099005062B1 /* CalendarSelectViewController.swift */; };
 		8DECD8AF24BDD2EF005062B1 /* CalendarSelectViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DECD8AE24BDD2EF005062B1 /* CalendarSelectViewCell.swift */; };
@@ -40,7 +39,6 @@
 		8D9EEF6A24AE8D0100E855C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D9EEF6C24AE8D0100E855C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D9EEF7224AFF6F700E855C4 /* Pages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pages.swift; sourceTree = "<group>"; };
-		8DD1739724D5503E00E907EB /* MonthlyCalendarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MonthlyCalendarView.xib; sourceTree = "<group>"; };
 		8DD1739924D5509700E907EB /* MonthlyCarendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCarendarView.swift; sourceTree = "<group>"; };
 		8DECD8AC24BDD099005062B1 /* CalendarSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSelectViewController.swift; sourceTree = "<group>"; };
 		8DECD8AE24BDD2EF005062B1 /* CalendarSelectViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSelectViewCell.swift; sourceTree = "<group>"; };
@@ -91,7 +89,6 @@
 				8DECD8AC24BDD099005062B1 /* CalendarSelectViewController.swift */,
 				8DECD8AE24BDD2EF005062B1 /* CalendarSelectViewCell.swift */,
 				8D13774F24C42CE900A6938C /* AboutViewController.swift */,
-				8DD1739724D5503E00E907EB /* MonthlyCalendarView.xib */,
 				8DD1739924D5509700E907EB /* MonthlyCarendarView.swift */,
 			);
 			path = APCDigital;
@@ -156,7 +153,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D9EEF6B24AE8D0100E855C4 /* LaunchScreen.storyboard in Resources */,
-				8DD1739824D5503E00E907EB /* MonthlyCalendarView.xib in Resources */,
 				8D0E63F524B1A9A000D47A47 /* ScheduleView.xib in Resources */,
 				8D9EEF6824AE8D0100E855C4 /* Assets.xcassets in Resources */,
 				8D9EEF6324AE8D0000E855C4 /* Main.storyboard in Resources */,
