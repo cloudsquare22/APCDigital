@@ -13,7 +13,10 @@ class MonthlyCarendarView {
     let day: Date
     var selectWeek: Bool
     let selectWeekMonday: Date
-    
+
+    let baseColor = UIColor(red: 0.0, green: 143.0 / 255.0 , blue: 0.0, alpha: 1.0)
+    let backColor = UIColor(red: 229.0 / 255.0, green: 229.0 / 255.0, blue: 229.0 / 255.0, alpha: 1.0)
+
     init(frame: CGRect, day: Date, selectWeek: Bool = true) {
         self.view = UIView(frame: frame)
         self.day = day
@@ -55,14 +58,13 @@ class MonthlyCarendarView {
         rightBorder.backgroundColor = lineColor
         self.view.layer.addSublayer(rightBorder)
 
-        let baseColor = UIColor(red: 0.0, green: 143.0 / 255.0 , blue: 0.0, alpha: 1.0)
         let mmyy = UILabel(frame: CGRect(x: 1.0, y: 1.0, width: 144.0, height: 15.0))
         let monthText = String("\(Calendar.current.shortStandaloneMonthSymbols[dayDateComponents.month! - 1].uppercased()) \(dayDateComponents.year!)")
         mmyy.text = monthText
         mmyy.font = UIFont.systemFont(ofSize: 9.0)
         mmyy.textAlignment = .center
         mmyy.textColor = baseColor
-        mmyy.backgroundColor = UIColor(red: 229.0 / 255.0, green: 229.0 / 255.0, blue: 229.0 / 255.0, alpha: 1.0)
+        mmyy.backgroundColor = backColor
         self.view.addSubview(mmyy)
         
         let weekname = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"]
@@ -118,18 +120,10 @@ class MonthlyCarendarView {
                                                         y: 34 + (11.5 * CGFloat(weekIndex)),
                                                         width: 144,
                                                         height: 9))
-                weekBackView.backgroundColor = UIColor(red: 229.0 / 255.0, green: 229.0 / 255.0, blue: 229.0 / 255.0, alpha: 1.0)
+                weekBackView.backgroundColor = backColor
                 self.view.addSubview(weekBackView)
             }
-            let dayView = UILabel(frame: CGRect(x: 4.0 + (20.0 * CGFloat(weekdayIndex)),
-                                                y: 31.5 + (11.5 * CGFloat(weekIndex)),
-                                            width: 20,
-                                            height: 15))
-            dayView.text = String(day)
-            dayView.font = UIFont.systemFont(ofSize: 9.0)
-            dayView.textAlignment = .center
-            dayView.textColor = baseColor
-            self.view.addSubview(dayView)
+            self.view.addSubview(createDayUILabel(day: day, weekdayIndex: weekdayIndex, weekIndex: weekIndex))
             if weekdayIndex + 1 > 6 {
                 weekdayIndex = 0
                 weekIndex = weekIndex + 1
@@ -141,18 +135,22 @@ class MonthlyCarendarView {
         if (self.selectWeek == true) && (weekdayIndex != 0) && ((dayCount - (weekdayIndex - 1)) == mondayDateComponents.day!) {
             var day = 1
             for index in weekdayIndex...6 {
-                let dayView = UILabel(frame: CGRect(x: 4.0 + (20.0 * CGFloat(index)),
-                                                    y: 31.5 + (11.5 * CGFloat(weekIndex)),
-                                                width: 20,
-                                                height: 15))
-                dayView.text = String(day)
-                dayView.font = UIFont.systemFont(ofSize: 9.0)
-                dayView.textAlignment = .center
-                dayView.textColor = baseColor
-                self.view.addSubview(dayView)
+                self.view.addSubview(createDayUILabel(day: day, weekdayIndex: index, weekIndex: weekIndex))
                 day = day + 1
             }
         }
+    }
+    
+    func createDayUILabel(day:Int, weekdayIndex:Int, weekIndex:Int) -> UIView {
+        let dayView = UILabel(frame: CGRect(x: 4.0 + (20.0 * CGFloat(weekdayIndex)),
+                                            y: 31.5 + (11.5 * CGFloat(weekIndex)),
+                                            width: 20,
+                                            height: 15))
+        dayView.text = String(day)
+        dayView.font = UIFont.systemFont(ofSize: 9.0)
+        dayView.textAlignment = .center
+        dayView.textColor = baseColor
+        return dayView
     }
 
 }
