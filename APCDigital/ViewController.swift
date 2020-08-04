@@ -352,6 +352,15 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func tapSetting(_ sender: Any) {
+        let settingViewController = storyBoard.instantiateViewController(withIdentifier: "SettingView") as? SettingViewController
+        if let controller = settingViewController {
+            controller.viewController = self
+            self.setPopoverPresentationController(sender: sender, controller: controller)
+            present(controller, animated: false, completion: nil)
+        }
+    }
+    
 }
 
 extension ViewController: UIPopoverPresentationControllerDelegate {

@@ -32,6 +32,12 @@ class CalendarView: UIView {
     
     func dispSchedule(eventArray: [EKEvent], base: ViewController) {
 //        print(eventArray)
+        var movementSymmbolList: [String] = []
+        if let symbols = UserDefaults.standard.string(forKey: "movementSymbols") {
+            for symbol in symbols {
+                movementSymmbolList.append(String(symbol))
+            }
+        }
         var day1outPeriod: [String] = []
         var day2outPeriod: [String] = []
         var day3outPeriod: [String] = []
@@ -230,7 +236,7 @@ class CalendarView: UIView {
                     scheduleView.minute.image = UIImage(systemName: minuteSFSymbol)
                     scheduleView.endTime.frame = CGRect(x: -8.0, y: 11.375 * diff - 2, width: 16, height: 16)
                     
-                    if event.title.hasPrefix("🚗") == true || event.title.hasPrefix("🚃") {
+                    if movementSymmbolList.contains(String(event.title.prefix(1))) == true {
                         scheduleView.addLine(isMove: true, isStartLineHidden: startLineHidden, isEndLineHidden: endLineHidden)
                     }
                     else {
