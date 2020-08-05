@@ -15,8 +15,7 @@ class MonthlyCarendarView {
     let selectWeekMonday: Date
 
     let baseColor = UIColor(named: "Basic Color Green")
-//    UIColor(red: 0.0, green: 143.0 / 255.0 , blue: 0.0, alpha: 1.0)
-    let backColor = UIColor(red: 229.0 / 255.0, green: 229.0 / 255.0, blue: 229.0 / 255.0, alpha: 1.0)
+    let backColor = UIColor(named: "Basic Color Gray Light")
 
     init(frame: CGRect, day: Date, selectWeek: Bool = true) {
         self.view = UIView(frame: frame)
@@ -37,7 +36,7 @@ class MonthlyCarendarView {
         let dayDateComponents = Calendar.current.dateComponents(in: .current, from: day)
         let mondayDateComponents = Calendar.current.dateComponents(in: .current, from: selectWeekMonday)
 
-        let lineColor = UIColor(red: 165.0 / 255.0, green: 165.0 / 255.0, blue: 165.0 / 255.0, alpha: 1.0).cgColor
+        let lineColor = UIColor(named: "Basic Color Gray Middle")!.cgColor
         let topBorder = CALayer()
         topBorder.frame = CGRect(x: 0, y: 0, width: 145, height: 1.0)
         topBorder.backgroundColor = lineColor
