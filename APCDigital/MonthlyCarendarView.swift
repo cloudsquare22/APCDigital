@@ -14,7 +14,8 @@ class MonthlyCarendarView {
     var selectWeek: Bool
     let selectWeekMonday: Date
 
-    let baseColor = UIColor(red: 0.0, green: 143.0 / 255.0 , blue: 0.0, alpha: 1.0)
+    let baseColor = UIColor(named: "Basic Color Green")
+//    UIColor(red: 0.0, green: 143.0 / 255.0 , blue: 0.0, alpha: 1.0)
     let backColor = UIColor(red: 229.0 / 255.0, green: 229.0 / 255.0, blue: 229.0 / 255.0, alpha: 1.0)
 
     init(frame: CGRect, day: Date, selectWeek: Bool = true) {
