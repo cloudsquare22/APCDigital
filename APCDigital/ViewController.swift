@@ -365,12 +365,15 @@ class ViewController: UIViewController {
         UIGraphicsEndPDFContext()
             
         if let documentDirectories = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first {
-            let documentsFileName = documentDirectories + "/" + "APCDigital"
+            let documentsFileName = documentDirectories + "/" + "APCDigital.pdf"
             pdfData.write(toFile: documentsFileName, atomically: true)
+            let url = URL(fileURLWithPath: documentsFileName)
 
-//            let activityViewController = UIActivityViewController(activityItems: [documentsFileName], applicationActivities: nil)
-//            activityViewController.popoverPresentationController?.sourceView = self.view
-//            present(activityViewController, animated: true, completion: nil)
+            let activityViewController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+            activityViewController.modalPresentationStyle = .popover
+            activityViewController.popoverPresentationController?.sourceRect = (sender as! UIButton).frame
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            present(activityViewController, animated: true, completion: nil)
         }
         
     }
