@@ -274,6 +274,17 @@
                                             <action selector="tapCalendarSelect:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WJe-zC-80R"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kuV-19-NVH">
+                                        <rect key="frame" x="63" y="24" width="42" height="48"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" name="Basic Color Green"/>
+                                        <state key="normal" image="doc.plaintext" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="32" scale="large"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="tapAbout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dg0-y0-NVF"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w76-5V-v8P">
                                         <rect key="frame" x="113" y="31" width="49" height="41"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -296,15 +307,15 @@
                                             <action selector="tapSetting:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dLl-d7-979"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kuV-19-NVH">
-                                        <rect key="frame" x="63" y="24" width="42" height="48"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iC7-3r-nbW">
+                                        <rect key="frame" x="1256" y="24" width="42" height="48"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="tintColor" name="Basic Color Green"/>
-                                        <state key="normal" image="doc.plaintext" catalog="system">
+                                        <state key="normal" image="arrow.up.doc" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="32" scale="large"/>
                                         </state>
                                         <connections>
-                                            <action selector="tapAbout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dg0-y0-NVF"/>
+                                            <action selector="tapExport:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RIv-r4-zsa"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -637,6 +648,7 @@
     </scenes>
     <resources>
         <image name="aptemplate" width="491" height="342.33334350585938"/>
+        <image name="arrow.up.doc" catalog="system" width="115" height="128"/>
         <image name="calendar" catalog="system" width="128" height="106"/>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="doc.plaintext" catalog="system" width="115" height="128"/>

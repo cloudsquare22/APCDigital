@@ -352,6 +352,29 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func tapExport(_ sender: Any) {
+        self.menuView.isHidden.toggle()
+
+        let pdfData = NSMutableData()
+        UIGraphicsBeginPDFContextToData(pdfData, self.view.bounds, nil)
+        UIGraphicsBeginPDFPage()
+            
+        guard let pdfContext = UIGraphicsGetCurrentContext() else { return }
+            
+        self.view.layer.render(in: pdfContext)
+        UIGraphicsEndPDFContext()
+            
+        if let documentDirectories = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first {
+            let documentsFileName = documentDirectories + "/" + "APCDigital"
+            pdfData.write(toFile: documentsFileName, atomically: true)
+
+//            let activityViewController = UIActivityViewController(activityItems: [documentsFileName], applicationActivities: nil)
+//            activityViewController.popoverPresentationController?.sourceView = self.view
+//            present(activityViewController, animated: true, completion: nil)
+        }
+        
+    }
+    
     @IBAction func tapSetting(_ sender: Any) {
         let settingViewController = storyBoard.instantiateViewController(withIdentifier: "SettingView") as? SettingViewController
         if let controller = settingViewController {
