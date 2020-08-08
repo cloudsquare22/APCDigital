@@ -20,8 +20,10 @@ class APCDCalendar {
         
         let pdfData = NSMutableData()
         UIGraphicsBeginPDFContextToData(pdfData, view.bounds, nil)
-        UIGraphicsBeginPDFPage()
         guard let pdfContext = UIGraphicsGetCurrentContext() else { return result}
+        UIGraphicsBeginPDFPage()
+        view.layer.render(in: pdfContext)
+        UIGraphicsBeginPDFPage()
         view.layer.render(in: pdfContext)
         UIGraphicsEndPDFContext()
             
