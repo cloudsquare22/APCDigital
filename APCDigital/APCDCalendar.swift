@@ -53,6 +53,7 @@ class APCDCalendar {
         }
         
         let view = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 1366.0, height: 1024.0))
+        view.backgroundColor = .white
         let templateView = UIImageView(image: UIImage(named: "aptemplate"))
         templateView.frame = CGRect(x: 0.0, y: 0.0, width: 1366.0, height: 1024.0)
         templateView.contentMode = .scaleAspectFit
@@ -243,6 +244,8 @@ class APCDCalendar {
                                                                     blue: event.calendar.cgColor.components![2],
                                                                     alpha: 0.3)
                     scheduleView.label.text = event.title
+                    scheduleView.label.numberOfLines = 0
+//                    scheduleView.label.frame = CGRect(x: 8.0, y: 0.0, width: 132.0, height: 11.375 * diff)
                     var minuteSFSymbol = "circle"
                     switch startDateComponents.minute {
                     case 0, 30:
@@ -304,11 +307,14 @@ class APCDCalendar {
     }
     
     func createOutPeriod(texts: [String], startPoint: CGFloat) -> UILabel {
+        print("--^--\(texts)")
         let outPeriod = UILabel(frame: CGRect(x: startPoint + 2.0, y: 107.0, width: 135.0, height: 50.0))
         outPeriod.font = UIFont.systemFont(ofSize: 10.0, weight: .medium)
         outPeriod.textColor = .black
         outPeriod.backgroundColor = UIColor(named: "Basic Color Gray Light")
         outPeriod.textAlignment = .left
+        outPeriod.text = ""
+        outPeriod.numberOfLines = 0
         for (index, schedule) in texts.enumerated() {
             outPeriod.text?.append(contentsOf: schedule)
             if index + 1 != texts.count {
@@ -329,8 +335,9 @@ class APCDCalendar {
             do {
                 print(page.count)
                 let drawaing = try PKDrawing(data: page).image(from: CGRect(x: 0.0, y: 0.0, width: 1366.0, height: 1024.0), scale: 3.0)
-                let image = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 1366.0, height: 1024.0))
-                image.image = drawaing
+                let image = UIImageView(image: drawaing)
+                image.frame = CGRect(x: 0.0, y: 0.0, width: 1366.0, height: 1024.0)
+                image.contentMode = .scaleAspectFit
                 view.addSubview(image)
             }
             catch {
