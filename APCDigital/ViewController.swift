@@ -353,17 +353,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapExport(_ sender: Any) {
-        self.menuView.isHidden.toggle()
-        
-        let aPCDCalendar = APCDCalendar()
-        if let url = aPCDCalendar.export(fromDate: pageMonday, displayCalendars: displayCalendars) {
-            let activityViewController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-            activityViewController.modalPresentationStyle = .popover
-            activityViewController.popoverPresentationController?.sourceRect = (sender as! UIButton).frame
-            activityViewController.popoverPresentationController?.sourceView = self.view
-            present(activityViewController, animated: true, completion: nil)
+        let exportViewController = storyBoard.instantiateViewController(withIdentifier: "ExportView") as? ExportViewController
+        if let controller = exportViewController {
+            controller.viewController = self
+            self.setPopoverPresentationController(sender: sender, controller: controller)
+            present(controller, animated: false, completion: nil)
         }
-        
     }
     
     @IBAction func tapSetting(_ sender: Any) {

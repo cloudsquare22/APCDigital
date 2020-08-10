@@ -12,27 +12,38 @@ import EventKit
 
 class APCDCalendar {
     var eventStore = EKEventStore()
-    var fromDate = Date()
     var displayCalendars: [String] = []
 
-    func export(fromDate: Date, displayCalendars: [String]) -> URL? {
+    func export(fromDate: Date, toDate: Date, displayCalendars: [String]) -> URL? {
         var result: URL? = nil
-        self.fromDate = fromDate
         self.displayCalendars = displayCalendars
         
-        let view = createWeeklyCalendar(date: self.fromDate)
-        
+        print("Export start \(Date())")
         let pdfData = NSMutableData()
-        UIGraphicsBeginPDFContextToData(pdfData, view.bounds, nil)
+        UIGraphicsBeginPDFContextToData(pdfData, CGRect(x: 0.0, y: 0.0, width: 1366.0, height: 1024.0), nil)
         guard let pdfContext = UIGraphicsGetCurrentContext() else { return result}
-        UIGraphicsBeginPDFPage()
-        view.layer.render(in: pdfContext)
-        UIGraphicsBeginPDFPage()
-        view.layer.render(in: pdfContext)
+
+        let matching = DateComponents(weekday: 2)
+        var dateCurrent = fromDate
+        while dateCurrent < toDate {
+            let view = createWeeklyCalendar(date: dateCurrent)
+            UIGraphicsBeginPDFPage()
+            view.layer.render(in: pdfContext)
+            dateCurrent = Calendar.current.nextDate(after: dateCurrent, matching: matching, matchingPolicy: .nextTime, direction: .forward)!
+        }
+        
         UIGraphicsEndPDFContext()
-            
+        print("Export end \(Date())")
+        
+        let fromDateComponents = Calendar.current.dateComponents(in: .current, from: fromDate)
+        let toDateComponents = Calendar.current.dateComponents(in: .current, from: toDate)
+        let filename = String(format: "APCDigital_%04d%02d%02d-%04d%02d%02d.pdf",
+                              fromDateComponents.year!, fromDateComponents.month!, fromDateComponents.day!,
+                              toDateComponents.year!, toDateComponents.month!, toDateComponents.day!)
+
+
         if let documentDirectories = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first {
-            let documentsFileName = documentDirectories + "/" + "APCDigital_ec.pdf"
+            let documentsFileName = documentDirectories + "/" + filename
             pdfData.write(toFile: documentsFileName, atomically: true)
             result = URL(fileURLWithPath: documentsFileName)
         }
@@ -245,7 +256,10 @@ class APCDCalendar {
                                                                     alpha: 0.3)
                     scheduleView.label.text = event.title
                     scheduleView.label.numberOfLines = 0
-//                    scheduleView.label.frame = CGRect(x: 8.0, y: 0.0, width: 132.0, height: 11.375 * diff)
+                    var labelFrame = scheduleView.label.frame
+                    scheduleView.label.sizeToFit()
+                    labelFrame.size.height = scheduleView.label.frame.size.height
+                    scheduleView.label.frame = labelFrame
                     var minuteSFSymbol = "circle"
                     switch startDateComponents.minute {
                     case 0, 30:
