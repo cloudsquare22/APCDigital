@@ -79,4 +79,22 @@ extension Pages {
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
+
+    static func delete(year: Int, week: Int) {
+        let managedObjectContext  = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        do {
+            let fetchRequest = NSFetchRequest<Pages>(entityName: "Pages")
+            fetchRequest.predicate = NSPredicate(format: "year == %@ AND week == %@", String(year), String(week))
+            let pages: [Pages] = try managedObjectContext.fetch(fetchRequest)
+            print(pages)
+            if pages.count > 0 {
+                managedObjectContext.delete(pages[0])
+                try managedObjectContext.save()
+            }
+        }
+        catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+    }
 }

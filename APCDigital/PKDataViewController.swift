@@ -44,6 +44,8 @@ class PKDataViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             print("Delete")
+            Pages.delete(year: self.pages[indexPath.row].year, week: self.pages[indexPath.row].week)
+            self.pages = Pages.selectAll()
         }
         self.tableView.reloadData()
     }
