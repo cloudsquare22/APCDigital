@@ -30,6 +30,26 @@ extension Pages {
         return result
     }
     
+    static func selectAll() -> [(year: Int , week: Int)] {
+        var result: [(year: Int , week: Int)] = []
+        let managedObjectContext  = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        do {
+            let fetchRequest = NSFetchRequest<Pages>(entityName: "Pages")
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "year", ascending: true),
+                                            NSSortDescriptor(key: "week", ascending: true)]
+            let pages: [Pages] = try managedObjectContext.fetch(fetchRequest)
+            print(pages)
+            for page in pages {
+                result.append((year: Int(page.year), week: Int(page.week)))
+            }
+        }
+        catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+        return result
+    }
+    
     static func upsert(year: Int, week: Int, page: Data) {
         let managedObjectContext  = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         do {

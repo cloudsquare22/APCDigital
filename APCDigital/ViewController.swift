@@ -351,6 +351,15 @@ class ViewController: UIViewController {
             UIApplication.shared.open(url)
         }
     }
+
+    @IBAction func tapArchive(_ sender: Any) {
+        let pKDataViewController = storyBoard.instantiateViewController(withIdentifier: "PKDataView") as? PKDataViewController
+        if let controller = pKDataViewController {
+//            controller.viewController = self
+            self.setPopoverPresentationController(sender: sender, controller: controller)
+            present(controller, animated: false, completion: nil)
+        }
+    }
     
     @IBAction func tapExport(_ sender: Any) {
         let exportViewController = storyBoard.instantiateViewController(withIdentifier: "ExportView") as? ExportViewController
