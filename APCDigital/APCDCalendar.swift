@@ -43,6 +43,17 @@ class APCDCalendar {
 
 
         if let documentDirectories = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first {
+            do {
+                let files = try FileManager.default.contentsOfDirectory(atPath: documentDirectories)
+                print(files)
+                for file in files {
+                    try FileManager.default.removeItem(atPath: documentDirectories + "/" + file)
+                }
+            }
+            catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
             let documentsFileName = documentDirectories + "/" + filename
             pdfData.write(toFile: documentsFileName, atomically: true)
             result = URL(fileURLWithPath: documentsFileName)
