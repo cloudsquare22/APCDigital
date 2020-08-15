@@ -211,12 +211,9 @@ class ViewController: UIViewController {
             let selectJumpDayViewController = storyBoard.instantiateViewController(withIdentifier: "SelectJumpDayView") as? SelectJumpDayViewController
             if let controller = selectJumpDayViewController {
                 controller.viewController = self
-                controller.modalPresentationStyle = .popover
-                controller.popoverPresentationController?.sourceView = self.view
-                controller.popoverPresentationController?.sourceRect = CGRect(x: 1170.0, y: 168.0, width: 1170.0 + 145.0, height: 168.0 + (105.0 * 2))
-                controller.popoverPresentationController?.permittedArrowDirections = .any
-                controller.popoverPresentationController?.delegate = self
-                controller.preferredContentSize = CGSize(width: 300, height: 300)
+                self.setPopoverPresentationController(size: CGSize(width: 300, height: 300),
+                                                      rect: CGRect(x: 1170.0, y: 168.0, width: 1170.0 + 145.0, height: 168.0 + (105.0 * 2)),
+                                                      controller: controller)
                 present(controller, animated: false, completion: nil)
             }
 
@@ -351,7 +348,9 @@ class ViewController: UIViewController {
         let calendarSelectViewController = storyBoard.instantiateViewController(withIdentifier: "CalendarSelectView") as? CalendarSelectViewController
         if let controller = calendarSelectViewController {
             controller.viewController = self
-            self.setPopoverPresentationController(sender: sender, controller: controller)
+            self.setPopoverPresentationController(size: CGSize(width: 600, height: 800),
+                                                  rect: (sender as! UIButton).frame,
+                                                  controller: controller)
             present(controller, animated: false, completion: nil)
         }
     }
@@ -359,7 +358,9 @@ class ViewController: UIViewController {
     @IBAction func tapAbout(_ sender: Any) {
         let aboutViewController = storyBoard.instantiateViewController(withIdentifier: "AboutView") as? AboutViewController
         if let controller = aboutViewController {
-            self.setPopoverPresentationController(sender: sender, controller: controller)
+            self.setPopoverPresentationController(size: CGSize(width: 600, height: 800),
+                                                  rect: (sender as! UIButton).frame,
+                                                  controller: controller)
             present(controller, animated: false, completion: nil)
         }
     }
@@ -373,8 +374,9 @@ class ViewController: UIViewController {
     @IBAction func tapArchive(_ sender: Any) {
         let pKDataViewController = storyBoard.instantiateViewController(withIdentifier: "PKDataView") as? PKDataViewController
         if let controller = pKDataViewController {
-//            controller.viewController = self
-            self.setPopoverPresentationController(sender: sender, controller: controller)
+            self.setPopoverPresentationController(size: CGSize(width: 600, height: 800),
+                                                  rect: (sender as! UIButton).frame,
+                                                  controller: controller)
             present(controller, animated: false, completion: nil)
         }
     }
@@ -383,7 +385,9 @@ class ViewController: UIViewController {
         let exportViewController = storyBoard.instantiateViewController(withIdentifier: "ExportView") as? ExportViewController
         if let controller = exportViewController {
             controller.viewController = self
-            self.setPopoverPresentationController(sender: sender, controller: controller)
+            self.setPopoverPresentationController(size: CGSize(width: 600, height: 800),
+                                                  rect: (sender as! UIButton).frame,
+                                                  controller: controller)
             present(controller, animated: false, completion: nil)
         }
     }
@@ -392,7 +396,9 @@ class ViewController: UIViewController {
         let settingViewController = storyBoard.instantiateViewController(withIdentifier: "SettingView") as? SettingViewController
         if let controller = settingViewController {
             controller.viewController = self
-            self.setPopoverPresentationController(sender: sender, controller: controller)
+            self.setPopoverPresentationController(size: CGSize(width: 600, height: 800),
+                                                  rect: (sender as! UIButton).frame,
+                                                  controller: controller)
             present(controller, animated: false, completion: nil)
         }
     }
@@ -400,12 +406,12 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UIPopoverPresentationControllerDelegate {
-    func setPopoverPresentationController(sender: Any, controller: UIViewController) {
+    func setPopoverPresentationController(size: CGSize, rect: CGRect, controller: UIViewController) {
         controller.modalPresentationStyle = .popover
         controller.popoverPresentationController?.sourceView = self.view
-        controller.popoverPresentationController?.sourceRect = (sender as! UIButton).frame
+        controller.popoverPresentationController?.sourceRect = rect
         controller.popoverPresentationController?.permittedArrowDirections = .any
         controller.popoverPresentationController?.delegate = self
-        controller.preferredContentSize = CGSize(width: 600, height: 800)
+        controller.preferredContentSize = size
     }
 }
