@@ -205,9 +205,27 @@ class ViewController: UIViewController {
     }
 
     @objc func tapPKCanvasView(sender: UITapGestureRecognizer) {
-        menuView.isHidden.toggle()
+        let point = sender.location(in: self.pKCanvasView)
+        if (1170.0 < point.x) && (point.x < 1170.0 + 145.0) && (168.0 < point.y) && (point.y < 168.0 + (105.0 * 2)) {
+            print("touch Monthly calendar")
+            let selectJumpDayViewController = storyBoard.instantiateViewController(withIdentifier: "SelectJumpDayView") as? SelectJumpDayViewController
+            if let controller = selectJumpDayViewController {
+                controller.viewController = self
+                controller.modalPresentationStyle = .popover
+                controller.popoverPresentationController?.sourceView = self.view
+                controller.popoverPresentationController?.sourceRect = CGRect(x: 1170.0, y: 168.0, width: 1170.0 + 145.0, height: 168.0 + (105.0 * 2))
+                controller.popoverPresentationController?.permittedArrowDirections = .any
+                controller.popoverPresentationController?.delegate = self
+                controller.preferredContentSize = CGSize(width: 300, height: 300)
+                present(controller, animated: false, completion: nil)
+            }
+
+        }
+        else {
+            menuView.isHidden.toggle()
+        }
     }
-    
+
     func updateDays() {
         let monday = Calendar.current.dateComponents(in: .current, from: pageMonday)
         let tuesday = Calendar.current.dateComponents(in: .current, from: pageMonday + (86400 * 1))
