@@ -133,12 +133,30 @@ class ViewController: UIViewController {
         endDateComponents.second = 59
         endDateComponents.nanosecond = 0
 
+        calendarView.clearSchedule()
+        let predicate = eventStore.predicateForEvents(withStart: startDateComponents.date!, end: endDateComponents.date!, calendars: nil)
+        let eventArray = eventStore.events(matching: predicate)
+        calendarView.dispSchedule(eventArray: eventArray,base: self)
+
+        self.dispMonthlyCalendar()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("viewWillDisappear")
+    }
+    
+    func updateCalendars() {
+        var nationalHoliday = "日本の祝日"
+        if let title = UserDefaults.standard.string(forKey: "nationalHoliday") {
+            nationalHoliday = title
+        }
         let calendarAll = eventStore.calendars(for: .event)
         self.calendars = []
         for calendar in calendarAll {
             switch calendar.type {
             case .local, .calDAV,
-                 .subscription where calendar.title != "日本の祝日":
+                 .subscription where calendar.title != nationalHoliday:
                 self.calendars.append(calendar)
             default:
                 break
@@ -155,22 +173,9 @@ class ViewController: UIViewController {
         }
         else {
             for calendar in self.calendars {
-                displayCalendars.append(calendar.title)
+                self.displayCalendars.append(calendar.title)
             }
         }
-            
-
-        calendarView.clearSchedule()
-        let predicate = eventStore.predicateForEvents(withStart: startDateComponents.date!, end: endDateComponents.date!, calendars: nil)
-        let eventArray = eventStore.events(matching: predicate)
-        calendarView.dispSchedule(eventArray: eventArray,base: self)
-
-        self.dispMonthlyCalendar()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        print("viewWillDisappear")
     }
 
     @objc func swipeLeft(sender: UISwipeGestureRecognizer) {
@@ -224,6 +229,8 @@ class ViewController: UIViewController {
     }
 
     func updateDays() {
+        self.updateCalendars()
+
         let monday = Calendar.current.dateComponents(in: .current, from: pageMonday)
         let tuesday = Calendar.current.dateComponents(in: .current, from: pageMonday + (86400 * 1))
         let wednesday = Calendar.current.dateComponents(in: .current, from: pageMonday + (86400 * 2))
@@ -239,14 +246,14 @@ class ViewController: UIViewController {
         self.day5.text = String(friday.day!)
         self.day6.text = String(saturday.day!)
         self.day7.text = String(sunday.day!)
-        days = []
-        days.append(monday.day!)
-        days.append(tuesday.day!)
-        days.append(wednesday.day!)
-        days.append(thursday.day!)
-        days.append(friday.day!)
-        days.append(saturday.day!)
-        days.append(sunday.day!)
+        self.days = []
+        self.days.append(monday.day!)
+        self.days.append(tuesday.day!)
+        self.days.append(wednesday.day!)
+        self.days.append(thursday.day!)
+        self.days.append(friday.day!)
+        self.days.append(saturday.day!)
+        self.days.append(sunday.day!)
         if monday.month! == sunday.month! {
             self.month.text = String(monday.month!)
         }

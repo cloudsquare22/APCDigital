@@ -12,12 +12,16 @@ class SettingViewController: UITableViewController {
     weak var viewController: ViewController? = nil
 
     @IBOutlet weak var movementSymbols: UITextField!
+    @IBOutlet weak var nationalHoliday: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         if let symbols = UserDefaults.standard.string(forKey: "movementSymbols") {
             movementSymbols.text = symbols
+        }
+        if let title = UserDefaults.standard.string(forKey: "nationalHoliday") {
+            nationalHoliday.text = title
         }
 
         // Uncomment the following line to preserve selection between presentations
@@ -36,7 +40,7 @@ class SettingViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 2
+        return 3
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -44,6 +48,9 @@ class SettingViewController: UITableViewController {
         
         if let symbols = self.movementSymbols.text {
             UserDefaults.standard.set(symbols, forKey: "movementSymbols")
+        }
+        if let title = self.nationalHoliday.text {
+            UserDefaults.standard.set(title, forKey: "nationalHoliday")
         }
         self.viewController!.updateDays()
     }
