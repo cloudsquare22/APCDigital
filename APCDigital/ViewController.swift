@@ -75,6 +75,10 @@ class ViewController: UIViewController {
         let tapPKCanvasView = UITapGestureRecognizer(target: self, action: #selector(self.tapPKCanvasView(sender:)))
         tapPKCanvasView.numberOfTapsRequired = 1
         pKCanvasView.addGestureRecognizer(tapPKCanvasView)
+        
+        let longPressPKCanvasView = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressPKCanvasView(sender:)))
+        longPressPKCanvasView.minimumPressDuration = 1.0
+        pKCanvasView.addGestureRecognizer(longPressPKCanvasView)
 
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeLeft(sender:)))
         swipeLeft.direction = .left
@@ -225,6 +229,21 @@ class ViewController: UIViewController {
         }
         else {
             menuView.isHidden.toggle()
+        }
+    }
+    
+    @objc func longPressPKCanvasView(sender: UILongPressGestureRecognizer) {
+        print("longPressPKCanvasView")
+        let point = sender.location(in: self.pKCanvasView)
+        print(point)
+
+        let selectJumpDayViewController = storyBoard.instantiateViewController(withIdentifier: "SelectJumpDayView") as? SelectJumpDayViewController
+        if let controller = selectJumpDayViewController {
+            controller.viewController = self
+            self.setPopoverPresentationController(size: CGSize(width: 300, height: 300),
+                                                  rect: CGRect(x: point.x, y: point.y, width: 1, height: 1),
+                                                  controller: controller)
+            present(controller, animated: false, completion: nil)
         }
     }
 
