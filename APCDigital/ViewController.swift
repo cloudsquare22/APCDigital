@@ -234,17 +234,33 @@ class ViewController: UIViewController {
     
     @objc func longPressPKCanvasView(sender: UILongPressGestureRecognizer) {
         print("longPressPKCanvasView")
-        let point = sender.location(in: self.pKCanvasView)
-        print(point)
 
-        let selectJumpDayViewController = storyBoard.instantiateViewController(withIdentifier: "SelectJumpDayView") as? SelectJumpDayViewController
-        if let controller = selectJumpDayViewController {
-            controller.viewController = self
-            self.setPopoverPresentationController(size: CGSize(width: 300, height: 300),
-                                                  rect: CGRect(x: point.x, y: point.y, width: 1, height: 1),
-                                                  controller: controller)
-            present(controller, animated: false, completion: nil)
+        let event = EKEvent(eventStore: eventStore)
+        event.title = "Example Event"
+        event.startDate = Date()
+        event.endDate = Date() + (60 * 30)
+        event.calendar = eventStore.defaultCalendarForNewEvents
+        do {
+            try eventStore.save(event, span: .thisEvent)
         }
+        catch {
+            let nserror = error as NSError
+            print(nserror)
+
+        }
+        print("Event Comit")
+//
+//        let point = sender.location(in: self.pKCanvasView)
+//        print(point)
+//
+//        let selectJumpDayViewController = storyBoard.instantiateViewController(withIdentifier: "SelectJumpDayView") as? SelectJumpDayViewController
+//        if let controller = selectJumpDayViewController {
+//            controller.viewController = self
+//            self.setPopoverPresentationController(size: CGSize(width: 300, height: 300),
+//                                                  rect: CGRect(x: point.x, y: point.y, width: 1, height: 1),
+//                                                  controller: controller)
+//            present(controller, animated: false, completion: nil)
+//        }
     }
 
     func updateDays() {
