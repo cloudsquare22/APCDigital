@@ -234,20 +234,64 @@ class ViewController: UIViewController {
     
     @objc func longPressPKCanvasView(sender: UILongPressGestureRecognizer) {
         print("longPressPKCanvasView")
+        let point = sender.location(in: self.pKCanvasView)
+        
+        var startH = Int((point.y - 169.0) / 45.5) + 6
+        print(startH)
+        var startDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday)
+        startDateComponents.hour = startH
+        print(startDateComponents)
 
-        let event = EKEvent(eventStore: eventStore)
-        event.title = "Example Event"
-        event.startDate = Date()
-        event.endDate = Date() + (60 * 30)
-        event.calendar = eventStore.defaultCalendarForNewEvents
-        do {
-            try eventStore.save(event, span: .thisEvent)
+        var weekDayIndex = 0
+        let weekDayIndexX: [CGFloat] = [55.0, 203.0, 351.0, 499.0, 647.0, 720.0, 868.0, 1016.0, 1164.0]
+        switch point.x {
+        case weekDayIndexX[0]..<weekDayIndexX[1]:
+            weekDayIndex = 0
+        case weekDayIndexX[1]..<weekDayIndexX[2]:
+            weekDayIndex = 1
+        case weekDayIndexX[2]..<weekDayIndexX[3]:
+            weekDayIndex = 2
+        case weekDayIndexX[3]..<weekDayIndexX[4]:
+            weekDayIndex = 3
+        case weekDayIndexX[5]..<weekDayIndexX[6]:
+            weekDayIndex = 4
+        case weekDayIndexX[6]..<weekDayIndexX[7]:
+            weekDayIndex = 5
+        case weekDayIndexX[7]..<weekDayIndexX[8]:
+            weekDayIndex = 6
+        default:
+            break
         }
-        catch {
-            let nserror = error as NSError
-            print(nserror)
+        
+        print("weekDayIndex:\(weekDayIndex)")
 
+        
+        let editScheduleViewController = storyBoard.instantiateViewController(withIdentifier: "EditScheduleView") as? EditScheduleViewController
+        if let controller = editScheduleViewController {
+            controller.viewController = self
+            controller.startDate = Calendar.current.date(from: startDateComponents)
+            controller.endDate = controller.startDate! + (60 * 60)
+            self.setPopoverPresentationController(size: CGSize(width: 600, height: 300),
+                                                  rect: CGRect(x: point.x, y: point.y, width: 1, height: 1),
+                                                  controller: controller)
+            present(controller, animated: false, completion: nil)
         }
+
+        
+//        let event = EKEvent(eventStore: eventStore)
+//        event.title = "Example Event"
+//        event.startDate = Date()
+//        event.endDate = Date() + (60 * 30)
+//        event.calendar = eventStore.defaultCalendarForNewEvents
+//        print(eventStore.defaultCalendarForNewEvents)
+//        do {
+//            try eventStore.save(event, span: .thisEvent)
+//        }
+//        catch {
+//            let nserror = error as NSError
+//            print(nserror)
+//
+//        }
         print("Event Comit")
 //
 //        let point = sender.location(in: self.pKCanvasView)
