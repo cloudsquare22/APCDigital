@@ -77,7 +77,7 @@ class ViewController: UIViewController {
         pKCanvasView.addGestureRecognizer(tapPKCanvasView)
         
         let longPressPKCanvasView = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressPKCanvasView(sender:)))
-        longPressPKCanvasView.minimumPressDuration = 1.0
+        longPressPKCanvasView.minimumPressDuration = 0.3
         pKCanvasView.addGestureRecognizer(longPressPKCanvasView)
 
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeLeft(sender:)))
@@ -236,12 +236,6 @@ class ViewController: UIViewController {
         print("longPressPKCanvasView")
         let point = sender.location(in: self.pKCanvasView)
         
-        var startH = Int((point.y - 169.0) / 45.5) + 6
-        print(startH)
-        var startDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday)
-        startDateComponents.hour = startH
-        print(startDateComponents)
-
         var weekDayIndex = 0
         let weekDayIndexX: [CGFloat] = [55.0, 203.0, 351.0, 499.0, 647.0, 720.0, 868.0, 1016.0, 1164.0]
         switch point.x {
@@ -262,10 +256,17 @@ class ViewController: UIViewController {
         default:
             break
         }
-        
         print("weekDayIndex:\(weekDayIndex)")
 
-        
+        var startH = Int((point.y - 169.0) / 45.5) + 6
+        if point.y < 169 {
+            startH = 0
+        }
+        print(startH)
+        var startDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday + Double(86400 * weekDayIndex))
+        startDateComponents.hour = startH
+        print(startDateComponents)
+
         let editScheduleViewController = storyBoard.instantiateViewController(withIdentifier: "EditScheduleView") as? EditScheduleViewController
         if let controller = editScheduleViewController {
             controller.viewController = self
