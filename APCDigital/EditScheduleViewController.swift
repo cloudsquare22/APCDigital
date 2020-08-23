@@ -62,15 +62,25 @@ class EditScheduleViewController: UIViewController {
     }
     
     @IBAction func addCalendar(_ sender: Any) {
+        guard !(self.titleText.text!.isEmpty) else {
+            let alert = UIAlertController(title: "No title.", message: "Please enter a title.", preferredStyle: .alert)
+            let actionOK = UIAlertAction(title: "OK", style: .default, handler: { action in })
+            alert.addAction(actionOK)
+            present(alert, animated: true, completion: nil)
+            return
+        }
         let event = EKEvent(eventStore: eventStore)
         event.title = self.titleText.text
         event.startDate = self.startDatePicker.date
         event.endDate = self.endDatePicker.date
-//        event.calendar = self.viewController?.calendars[calendarPicker.selectedRow(inComponent: 0)]
-        event.calendar = eventStore.defaultCalendarForNewEvents
+        let calendar = self.viewController?.calendars[calendarPicker.selectedRow(inComponent: 0)]
+        event.calendar = eventStore.calendar(withIdentifier: calendar!.calendarIdentifier)
         if allday == true {
             event.isAllDay = true
         }
+        let alarmEvent = EKAlarm(relativeOffset: 0)
+        let alarm5Minute = EKAlarm(relativeOffset: 60 * -5)
+        event.alarms = [alarmEvent, alarm5Minute]
         do {
             try eventStore.save(event, span: .thisEvent)
             self.viewController?.pageUpsert()
@@ -81,20 +91,6 @@ class EditScheduleViewController: UIViewController {
             let nserror = error as NSError
             print(nserror)
         }
-        //        let event = EKEvent(eventStore: eventStore)
-        //        event.title = "Example Event"
-        //        event.startDate = Date()
-        //        event.endDate = Date() + (60 * 30)
-        //        event.calendar = eventStore.defaultCalendarForNewEvents
-        //        print(eventStore.defaultCalendarForNewEvents)
-        //        do {
-        //            try eventStore.save(event, span: .thisEvent)
-        //        }
-        //        catch {
-        //            let nserror = error as NSError
-        //            print(nserror)
-        //
-        //        }
     }
     
     /*
