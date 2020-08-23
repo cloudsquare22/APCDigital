@@ -77,7 +77,7 @@ class ViewController: UIViewController {
         pKCanvasView.addGestureRecognizer(tapPKCanvasView)
         
         let longPressPKCanvasView = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressPKCanvasView(sender:)))
-        longPressPKCanvasView.minimumPressDuration = 0.3
+        longPressPKCanvasView.minimumPressDuration = 0.2
         pKCanvasView.addGestureRecognizer(longPressPKCanvasView)
 
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeLeft(sender:)))
@@ -236,7 +236,7 @@ class ViewController: UIViewController {
         print("longPressPKCanvasView")
         let point = sender.location(in: self.pKCanvasView)
         
-        var weekDayIndex = 0
+        var weekDayIndex = -1
         let weekDayIndexX: [CGFloat] = [55.0, 203.0, 351.0, 499.0, 647.0, 720.0, 868.0, 1016.0, 1164.0]
         switch point.x {
         case weekDayIndexX[0]..<weekDayIndexX[1]:
@@ -257,6 +257,9 @@ class ViewController: UIViewController {
             break
         }
         print("weekDayIndex:\(weekDayIndex)")
+        guard weekDayIndex != -1 else {
+            return
+        }
 
         var startH = Int((point.y - 169.0) / 45.5) + 6
         if point.y < 169 {
@@ -277,35 +280,6 @@ class ViewController: UIViewController {
                                                   controller: controller)
             present(controller, animated: false, completion: nil)
         }
-
-        
-//        let event = EKEvent(eventStore: eventStore)
-//        event.title = "Example Event"
-//        event.startDate = Date()
-//        event.endDate = Date() + (60 * 30)
-//        event.calendar = eventStore.defaultCalendarForNewEvents
-//        print(eventStore.defaultCalendarForNewEvents)
-//        do {
-//            try eventStore.save(event, span: .thisEvent)
-//        }
-//        catch {
-//            let nserror = error as NSError
-//            print(nserror)
-//
-//        }
-        print("Event Comit")
-//
-//        let point = sender.location(in: self.pKCanvasView)
-//        print(point)
-//
-//        let selectJumpDayViewController = storyBoard.instantiateViewController(withIdentifier: "SelectJumpDayView") as? SelectJumpDayViewController
-//        if let controller = selectJumpDayViewController {
-//            controller.viewController = self
-//            self.setPopoverPresentationController(size: CGSize(width: 300, height: 300),
-//                                                  rect: CGRect(x: point.x, y: point.y, width: 1, height: 1),
-//                                                  controller: controller)
-//            present(controller, animated: false, completion: nil)
-//        }
     }
 
     func updateDays() {
