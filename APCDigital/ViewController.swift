@@ -457,6 +457,17 @@ class ViewController: UIViewController {
             UIApplication.shared.open(url)
         }
     }
+    
+    @IBAction func tapEditEvents(_ sender: Any) {
+        let editEventsViewController = storyBoard.instantiateViewController(withIdentifier: "EditEventsView") as? EditEventsViewController
+        if let controller = editEventsViewController {
+            controller.viewController = self
+            self.setPopoverPresentationController(size: CGSize(width: 800, height: 800),
+                                                  rect: (sender as! UIButton).frame,
+                                                  controller: controller)
+            present(controller, animated: false, completion: nil)
+        }
+    }
 
     @IBAction func tapArchive(_ sender: Any) {
         let pKDataViewController = storyBoard.instantiateViewController(withIdentifier: "PKDataView") as? PKDataViewController
