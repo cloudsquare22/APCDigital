@@ -107,7 +107,12 @@ class EditEventsViewController: UITableViewController {
             if event.calendar.title == nationalHoliday {
                 continue
             }
-            events.append(event)
+            switch event.calendar.type {
+            case .local, .calDAV:
+                events.append(event)
+            default:
+                break
+            }
         }
     }
 

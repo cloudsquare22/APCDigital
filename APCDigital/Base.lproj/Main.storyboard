@@ -581,7 +581,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <sections>
-                            <tableViewSection headerTitle="Section-1" id="MB0-2v-xQf">
+                            <tableViewSection headerTitle="Setting" id="MB0-2v-xQf">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="vfr-yT-nza">
                                         <rect key="frame" x="0.0" y="28" width="600" height="43.5"/>
@@ -898,7 +898,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VGs-28-9P9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2157" y="-94"/>
+            <point key="canvasLocation" x="2154" y="-75"/>
         </scene>
         <!--Edit Events View Controller-->
         <scene sceneID="Rpq-wk-dV2">
@@ -953,7 +953,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iqe-oj-Hoi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2479.9414348462665" y="52.1484375"/>
+            <point key="canvasLocation" x="2478" y="71"/>
         </scene>
     </scenes>
     <resources>
