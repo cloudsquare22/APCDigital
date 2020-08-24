@@ -221,7 +221,7 @@ class ViewController: UIViewController {
             if let controller = selectJumpDayViewController {
                 controller.viewController = self
                 self.setPopoverPresentationController(size: CGSize(width: 300, height: 300),
-                                                      rect: CGRect(x: 1170.0, y: 168.0, width: 1170.0 + 145.0, height: 168.0 + (105.0 * 2)),
+                                                      rect: CGRect(x: 1170.0, y: 168.0 + 105.0, width: 1, height: 1),
                                                       controller: controller)
                 present(controller, animated: false, completion: nil)
             }
