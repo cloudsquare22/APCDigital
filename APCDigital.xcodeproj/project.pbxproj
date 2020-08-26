@@ -29,6 +29,7 @@
 		8DD1739C24D990C100E907EB /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD1739B24D990C100E907EB /* SettingViewController.swift */; };
 		8DDC869724F24C2D00B850E5 /* EditEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC869624F24C2D00B850E5 /* EditEventsViewController.swift */; };
 		8DDC869924F24C8C00B850E5 /* EditEventsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC869824F24C8C00B850E5 /* EditEventsViewCell.swift */; };
+		8DDC869D24F70E8D00B850E5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8DDC869F24F70E8D00B850E5 /* Localizable.strings */; };
 		8DECD8AD24BDD099005062B1 /* CalendarSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DECD8AC24BDD099005062B1 /* CalendarSelectViewController.swift */; };
 		8DECD8AF24BDD2EF005062B1 /* CalendarSelectViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DECD8AE24BDD2EF005062B1 /* CalendarSelectViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -58,6 +59,8 @@
 		8DD1739B24D990C100E907EB /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		8DDC869624F24C2D00B850E5 /* EditEventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventsViewController.swift; sourceTree = "<group>"; };
 		8DDC869824F24C8C00B850E5 /* EditEventsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventsViewCell.swift; sourceTree = "<group>"; };
+		8DDC869E24F70E8D00B850E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8DDC86A024F70EAD00B850E5 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8DECD8AC24BDD099005062B1 /* CalendarSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSelectViewController.swift; sourceTree = "<group>"; };
 		8DECD8AE24BDD2EF005062B1 /* CalendarSelectViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSelectViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,6 +120,7 @@
 				8D25655B24EFE61D00359BE3 /* EditScheduleViewController.swift */,
 				8DDC869624F24C2D00B850E5 /* EditEventsViewController.swift */,
 				8DDC869824F24C8C00B850E5 /* EditEventsViewCell.swift */,
+				8DDC869F24F70E8D00B850E5 /* Localizable.strings */,
 			);
 			path = APCDigital;
 			sourceTree = "<group>";
@@ -163,6 +167,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = 8D9EEF4F24AE8D0000E855C4;
 			productRefGroup = 8D9EEF5924AE8D0000E855C4 /* Products */;
@@ -179,6 +184,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DDC869D24F70E8D00B850E5 /* Localizable.strings in Resources */,
 				8D9EEF6B24AE8D0100E855C4 /* LaunchScreen.storyboard in Resources */,
 				8D0E63F524B1A9A000D47A47 /* ScheduleView.xib in Resources */,
 				8D9EEF6824AE8D0100E855C4 /* Assets.xcassets in Resources */,
@@ -235,6 +241,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		8DDC869F24F70E8D00B850E5 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8DDC869E24F70E8D00B850E5 /* en */,
+				8DDC86A024F70EAD00B850E5 /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -242,6 +257,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -302,6 +318,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
