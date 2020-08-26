@@ -77,12 +77,6 @@ class EditScheduleViewController: UIViewController {
         event.calendar = eventStore.calendar(withIdentifier: calendar!.calendarIdentifier)
         if allday == true {
             event.isAllDay = true
-            var alarmDateComponent = Calendar.current.dateComponents(in: .current, from: event.startDate)
-            alarmDateComponent.hour = 6
-            alarmDateComponent.minute = 0
-            alarmDateComponent.second = 0
-            alarmDateComponent.nanosecond = 0
-//            let alarmToday = EKAlarm(absoluteDate: alarmDateComponent.date!)
             let alarmToday = EKAlarm(relativeOffset: 60 * 60 * 6)
             event.alarms = [alarmToday]
         }
