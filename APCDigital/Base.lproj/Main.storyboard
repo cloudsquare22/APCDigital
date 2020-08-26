@@ -657,18 +657,31 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Section-2" id="FIJ-kb-BHI">
+                            <tableViewSection headerTitle="Event Alarm" id="FIJ-kb-BHI">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="jYw-vP-b7B">
-                                        <rect key="frame" x="0.0" y="214.5" width="600" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="120" id="jYw-vP-b7B">
+                                        <rect key="frame" x="0.0" y="214.5" width="600" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jYw-vP-b7B" id="5y3-PF-LdU">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="All Day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iL4-Vv-0kW">
+                                                    <rect key="frame" x="20" y="49" width="53" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="sBp-5a-OeR">
+                                                    <rect key="frame" x="81" y="11" width="372" height="98"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                </datePicker>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Kkq-0n-XyD">
-                                        <rect key="frame" x="0.0" y="258" width="600" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="334.5" width="600" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Kkq-0n-XyD" id="xSt-S2-Vb8">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -676,7 +689,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="zDR-45-eW6">
-                                        <rect key="frame" x="0.0" y="301.5" width="600" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="378" width="600" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zDR-45-eW6" id="wEe-6n-TDA">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -693,6 +706,7 @@
                     </tableView>
                     <size key="freeformSize" width="600" height="800"/>
                     <connections>
+                        <outlet property="dateAllDay" destination="sBp-5a-OeR" id="Usf-vl-phU"/>
                         <outlet property="movementSymbols" destination="O72-T6-3cK" id="fNY-dJ-0b4"/>
                         <outlet property="nationalHoliday" destination="y7y-Sm-guM" id="vpd-lg-zC3"/>
                     </connections>

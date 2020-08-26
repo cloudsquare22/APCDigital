@@ -14,6 +14,8 @@ class SettingViewController: UITableViewController {
     @IBOutlet weak var movementSymbols: UITextField!
     @IBOutlet weak var nationalHoliday: UITextField!
     
+    @IBOutlet weak var dateAllDay: UIDatePicker!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,12 +25,12 @@ class SettingViewController: UITableViewController {
         if let title = UserDefaults.standard.string(forKey: "nationalHoliday") {
             nationalHoliday.text = title
         }
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        let dateAllDayH = UserDefaults.standard.integer(forKey: "dateAllDayH")
+        let dateAllDayM = UserDefaults.standard.integer(forKey: "dateAllDayM")
+        var dateComponentsAllDay = Calendar.current.dateComponents(in: .current, from: Date())
+        dateComponentsAllDay.hour = dateAllDayH
+        dateComponentsAllDay.minute = dateAllDayM
+        self.dateAllDay.date = dateComponentsAllDay.date!
     }
 
     // MARK: - Table view data source
@@ -52,6 +54,10 @@ class SettingViewController: UITableViewController {
         if let title = self.nationalHoliday.text {
             UserDefaults.standard.set(title, forKey: "nationalHoliday")
         }
+        let dateComponentsAllDay = Calendar.current.dateComponents(in: .current, from: self.dateAllDay.date)
+        UserDefaults.standard.set(dateComponentsAllDay.hour, forKey: "dateAllDayH")
+        UserDefaults.standard.set(dateComponentsAllDay.minute, forKey: "dateAllDayM")
+        
         self.viewController!.updateDays()
     }
 

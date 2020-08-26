@@ -77,7 +77,10 @@ class EditScheduleViewController: UIViewController {
         event.calendar = eventStore.calendar(withIdentifier: calendar!.calendarIdentifier)
         if allday == true {
             event.isAllDay = true
-            let alarmToday = EKAlarm(relativeOffset: 60 * 60 * 6)
+
+            let dateAllDayH = UserDefaults.standard.integer(forKey: "dateAllDayH")
+            let dateAllDayM = UserDefaults.standard.integer(forKey: "dateAllDayM")
+            let alarmToday = EKAlarm(relativeOffset: (60 * 60 * Double(dateAllDayH) + (60 * Double(dateAllDayM))))
             event.alarms = [alarmToday]
         }
         else {
