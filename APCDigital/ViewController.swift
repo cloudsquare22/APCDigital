@@ -261,14 +261,18 @@ class ViewController: UIViewController {
             return
         }
 
-        var startH = Int((point.y - 169.0) / 45.5) + 6
+        let pointH = ((point.y - 169.0) / 45.5) + 6
+        var startH = Int(pointH)
         if point.y < 169 {
             startH = 0
         }
-        print(startH)
+        var startM = 0
+        if pointH > CGFloat(startH) + 0.5 {
+            startM = 30
+        }
         var startDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday + Double(86400 * weekDayIndex))
         startDateComponents.hour = startH
-        startDateComponents.minute = 0
+        startDateComponents.minute = startM
         print(startDateComponents)
 
         let editScheduleViewController = storyBoard.instantiateViewController(withIdentifier: "EditScheduleView") as? EditScheduleViewController
