@@ -71,6 +71,7 @@ class EditScheduleViewController: UIViewController {
         }
         let event = EKEvent(eventStore: eventStore)
         event.title = self.titleText.text
+        event.location = self.locationText.text
         event.startDate = self.startDatePicker.date
         event.endDate = self.endDatePicker.date
         let calendar = self.viewController?.calendars[calendarPicker.selectedRow(inComponent: 0)]
