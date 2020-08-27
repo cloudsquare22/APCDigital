@@ -277,7 +277,7 @@ class ViewController: UIViewController {
             controller.startDate = Calendar.current.date(from: startDateComponents)
             controller.endDate = controller.startDate! + (60 * 60)
             self.setPopoverPresentationController(size: CGSize(width: 600, height: 400),
-                                                  rect: CGRect(x: point.x, y: point.y, width: 1, height: 1),
+                                                  rect: CGRect(x: self.view.frame.width / 2, y: 10, width: 1, height: 1),
                                                   controller: controller)
             present(controller, animated: false, completion: nil)
         }

@@ -45,10 +45,23 @@ class EditScheduleViewController: UIViewController {
             }
         }
         
-
-        // Do any additional setup after loading the view.
+        let notification = NotificationCenter.default
+        notification.addObserver(self, selector: #selector(keyboardWillShow(_:)),
+                                 name: UIResponder.keyboardWillShowNotification, object: nil)
+        notification.addObserver(self, selector: #selector(keyboardWillHide(_:)),
+        name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    @objc func keyboardWillShow(_ notification: Notification?) {
+        print("keyboardWillShow")
+        print(self.view.frame)
+    }
+
+    @objc func keyboardWillHide(_ notification: Notification?) {
+        print("keyboardWillHide")
+        print(self.view.frame)
+    }
+
     @IBAction func changeAllDaySwitch(_ sender: Any) {
         allday.toggle()
         if allday == true {
