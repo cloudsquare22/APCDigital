@@ -85,12 +85,16 @@ class ViewController: UIViewController {
         pKCanvasView.addGestureRecognizer(swipeLeft)
 
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeRight(sender:)))
-        swipeRight .direction = .right
+        swipeRight.direction = .right
         pKCanvasView.addGestureRecognizer(swipeRight)
 
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeUp(sender:)))
-        swipeUp .direction = .up
+        swipeUp.direction = .up
         pKCanvasView.addGestureRecognizer(swipeUp)
+
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeDown(sender:)))
+        swipeDown.direction = .down
+        pKCanvasView.addGestureRecognizer(swipeDown)
 
         print(Date().description(with: Calendar.current.locale))
         
@@ -211,6 +215,17 @@ class ViewController: UIViewController {
             pageMonday = Date()
         }
         updateDays()
+    }
+
+    @objc func swipeDown(sender: UISwipeGestureRecognizer) {
+        let selectJumpDayViewController = storyBoard.instantiateViewController(withIdentifier: "SelectJumpDayView") as? SelectJumpDayViewController
+        if let controller = selectJumpDayViewController {
+            controller.viewController = self
+            self.setPopoverPresentationController(size: CGSize(width: 300, height: 300),
+                                                  rect: CGRect(x: self.view.frame.width / 2, y: 200, width: 1, height: 1),
+                                                  controller: controller)
+            present(controller, animated: false, completion: nil)
+        }
     }
 
     @objc func tapPKCanvasView(sender: UITapGestureRecognizer) {
