@@ -11,12 +11,16 @@ import UIKit
 import CoreData
 
 extension Pages {
+    static func createPredicateYearAndWeek(_ year: Int, _ week: Int) -> NSPredicate {
+        return NSPredicate(format: "year == %@ AND week == %@", String(year), String(week))
+    }
+    
     static func select(year: Int, week: Int) -> Data? {
         var result: Data? = nil
         let managedObjectContext  = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         do {
             let fetchRequest = NSFetchRequest<Pages>(entityName: "Pages")
-            fetchRequest.predicate = NSPredicate(format: "year == %@ AND week == %@", String(year), String(week))
+            fetchRequest.predicate = createPredicateYearAndWeek(year, week)
             let pages: [Pages] = try managedObjectContext.fetch(fetchRequest)
             print(pages)
             if pages.count > 0 {
@@ -54,7 +58,7 @@ extension Pages {
         let managedObjectContext  = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         do {
             let fetchRequest = NSFetchRequest<Pages>(entityName: "Pages")
-            fetchRequest.predicate = NSPredicate(format: "year == %@ AND week == %@", String(year), String(week))
+            fetchRequest.predicate = createPredicateYearAndWeek(year, week)
             let pages: [Pages] = try managedObjectContext.fetch(fetchRequest)
             print(pages)
             
@@ -84,7 +88,7 @@ extension Pages {
         let managedObjectContext  = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         do {
             let fetchRequest = NSFetchRequest<Pages>(entityName: "Pages")
-            fetchRequest.predicate = NSPredicate(format: "year == %@ AND week == %@", String(year), String(week))
+            fetchRequest.predicate = createPredicateYearAndWeek(year, week)
             let pages: [Pages] = try managedObjectContext.fetch(fetchRequest)
             print(pages)
             if pages.count > 0 {
