@@ -466,6 +466,7 @@ class ViewController: UIViewController {
     @IBAction func tapArchive(_ sender: Any) {
         let pKDataViewController = storyBoard.instantiateViewController(withIdentifier: "PKDataView") as? PKDataViewController
         if let controller = pKDataViewController {
+            controller.viewController = self
             self.setPopoverPresentationController(size: CGSize(width: 600, height: 800),
                                                   rect: (sender as! UIButton).frame,
                                                   controller: controller)

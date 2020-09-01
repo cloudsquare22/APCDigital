@@ -9,7 +9,8 @@
 import UIKit
 
 class PKDataViewController: UITableViewController {
-    
+    weak var viewController: ViewController? = nil
+
     var pages: [(year: Int , week: Int)] = []
 
     override func viewDidLoad() {
@@ -46,6 +47,7 @@ class PKDataViewController: UITableViewController {
             print("Delete")
             Pages.delete(year: self.pages[indexPath.row].year, week: self.pages[indexPath.row].week)
             self.pages = Pages.selectAll()
+            self.viewController?.updateDays()
         }
         self.tableView.reloadData()
     }
