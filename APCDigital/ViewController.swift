@@ -118,15 +118,20 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         print("viewDidAppear")
-
-        if let window = self.pKCanvasView.window {
-            let toolPicker = PKToolPicker.shared(for: window)
-            toolPicker?.addObserver(pKCanvasView)
-            toolPicker?.setVisible(true, forFirstResponder: pKCanvasView)
-            toolPicker?.overrideUserInterfaceStyle = .light
-            pKCanvasView.becomeFirstResponder()
-            print("PKToolPicker Set")
+        
+        let toolPicker: PKToolPicker!
+        if #available(iOS 14.0, *) {
+            toolPicker = PKToolPicker()
         }
+        else {
+            let window = parent?.view.window
+            toolPicker = PKToolPicker.shared(for: window!)
+        }
+        toolPicker.addObserver(pKCanvasView)
+        toolPicker.setVisible(true, forFirstResponder: pKCanvasView)
+        toolPicker.overrideUserInterfaceStyle = .light
+        pKCanvasView.becomeFirstResponder()
+        print("PKToolPicker Set")
         
         print(pageMonday)
         var startDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday)
