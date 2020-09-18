@@ -48,6 +48,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var day6Remaining: UILabel!
     @IBOutlet weak var day7Remaining: UILabel!
     
+    var toolPicker: PKToolPicker!
+
     var pageMonday = Date()
     var days: [Int] = []
     var calendars: [EKCalendar] = []
@@ -119,7 +121,6 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
         print("viewDidAppear")
         
-        let toolPicker: PKToolPicker!
         if #available(iOS 14.0, *) {
             toolPicker = PKToolPicker()
         }
