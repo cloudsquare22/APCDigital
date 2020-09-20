@@ -68,18 +68,22 @@ class ViewController: UIViewController {
         checkAuthorization()
         
         menuView.isHidden = true
-
-        pKCanvasView.allowsFingerDrawing = false
+        if #available(iOS 14.0, *) {
+            pKCanvasView.drawingPolicy = .pencilOnly
+        }
+        else {
+            pKCanvasView.allowsFingerDrawing = false
+        }
         pKCanvasView.isOpaque = false
         pKCanvasView.backgroundColor = .clear
         pKCanvasView.overrideUserInterfaceStyle = .light
 
         let tapPKCanvasView = UITapGestureRecognizer(target: self, action: #selector(self.tapPKCanvasView(sender:)))
-        tapPKCanvasView.numberOfTapsRequired = 1
+        tapPKCanvasView.numberOfTapsRequired = 2
         pKCanvasView.addGestureRecognizer(tapPKCanvasView)
         
         let longPressPKCanvasView = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressPKCanvasView(sender:)))
-        longPressPKCanvasView.minimumPressDuration = 0.3
+        longPressPKCanvasView.minimumPressDuration = 0.5
         pKCanvasView.addGestureRecognizer(longPressPKCanvasView)
 
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeLeft(sender:)))
@@ -123,6 +127,7 @@ class ViewController: UIViewController {
         
         if #available(iOS 14.0, *) {
             toolPicker = PKToolPicker()
+            toolPicker.showsDrawingPolicyControls = false
         }
         else {
             let window = parent?.view.window
