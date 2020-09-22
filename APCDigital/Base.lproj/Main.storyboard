@@ -299,7 +299,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XQ7-eA-aui">
-                                        <rect key="frame" x="1306" y="23" width="52" height="49"/>
+                                        <rect key="frame" x="1251" y="25" width="52" height="49"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="tintColor" name="Basic Color Green"/>
                                         <state key="normal" image="gear" catalog="system">
@@ -310,7 +310,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iC7-3r-nbW">
-                                        <rect key="frame" x="1256" y="24" width="42" height="48"/>
+                                        <rect key="frame" x="1201" y="26" width="42" height="48"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="tintColor" name="Basic Color Green"/>
                                         <state key="normal" image="arrow.up.doc" catalog="system">
@@ -318,17 +318,6 @@
                                         </state>
                                         <connections>
                                             <action selector="tapExport:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RIv-r4-zsa"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hH-Tm-jzy">
-                                        <rect key="frame" x="1200" y="27" width="48" height="41"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="tintColor" name="Basic Color Green"/>
-                                        <state key="normal" image="archivebox" catalog="system">
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="32" scale="large"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="tapArchive:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JhB-hF-qjU"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v3t-wP-1uK">
@@ -340,6 +329,28 @@
                                         </state>
                                         <connections>
                                             <action selector="tapEditEvents:" destination="BYZ-38-t0r" eventType="touchUpInside" id="J3P-Mz-1vC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pWS-5y-b9m">
+                                        <rect key="frame" x="1311" y="27" width="47" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" name="Basic Color Green"/>
+                                        <state key="normal" image="xmark.circle" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="32" scale="large"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="tapXmark:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kLu-e2-9m9"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hH-Tm-jzy">
+                                        <rect key="frame" x="1145" y="30" width="48" height="41"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" name="Basic Color Green"/>
+                                        <state key="normal" image="archivebox" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="32" scale="large"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="tapArchive:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JhB-hF-qjU"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1029,6 +1040,7 @@
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="doc.plaintext" catalog="system" width="115" height="128"/>
         <image name="gear" catalog="system" width="128" height="119"/>
+        <image name="xmark.circle" catalog="system" width="128" height="121"/>
         <namedColor name="Basic Color Gray Light">
             <color red="0.92199999094009399" green="0.92199999094009399" blue="0.92199999094009399" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

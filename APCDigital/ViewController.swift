@@ -507,6 +507,10 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func tapXmark(_ sender: Any) {
+        menuView.isHidden.toggle()
+    }
+    
 }
 
 extension ViewController: UIPopoverPresentationControllerDelegate {
