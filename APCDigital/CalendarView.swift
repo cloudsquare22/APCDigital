@@ -246,7 +246,7 @@ class CalendarView: UIView {
                     else {
                         scheduleView.addLine(isMove: false, isStartLineHidden: startLineHidden, isEndLineHidden: endLineHidden)
                     }
-                    print(event.calendar.cgColor.components)
+//                    print(event.calendar.cgColor.components)
                     self.addSubview(scheduleView)
 
                 }
