@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreData
+import Logging
 
 extension Pages {
     static func createPredicateYearAndWeek(_ year: Int, _ week: Int) -> NSPredicate {

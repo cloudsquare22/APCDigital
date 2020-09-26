@@ -9,29 +9,21 @@
 import Foundation
 import UIKit
 import EventKit
+import Logging
 
 class CalendarView: UIView {
-    func lalala() {
-        let scheduleView = ScheduleView(frame: CGRect(x: 55, y: 192, width: 140, height: 23))
-        scheduleView.baseView.backgroundColor = UIColor(red: 1, green: 0.58, blue: 0, alpha: 0.3)
-        self.addSubview(scheduleView)
-
-//        let schedule = ScheduleView(frame: CGRect(x: 63, y: 193, width: 132, height: 23))
-//
-//        self.addSubview(schedule)
-//        let scheduleBox = UIView(frame: CGRect(x: 100, y: 300, width: 100, height: 50))
-//        scheduleBox.backgroundColor = UIColor(red: 1, green: 0.58, blue: 0, alpha: 0.5)
-//        self.addSubview(scheduleBox)
-    }
+    let logger = Logger()
     
     func clearSchedule() {
+        logger.info()
         for subview in self.subviews {
             subview.removeFromSuperview()
         }
     }
     
     func dispSchedule(eventArray: [EKEvent], base: ViewController) {
-        print(#function)
+        logger.info("eventArray Count: \(eventArray.count)")
+        logger.debug("eventArray: \(eventArray) base: \(base)")
         var movementSymmbolList: [String] = []
         if let symbols = UserDefaults.standard.string(forKey: "movementSymbols") {
             for symbol in symbols {
@@ -276,6 +268,7 @@ class CalendarView: UIView {
     }
     
     func dispOutPeriod(label: UILabel, texts: [String]) {
+        logger.debug("label: \(label) texts: \(texts)")
         label.text = ""
         if texts.isEmpty == false {
             label.isHidden = false

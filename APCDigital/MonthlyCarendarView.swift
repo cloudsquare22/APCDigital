@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Logging
 
 class MonthlyCarendarView {
     let view: UIView
@@ -16,8 +17,11 @@ class MonthlyCarendarView {
 
     let baseColor = UIColor(named: "Basic Color Green")
     let backColor = UIColor(named: "Basic Color Gray Light")
+    
+    let logger = Logger()
 
     init(frame: CGRect, day: Date, selectWeek: Bool = true) {
+        logger.info("frame: \(frame) day: \(day) selectWeek: \(selectWeek)")
         self.view = UIView(frame: frame)
         self.day = day
         self.selectWeek = selectWeek
@@ -33,6 +37,7 @@ class MonthlyCarendarView {
     }
     
     func createCalendar() {
+        logger.info()
         let dayDateComponents = Calendar.current.dateComponents(in: .current, from: day)
         let mondayDateComponents = Calendar.current.dateComponents(in: .current, from: selectWeekMonday)
 
@@ -103,13 +108,11 @@ class MonthlyCarendarView {
         var firstDateComponents = dayDateComponents
         firstDateComponents.day = 1
         firstDateComponents = Calendar.current.dateComponents(in: .current, from: Calendar.current.date(from: firstDateComponents)!)
-//        print("--^-- \(firstDateComponents)")
         var countDateComponents = DateComponents()
         countDateComponents.year = firstDateComponents.year
         countDateComponents.month = firstDateComponents.month! + 1
         countDateComponents.day = 0
         let dayCount = Calendar.current.component(.day, from: Calendar.current.date(from: countDateComponents)!)
-//        print("--^-- \(dayCount)")
         
         let weekday = firstDateComponents.weekday!
         var weekdayIndex = weekday - 1 == 0 ? 6 : weekday - 2
@@ -142,6 +145,7 @@ class MonthlyCarendarView {
     }
     
     func createDayUILabel(day:Int, weekdayIndex:Int, weekIndex:Int) -> UIView {
+        logger.debug("day: \(day) weekdayIndex: \(weekdayIndex) weekIndex: \(weekIndex)")
         let dayView = UILabel(frame: CGRect(x: 4.0 + (20.0 * CGFloat(weekdayIndex)),
                                             y: 31.5 + (11.5 * CGFloat(weekIndex)),
                                             width: 20,

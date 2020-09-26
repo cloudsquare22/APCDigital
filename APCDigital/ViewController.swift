@@ -9,6 +9,7 @@
 import UIKit
 import PencilKit
 import EventKit
+import Logging
 
 class ViewController: UIViewController {
 
@@ -61,11 +62,13 @@ class ViewController: UIViewController {
 //    override var prefersStatusBarHidden: Bool {
 //        return true
 //    }
-
+    
+    let logger = Logger()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(#function)
-        
+        logger.info()
+
         checkAuthorization()
         
         menuView.isHidden = true
@@ -103,8 +106,6 @@ class ViewController: UIViewController {
         swipeDown.direction = .down
         pKCanvasView.addGestureRecognizer(swipeDown)
 
-//        print(Date().description(with: Calendar.current.locale))
-        
         let weekday = Calendar.current.component(.weekday, from: Date())
 
         if weekday != 2 {
@@ -114,17 +115,18 @@ class ViewController: UIViewController {
         else {
             pageMonday = Date()
         }
-        updateDays()
+//        updateDays()
+        logger.info()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(#function)
+        logger.info()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print(#function)
+        logger.info()
 
         if #available(iOS 14.0, *) {
             toolPicker = PKToolPicker()
@@ -138,36 +140,37 @@ class ViewController: UIViewController {
         toolPicker.setVisible(true, forFirstResponder: pKCanvasView)
         toolPicker.overrideUserInterfaceStyle = .light
         pKCanvasView.becomeFirstResponder()
-        print("PKToolPicker Set")
+        logger.info("PKToolPicker Set")
         
-        print("pageMonday:\(pageMonday)")
-        var startDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday)
-        startDateComponents.hour = 0
-        startDateComponents.minute = 0
-        startDateComponents.second = 0
-        startDateComponents.nanosecond = 0
-//        var endDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday + (86400 * 6))
-        var endDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday  + (86400 * 6))
-        endDateComponents.hour = 23
-        endDateComponents.minute = 59
-        endDateComponents.second = 59
-        endDateComponents.nanosecond = 0
-
-        calendarView.clearSchedule()
-        let predicate = eventStore.predicateForEvents(withStart: startDateComponents.date!, end: endDateComponents.date!, calendars: nil)
-        let eventArray = eventStore.events(matching: predicate)
-        calendarView.dispSchedule(eventArray: eventArray,base: self)
-
-        self.dispMonthlyCalendar()
+//        logger.info("pageMonday:\(pageMonday)")
+//        var startDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday)
+//        startDateComponents.hour = 0
+//        startDateComponents.minute = 0
+//        startDateComponents.second = 0
+//        startDateComponents.nanosecond = 0
+////        var endDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday + (86400 * 6))
+//        var endDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday  + (86400 * 6))
+//        endDateComponents.hour = 23
+//        endDateComponents.minute = 59
+//        endDateComponents.second = 59
+//        endDateComponents.nanosecond = 0
+//
+//        calendarView.clearSchedule()
+//        let predicate = eventStore.predicateForEvents(withStart: startDateComponents.date!, end: endDateComponents.date!, calendars: nil)
+//        let eventArray = eventStore.events(matching: predicate)
+//        calendarView.dispSchedule(eventArray: eventArray,base: self)
+//
+//        self.dispMonthlyCalendar()
+        updateDays()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print(#function)
+        logger.info()
     }
     
     func updateCalendars() {
-        print(#function)
+        logger.info()
         var nationalHoliday = "日本の祝日"
         if let title = UserDefaults.standard.string(forKey: "nationalHoliday") {
             nationalHoliday = title
@@ -186,10 +189,8 @@ class ViewController: UIViewController {
         self.calendars.sort() { (c1, c2) -> Bool in
             c1.title < c2.title
         }
-//        print(calendars)
         
         if let displays = UserDefaults.standard.stringArray(forKey: "displayCalendars") {
-//            print(displays)
             self.displayCalendars = displays
         }
         else {
@@ -200,7 +201,7 @@ class ViewController: UIViewController {
     }
 
     @objc func swipeLeft(sender: UISwipeGestureRecognizer) {
-        print(#function)
+        logger.info()
         pageUpsert()
         
         let matching = DateComponents(weekday: 2)
@@ -209,7 +210,7 @@ class ViewController: UIViewController {
     }
 
     @objc func swipeRight(sender: UISwipeGestureRecognizer) {
-        print(#function)
+        logger.info()
         pageUpsert()
 
         let matching = DateComponents(weekday: 2)
@@ -218,11 +219,11 @@ class ViewController: UIViewController {
     }
 
     @objc func swipeUp(sender: UISwipeGestureRecognizer) {
-        print(#function)
+        logger.info()
     }
 
     @objc func swipeDown(sender: UISwipeGestureRecognizer) {
-        print(#function)
+        logger.info()
         pageUpsert()
 
         pageMonday = Date()
@@ -238,10 +239,10 @@ class ViewController: UIViewController {
     }
 
     @objc func tapPKCanvasView(sender: UITapGestureRecognizer) {
-        print(#function)
+        logger.info()
         let point = sender.location(in: self.pKCanvasView)
         if (1170.0 < point.x) && (point.x < 1170.0 + 145.0) && (168.0 < point.y) && (point.y < 168.0 + (105.0 * 2)) {
-            print("touch Monthly calendar")
+            logger.info("Touch Monthly calendar")
             let selectJumpDayViewController = storyBoard.instantiateViewController(withIdentifier: "SelectJumpDayView") as? SelectJumpDayViewController
             if let controller = selectJumpDayViewController {
                 controller.viewController = self
@@ -258,7 +259,7 @@ class ViewController: UIViewController {
     }
     
     @objc func longPressPKCanvasView(sender: UILongPressGestureRecognizer) {
-        print(#function)
+        logger.info()
         let point = sender.location(in: self.pKCanvasView)
         
         var weekDayIndex = -1
@@ -281,7 +282,7 @@ class ViewController: UIViewController {
         default:
             break
         }
-        print("weekDayIndex:\(weekDayIndex)")
+        logger.info("weekDayIndex: \(weekDayIndex)")
         guard weekDayIndex != -1 else {
             return
         }
@@ -298,7 +299,6 @@ class ViewController: UIViewController {
         var startDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday + Double(86400 * weekDayIndex))
         startDateComponents.hour = startH
         startDateComponents.minute = startM
-//        print(startDateComponents)
 
         let editScheduleViewController = storyBoard.instantiateViewController(withIdentifier: "EditScheduleView") as? EditScheduleViewController
         if let controller = editScheduleViewController {
@@ -313,7 +313,7 @@ class ViewController: UIViewController {
     }
 
     func updateDays() {
-        print(#function)
+        logger.info()
         self.updateCalendars()
 
         let monday = Calendar.current.dateComponents(in: .current, from: pageMonday)
@@ -323,7 +323,6 @@ class ViewController: UIViewController {
         let friday = Calendar.current.dateComponents(in: .current, from: pageMonday + (86400 * 4))
         let saturday = Calendar.current.dateComponents(in: .current, from: pageMonday + (86400 * 5))
         let sunday = Calendar.current.dateComponents(in: .current, from: pageMonday + (86400 * 6))
-//        print(monday)
         self.day1.text = String(monday.day!)
         self.day2.text = String(tuesday.day!)
         self.day3.text = String(wednesday.day!)
@@ -358,9 +357,9 @@ class ViewController: UIViewController {
         self.day7Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 6))
 
         if let page = Pages.select(year: monday.year!, week: monday.weekOfYear!) {
-            print("select page")
+            logger.info("select page")
             do {
-                print(page.count)
+                logger.info("Page count: \(page.count)")
                 self.pKCanvasView.drawing = try PKDrawing(data: page)
             }
             catch {
@@ -370,16 +369,14 @@ class ViewController: UIViewController {
         }
         else {
             self.pKCanvasView.drawing = PKDrawing()
-            print("select no page")
+            logger.info("select no page")
         }
         
-//        print(pageMonday)
         var startDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday)
         startDateComponents.hour = 0
         startDateComponents.minute = 0
         startDateComponents.second = 0
         startDateComponents.nanosecond = 0
-        //        var endDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday + (86400 * 6))
         var endDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday  + (86400 * 6))
         endDateComponents.hour = 23
         endDateComponents.minute = 59
@@ -395,33 +392,33 @@ class ViewController: UIViewController {
     }
     
     func pageUpsert() {
-        print(#function)
+        logger.info()
         let saveWeek = Calendar.current.dateComponents(in: .current, from: pageMonday)
-        print("year: \(saveWeek.year!) week:\(saveWeek.weekOfYear!)")
+        logger.info("year: \(saveWeek.year!) week:\(saveWeek.weekOfYear!)")
         Pages.upsert(year: saveWeek.year!, week: saveWeek.weekOfYear!, page: self.pKCanvasView.drawing.dataRepresentation())
     }
     
     func checkAuthorization() {
-        print(#function)
+        logger.info()
         let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
 
         if status == .authorized {
-            print("アクセスできます！！")
+            logger.info("Access OK")
         }
         else if status == .notDetermined {
-            // アクセス権限のアラートを送る。
             eventStore.requestAccess(to: EKEntityType.event) { (granted, error) in
-                if granted { // 許可されたら
-                    print("アクセス可能になりました。")
-                }else { // 拒否されたら
-                    print("アクセスが拒否されました。")
+                if granted {
+                    self.logger.info("Accessible")
+                }
+                else {
+                    self.logger.info("Access denied")
                 }
             }
         }
     }
     
     func countElapsedRemaining(day: Date) -> String {
-        print(#function)
+        logger.info("day: \(day.debugDescription)")
         var result = ""
         let dayComponentes = Calendar.current.dateComponents(in: .current, from: day)
         let dateYearFirst = Calendar.current.date(from: DateComponents(year: dayComponentes.year, month: 1, day: 1))!
@@ -435,14 +432,14 @@ class ViewController: UIViewController {
     }
     
     func dispMonthlyCalendar() {
-        print(#function)
+        logger.info()
         self.calendarView.addSubview(MonthlyCarendarView(frame: CGRect(x: 1170, y: 168, width: 145, height: 105), day: self.pageMonday).view)
         let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: self.pageMonday)
         self.calendarView.addSubview(MonthlyCarendarView(frame: CGRect(x: 1170, y: 273, width: 145, height: 105), day: nextMonth!, selectWeek: false).view)
     }
     
     @IBAction func tapCalendarSelect(_ sender: Any) {
-        print(#function)
+        logger.info()
         let calendarSelectViewController = storyBoard.instantiateViewController(withIdentifier: "CalendarSelectView") as? CalendarSelectViewController
         if let controller = calendarSelectViewController {
             controller.viewController = self
@@ -454,7 +451,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapAbout(_ sender: Any) {
-        print(#function)
+        logger.info()
         let aboutViewController = storyBoard.instantiateViewController(withIdentifier: "AboutView") as? AboutViewController
         if let controller = aboutViewController {
             self.setPopoverPresentationController(size: CGSize(width: 600, height: 800),
@@ -465,14 +462,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapCalendar(_ sender: Any) {
-        print(#function)
+        logger.info()
         if let url = URL(string: "calshow:") {
             UIApplication.shared.open(url)
         }
     }
     
     @IBAction func tapEditEvents(_ sender: Any) {
-        print(#function)
+        logger.info()
         let editEventsViewController = storyBoard.instantiateViewController(withIdentifier: "EditEventsView") as? EditEventsViewController
         if let controller = editEventsViewController {
             controller.viewController = self
@@ -484,7 +481,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func tapArchive(_ sender: Any) {
-        print(#function)
+        logger.info()
         let pKDataViewController = storyBoard.instantiateViewController(withIdentifier: "PKDataView") as? PKDataViewController
         if let controller = pKDataViewController {
             controller.viewController = self
@@ -496,7 +493,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapExport(_ sender: Any) {
-        print(#function)
+        logger.info()
         let exportViewController = storyBoard.instantiateViewController(withIdentifier: "ExportView") as? ExportViewController
         if let controller = exportViewController {
             controller.viewController = self
@@ -508,7 +505,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapSetting(_ sender: Any) {
-        print(#function)
+        logger.info()
         let settingViewController = storyBoard.instantiateViewController(withIdentifier: "SettingView") as? SettingViewController
         if let controller = settingViewController {
             controller.viewController = self
@@ -520,7 +517,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapXmark(_ sender: Any) {
-        print(#function)
+        logger.info()
         menuView.isHidden.toggle()
     }
     
@@ -528,7 +525,7 @@ class ViewController: UIViewController {
 
 extension ViewController: UIPopoverPresentationControllerDelegate {
     func setPopoverPresentationController(size: CGSize, rect: CGRect, controller: UIViewController) {
-        print(#function)
+        logger.info()
         controller.modalPresentationStyle = .popover
         controller.popoverPresentationController?.sourceView = self.view
         controller.popoverPresentationController?.sourceRect = rect
