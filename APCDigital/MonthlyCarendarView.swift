@@ -103,13 +103,13 @@ class MonthlyCarendarView {
         var firstDateComponents = dayDateComponents
         firstDateComponents.day = 1
         firstDateComponents = Calendar.current.dateComponents(in: .current, from: Calendar.current.date(from: firstDateComponents)!)
-        print("--^-- \(firstDateComponents)")
+//        print("--^-- \(firstDateComponents)")
         var countDateComponents = DateComponents()
         countDateComponents.year = firstDateComponents.year
         countDateComponents.month = firstDateComponents.month! + 1
         countDateComponents.day = 0
         let dayCount = Calendar.current.component(.day, from: Calendar.current.date(from: countDateComponents)!)
-        print("--^-- \(dayCount)")
+//        print("--^-- \(dayCount)")
         
         let weekday = firstDateComponents.weekday!
         var weekdayIndex = weekday - 1 == 0 ? 6 : weekday - 2

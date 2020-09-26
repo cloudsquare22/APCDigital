@@ -31,7 +31,7 @@ class CalendarView: UIView {
     }
     
     func dispSchedule(eventArray: [EKEvent], base: ViewController) {
-//        print(eventArray)
+        print(#function)
         var movementSymmbolList: [String] = []
         if let symbols = UserDefaults.standard.string(forKey: "movementSymbols") {
             for symbol in symbols {
@@ -59,7 +59,6 @@ class CalendarView: UIView {
         for event in eventArray {
             if event.calendar.title == nationalHoliday {
                 let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
-                print(startDateComponents)
                 if let title = event.title {
                     switch startDateComponents.weekday {
                     case 2:
@@ -105,9 +104,7 @@ class CalendarView: UIView {
 
                 if event.isAllDay == false {
                     var startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
-                    print(startDateComponents)
                     var endDateComponents = Calendar.current.dateComponents(in: .current, from: event.endDate)
-                    print(endDateComponents)
 
                     if base.days.contains(startDateComponents.day!) == false {
                         continue
@@ -120,7 +117,6 @@ class CalendarView: UIView {
                     if let startH = startDateComponents.hour, let startM = startDateComponents.minute,
                         let endH = endDateComponents.hour, let endM = endDateComponents.minute {
                         if startH < 6 && (endH < 6 || (endH <= 6 && endM == 0)) {
-                            print("Out range")
                             let outSchedule = String(format: "%d:%02d〜", startH, startM) + event.title
                             switch startDateComponents.weekday {
                             case 2:
@@ -144,16 +140,13 @@ class CalendarView: UIView {
                         }
                         else if startH < 6 , 6 <= endH {
                             startDateComponents.hour = 6
+                            startDateComponents.minute = 0
                             event.title = String(format: "%d:%02d〜", startH, startM) + event.title
-                            print("start Out range")
-                            print(startDateComponents)
                             startDate = Calendar.current.date(from: startDateComponents)!
-                            print(startDate)
                             startLineHidden = true
                         }
                         else if startH <= 23, 0 <= endH, startDateComponents.day != endDateComponents.day {
                             if startH == 23, 30 <= startM {
-                                print("Out range 23:30")
                                 let outSchedule = String(format: "%d:%02d〜", startH, startM) + event.title
                                 switch startDateComponents.weekday {
                                 case 2:
@@ -186,7 +179,6 @@ class CalendarView: UIView {
                         }
                     }
 
-                    print(startDateComponents.weekday!)
                     var x = 55.0
                     var widthAdd = 0.0
                     switch startDateComponents.weekday! {
@@ -215,7 +207,6 @@ class CalendarView: UIView {
                             y = y + 45.5 * (Double(minutes) / Double(60))
                         }
                     }
-                    print(y)
                     let diff = endDate.timeIntervalSince(startDate) / 900
                     let scheduleView = ScheduleView(frame: CGRect(x: x, y: y, width: 140.0 + widthAdd, height: 11.375 * diff))
 //                    scheduleView.baseView.backgroundColor = UIColor(red: 1, green: 0.58, blue: 0, alpha: 0.3)
@@ -246,13 +237,11 @@ class CalendarView: UIView {
                     else {
                         scheduleView.addLine(isMove: false, isStartLineHidden: startLineHidden, isEndLineHidden: endLineHidden)
                     }
-//                    print(event.calendar.cgColor.components)
                     self.addSubview(scheduleView)
 
                 }
                 else {
                     let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
-                    print(startDateComponents)
                     if let outSchedule = event.title {
                         switch startDateComponents.weekday {
                         case 2:

@@ -332,7 +332,7 @@ class APCDCalendar {
     }
     
     func createOutPeriod(texts: [String], startPoint: CGFloat) -> UILabel {
-        print("--^--\(texts)")
+//        print("--^--\(texts)")
         let outPeriod = UILabel(frame: CGRect(x: startPoint + 2.0, y: 107.0, width: 135.0, height: 50.0))
         outPeriod.font = UIFont.systemFont(ofSize: 10.0, weight: .medium)
         outPeriod.textColor = .black
