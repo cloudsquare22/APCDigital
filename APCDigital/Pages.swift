@@ -12,11 +12,14 @@ import CoreData
 import Logging
 
 extension Pages {
+    static let logger = Logger()
+    
     static func createPredicateYearAndWeek(_ year: Int, _ week: Int) -> NSPredicate {
         return NSPredicate(format: "year == %@ AND week == %@", String(year), String(week))
     }
     
     static func select(year: Int, week: Int) -> Data? {
+        logger.info()
         var result: Data? = nil
         let managedObjectContext  = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         do {
@@ -26,6 +29,7 @@ extension Pages {
             print(pages)
             if pages.count > 0 {
                 result = pages[0].page
+                logger.info("Page count: \(result!.count)")
             }
         }
         catch {
@@ -36,6 +40,7 @@ extension Pages {
     }
     
     static func selectAll() -> [(year: Int , week: Int)] {
+        logger.info()
         var result: [(year: Int , week: Int)] = []
         let managedObjectContext  = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         do {
@@ -56,6 +61,7 @@ extension Pages {
     }
     
     static func upsert(year: Int, week: Int, page: Data) {
+        logger.info()
         let managedObjectContext  = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         do {
             let fetchRequest = NSFetchRequest<Pages>(entityName: "Pages")
@@ -69,13 +75,13 @@ extension Pages {
                 newPage.week = Int16(week)
                 newPage.page = page
                 print(newPage)
-                print("insert")
+                logger.info("insert \(page.count)")
             }
             else {
                 let updatePage = pages[0]
                 updatePage.page = page
                 print(updatePage)
-                print("update")
+                logger.info("update \(page.count)")
             }
             try managedObjectContext.save()
         }
