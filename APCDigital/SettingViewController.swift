@@ -59,6 +59,7 @@ class SettingViewController: UITableViewController {
         UserDefaults.standard.set(dateComponentsAllDay.minute, forKey: "dateAllDayM")
         
         self.viewController!.updateDays()
+        self.viewController!.pKCanvasView.becomeFirstResponder()
     }
 
     /*

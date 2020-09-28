@@ -106,6 +106,7 @@ class EditScheduleViewController: UIViewController {
             try eventStore.save(event, span: .thisEvent)
             self.viewController?.pageUpsert()
             self.viewController?.updateDays()
+            self.viewController?.pKCanvasView.becomeFirstResponder()
             self.dismiss(animated: true, completion: nil)
         }
         catch {
