@@ -137,6 +137,7 @@ class ViewController: UIViewController {
             toolPicker = PKToolPicker.shared(for: window!)
         }
         toolPicker.addObserver(pKCanvasView)
+        toolPicker.addObserver(self)
         toolPicker.setVisible(true, forFirstResponder: pKCanvasView)
         toolPicker.overrideUserInterfaceStyle = .light
         pKCanvasView.becomeFirstResponder()
@@ -534,4 +535,11 @@ extension ViewController: UIPopoverPresentationControllerDelegate {
         controller.popoverPresentationController?.delegate = self
         controller.preferredContentSize = size
     }
+}
+
+extension ViewController: PKToolPickerObserver {
+    func toolPickerSelectedToolDidChange(_ toolPicker: PKToolPicker) {
+        logger.info(toolPicker.description)
+    }
+    
 }
