@@ -52,6 +52,10 @@ class EditScheduleViewController: UIViewController {
         name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        self.viewController?.pKCanvasView.becomeFirstResponder()
+    }
+    
     @objc func keyboardWillShow(_ notification: Notification?) {
         print("keyboardWillShow")
         print(self.view.frame)
@@ -106,7 +110,7 @@ class EditScheduleViewController: UIViewController {
             try eventStore.save(event, span: .thisEvent)
             self.viewController?.pageUpsert()
             self.viewController?.updateDays()
-            self.viewController?.pKCanvasView.becomeFirstResponder()
+//            self.viewController?.pKCanvasView.becomeFirstResponder()
             self.dismiss(animated: true, completion: nil)
         }
         catch {
