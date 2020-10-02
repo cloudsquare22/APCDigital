@@ -23,13 +23,12 @@ class APCDCalendar {
         UIGraphicsBeginPDFContextToData(pdfData, CGRect(x: 0.0, y: 0.0, width: 1366.0, height: 1024.0), nil)
         guard let pdfContext = UIGraphicsGetCurrentContext() else { return result}
 
-        let matching = DateComponents(weekday: 2)
         var dateCurrent = fromDate
         while dateCurrent < toDate {
             let view = createWeeklyCalendar(date: dateCurrent)
             UIGraphicsBeginPDFPage()
             view.layer.render(in: pdfContext)
-            dateCurrent = Calendar.current.nextDate(after: dateCurrent, matching: matching, matchingPolicy: .nextTime, direction: .forward)!
+            dateCurrent = Calendar.current.nextDate(after: dateCurrent, matching: ViewController.matching, matchingPolicy: .nextTime, direction: .forward)!
         }
         
         UIGraphicsEndPDFContext()
@@ -65,8 +64,7 @@ class APCDCalendar {
         let weekday = Calendar.current.component(.weekday, from: date)
         var monday = date
         if weekday != 2 {
-            let matching = DateComponents(weekday: 2)
-            monday = Calendar.current.nextDate(after: monday, matching: matching, matchingPolicy: .nextTime, direction: .backward)!
+            monday = Calendar.current.nextDate(after: monday, matching: ViewController.matching, matchingPolicy: .nextTime, direction: .backward)!
         }
         var dateComponentsWeek: [DateComponents] = []
         for index in 0..<7 {

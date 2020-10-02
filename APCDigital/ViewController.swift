@@ -59,6 +59,8 @@ class ViewController: UIViewController {
     var eventStore = EKEventStore()
     let storyBoard = UIStoryboard(name: "Main", bundle: nil)
 
+    static let matching = DateComponents(weekday: 2)
+
 //    override var prefersStatusBarHidden: Bool {
 //        return true
 //    }
@@ -109,8 +111,7 @@ class ViewController: UIViewController {
         let weekday = Calendar.current.component(.weekday, from: Date())
 
         if weekday != 2 {
-            let matching = DateComponents(weekday: 2)
-            pageMonday = Calendar.current.nextDate(after: pageMonday, matching: matching, matchingPolicy: .nextTime, direction: .backward)!
+            pageMonday = Calendar.current.nextDate(after: pageMonday, matching: ViewController.matching, matchingPolicy: .nextTime, direction: .backward)!
         }
         else {
             pageMonday = Date()
@@ -143,25 +144,6 @@ class ViewController: UIViewController {
         pKCanvasView.becomeFirstResponder()
         logger.info("PKToolPicker Set")
         
-//        logger.info("pageMonday:\(pageMonday)")
-//        var startDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday)
-//        startDateComponents.hour = 0
-//        startDateComponents.minute = 0
-//        startDateComponents.second = 0
-//        startDateComponents.nanosecond = 0
-////        var endDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday + (86400 * 6))
-//        var endDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday  + (86400 * 6))
-//        endDateComponents.hour = 23
-//        endDateComponents.minute = 59
-//        endDateComponents.second = 59
-//        endDateComponents.nanosecond = 0
-//
-//        calendarView.clearSchedule()
-//        let predicate = eventStore.predicateForEvents(withStart: startDateComponents.date!, end: endDateComponents.date!, calendars: nil)
-//        let eventArray = eventStore.events(matching: predicate)
-//        calendarView.dispSchedule(eventArray: eventArray,base: self)
-//
-//        self.dispMonthlyCalendar()
         updateDays()
     }
     
@@ -207,8 +189,7 @@ class ViewController: UIViewController {
         logger.info()
         pageUpsert()
         
-        let matching = DateComponents(weekday: 2)
-        pageMonday = Calendar.current.nextDate(after: pageMonday, matching: matching, matchingPolicy: .nextTime, direction: .forward)!
+        pageMonday = Calendar.current.nextDate(after: pageMonday, matching: ViewController.matching, matchingPolicy: .nextTime, direction: .forward)!
         updateDays()
     }
 
@@ -216,8 +197,7 @@ class ViewController: UIViewController {
         logger.info()
         pageUpsert()
 
-        let matching = DateComponents(weekday: 2)
-        pageMonday = Calendar.current.nextDate(after: pageMonday, matching: matching, matchingPolicy: .nextTime, direction: .backward)!
+        pageMonday = Calendar.current.nextDate(after: pageMonday, matching: ViewController.matching, matchingPolicy: .nextTime, direction: .backward)!
         updateDays()
     }
 
@@ -232,8 +212,7 @@ class ViewController: UIViewController {
         pageMonday = Date()
         let weekday = Calendar.current.component(.weekday, from: pageMonday)
         if weekday != 2 {
-            let matching = DateComponents(weekday: 2)
-            pageMonday = Calendar.current.nextDate(after: pageMonday, matching: matching, matchingPolicy: .nextTime, direction: .backward)!
+            pageMonday = Calendar.current.nextDate(after: pageMonday, matching: ViewController.matching, matchingPolicy: .nextTime, direction: .backward)!
         }
         else {
             pageMonday = Date()

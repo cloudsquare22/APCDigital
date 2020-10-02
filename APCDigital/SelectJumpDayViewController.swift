@@ -25,8 +25,7 @@ class SelectJumpDayViewController: UIViewController {
         var day = selectDay.date
         let weekday = Calendar.current.component(.weekday, from: day)
         if weekday != 2 {
-            let matching = DateComponents(weekday: 2)
-            day = Calendar.current.nextDate(after: day, matching: matching, matchingPolicy: .nextTime, direction: .backward)!
+            day = Calendar.current.nextDate(after: day, matching: ViewController.matching, matchingPolicy: .nextTime, direction: .backward)!
         }
         self.viewController?.pageUpsert()
         self.viewController?.pageMonday = day

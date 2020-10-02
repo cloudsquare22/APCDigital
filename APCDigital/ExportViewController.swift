@@ -41,12 +41,11 @@ class ExportViewController: UIViewController {
     
     @IBAction func tapPKDataDelete(_ sender: Any) {
         if dateStart.date < dateEnd.date {
-            let matching = DateComponents(weekday: 2)
             var dateCurrent = dateStart.date
             while dateCurrent < dateEnd.date {
                 let dateComponentsCurrent = Calendar.current.dateComponents(in: .current, from: dateCurrent)
                 Pages.delete(year: dateComponentsCurrent.year!, week: dateComponentsCurrent.weekOfYear!)
-                dateCurrent = Calendar.current.nextDate(after: dateCurrent, matching: matching, matchingPolicy: .nextTime, direction: .forward)!
+                dateCurrent = Calendar.current.nextDate(after: dateCurrent, matching: ViewController.matching, matchingPolicy: .nextTime, direction: .forward)!
                 let sunday = dateCurrent + (86400 * 6)
                 if dateCurrent <= dateEnd.date && dateEnd.date < sunday {
                     break
