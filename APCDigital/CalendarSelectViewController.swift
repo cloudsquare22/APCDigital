@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Algorithms
 
 class CalendarSelectViewController: UITableViewController {
     weak var viewController: ViewController? = nil
@@ -27,7 +28,7 @@ class CalendarSelectViewController: UITableViewController {
         super.viewWillDisappear(animated)
         print(self.displayOnOff)
         viewController!.displayCalendars = []
-        for (index, calendar) in self.viewController!.calendars.enumerated() {
+        for (index, calendar) in self.viewController!.calendars.indexed() {
             if displayOnOff[index] == true {
                 viewController!.displayCalendars.append(calendar.title)
             }

@@ -32,6 +32,7 @@
 		8DDC869724F24C2D00B850E5 /* EditEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC869624F24C2D00B850E5 /* EditEventsViewController.swift */; };
 		8DDC869924F24C8C00B850E5 /* EditEventsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC869824F24C8C00B850E5 /* EditEventsViewCell.swift */; };
 		8DDC869D24F70E8D00B850E5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8DDC869F24F70E8D00B850E5 /* Localizable.strings */; };
+		8DDF9848252F3DC5008152F9 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 8DDF9847252F3DC5008152F9 /* Algorithms */; };
 		8DECD8AD24BDD099005062B1 /* CalendarSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DECD8AC24BDD099005062B1 /* CalendarSelectViewController.swift */; };
 		8DECD8AF24BDD2EF005062B1 /* CalendarSelectViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DECD8AE24BDD2EF005062B1 /* CalendarSelectViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -73,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DDF9848252F3DC5008152F9 /* Algorithms in Frameworks */,
 				8DC71067251F34FC00156742 /* Logging in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -148,6 +150,7 @@
 			name = APCDigital;
 			packageProductDependencies = (
 				8DC71066251F34FC00156742 /* Logging */,
+				8DDF9847252F3DC5008152F9 /* Algorithms */,
 			);
 			productName = APCDigital;
 			productReference = 8D9EEF5824AE8D0000E855C4 /* Action Planner.app */;
@@ -180,6 +183,7 @@
 			mainGroup = 8D9EEF4F24AE8D0000E855C4;
 			packageReferences = (
 				8DC71065251F34FC00156742 /* XCRemoteSwiftPackageReference "swift-log" */,
+				8DDF9846252F3DC5008152F9 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 			);
 			productRefGroup = 8D9EEF5924AE8D0000E855C4 /* Products */;
 			projectDirPath = "";
@@ -451,6 +455,14 @@
 				minimumVersion = 1.4.0;
 			};
 		};
+		8DDF9846252F3DC5008152F9 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -458,6 +470,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8DC71065251F34FC00156742 /* XCRemoteSwiftPackageReference "swift-log" */;
 			productName = Logging;
+		};
+		8DDF9847252F3DC5008152F9 /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8DDF9846252F3DC5008152F9 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
 		};
 /* End XCSwiftPackageProductDependency section */
 

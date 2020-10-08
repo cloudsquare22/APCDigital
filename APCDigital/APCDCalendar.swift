@@ -9,6 +9,7 @@
 import UIKit
 import PencilKit
 import EventKit
+import Algorithms
 
 class APCDCalendar {
     var eventStore = EKEventStore()
@@ -338,7 +339,7 @@ class APCDCalendar {
         outPeriod.textAlignment = .left
         outPeriod.text = ""
         outPeriod.numberOfLines = 0
-        for (index, schedule) in texts.enumerated() {
+        for (index, schedule) in texts.indexed() {
             outPeriod.text?.append(contentsOf: schedule)
             if index + 1 != texts.count {
                 outPeriod.text?.append(contentsOf: "\n")

@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import EventKit
 import Logging
+import Algorithms
 
 class CalendarView: UIView {
     let logger = Logger()
@@ -272,7 +273,7 @@ class CalendarView: UIView {
         label.text = ""
         if texts.isEmpty == false {
             label.isHidden = false
-            for (index, schedule) in texts.enumerated() {
+            for (index, schedule) in texts.indexed() {
                 label.text?.append(contentsOf: schedule)
                 if index + 1 != texts.count {
                     label.text?.append(contentsOf: "\n")
