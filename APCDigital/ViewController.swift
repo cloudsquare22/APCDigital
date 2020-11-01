@@ -186,8 +186,8 @@ class ViewController: UIViewController {
                 break
             }
         }
-        self.calendars.sort() { (c1, c2) -> Bool in
-            c1.title < c2.title
+        self.calendars.sort() {
+            $0.title < $1.title
         }
         
         if let displays = UserDefaults.standard.stringArray(forKey: "displayCalendars") {
