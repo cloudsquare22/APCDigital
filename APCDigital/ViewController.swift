@@ -123,11 +123,6 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         logger.info()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        logger.info()
 
         if #available(iOS 14.0, *) {
             toolPicker = PKToolPicker()
@@ -143,6 +138,26 @@ class ViewController: UIViewController {
         toolPicker.overrideUserInterfaceStyle = .light
         pKCanvasView.becomeFirstResponder()
         logger.info("PKToolPicker Set")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        logger.info()
+
+//        if #available(iOS 14.0, *) {
+//            toolPicker = PKToolPicker()
+//            toolPicker.showsDrawingPolicyControls = false
+//        }
+//        else {
+//            let window = parent?.view.window
+//            toolPicker = PKToolPicker.shared(for: window!)
+//        }
+//        toolPicker.addObserver(pKCanvasView)
+//        toolPicker.addObserver(self)
+//        toolPicker.setVisible(true, forFirstResponder: pKCanvasView)
+//        toolPicker.overrideUserInterfaceStyle = .light
+//        pKCanvasView.becomeFirstResponder()
+//        logger.info("PKToolPicker Set")
         
         updateDays()
     }

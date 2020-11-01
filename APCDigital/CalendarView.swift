@@ -86,7 +86,7 @@ class CalendarView: UIView {
 //
 //            if event.calendar.title == "work" || event.calendar.title == "oneself" || event.calendar.title == "FC Barcelona" || event.calendar.title == "2020 FIA Formula One World Championship Race Calendar" || event.calendar.title == "buy" {
                 if event.calendar.title == "2020 FIA Formula One World Championship Race Calendar" {
-                    if event.title.contains("PRACTICE") == true {
+                    if (event.title.contains("PRACTICE") == true) || (event.title.contains("QUALIFYING") == true) {
                         continue
                     }
                 }
