@@ -312,6 +312,9 @@ class ViewController: UIViewController {
     func updateDays() {
         logger.info()
         self.updateCalendars()
+        
+        let weekDays = self.getWeekDays()
+        let dayLabels = [self.day1, self.day2, self.day3, self.day4, self.day5, self.day6, self.day7]
 
         let monday = Calendar.current.dateComponents(in: .current, from: pageMonday)
         let tuesday = Calendar.current.dateComponents(in: .current, from: pageMonday + (86400 * 1))
@@ -320,21 +323,28 @@ class ViewController: UIViewController {
         let friday = Calendar.current.dateComponents(in: .current, from: pageMonday + (86400 * 4))
         let saturday = Calendar.current.dateComponents(in: .current, from: pageMonday + (86400 * 5))
         let sunday = Calendar.current.dateComponents(in: .current, from: pageMonday + (86400 * 6))
-        self.day1.text = String(monday.day!)
-        self.day2.text = String(tuesday.day!)
-        self.day3.text = String(wednesday.day!)
-        self.day4.text = String(thursday.day!)
-        self.day5.text = String(friday.day!)
-        self.day6.text = String(saturday.day!)
-        self.day7.text = String(sunday.day!)
+        
         self.days = []
-        self.days.append(monday.day!)
-        self.days.append(tuesday.day!)
-        self.days.append(wednesday.day!)
-        self.days.append(thursday.day!)
-        self.days.append(friday.day!)
-        self.days.append(saturday.day!)
-        self.days.append(sunday.day!)
+        for weekday in 0..<7 {
+            let dateComponents = Calendar.current.dateComponents(in: .current, from: weekDays[weekday])
+            dayLabels[weekday]?.text = String(dateComponents.day!)
+            self.days.append(dateComponents.day!)
+        }
+//        self.day1.text = String(monday.day!)
+//        self.day2.text = String(tuesday.day!)
+//        self.day3.text = String(wednesday.day!)
+//        self.day4.text = String(thursday.day!)
+//        self.day5.text = String(friday.day!)
+//        self.day6.text = String(saturday.day!)
+//        self.day7.text = String(sunday.day!)
+//        self.days = []
+//        self.days.append(monday.day!)
+//        self.days.append(tuesday.day!)
+//        self.days.append(wednesday.day!)
+//        self.days.append(thursday.day!)
+//        self.days.append(friday.day!)
+//        self.days.append(saturday.day!)
+//        self.days.append(sunday.day!)
         if monday.month! == sunday.month! {
             self.month.text = String(monday.month!)
         }
@@ -386,6 +396,14 @@ class ViewController: UIViewController {
         
         calendarView.dispSchedule(eventArray: eventArray, base: self)
         self.dispMonthlyCalendar()
+    }
+    
+    func getWeekDays() -> [Date] {
+        var result: [Date] = []
+        for weekday in 0..<7 {
+            result.append(pageMonday  + TimeInterval((86400 * weekday)))
+        }
+        return result
     }
     
     func pageUpsert() {
