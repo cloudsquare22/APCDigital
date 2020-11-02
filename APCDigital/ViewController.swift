@@ -315,6 +315,7 @@ class ViewController: UIViewController {
         
         let weekDays = self.getWeekDays()
         let dayLabels = [self.day1, self.day2, self.day3, self.day4, self.day5, self.day6, self.day7]
+        let dayRemainings = [self.day1Remaining, self.day2Remaining, self.day3Remaining, self.day4Remaining, self.day5Remaining, self.day6Remaining, self.day7Remaining]
 
         let monday = Calendar.current.dateComponents(in: .current, from: pageMonday)
         let tuesday = Calendar.current.dateComponents(in: .current, from: pageMonday + (86400 * 1))
@@ -329,6 +330,7 @@ class ViewController: UIViewController {
             let dateComponents = Calendar.current.dateComponents(in: .current, from: weekDays[weekday])
             dayLabels[weekday]?.text = String(dateComponents.day!)
             self.days.append(dateComponents.day!)
+            dayRemainings[weekday]?.text = countElapsedRemaining(day: weekDays[weekday])
         }
 //        self.day1.text = String(monday.day!)
 //        self.day2.text = String(tuesday.day!)
@@ -355,13 +357,13 @@ class ViewController: UIViewController {
         self.toDay.text = "to " + Calendar.current.standaloneMonthSymbols[sunday.month! - 1].uppercased() + " " + String(sunday.day!)
         self.weekOfYear.text = String(Calendar.current.component(.weekOfYear, from: pageMonday)) + " week"
 
-        self.day1Remaining.text = countElapsedRemaining(day: pageMonday)
-        self.day2Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 1))
-        self.day3Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 2))
-        self.day4Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 3))
-        self.day5Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 4))
-        self.day6Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 5))
-        self.day7Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 6))
+//        self.day1Remaining.text = countElapsedRemaining(day: pageMonday)
+//        self.day2Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 1))
+//        self.day3Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 2))
+//        self.day4Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 3))
+//        self.day5Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 4))
+//        self.day6Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 5))
+//        self.day7Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 6))
 
         if let page = Pages.select(year: monday.year!, week: monday.weekOfYear!) {
             logger.info("select page")
