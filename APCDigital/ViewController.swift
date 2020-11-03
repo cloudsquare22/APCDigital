@@ -53,6 +53,18 @@ class ViewController: UIViewController {
 
     var pageMonday = Date()
     var days: [Int] = []
+
+    var weekDaysDateComponents: [DateComponents] = []
+    enum WeekDay1stMonday: Int {
+        case monday = 0
+        case tuesday = 1
+        case wednesday = 2
+        case thursday = 3
+        case friday = 4
+        case saturday = 5
+        case sunday = 6
+    }
+
     var calendars: [EKCalendar] = []
     var displayCalendars: [String] = []
     
@@ -60,7 +72,7 @@ class ViewController: UIViewController {
     let storyBoard = UIStoryboard(name: "Main", bundle: nil)
 
     static let matching = DateComponents(weekday: 2)
-
+    
 //    override var prefersStatusBarHidden: Bool {
 //        return true
 //    }
@@ -313,40 +325,21 @@ class ViewController: UIViewController {
         logger.info()
         self.updateCalendars()
         
-        let weekDays = self.getWeekDays()
+        self.setWeekDaysDateComponents(monday: pageMonday)
+        
         let dayLabels = [self.day1, self.day2, self.day3, self.day4, self.day5, self.day6, self.day7]
         let dayRemainings = [self.day1Remaining, self.day2Remaining, self.day3Remaining, self.day4Remaining, self.day5Remaining, self.day6Remaining, self.day7Remaining]
-
-        let monday = Calendar.current.dateComponents(in: .current, from: pageMonday)
-        let tuesday = Calendar.current.dateComponents(in: .current, from: pageMonday + (86400 * 1))
-        let wednesday = Calendar.current.dateComponents(in: .current, from: pageMonday + (86400 * 2))
-        let thursday = Calendar.current.dateComponents(in: .current, from: pageMonday + (86400 * 3))
-        let friday = Calendar.current.dateComponents(in: .current, from: pageMonday + (86400 * 4))
-        let saturday = Calendar.current.dateComponents(in: .current, from: pageMonday + (86400 * 5))
-        let sunday = Calendar.current.dateComponents(in: .current, from: pageMonday + (86400 * 6))
         
         self.days = []
-        for weekday in 0..<7 {
-            let dateComponents = Calendar.current.dateComponents(in: .current, from: weekDays[weekday])
-            dayLabels[weekday]?.text = String(dateComponents.day!)
-            self.days.append(dateComponents.day!)
-            dayRemainings[weekday]?.text = countElapsedRemaining(day: weekDays[weekday])
+        for weekday in WeekDay1stMonday.monday.rawValue...WeekDay1stMonday.sunday.rawValue {
+            dayLabels[weekday]?.text = String(self.weekDaysDateComponents[weekday].day!)
+            self.days.append(self.weekDaysDateComponents[weekday].day!)
+            dayRemainings[weekday]?.text = countElapsedRemaining(day: self.weekDaysDateComponents[weekday].date!)
         }
-//        self.day1.text = String(monday.day!)
-//        self.day2.text = String(tuesday.day!)
-//        self.day3.text = String(wednesday.day!)
-//        self.day4.text = String(thursday.day!)
-//        self.day5.text = String(friday.day!)
-//        self.day6.text = String(saturday.day!)
-//        self.day7.text = String(sunday.day!)
-//        self.days = []
-//        self.days.append(monday.day!)
-//        self.days.append(tuesday.day!)
-//        self.days.append(wednesday.day!)
-//        self.days.append(thursday.day!)
-//        self.days.append(friday.day!)
-//        self.days.append(saturday.day!)
-//        self.days.append(sunday.day!)
+        
+        let monday = self.weekDaysDateComponents[WeekDay1stMonday.monday.rawValue]
+        let sunday = self.weekDaysDateComponents[WeekDay1stMonday.sunday.rawValue]
+
         if monday.month! == sunday.month! {
             self.month.text = String(monday.month!)
         }
@@ -356,56 +349,31 @@ class ViewController: UIViewController {
         self.fromDay.text = Calendar.current.standaloneMonthSymbols[monday.month! - 1].uppercased() + " " + String(monday.day!)
         self.toDay.text = "to " + Calendar.current.standaloneMonthSymbols[sunday.month! - 1].uppercased() + " " + String(sunday.day!)
         self.weekOfYear.text = String(Calendar.current.component(.weekOfYear, from: pageMonday)) + " week"
-
-//        self.day1Remaining.text = countElapsedRemaining(day: pageMonday)
-//        self.day2Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 1))
-//        self.day3Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 2))
-//        self.day4Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 3))
-//        self.day5Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 4))
-//        self.day6Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 5))
-//        self.day7Remaining.text = countElapsedRemaining(day: pageMonday + (86400 * 6))
-
-        if let page = Pages.select(year: monday.year!, week: monday.weekOfYear!) {
-            logger.info("select page")
-            do {
-                logger.info("Page count: \(page.count)")
-                self.pKCanvasView.drawing = try PKDrawing(data: page)
-            }
-            catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
-        else {
-            self.pKCanvasView.drawing = PKDrawing()
-            logger.info("select no page")
-        }
         
-        var startDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday)
-        startDateComponents.hour = 0
-        startDateComponents.minute = 0
-        startDateComponents.second = 0
-        startDateComponents.nanosecond = 0
-        var endDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday  + (86400 * 6))
-        endDateComponents.hour = 23
-        endDateComponents.minute = 59
-        endDateComponents.second = 59
-        endDateComponents.nanosecond = 0
-        calendarView.clearSchedule()
-
-        let predicate = eventStore.predicateForEvents(withStart: startDateComponents.date!, end: endDateComponents.date!, calendars: nil)
-        let eventArray = eventStore.events(matching: predicate)
-        
-        calendarView.dispSchedule(eventArray: eventArray, base: self)
+        self.dispPKDrawing()
+        self.dispEvent()
         self.dispMonthlyCalendar()
     }
-    
-    func getWeekDays() -> [Date] {
-        var result: [Date] = []
-        for weekday in 0..<7 {
-            result.append(pageMonday  + TimeInterval((86400 * weekday)))
+        
+    func setWeekDaysDateComponents(monday: Date) {
+        self.weekDaysDateComponents = []
+        for weekday in WeekDay1stMonday.monday.rawValue...WeekDay1stMonday.sunday.rawValue {
+            let date = monday + TimeInterval((86400 * weekday))
+            var dateComponents = Calendar.current.dateComponents(in: .current, from: date)
+            if weekday == WeekDay1stMonday.sunday.rawValue {
+                dateComponents.hour = 23
+                dateComponents.minute = 59
+                dateComponents.second = 59
+                dateComponents.nanosecond = 999
+            }
+            else {
+                dateComponents.hour = 0
+                dateComponents.minute = 0
+                dateComponents.second = 0
+                dateComponents.nanosecond = 0
+            }
+            self.weekDaysDateComponents.append(dateComponents)
         }
-        return result
     }
     
     func pageUpsert() {
@@ -446,6 +414,36 @@ class ViewController: UIViewController {
         
         result = String(format: "%d-%d", elapsed.day! + 1, remaining.day!)
         return result
+    }
+    
+    func dispPKDrawing() {
+        logger.info()
+        let monday = self.weekDaysDateComponents[WeekDay1stMonday.monday.rawValue]
+        if let page = Pages.select(year: monday.year!, week: monday.weekOfYear!) {
+            logger.info("select page")
+            do {
+                logger.info("Page count: \(page.count)")
+                self.pKCanvasView.drawing = try PKDrawing(data: page)
+            }
+            catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+        else {
+            self.pKCanvasView.drawing = PKDrawing()
+            logger.info("select no page")
+        }
+    }
+    
+    func dispEvent() {
+        logger.info()
+        self.calendarView.clearSchedule()
+        let monday = self.weekDaysDateComponents[WeekDay1stMonday.monday.rawValue]
+        let sunday = self.weekDaysDateComponents[WeekDay1stMonday.sunday.rawValue]
+        let predicate = eventStore.predicateForEvents(withStart: monday.date!, end: sunday.date!, calendars: nil)
+        let eventArray = eventStore.events(matching: predicate)
+        self.calendarView.dispSchedule(eventArray: eventArray, base: self)
     }
     
     func dispMonthlyCalendar() {
