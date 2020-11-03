@@ -323,36 +323,20 @@ class ViewController: UIViewController {
 
     func updateDays() {
         logger.info()
-        self.updateCalendars()
         
+        // Data Initial
+        self.updateCalendars()
         self.setWeekDaysDateComponents(monday: pageMonday)
         
-        let dayLabels = [self.day1, self.day2, self.day3, self.day4, self.day5, self.day6, self.day7]
-        let dayRemainings = [self.day1Remaining, self.day2Remaining, self.day3Remaining, self.day4Remaining, self.day5Remaining, self.day6Remaining, self.day7Remaining]
-        
-        self.days = []
-        for weekday in WeekDay1stMonday.monday.rawValue...WeekDay1stMonday.sunday.rawValue {
-            dayLabels[weekday]?.text = String(self.weekDaysDateComponents[weekday].day!)
-            self.days.append(self.weekDaysDateComponents[weekday].day!)
-            dayRemainings[weekday]?.text = countElapsedRemaining(day: self.weekDaysDateComponents[weekday].date!)
-        }
-        
-        let monday = self.weekDaysDateComponents[WeekDay1stMonday.monday.rawValue]
-        let sunday = self.weekDaysDateComponents[WeekDay1stMonday.sunday.rawValue]
-
-        if monday.month! == sunday.month! {
-            self.month.text = String(monday.month!)
-        }
-        else {
-            self.month.text = String(monday.month!) + "/" + String(sunday.month!)
-        }
-        self.fromDay.text = Calendar.current.standaloneMonthSymbols[monday.month! - 1].uppercased() + " " + String(monday.day!)
-        self.toDay.text = "to " + Calendar.current.standaloneMonthSymbols[sunday.month! - 1].uppercased() + " " + String(sunday.day!)
-        self.weekOfYear.text = String(Calendar.current.component(.weekOfYear, from: pageMonday)) + " week"
-        
+        // Main Area
+        self.dispDayLabel()
         self.dispPKDrawing()
         self.dispEvent()
+        
+        // Right Side
+        self.dispMonthLabel()
         self.dispMonthlyCalendar()
+        self.dispWeekOfYear()
     }
         
     func setWeekDaysDateComponents(monday: Date) {
@@ -416,6 +400,18 @@ class ViewController: UIViewController {
         return result
     }
     
+    func dispDayLabel() {
+        logger.info()
+        let dayLabels = [self.day1, self.day2, self.day3, self.day4, self.day5, self.day6, self.day7]
+        let dayRemainings = [self.day1Remaining, self.day2Remaining, self.day3Remaining, self.day4Remaining, self.day5Remaining, self.day6Remaining, self.day7Remaining]
+        self.days = []
+        for weekday in WeekDay1stMonday.monday.rawValue...WeekDay1stMonday.sunday.rawValue {
+            dayLabels[weekday]?.text = String(self.weekDaysDateComponents[weekday].day!)
+            self.days.append(self.weekDaysDateComponents[weekday].day!)
+            dayRemainings[weekday]?.text = countElapsedRemaining(day: self.weekDaysDateComponents[weekday].date!)
+        }
+    }
+    
     func dispPKDrawing() {
         logger.info()
         let monday = self.weekDaysDateComponents[WeekDay1stMonday.monday.rawValue]
@@ -446,11 +442,31 @@ class ViewController: UIViewController {
         self.calendarView.dispSchedule(eventArray: eventArray, base: self)
     }
     
+    func dispMonthLabel() {
+        logger.info()
+        let monday = self.weekDaysDateComponents[WeekDay1stMonday.monday.rawValue]
+        let sunday = self.weekDaysDateComponents[WeekDay1stMonday.sunday.rawValue]
+        if monday.month! == sunday.month! {
+            self.month.text = String(monday.month!)
+        }
+        else {
+            self.month.text = String(monday.month!) + "/" + String(sunday.month!)
+        }
+        self.fromDay.text = Calendar.current.standaloneMonthSymbols[monday.month! - 1].uppercased() + " " + String(monday.day!)
+        self.toDay.text = "to " + Calendar.current.standaloneMonthSymbols[sunday.month! - 1].uppercased() + " " + String(sunday.day!)
+    }
+    
     func dispMonthlyCalendar() {
         logger.info()
         self.calendarView.addSubview(MonthlyCarendarView(frame: CGRect(x: 1170, y: 168, width: 145, height: 105), day: self.pageMonday).view)
         let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: self.pageMonday)
         self.calendarView.addSubview(MonthlyCarendarView(frame: CGRect(x: 1170, y: 273, width: 145, height: 105), day: nextMonth!, selectWeek: false).view)
+    }
+    
+    func dispWeekOfYear() {
+        logger.info()
+        let monday = self.weekDaysDateComponents[WeekDay1stMonday.monday.rawValue]
+        self.weekOfYear.text = String(Calendar.current.component(.weekOfYear, from: monday.date!)) + " week"
     }
     
     @IBAction func tapCalendarSelect(_ sender: Any) {
