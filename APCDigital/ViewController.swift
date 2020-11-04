@@ -119,16 +119,10 @@ class ViewController: UIViewController {
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeDown(sender:)))
         swipeDown.direction = .down
         pKCanvasView.addGestureRecognizer(swipeDown)
+        
+        self.setPageMonday()
 
-        let weekday = Calendar.current.component(.weekday, from: Date())
-
-        if weekday != 2 {
-            pageMonday = Calendar.current.nextDate(after: pageMonday, matching: ViewController.matching, matchingPolicy: .nextTime, direction: .backward)!
-        }
-        else {
-            pageMonday = Date()
-        }
-//        updateDays()
+        //        updateDays()
         logger.info()
     }
     
@@ -180,6 +174,17 @@ class ViewController: UIViewController {
 //        self.pageUpsert()
     }
     
+    func setPageMonday() {
+        logger.info()
+        pageMonday = Date()
+        let weekday = Calendar.current.component(.weekday, from: Date())
+        if weekday != 2 {
+            pageMonday = Calendar.current.nextDate(after: pageMonday, matching: ViewController.matching, matchingPolicy: .nextTime, direction: .backward)!
+        }
+        else {
+            pageMonday = Date()
+        }
+    }
     
     func updateCalendars() {
         logger.info()
@@ -234,17 +239,9 @@ class ViewController: UIViewController {
 
     @objc func swipeDown(sender: UISwipeGestureRecognizer) {
         logger.info()
-        pageUpsert()
-
-        pageMonday = Date()
-        let weekday = Calendar.current.component(.weekday, from: pageMonday)
-        if weekday != 2 {
-            pageMonday = Calendar.current.nextDate(after: pageMonday, matching: ViewController.matching, matchingPolicy: .nextTime, direction: .backward)!
-        }
-        else {
-            pageMonday = Date()
-        }
-        updateDays()
+        self.pageUpsert()
+        self.setPageMonday()
+        self.updateDays()
     }
 
     @objc func tapPKCanvasView(sender: UITapGestureRecognizer) {
