@@ -52,6 +52,11 @@ class ViewController: UIViewController {
     var toolPicker: PKToolPicker!
 
     var pageMonday = Date()
+    enum PageMondayDirection {
+        case today
+        case next
+        case back
+    }
     var days: [Int] = []
 
     var weekDaysDateComponents: [DateComponents] = []
@@ -120,7 +125,7 @@ class ViewController: UIViewController {
         swipeDown.direction = .down
         pKCanvasView.addGestureRecognizer(swipeDown)
         
-        self.setPageMonday()
+        self.setPageMonday(direction: .today)
 
         //        updateDays()
         logger.info()
@@ -174,15 +179,19 @@ class ViewController: UIViewController {
 //        self.pageUpsert()
     }
     
-    func setPageMonday() {
+    func setPageMonday(direction: PageMondayDirection) {
         logger.info()
-        pageMonday = Date()
-        let weekday = Calendar.current.component(.weekday, from: Date())
-        if weekday != 2 {
-            pageMonday = Calendar.current.nextDate(after: pageMonday, matching: ViewController.matching, matchingPolicy: .nextTime, direction: .backward)!
-        }
-        else {
+        switch direction {
+        case .today:
             pageMonday = Date()
+            let weekday = Calendar.current.component(.weekday, from: Date())
+            if weekday != 2 {
+                pageMonday = Calendar.current.nextDate(after: pageMonday, matching: ViewController.matching, matchingPolicy: .nextTime, direction: .backward)!
+            }
+        case .next:
+            pageMonday = Calendar.current.nextDate(after: pageMonday, matching: ViewController.matching, matchingPolicy: .nextTime, direction: .forward)!
+        case .back:
+            pageMonday = Calendar.current.nextDate(after: pageMonday, matching: ViewController.matching, matchingPolicy: .nextTime, direction: .backward)!
         }
     }
     
@@ -219,18 +228,16 @@ class ViewController: UIViewController {
 
     @objc func swipeLeft(sender: UISwipeGestureRecognizer) {
         logger.info()
-        pageUpsert()
-        
-        pageMonday = Calendar.current.nextDate(after: pageMonday, matching: ViewController.matching, matchingPolicy: .nextTime, direction: .forward)!
-        updateDays()
+        self.pageUpsert()
+        self.setPageMonday(direction: .next)
+        self.updateDays()
     }
 
     @objc func swipeRight(sender: UISwipeGestureRecognizer) {
         logger.info()
-        pageUpsert()
-
-        pageMonday = Calendar.current.nextDate(after: pageMonday, matching: ViewController.matching, matchingPolicy: .nextTime, direction: .backward)!
-        updateDays()
+        self.pageUpsert()
+        self.setPageMonday(direction: .back)
+        self.updateDays()
     }
 
     @objc func swipeUp(sender: UISwipeGestureRecognizer) {
@@ -240,7 +247,7 @@ class ViewController: UIViewController {
     @objc func swipeDown(sender: UISwipeGestureRecognizer) {
         logger.info()
         self.pageUpsert()
-        self.setPageMonday()
+        self.setPageMonday(direction: .today)
         self.updateDays()
     }
 
