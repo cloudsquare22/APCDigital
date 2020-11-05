@@ -456,8 +456,8 @@ class ViewController: UIViewController {
         else {
             self.month.text = String(monday.month!) + "/" + String(sunday.month!)
         }
-        self.fromDay.text = Calendar.current.standaloneMonthSymbols[monday.month! - 1].uppercased() + " " + String(monday.day!)
-        self.toDay.text = "to " + Calendar.current.standaloneMonthSymbols[sunday.month! - 1].uppercased() + " " + String(sunday.day!)
+        self.fromDay.text = Calendar.shortMonthSymbols(local: Locale(identifier: "en"))[monday.month! - 1].uppercased() + " " + String(monday.day!)
+        self.toDay.text = "to " + Calendar.shortMonthSymbols(local: Locale(identifier: "en"))[sunday.month! - 1].uppercased() + " " + String(sunday.day!)
     }
     
     func dispMonthlyCalendar() {

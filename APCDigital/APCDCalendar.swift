@@ -93,14 +93,14 @@ class APCDCalendar {
         view.addSubview(month)
         
         let from = UILabel(frame: CGRect(x: 1170.0, y: 105.0, width: 145.0, height: 21.0))
-        from.text = Calendar.current.standaloneMonthSymbols[dateComponentsWeek.first!.month! - 1].uppercased() + " " + String(dateComponentsWeek.first!.day!)
+        from.text = Calendar.shortMonthSymbols(local: Locale(identifier: "en"))[dateComponentsWeek.first!.month! - 1].uppercased() + " " + String(dateComponentsWeek.first!.day!)
         from.font = UIFont.systemFont(ofSize: 15.0, weight: .regular)
         from.textColor = UIColor(named: "Basic Color Green")
         from.textAlignment = .center
         view.addSubview(from)
 
         let to = UILabel(frame: CGRect(x: 1170.0, y: 124.0, width: 145.0, height: 21.0))
-        to.text = "to " + Calendar.current.standaloneMonthSymbols[dateComponentsWeek.last!.month! - 1].uppercased() + " " + String(dateComponentsWeek.last!.month!)
+        to.text = "to " + Calendar.shortMonthSymbols(local: Locale(identifier: "en"))[dateComponentsWeek.last!.month! - 1].uppercased() + " " + String(dateComponentsWeek.last!.month!)
         to.font = UIFont.systemFont(ofSize: 15.0, weight: .regular)
         to.textColor = UIColor(named: "Basic Color Green")
         to.textAlignment = .center

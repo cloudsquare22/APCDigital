@@ -64,7 +64,7 @@ class MonthlyCarendarView {
         self.view.layer.addSublayer(rightBorder)
 
         let mmyy = UILabel(frame: CGRect(x: 1.0, y: 1.0, width: 144.0, height: 15.0))
-        let monthText = String("\(Calendar.current.shortStandaloneMonthSymbols[dayDateComponents.month! - 1].uppercased()) \(dayDateComponents.year!)")
+        let monthText = String("\(Calendar.shortMonthSymbols(local: Locale(identifier: "en"))[dayDateComponents.month! - 1].uppercased()) \(dayDateComponents.year!)")
         mmyy.text = monthText
         mmyy.font = UIFont.systemFont(ofSize: 9.0)
         mmyy.textAlignment = .center
