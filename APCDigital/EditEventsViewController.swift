@@ -87,16 +87,8 @@ class EditEventsViewController: UITableViewController {
     
     func setEvents() {
         self.events = []
-        var startDateComponents = Calendar.current.dateComponents(in: .current, from: self.viewController!.pageMonday)
-        startDateComponents.hour = 0
-        startDateComponents.minute = 0
-        startDateComponents.second = 0
-        startDateComponents.nanosecond = 0
-        var endDateComponents = Calendar.current.dateComponents(in: .current, from: self.viewController!.pageMonday  + (86400 * 6))
-        endDateComponents.hour = 23
-        endDateComponents.minute = 59
-        endDateComponents.second = 59
-        endDateComponents.nanosecond = 0
+        let startDateComponents = self.viewController!.weekDaysDateComponents[WeekDay1stMonday.monday.rawValue]
+        let endDateComponents = self.viewController!.weekDaysDateComponents[WeekDay1stMonday.sunday.rawValue]
         let predicate = eventStore.predicateForEvents(withStart: startDateComponents.date!, end: endDateComponents.date!, calendars: nil)
         let eventArray = eventStore.events(matching: predicate)
         var nationalHoliday = "日本の祝日"
