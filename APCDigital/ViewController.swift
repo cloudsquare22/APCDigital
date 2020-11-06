@@ -60,9 +60,9 @@ class ViewController: UIViewController {
     var days: [Int] = []
 
     var weekDaysDateComponents: [DateComponents] = []
-
     var calendars: [EKCalendar] = []
     var displayCalendars: [String] = []
+    var nationalHolidayCalendarName = "日本の祝日"
     
     var eventStore = EKEventStore()
     let storyBoard = UIStoryboard(name: "Main", bundle: nil)
@@ -188,16 +188,13 @@ class ViewController: UIViewController {
     
     func updateCalendars() {
         logger.info()
-        var nationalHoliday = "日本の祝日"
-        if let title = UserDefaults.standard.string(forKey: "nationalHoliday") {
-            nationalHoliday = title
-        }
+        self.setNationalHolidayCalendarName()
         let calendarAll = eventStore.calendars(for: .event)
         self.calendars = []
         for calendar in calendarAll {
             switch calendar.type {
             case .local, .calDAV,
-                 .subscription where calendar.title != nationalHoliday:
+                 .subscription where calendar.title != nationalHolidayCalendarName:
                 self.calendars.append(calendar)
             default:
                 break
@@ -214,6 +211,13 @@ class ViewController: UIViewController {
             for calendar in self.calendars {
                 self.displayCalendars.append(calendar.title)
             }
+        }
+    }
+    
+    func setNationalHolidayCalendarName() {
+        nationalHolidayCalendarName = "日本の祝日"
+        if let title = UserDefaults.standard.string(forKey: "nationalHoliday") {
+            nationalHolidayCalendarName = title
         }
     }
 
@@ -430,11 +434,16 @@ class ViewController: UIViewController {
     func dispEvent() {
         logger.info()
         self.calendarView.clearSchedule()
+        let eventArray = self.getEvents()
+        self.calendarView.dispSchedule(eventArray: eventArray, base: self)
+    }
+    
+    func getEvents() -> [EKEvent] {
         let monday = self.weekDaysDateComponents[WeekDay1stMonday.monday.rawValue]
         let sunday = self.weekDaysDateComponents[WeekDay1stMonday.sunday.rawValue]
         let predicate = eventStore.predicateForEvents(withStart: monday.date!, end: sunday.date!, calendars: nil)
         let eventArray = eventStore.events(matching: predicate)
-        self.calendarView.dispSchedule(eventArray: eventArray, base: self)
+        return eventArray
     }
     
     func dispMonthLabel() {

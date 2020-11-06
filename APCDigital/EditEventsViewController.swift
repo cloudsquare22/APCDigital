@@ -87,10 +87,7 @@ class EditEventsViewController: UITableViewController {
     
     func setEvents() {
         self.events = []
-        let startDateComponents = self.viewController!.weekDaysDateComponents[WeekDay1stMonday.monday.rawValue]
-        let endDateComponents = self.viewController!.weekDaysDateComponents[WeekDay1stMonday.sunday.rawValue]
-        let predicate = eventStore.predicateForEvents(withStart: startDateComponents.date!, end: endDateComponents.date!, calendars: nil)
-        let eventArray = eventStore.events(matching: predicate)
+        let eventArray = self.viewController!.getEvents()
         var nationalHoliday = "日本の祝日"
         if let title = UserDefaults.standard.string(forKey: "nationalHoliday") {
             nationalHoliday = title
