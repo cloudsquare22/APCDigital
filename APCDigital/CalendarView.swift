@@ -45,10 +45,7 @@ class CalendarView: UIView {
         base.day5Holiday.isHidden = true
         base.day6Holiday.isHidden = true
         base.day7Holiday.isHidden = true
-        var nationalHoliday = "日本の祝日"
-        if let title = UserDefaults.standard.string(forKey: "nationalHoliday") {
-            nationalHoliday = title
-        }
+        let nationalHoliday = base.nationalHolidayCalendarName
         for event in eventArray {
             if event.calendar.title == nationalHoliday {
                 let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)

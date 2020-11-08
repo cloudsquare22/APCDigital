@@ -88,10 +88,7 @@ class EditEventsViewController: UITableViewController {
     func setEvents() {
         self.events = []
         let eventArray = self.viewController!.getEvents()
-        var nationalHoliday = "日本の祝日"
-        if let title = UserDefaults.standard.string(forKey: "nationalHoliday") {
-            nationalHoliday = title
-        }
+        let nationalHoliday = self.viewController!.nationalHolidayCalendarName
         for event in eventArray {
             if event.calendar.title == nationalHoliday {
                 continue
