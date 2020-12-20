@@ -19,6 +19,8 @@ class ExportViewController: UIViewController {
         var start = Calendar.current.dateComponents(in: .current, from: self.viewController!.pageMonday)
         start.month = 1
         start.day = 1
+        start.weekOfYear = 1
+        start.yearForWeekOfYear = start.year
         var end = Calendar.current.dateComponents(in: .current, from: self.viewController!.pageMonday)
         end.month = 12
         end.day = 31

@@ -53,13 +53,13 @@ class CalendarView: UIView {
         base.day5Holiday.isHidden = true
         base.day6Holiday.isHidden = true
         base.day7Holiday.isHidden = true
-        base.day1outPeriod.text = ""
-        base.day2outPeriod.text = ""
-        base.day3outPeriod.text = ""
-        base.day4outPeriod.text = ""
-        base.day5outPeriod.text = ""
-        base.day6outPeriod.text = ""
-        base.day7outPeriod.text = ""
+        base.day1outPeriod.isHidden = true
+        base.day2outPeriod.isHidden = true
+        base.day3outPeriod.isHidden = true
+        base.day4outPeriod.isHidden = true
+        base.day5outPeriod.isHidden = true
+        base.day6outPeriod.isHidden = true
+        base.day7outPeriod.isHidden = true
         let nationalHoliday = base.nationalHolidayCalendarName
         for event in eventArray {
             if event.calendar.title == nationalHoliday {
