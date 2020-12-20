@@ -14,7 +14,15 @@ import Algorithms
 
 class CalendarView: UIView {
     let logger = Logger()
-    
+
+    var day1outPeriod: [String] = []
+    var day2outPeriod: [String] = []
+    var day3outPeriod: [String] = []
+    var day4outPeriod: [String] = []
+    var day5outPeriod: [String] = []
+    var day6outPeriod: [String] = []
+    var day7outPeriod: [String] = []
+
     func clearSchedule() {
         logger.info()
         for subview in self.subviews {
@@ -31,13 +39,13 @@ class CalendarView: UIView {
                 movementSymmbolList.append(String(symbol))
             }
         }
-        var day1outPeriod: [String] = []
-        var day2outPeriod: [String] = []
-        var day3outPeriod: [String] = []
-        var day4outPeriod: [String] = []
-        var day5outPeriod: [String] = []
-        var day6outPeriod: [String] = []
-        var day7outPeriod: [String] = []
+        self.day1outPeriod = []
+        self.day2outPeriod = []
+        self.day3outPeriod = []
+        self.day4outPeriod = []
+        self.day5outPeriod = []
+        self.day6outPeriod = []
+        self.day7outPeriod = []
         base.day1Holiday.isHidden = true
         base.day2Holiday.isHidden = true
         base.day3Holiday.isHidden = true
@@ -45,6 +53,13 @@ class CalendarView: UIView {
         base.day5Holiday.isHidden = true
         base.day6Holiday.isHidden = true
         base.day7Holiday.isHidden = true
+        base.day1outPeriod.text = ""
+        base.day2outPeriod.text = ""
+        base.day3outPeriod.text = ""
+        base.day4outPeriod.text = ""
+        base.day5outPeriod.text = ""
+        base.day6outPeriod.text = ""
+        base.day7outPeriod.text = ""
         let nationalHoliday = base.nationalHolidayCalendarName
         for event in eventArray {
             if event.calendar.title == nationalHoliday {
@@ -107,25 +122,7 @@ class CalendarView: UIView {
                     if let startH = startDateComponents.hour, let startM = startDateComponents.minute,
                         let endH = endDateComponents.hour, let endM = endDateComponents.minute {
                         if startH < 6 && (endH < 6 || (endH <= 6 && endM == 0)) {
-                            let outSchedule = String(format: "%d:%02d〜", startH, startM) + event.title
-                            switch startDateComponents.weekday {
-                            case 2:
-                                day1outPeriod.append(outSchedule)
-                            case 3:
-                                day2outPeriod.append(outSchedule)
-                            case 4:
-                                day3outPeriod.append(outSchedule)
-                            case 5:
-                                day4outPeriod.append(outSchedule)
-                            case 6:
-                                day5outPeriod.append(outSchedule)
-                            case 7:
-                                day6outPeriod.append(outSchedule)
-                            case 1:
-                                day7outPeriod.append(outSchedule)
-                            default:
-                                break
-                            }
+                            self.dispOutSchedule(startH: startH, startM: startM, weekday: startDateComponents.weekday!, event: event, base: base)
                             continue
                         }
                         else if startH < 6 , 6 <= endH {
@@ -137,25 +134,7 @@ class CalendarView: UIView {
                         }
                         else if startH <= 23, 0 <= endH, startDateComponents.day != endDateComponents.day {
                             if startH == 23, 30 <= startM {
-                                let outSchedule = String(format: "%d:%02d〜", startH, startM) + event.title
-                                switch startDateComponents.weekday {
-                                case 2:
-                                    day1outPeriod.append(outSchedule)
-                                case 3:
-                                    day2outPeriod.append(outSchedule)
-                                case 4:
-                                    day3outPeriod.append(outSchedule)
-                                case 5:
-                                    day4outPeriod.append(outSchedule)
-                                case 6:
-                                    day5outPeriod.append(outSchedule)
-                                case 7:
-                                    day6outPeriod.append(outSchedule)
-                                case 1:
-                                    day7outPeriod.append(outSchedule)
-                                default:
-                                    break
-                                }
+                                self.dispOutSchedule(startH: startH, startM: startM, weekday: startDateComponents.weekday!, event: event, base: base)
                                 continue
                             }
                             else {
@@ -232,36 +211,11 @@ class CalendarView: UIView {
                 }
                 else {
                     let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
-                    if let outSchedule = event.title {
-                        switch startDateComponents.weekday {
-                        case 2:
-                            day1outPeriod.append(outSchedule)
-                        case 3:
-                            day2outPeriod.append(outSchedule)
-                        case 4:
-                            day3outPeriod.append(outSchedule)
-                        case 5:
-                            day4outPeriod.append(outSchedule)
-                        case 6:
-                            day5outPeriod.append(outSchedule)
-                        case 7:
-                            day6outPeriod.append(outSchedule)
-                        case 1:
-                            day7outPeriod.append(outSchedule)
-                        default:
-                            break
-                        }
+                    if event.title != nil {
+                        self.dispOutSchedule(weekday: startDateComponents.weekday!, event: event, base: base, isAllday: true)
                     }
                 }
             }
-            
-            dispOutPeriod(label: base.day1outPeriod, texts: day1outPeriod)
-            dispOutPeriod(label: base.day2outPeriod, texts: day2outPeriod)
-            dispOutPeriod(label: base.day3outPeriod, texts: day3outPeriod)
-            dispOutPeriod(label: base.day4outPeriod, texts: day4outPeriod)
-            dispOutPeriod(label: base.day5outPeriod, texts: day5outPeriod)
-            dispOutPeriod(label: base.day6outPeriod, texts: day6outPeriod)
-            dispOutPeriod(label: base.day7outPeriod, texts: day7outPeriod)
         }
     }
     
@@ -280,6 +234,41 @@ class CalendarView: UIView {
         }
         else {
             label.isHidden = true
+        }
+    }
+    
+    func dispOutSchedule(startH: Int = 0, startM: Int = 0, weekday: Int, event: EKEvent, base: ViewController, isAllday: Bool = false) {
+        var outSchedule = ""
+        if isAllday == false {
+            outSchedule = String(format: "%d:%02d〜", startH, startM) + event.title
+        }
+        else {
+            outSchedule = event.title
+        }
+        switch weekday {
+        case 2:
+            self.day1outPeriod.append(outSchedule)
+            dispOutPeriod(label: base.day1outPeriod, texts: day1outPeriod)
+        case 3:
+            self.day2outPeriod.append(outSchedule)
+            dispOutPeriod(label: base.day2outPeriod, texts: day2outPeriod)
+        case 4:
+            self.day3outPeriod.append(outSchedule)
+            dispOutPeriod(label: base.day3outPeriod, texts: day3outPeriod)
+        case 5:
+            self.day4outPeriod.append(outSchedule)
+            dispOutPeriod(label: base.day4outPeriod, texts: day4outPeriod)
+        case 6:
+            self.day5outPeriod.append(outSchedule)
+            dispOutPeriod(label: base.day5outPeriod, texts: day5outPeriod)
+        case 7:
+            self.day6outPeriod.append(outSchedule)
+            dispOutPeriod(label: base.day6outPeriod, texts: day6outPeriod)
+        case 1:
+            self.day7outPeriod.append(outSchedule)
+            dispOutPeriod(label: base.day7outPeriod, texts: day7outPeriod)
+        default:
+            break
         }
     }
     
