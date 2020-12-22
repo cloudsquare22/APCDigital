@@ -126,19 +126,19 @@ class ViewController: UIViewController {
         super.viewWillAppear(animated)
         logger.info()
 
-        if #available(iOS 14.0, *) {
-            toolPicker = PKToolPicker()
-            toolPicker.showsDrawingPolicyControls = false
-        }
-        else {
-            let window = parent?.view.window
-            toolPicker = PKToolPicker.shared(for: window!)
-        }
-        toolPicker.addObserver(pKCanvasView)
-        toolPicker.addObserver(self)
-        toolPicker.setVisible(true, forFirstResponder: pKCanvasView)
-        toolPicker.overrideUserInterfaceStyle = .light
-        pKCanvasView.becomeFirstResponder()
+//        if #available(iOS 14.0, *) {
+//            toolPicker = PKToolPicker()
+//            toolPicker.showsDrawingPolicyControls = false
+//        }
+//        else {
+//            let window = parent?.view.window
+//            toolPicker = PKToolPicker.shared(for: window!)
+//        }
+//        toolPicker.addObserver(pKCanvasView)
+//        toolPicker.addObserver(self)
+//        toolPicker.setVisible(true, forFirstResponder: pKCanvasView)
+//        toolPicker.overrideUserInterfaceStyle = .light
+//        pKCanvasView.becomeFirstResponder()
         logger.info("PKToolPicker Set")
     }
     
@@ -554,6 +554,18 @@ class ViewController: UIViewController {
     @IBAction func tapXmark(_ sender: Any) {
         logger.info()
         menuView.isHidden.toggle()
+    }
+    
+    @IBAction func tapBlack(_ sender: Any) {
+        self.pKCanvasView.tool = PKInkingTool(.pen, color: .black, width: 0.1)
+    }
+    
+    @IBAction func tapRed(_ sender: Any) {
+        self.pKCanvasView.tool = PKInkingTool(.pen, color: .red, width: 0.01)
+    }
+    
+    @IBAction func tapErase(_ sender: Any) {
+        self.pKCanvasView.tool = PKEraserTool(.vector)
     }
     
 }
