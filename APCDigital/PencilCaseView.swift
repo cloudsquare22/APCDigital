@@ -17,6 +17,8 @@ class PencilCaseView: UIView {
     @IBOutlet weak var inkBlue: UIButton!
     @IBOutlet weak var inkGreen: UIButton!
     @IBOutlet weak var inkOrange: UIButton!
+    @IBOutlet weak var inkPurple: UIButton!
+    @IBOutlet weak var inkMarkerYellow: UIButton!
     @IBOutlet weak var inkErase: UIButton!
     
     
@@ -49,6 +51,8 @@ class PencilCaseView: UIView {
         self.inkBlue.backgroundColor = .clear
         self.inkGreen.backgroundColor = .clear
         self.inkOrange.backgroundColor = .clear
+        self.inkPurple.backgroundColor = .clear
+        self.inkMarkerYellow.backgroundColor = .clear
         self.inkErase.backgroundColor = .clear
     }
     
@@ -81,7 +85,19 @@ class PencilCaseView: UIView {
         self.clearBackground()
         self.inkOrange.backgroundColor = .systemGray6
     }
-
+    
+    @IBAction func tapPurple(_ sender: Any) {
+        self.pKCanvasView!.tool = PKInkingTool(.pen, color: .purple, width: PKInkingTool.InkType.pen.defaultWidth)
+        self.clearBackground()
+        self.inkPurple.backgroundColor = .systemGray6
+    }
+    
+    @IBAction func tapMarkerYellow(_ sender: Any) {
+        self.pKCanvasView!.tool = PKInkingTool(.marker, color: .yellow, width: PKInkingTool.InkType.marker.defaultWidth)
+        self.clearBackground()
+        self.inkMarkerYellow.backgroundColor = .systemGray6
+    }
+    
     @IBAction func tapErase(_ sender: Any) {
         self.pKCanvasView!.tool = PKEraserTool(.vector)
         self.clearBackground()

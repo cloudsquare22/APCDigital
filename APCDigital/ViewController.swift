@@ -483,7 +483,7 @@ class ViewController: UIViewController {
     
     func dispPencilCase() {
         logger.info()
-        self.view.addSubview(PencilCaseView(frame: CGRect(x: 800, y: 0, width: 300, height: 50), pKCanvasView: self.pKCanvasView))
+        self.view.addSubview(PencilCaseView(frame: CGRect(x: 800, y: 16, width: 370, height: 35), pKCanvasView: self.pKCanvasView))
     }
     
     @IBAction func tapCalendarSelect(_ sender: Any) {
