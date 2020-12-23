@@ -125,6 +125,13 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         logger.info()
+        print("-^--^-")
+        print(PKInkingTool.InkType.pencil.defaultWidth)
+        print(PKInkingTool.InkType.pencil.validWidthRange)
+        print(PKInkingTool.InkType.marker.defaultWidth)
+        print(PKInkingTool.InkType.marker.validWidthRange)
+        print(PKInkingTool.InkType.pen.defaultWidth)
+        print(PKInkingTool.InkType.pen.validWidthRange)
 
 //        if #available(iOS 14.0, *) {
 //            toolPicker = PKToolPicker()
@@ -336,6 +343,7 @@ class ViewController: UIViewController {
         self.dispMonthLabel()
         self.dispMonthlyCalendar()
         self.dispWeekOfYear()
+        self.dispPencilCase()
     }
         
     func setWeekDaysDateComponents(monday: Date) {
@@ -473,6 +481,11 @@ class ViewController: UIViewController {
         self.weekOfYear.text = String(Calendar.current.component(.weekOfYear, from: monday.date!)) + " week"
     }
     
+    func dispPencilCase() {
+        logger.info()
+        self.view.addSubview(PencilCaseView(frame: CGRect(x: 800, y: 0, width: 300, height: 50), pKCanvasView: self.pKCanvasView))
+    }
+    
     @IBAction func tapCalendarSelect(_ sender: Any) {
         logger.info()
         let calendarSelectViewController = storyBoard.instantiateViewController(withIdentifier: "CalendarSelectView") as? CalendarSelectViewController
@@ -554,18 +567,6 @@ class ViewController: UIViewController {
     @IBAction func tapXmark(_ sender: Any) {
         logger.info()
         menuView.isHidden.toggle()
-    }
-    
-    @IBAction func tapBlack(_ sender: Any) {
-        self.pKCanvasView.tool = PKInkingTool(.pen, color: .black, width: 0.1)
-    }
-    
-    @IBAction func tapRed(_ sender: Any) {
-        self.pKCanvasView.tool = PKInkingTool(.pen, color: .red, width: 0.01)
-    }
-    
-    @IBAction func tapErase(_ sender: Any) {
-        self.pKCanvasView.tool = PKEraserTool(.vector)
     }
     
 }

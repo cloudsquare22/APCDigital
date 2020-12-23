@@ -27,6 +27,8 @@
 		8D9EEF6824AE8D0100E855C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D9EEF6724AE8D0100E855C4 /* Assets.xcassets */; };
 		8D9EEF6B24AE8D0100E855C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D9EEF6924AE8D0100E855C4 /* LaunchScreen.storyboard */; };
 		8D9EEF7324AFF6F700E855C4 /* Pages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9EEF7224AFF6F700E855C4 /* Pages.swift */; };
+		8DAF7A91259368F600BDF2C8 /* PencilCaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAF7A90259368F600BDF2C8 /* PencilCaseView.swift */; };
+		8DAF7A952593694200BDF2C8 /* PencilCaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DAF7A942593694200BDF2C8 /* PencilCaseView.xib */; };
 		8DC71067251F34FC00156742 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 8DC71066251F34FC00156742 /* Logging */; };
 		8DC7106A251F61D700156742 /* LoggerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC71069251F61D700156742 /* LoggerExtension.swift */; };
 		8DD1739A24D5509700E907EB /* MonthlyCarendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD1739924D5509700E907EB /* MonthlyCarendarView.swift */; };
@@ -62,6 +64,8 @@
 		8D9EEF6A24AE8D0100E855C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D9EEF6C24AE8D0100E855C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D9EEF7224AFF6F700E855C4 /* Pages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pages.swift; sourceTree = "<group>"; };
+		8DAF7A90259368F600BDF2C8 /* PencilCaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilCaseView.swift; sourceTree = "<group>"; };
+		8DAF7A942593694200BDF2C8 /* PencilCaseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PencilCaseView.xib; sourceTree = "<group>"; };
 		8DC71069251F61D700156742 /* LoggerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerExtension.swift; sourceTree = "<group>"; };
 		8DD1739924D5509700E907EB /* MonthlyCarendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCarendarView.swift; sourceTree = "<group>"; };
 		8DD1739B24D990C100E907EB /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +138,8 @@
 				8DC71069251F61D700156742 /* LoggerExtension.swift */,
 				8D5ABE8D255422C10099E539 /* ExtensionCalendar.swift */,
 				8D8BF03625557F730003F82F /* Enum.swift */,
+				8DAF7A90259368F600BDF2C8 /* PencilCaseView.swift */,
+				8DAF7A942593694200BDF2C8 /* PencilCaseView.xib */,
 			);
 			path = APCDigital;
 			sourceTree = "<group>";
@@ -210,6 +216,7 @@
 				8D0E63F524B1A9A000D47A47 /* ScheduleView.xib in Resources */,
 				8D9EEF6824AE8D0100E855C4 /* Assets.xcassets in Resources */,
 				8D9EEF6324AE8D0000E855C4 /* Main.storyboard in Resources */,
+				8DAF7A952593694200BDF2C8 /* PencilCaseView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +244,7 @@
 				8DECD8AD24BDD099005062B1 /* CalendarSelectViewController.swift in Sources */,
 				8DDC869724F24C2D00B850E5 /* EditEventsViewController.swift in Sources */,
 				8D13775024C42CE900A6938C /* AboutViewController.swift in Sources */,
+				8DAF7A91259368F600BDF2C8 /* PencilCaseView.swift in Sources */,
 				8D3F112624DE961E00D40FA3 /* APCDCalendar.swift in Sources */,
 				8DD1739A24D5509700E907EB /* MonthlyCarendarView.swift in Sources */,
 				8D9EEF5E24AE8D0000E855C4 /* SceneDelegate.swift in Sources */,
