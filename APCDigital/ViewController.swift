@@ -118,6 +118,8 @@ class ViewController: UIViewController {
         
         self.setPageMonday(direction: .today)
 
+        self.dispPencilCase()
+        
         //        updateDays()
         logger.info()
     }
@@ -343,7 +345,6 @@ class ViewController: UIViewController {
         self.dispMonthLabel()
         self.dispMonthlyCalendar()
         self.dispWeekOfYear()
-        self.dispPencilCase()
     }
         
     func setWeekDaysDateComponents(monday: Date) {
