@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="inkBlack" destination="gFs-mH-VEv" id="382-ab-3Gb"/>
                 <outlet property="inkBlue" destination="IDp-P1-PhO" id="KBH-Pm-hnc"/>
+                <outlet property="inkBrown" destination="9i6-Kj-VlS" id="tgg-cf-Ywg"/>
                 <outlet property="inkErase" destination="6ma-cf-Sgg" id="kJy-4R-L86"/>
                 <outlet property="inkGreen" destination="lsW-Be-yXz" id="j0M-xS-3yq"/>
                 <outlet property="inkMarkerYellow" destination="TJe-P6-5Ja" id="Evp-ib-7b5"/>
@@ -23,7 +24,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="370" height="35"/>
+            <rect key="frame" x="0.0" y="0.0" width="410" height="35"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gFs-mH-VEv">
@@ -91,19 +92,19 @@
                         <action selector="tapPurple:" destination="-1" eventType="touchUpInside" id="bxE-6f-eAo"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ma-cf-Sgg">
-                    <rect key="frame" x="322" y="2" width="33" height="31"/>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9i6-Kj-VlS">
+                    <rect key="frame" x="276" y="0.0" width="38" height="36"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" image="pencil.slash" catalog="system">
+                    <color key="tintColor" red="0.66799789669999998" green="0.47512125970000002" blue="0.25860109930000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" image="pencil.tip.crop.circle" catalog="system">
                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="32"/>
                     </state>
                     <connections>
-                        <action selector="tapErase:" destination="-1" eventType="touchUpInside" id="WKU-Ot-POO"/>
+                        <action selector="tapBrown:" destination="-1" eventType="touchUpInside" id="ixT-u4-WJW"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJe-P6-5Ja">
-                    <rect key="frame" x="276" y="-2" width="41" height="38"/>
+                    <rect key="frame" x="322" y="-2" width="41" height="38"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" systemColor="systemYellowColor"/>
                     <state key="normal" image="highlighter" catalog="system">
@@ -111,6 +112,17 @@
                     </state>
                     <connections>
                         <action selector="tapMarkerYellow:" destination="-1" eventType="touchUpInside" id="63d-ef-Zai"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ma-cf-Sgg">
+                    <rect key="frame" x="371" y="3" width="33" height="31"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" image="pencil.slash" catalog="system">
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="32"/>
+                    </state>
+                    <connections>
+                        <action selector="tapErase:" destination="-1" eventType="touchUpInside" id="WKU-Ot-POO"/>
                     </connections>
                 </button>
             </subviews>
