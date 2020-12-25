@@ -148,7 +148,7 @@ class ViewController: UIViewController {
 //        toolPicker.setVisible(true, forFirstResponder: pKCanvasView)
 //        toolPicker.overrideUserInterfaceStyle = .light
 //        pKCanvasView.becomeFirstResponder()
-        logger.info("PKToolPicker Set")
+//        logger.info("PKToolPicker Set")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -167,7 +167,7 @@ class ViewController: UIViewController {
 //        toolPicker.addObserver(self)
 //        toolPicker.setVisible(true, forFirstResponder: pKCanvasView)
 //        toolPicker.overrideUserInterfaceStyle = .light
-//        pKCanvasView.becomeFirstResponder()
+        pKCanvasView.becomeFirstResponder()
 //        logger.info("PKToolPicker Set")
         
         updateDays()
@@ -484,7 +484,7 @@ class ViewController: UIViewController {
     
     func dispPencilCase() {
         logger.info()
-        self.view.addSubview(PencilCaseView(frame: CGRect(x: 760, y: 16, width: 410, height: 35), pKCanvasView: self.pKCanvasView))
+        self.view.addSubview(PencilCaseView(frame: CGRect(x: 670, y: 16, width: 500, height: 35), pKCanvasView: self.pKCanvasView))
     }
     
     @IBAction func tapCalendarSelect(_ sender: Any) {

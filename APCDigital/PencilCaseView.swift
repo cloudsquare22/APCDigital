@@ -37,7 +37,7 @@ class PencilCaseView: UIView {
     @IBOutlet weak var inkBrown: UIButton!
     @IBOutlet weak var inkMarkerYellow: UIButton!
     @IBOutlet weak var inkErase: UIButton!
-    
+    @IBOutlet weak var ruler: UIButton!
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -110,6 +110,12 @@ class PencilCaseView: UIView {
     
     @IBAction func tapErase(_ sender: Any) {
         self.updateInk(ink: .erase)
+    }
+    
+    @IBAction func tapRuler(_ sender: Any) {
+        self.pKCanvasView?.isRulerActive.toggle()
+        let image = self.pKCanvasView!.isRulerActive ? "ruler.fill" : "ruler"
+        self.ruler.setImage(UIImage(systemName: image), for: .normal)
     }
     
     func updateInk(ink: Ink) {
