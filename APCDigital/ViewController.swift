@@ -93,7 +93,7 @@ class ViewController: UIViewController {
         pKCanvasView.overrideUserInterfaceStyle = .light
 
         let tapPKCanvasView = UITapGestureRecognizer(target: self, action: #selector(self.tapPKCanvasView(sender:)))
-        tapPKCanvasView.numberOfTapsRequired = 2
+        tapPKCanvasView.numberOfTapsRequired = 1
         pKCanvasView.addGestureRecognizer(tapPKCanvasView)
         
         let longPressPKCanvasView = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressPKCanvasView(sender:)))

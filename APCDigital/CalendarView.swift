@@ -102,6 +102,11 @@ class CalendarView: UIView {
                         continue
                     }
                 }
+                if event.calendar.title == "FC Barcelona" {
+                    if event.title.contains("Challenge") == true {
+                        continue
+                    }
+                }
                 if let location = event.structuredLocation?.title, location.isEmpty == false {
                     let locations = location.split(separator: "\n")
                     event.title = String(format: "%@(%@)", event.title, String(locations[0]))
