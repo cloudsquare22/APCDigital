@@ -29,6 +29,8 @@
 		8D9EEF7324AFF6F700E855C4 /* Pages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9EEF7224AFF6F700E855C4 /* Pages.swift */; };
 		8DAF7A91259368F600BDF2C8 /* PencilCaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAF7A90259368F600BDF2C8 /* PencilCaseView.swift */; };
 		8DAF7A952593694200BDF2C8 /* PencilCaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DAF7A942593694200BDF2C8 /* PencilCaseView.xib */; };
+		8DAF7A98259A009F00BDF2C8 /* EventFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAF7A97259A009F00BDF2C8 /* EventFilterViewController.swift */; };
+		8DAF7A9B259A011400BDF2C8 /* EventFilterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAF7A9A259A011400BDF2C8 /* EventFilterViewCell.swift */; };
 		8DC71067251F34FC00156742 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 8DC71066251F34FC00156742 /* Logging */; };
 		8DC7106A251F61D700156742 /* LoggerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC71069251F61D700156742 /* LoggerExtension.swift */; };
 		8DD1739A24D5509700E907EB /* MonthlyCarendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD1739924D5509700E907EB /* MonthlyCarendarView.swift */; };
@@ -66,6 +68,8 @@
 		8D9EEF7224AFF6F700E855C4 /* Pages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pages.swift; sourceTree = "<group>"; };
 		8DAF7A90259368F600BDF2C8 /* PencilCaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilCaseView.swift; sourceTree = "<group>"; };
 		8DAF7A942593694200BDF2C8 /* PencilCaseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PencilCaseView.xib; sourceTree = "<group>"; };
+		8DAF7A97259A009F00BDF2C8 /* EventFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFilterViewController.swift; sourceTree = "<group>"; };
+		8DAF7A9A259A011400BDF2C8 /* EventFilterViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFilterViewCell.swift; sourceTree = "<group>"; };
 		8DC71069251F61D700156742 /* LoggerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerExtension.swift; sourceTree = "<group>"; };
 		8DD1739924D5509700E907EB /* MonthlyCarendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCarendarView.swift; sourceTree = "<group>"; };
 		8DD1739B24D990C100E907EB /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +144,8 @@
 				8D8BF03625557F730003F82F /* Enum.swift */,
 				8DAF7A90259368F600BDF2C8 /* PencilCaseView.swift */,
 				8DAF7A942593694200BDF2C8 /* PencilCaseView.xib */,
+				8DAF7A97259A009F00BDF2C8 /* EventFilterViewController.swift */,
+				8DAF7A9A259A011400BDF2C8 /* EventFilterViewCell.swift */,
 			);
 			path = APCDigital;
 			sourceTree = "<group>";
@@ -228,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D9EEF6024AE8D0000E855C4 /* ViewController.swift in Sources */,
+				8DAF7A9B259A011400BDF2C8 /* EventFilterViewCell.swift in Sources */,
 				8D5ABE8E255422C10099E539 /* ExtensionCalendar.swift in Sources */,
 				8D9EEF6624AE8D0000E855C4 /* APCDigital.xcdatamodeld in Sources */,
 				8D6668BA24E7A9DD00607C09 /* SelectJumpDayViewController.swift in Sources */,
@@ -240,6 +247,7 @@
 				8DECD8AF24BDD2EF005062B1 /* CalendarSelectViewCell.swift in Sources */,
 				8D9EEF7324AFF6F700E855C4 /* Pages.swift in Sources */,
 				8D9EEF5C24AE8D0000E855C4 /* AppDelegate.swift in Sources */,
+				8DAF7A98259A009F00BDF2C8 /* EventFilterViewController.swift in Sources */,
 				8D25655C24EFE61D00359BE3 /* EditScheduleViewController.swift in Sources */,
 				8DECD8AD24BDD099005062B1 /* CalendarSelectViewController.swift in Sources */,
 				8DDC869724F24C2D00B850E5 /* EditEventsViewController.swift in Sources */,
