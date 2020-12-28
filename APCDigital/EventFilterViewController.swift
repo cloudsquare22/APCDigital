@@ -9,6 +9,7 @@
 import UIKit
 
 class EventFilterViewController: UITableViewController {
+    weak var viewController: ViewController? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,8 @@ class EventFilterViewController: UITableViewController {
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "filters", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "filters", for: indexPath) as! EventFilterViewCell
+        cell.viewController = self.viewController
 
         // Configure the cell...
 
@@ -54,17 +56,19 @@ class EventFilterViewController: UITableViewController {
     }
     */
 
-    /*
+
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            if indexPath.row != 0 {
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            print(indexPath.row)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
 
     /*
     // Override to support rearranging the table view.

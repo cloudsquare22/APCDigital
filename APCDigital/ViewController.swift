@@ -569,7 +569,7 @@ class ViewController: UIViewController {
         logger.info()
         let eventFilterViewController = storyBoard.instantiateViewController(withIdentifier: "EventFilterView") as? EventFilterViewController
         if let controller = eventFilterViewController {
-//            controller.viewController = self
+            controller.viewController = self
             self.setPopoverPresentationController(size: CGSize(width: 600, height: 800),
                                                   rect: (sender as! UIButton).frame,
                                                   controller: controller)
