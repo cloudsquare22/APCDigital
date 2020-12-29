@@ -43,7 +43,7 @@ class EventFilterViewController: UITableViewController {
             return 1
         }
         else {
-            return 0
+            return 1
         }
     }
 
@@ -52,11 +52,30 @@ class EventFilterViewController: UITableViewController {
 //        let cell = tableView.dequeueReusableCell(withIdentifier: "filters", for: indexPath) as! EventFilterViewCell
 //        cell.viewController = self.viewController
         
+        var cell: UITableViewCell? = nil
+        
         print(indexPath)
-        let cell = tableView.dequeueReusableCell(withIdentifier: "addfilters", for: indexPath)
-        // Configure the cell...
+        if indexPath.section == 0 {
+            let addCell = tableView.dequeueReusableCell(withIdentifier: "addfilters", for: indexPath) as! EventFilterViewAddCell
+            addCell.viewController = self.viewController
+            addCell.setPicker()
+            cell = addCell
+            // Configure the cell...
+        }
+        else {
+            cell = tableView.dequeueReusableCell(withIdentifier: "filters", for: indexPath)
+        }
 
-        return cell
+        return cell!
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 100.0
+        }
+        else {
+            return 50.0
+        }
     }
 
     
