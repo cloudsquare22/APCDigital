@@ -11,6 +11,9 @@ import UIKit
 class EventFilterViewCell: UITableViewCell {
     weak var viewController: ViewController? = nil
 
+    @IBOutlet weak var calendar: UILabel!
+    @IBOutlet weak var filterString: UILabel!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,4 +25,7 @@ class EventFilterViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func tapDeleteEventFilter(_ sender: Any) {
+        EventFilter.delete(calendar: self.calendar.text!, filterString: self.filterString.text!)
+    }
 }

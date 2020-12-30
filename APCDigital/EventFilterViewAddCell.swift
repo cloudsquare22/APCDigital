@@ -12,6 +12,7 @@ class EventFilterViewAddCell: UITableViewCell {
     weak var viewController: ViewController? = nil
 
     @IBOutlet weak var calendars: UIPickerView!
+    @IBOutlet weak var filterString: UITextField!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,7 +29,15 @@ class EventFilterViewAddCell: UITableViewCell {
         self.calendars.dataSource = self
         self.calendars.delegate = self
     }
-
+    
+    @IBAction func tapAddEventFilter(_ sender: Any) {
+        guard self.filterString.text?.isEmpty == false else {
+            return
+        }
+        let calendarString = self.viewController?.calendars[self.calendars.selectedRow(inComponent: 0)].title
+        EventFilter.insert(calendar: calendarString!, filterString: self.filterString.text!)
+    }
+    
 }
 
 extension EventFilterViewAddCell: UIPickerViewDelegate, UIPickerViewDataSource {

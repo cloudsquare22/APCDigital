@@ -11,8 +11,12 @@ import UIKit
 class EventFilterViewController: UITableViewController {
     weak var viewController: ViewController? = nil
 
+    var eventFilters: [(calendar: String, filterString: String)] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.eventFilters = EventFilter.selectAll()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -43,7 +47,7 @@ class EventFilterViewController: UITableViewController {
             return 1
         }
         else {
-            return 1
+            return self.eventFilters.count
         }
     }
 
@@ -60,12 +64,13 @@ class EventFilterViewController: UITableViewController {
             addCell.viewController = self.viewController
             addCell.setPicker()
             cell = addCell
-            // Configure the cell...
         }
         else {
-            cell = tableView.dequeueReusableCell(withIdentifier: "filters", for: indexPath)
+            let filterCell = tableView.dequeueReusableCell(withIdentifier: "filters", for: indexPath) as! EventFilterViewCell
+            filterCell.calendar.text = self.eventFilters[indexPath.row].calendar
+            filterCell.filterString.text = self.eventFilters[indexPath.row].filterString
+            cell = filterCell
         }
-
         return cell!
     }
     

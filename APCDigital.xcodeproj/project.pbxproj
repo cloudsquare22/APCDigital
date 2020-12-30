@@ -32,6 +32,7 @@
 		8DAF7A952593694200BDF2C8 /* PencilCaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DAF7A942593694200BDF2C8 /* PencilCaseView.xib */; };
 		8DAF7A98259A009F00BDF2C8 /* EventFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAF7A97259A009F00BDF2C8 /* EventFilterViewController.swift */; };
 		8DAF7A9B259A011400BDF2C8 /* EventFilterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAF7A9A259A011400BDF2C8 /* EventFilterViewCell.swift */; };
+		8DAF7A9F259C9EBE00BDF2C8 /* EventFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAF7A9E259C9EBE00BDF2C8 /* EventFilter.swift */; };
 		8DC71067251F34FC00156742 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 8DC71066251F34FC00156742 /* Logging */; };
 		8DC7106A251F61D700156742 /* LoggerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC71069251F61D700156742 /* LoggerExtension.swift */; };
 		8DD1739A24D5509700E907EB /* MonthlyCarendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD1739924D5509700E907EB /* MonthlyCarendarView.swift */; };
@@ -72,6 +73,7 @@
 		8DAF7A942593694200BDF2C8 /* PencilCaseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PencilCaseView.xib; sourceTree = "<group>"; };
 		8DAF7A97259A009F00BDF2C8 /* EventFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFilterViewController.swift; sourceTree = "<group>"; };
 		8DAF7A9A259A011400BDF2C8 /* EventFilterViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFilterViewCell.swift; sourceTree = "<group>"; };
+		8DAF7A9E259C9EBE00BDF2C8 /* EventFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFilter.swift; sourceTree = "<group>"; };
 		8DC71069251F61D700156742 /* LoggerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerExtension.swift; sourceTree = "<group>"; };
 		8DD1739924D5509700E907EB /* MonthlyCarendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCarendarView.swift; sourceTree = "<group>"; };
 		8DD1739B24D990C100E907EB /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				8DAF7A97259A009F00BDF2C8 /* EventFilterViewController.swift */,
 				8DAF7A9A259A011400BDF2C8 /* EventFilterViewCell.swift */,
 				8D3B40E3259A9F0200C08035 /* EventFilterViewAddCell.swift */,
+				8DAF7A9E259C9EBE00BDF2C8 /* EventFilter.swift */,
 			);
 			path = APCDigital;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DAF7A9F259C9EBE00BDF2C8 /* EventFilter.swift in Sources */,
 				8D9EEF6024AE8D0000E855C4 /* ViewController.swift in Sources */,
 				8DAF7A9B259A011400BDF2C8 /* EventFilterViewCell.swift in Sources */,
 				8D5ABE8E255422C10099E539 /* ExtensionCalendar.swift in Sources */,

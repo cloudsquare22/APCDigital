@@ -1044,7 +1044,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Filter String" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nuU-Ig-mfo">
-                                            <rect key="frame" x="249" y="14" width="88" height="21"/>
+                                            <rect key="frame" x="249" y="14" width="495" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -1056,9 +1056,12 @@
                                             <state key="normal" image="minus.circle" catalog="system">
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
                                             </state>
+                                            <connections>
+                                                <action selector="tapDeleteEventFilter:" destination="tMm-PE-0JX" eventType="touchUpInside" id="zlG-7k-kiJ"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Calendar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o67-Gj-GVa">
-                                            <rect key="frame" x="20" y="14" width="69" height="21"/>
+                                            <rect key="frame" x="20" y="14" width="221" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -1066,6 +1069,10 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="calendar" destination="o67-Gj-GVa" id="4Gz-nb-qa8"/>
+                                    <outlet property="filterString" destination="nuU-Ig-mfo" id="Aij-T7-aIc"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="addfilters" rowHeight="100" id="6kl-jY-xUx" customClass="EventFilterViewAddCell" customModule="Action_Planner" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="78" width="800" height="100"/>
@@ -1090,11 +1097,15 @@
                                             <state key="normal" image="plus.circle" catalog="system">
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="32"/>
                                             </state>
+                                            <connections>
+                                                <action selector="tapAddEventFilter:" destination="6kl-jY-xUx" eventType="touchUpInside" id="9dg-Vd-isj"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="calendars" destination="Yre-DE-yWs" id="WeP-az-dXE"/>
+                                    <outlet property="filterString" destination="aEg-VV-eUJ" id="CBz-9a-IH1"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
