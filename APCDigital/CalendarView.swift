@@ -39,6 +39,7 @@ class CalendarView: UIView {
                 movementSymmbolList.append(String(symbol))
             }
         }
+        let eventFilters: [(calendar: String, filterString: String)] = EventFilter.selectAll()
         self.day1outPeriod = []
         self.day2outPeriod = []
         self.day3outPeriod = []
@@ -97,16 +98,28 @@ class CalendarView: UIView {
 //            if base.calendars.contains(event.calendar) == true {
 //
 //            if event.calendar.title == "work" || event.calendar.title == "oneself" || event.calendar.title == "FC Barcelona" || event.calendar.title == "2020 FIA Formula One World Championship Race Calendar" || event.calendar.title == "buy" {
-                if event.calendar.title == "2020 FIA Formula One World Championship Race Calendar" {
-                    if (event.title.contains("PRACTICE") == true) || (event.title.contains("QUALIFYING") == true) {
-                        continue
+                let isEventFilter = eventFilters.contains(where: { (calendar, filterString) in
+                    var result = false
+                    if event.calendar.title == calendar {
+                        if event.title.contains(filterString) == true {
+                            result = true
+                        }
                     }
+                    return result
+                })
+                if isEventFilter == true {
+                    continue
                 }
-                if event.calendar.title == "FC Barcelona" {
-                    if event.title.contains("Challenge") == true {
-                        continue
-                    }
-                }
+//                if event.calendar.title == "2020 FIA Formula One World Championship Race Calendar" {
+//                    if (event.title.contains("PRACTICE") == true) || (event.title.contains("QUALIFYING") == true) {
+//                        continue
+//                    }
+//                }
+//                if event.calendar.title == "FC Barcelona" {
+//                    if event.title.contains("Challenge") == true {
+//                        continue
+//                    }
+//                }
                 if let location = event.structuredLocation?.title, location.isEmpty == false {
                     let locations = location.split(separator: "\n")
                     event.title = String(format: "%@(%@)", event.title, String(locations[0]))

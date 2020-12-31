@@ -24,6 +24,11 @@ class EventFilterViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.viewController!.updateDays()
+        self.viewController!.pKCanvasView.becomeFirstResponder()
+    }
 
     // MARK: - Table view data source
 
@@ -62,11 +67,13 @@ class EventFilterViewController: UITableViewController {
         if indexPath.section == 0 {
             let addCell = tableView.dequeueReusableCell(withIdentifier: "addfilters", for: indexPath) as! EventFilterViewAddCell
             addCell.viewController = self.viewController
+            addCell.eventFilterViewController = self
             addCell.setPicker()
             cell = addCell
         }
         else {
             let filterCell = tableView.dequeueReusableCell(withIdentifier: "filters", for: indexPath) as! EventFilterViewCell
+            filterCell.eventFilterViewController = self
             filterCell.calendar.text = self.eventFilters[indexPath.row].calendar
             filterCell.filterString.text = self.eventFilters[indexPath.row].filterString
             cell = filterCell
@@ -82,7 +89,11 @@ class EventFilterViewController: UITableViewController {
             return 50.0
         }
     }
-
+    
+    func reload() {
+        self.eventFilters = EventFilter.selectAll()
+        self.tableView.reloadData()
+    }
     
     /*
     // Override to support conditional editing of the table view.
@@ -93,18 +104,16 @@ class EventFilterViewController: UITableViewController {
     */
 
 
+    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            if indexPath.row != 0 {
-                tableView.deleteRows(at: [indexPath], with: .fade)
-            }
-            print(indexPath.row)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
+     */
 
     /*
     // Override to support rearranging the table view.

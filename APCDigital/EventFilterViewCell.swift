@@ -9,7 +9,7 @@
 import UIKit
 
 class EventFilterViewCell: UITableViewCell {
-    weak var viewController: ViewController? = nil
+    weak var eventFilterViewController: EventFilterViewController? = nil
 
     @IBOutlet weak var calendar: UILabel!
     @IBOutlet weak var filterString: UILabel!
@@ -27,5 +27,6 @@ class EventFilterViewCell: UITableViewCell {
 
     @IBAction func tapDeleteEventFilter(_ sender: Any) {
         EventFilter.delete(calendar: self.calendar.text!, filterString: self.filterString.text!)
+        self.eventFilterViewController?.reload()
     }
 }

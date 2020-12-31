@@ -10,6 +10,7 @@ import UIKit
 
 class EventFilterViewAddCell: UITableViewCell {
     weak var viewController: ViewController? = nil
+    weak var eventFilterViewController: EventFilterViewController? = nil
 
     @IBOutlet weak var calendars: UIPickerView!
     @IBOutlet weak var filterString: UITextField!
@@ -36,6 +37,8 @@ class EventFilterViewAddCell: UITableViewCell {
         }
         let calendarString = self.viewController?.calendars[self.calendars.selectedRow(inComponent: 0)].title
         EventFilter.insert(calendar: calendarString!, filterString: self.filterString.text!)
+        self.eventFilterViewController?.reload()
+        self.filterString.text = ""
     }
     
 }
