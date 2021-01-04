@@ -160,6 +160,7 @@ class APCDCalendar {
                 movementSymmbolList.append(String(symbol))
             }
         }
+        let eventFilters: [(calendar: String, filterString: String)] = EventFilter.selectAll()
 
         let eventArray = self.events(day: day)
         for event in eventArray {
@@ -168,10 +169,22 @@ class APCDCalendar {
             }
             if self.displayCalendars.contains(event.calendar.title) == true {
                 // Special
-                if event.calendar.title == "2020 FIA Formula One World Championship Race Calendar" {
-                    if event.title.contains("PRACTICE") == true {
-                        continue
+//                if event.calendar.title == "2020 FIA Formula One World Championship Race Calendar" {
+//                    if event.title.contains("PRACTICE") == true {
+//                        continue
+//                    }
+//                }
+                let isEventFilter = eventFilters.contains(where: { (calendar, filterString) in
+                    var result = false
+                    if event.calendar.title == calendar {
+                        if event.title.contains(filterString) == true {
+                            result = true
+                        }
                     }
+                    return result
+                })
+                if isEventFilter == true {
+                    continue
                 }
 
                 // add Location
