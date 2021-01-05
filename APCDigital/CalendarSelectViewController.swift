@@ -57,6 +57,10 @@ class CalendarSelectViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "calendar", for: indexPath) as! CalendarSelectViewCell
         cell.title.text = viewController!.calendars[indexPath.row].title
+        cell.title.textColor = UIColor(red: viewController!.calendars[indexPath.row].cgColor.components![0],
+                                       green: viewController!.calendars[indexPath.row].cgColor.components![1],
+                                       blue: viewController!.calendars[indexPath.row].cgColor.components![2],
+                                       alpha: 1.0)
         cell.index = indexPath.row
         cell.tableView = self
         if viewController!.displayCalendars.contains(viewController!.calendars[indexPath.row].title) == true {

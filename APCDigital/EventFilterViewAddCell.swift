@@ -57,7 +57,25 @@ extension EventFilterViewAddCell: UIPickerViewDelegate, UIPickerViewDataSource {
         }
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        self.viewController?.calendars[row].title
+//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        self.viewController?.calendars[row].title
+//    }
+    
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let color = UIColor(red: self.viewController!.calendars[row].cgColor.components![0],
+                            green: self.viewController!.calendars[row].cgColor.components![1],
+                            blue: self.viewController!.calendars[row].cgColor.components![2],
+                            alpha: 1.0)
+        let attribute = NSAttributedString(string: (self.viewController?.calendars[row].title)!,
+                                           attributes: [NSAttributedString.Key.foregroundColor: color])
+        return attribute
     }
+    
+//    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+//        let label = UILabel()
+//        label.text = self.viewController?.calendars[row].title
+//        label.adjustsFontSizeToFitWidth = true
+//        label.textAlignment = .left
+//        return label
+//    }
 }
