@@ -23,11 +23,12 @@
                 <outlet property="marker" destination="TJe-P6-5Ja" id="uNg-VW-otr"/>
                 <outlet property="pencil" destination="V1M-gT-ttQ" id="hz0-SJ-l3W"/>
                 <outlet property="ruler" destination="fV7-GM-HYt" id="ocW-St-xMA"/>
+                <outlet property="undo" destination="EFN-TG-4c2" id="UL0-h7-etv"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="550" height="35"/>
+            <rect key="frame" x="0.0" y="0.0" width="600" height="35"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gFs-mH-VEv">
@@ -161,6 +162,16 @@
                         <action selector="tapRuler:" destination="-1" eventType="touchUpInside" id="ehl-or-SKL"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EFN-TG-4c2">
+                    <rect key="frame" x="553" y="0.0" width="38" height="36"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="arrow.uturn.left.circle" catalog="system">
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="32"/>
+                    </state>
+                    <connections>
+                        <action selector="tapUndo:" destination="-1" eventType="touchUpInside" id="0dt-HU-Ghl"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -170,6 +181,7 @@
         </view>
     </objects>
     <resources>
+        <image name="arrow.uturn.left.circle" catalog="system" width="128" height="121"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="pencil.slash" catalog="system" width="128" height="113"/>
         <image name="pencil.tip.crop.circle" catalog="system" width="128" height="121"/>

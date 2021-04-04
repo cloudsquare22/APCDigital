@@ -43,6 +43,7 @@ class PencilCaseView: UIView {
     @IBOutlet weak var pencil: UIButton!
     @IBOutlet weak var marker: UIButton!
     @IBOutlet weak var ruler: UIButton!
+    @IBOutlet weak var undo: UIButton!
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -174,6 +175,13 @@ class PencilCaseView: UIView {
         self.ruler.tintColor = color
     }
     
+    @IBAction func tapUndo(_ sender: Any) {
+        if let undoManager = self.pKCanvasView?.undoManager {
+            print("undo")
+            undoManager.undo()
+        }
+    }
+
     func updateInk(ink: Ink? = nil) {
         if let ink = ink {
             self.saveInk = self.selectInk
