@@ -79,7 +79,6 @@ class PencilCaseView: UIView {
         self.inkPurple.backgroundColor = .clear
         self.inkBrown.backgroundColor = .clear
         self.inkYellow.backgroundColor = .clear
-        self.inkErase.backgroundColor = .clear
         switch ink {
         case .black:
             self.inkBlack.backgroundColor = .systemGray5
@@ -143,7 +142,9 @@ class PencilCaseView: UIView {
     @IBAction func tapErase(_ sender: Any) {
         self.onErase.toggle()
         let color: UIColor = self.onErase ? .blue : .black
+        let colorBG: UIColor = self.onErase ? .systemGray5 : .clear
         self.inkErase.tintColor = color
+        self.inkErase.backgroundColor = colorBG
         self.updateInk()
     }
 
@@ -152,9 +153,12 @@ class PencilCaseView: UIView {
         if self.onMarker == true {
             self.onMarker = false
             self.marker.tintColor = .black
+            self.marker.backgroundColor = .clear
         }
         let color: UIColor = self.onPencil ? .blue : .black
+        let colorBG: UIColor = self.onPencil ? .systemGray5 : .clear
         self.pencil.tintColor = color
+        self.pencil.backgroundColor = colorBG
         self.updateInk()
     }
     
@@ -163,9 +167,12 @@ class PencilCaseView: UIView {
         if self.onPencil == true {
             self.onPencil = false
             self.pencil.tintColor = .black
+            self.pencil.backgroundColor = .clear
         }
         let color: UIColor = self.onMarker ? .blue : .black
+        let colorBG: UIColor = self.onMarker ? .systemGray5 : .clear
         self.marker.tintColor = color
+        self.marker.backgroundColor = colorBG
         self.updateInk()
     }
     
@@ -229,7 +236,9 @@ extension PencilCaseView: UIPencilInteractionDelegate {
     func pencilInteractionDidTap(_ interaction: UIPencilInteraction) {
         self.onErase.toggle()
         let color: UIColor = self.onErase ? .blue : .black
+        let colorBG: UIColor = self.onErase ? .systemGray5 : .clear
         self.inkErase.tintColor = color
+        self.inkErase.backgroundColor = colorBG
         self.updateInk()
     }
 }
