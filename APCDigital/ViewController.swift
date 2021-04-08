@@ -246,6 +246,7 @@ class ViewController: UIViewController {
 
     @objc func swipeUp(sender: UISwipeGestureRecognizer) {
         logger.info()
+        menuView.isHidden.toggle()
     }
 
     @objc func swipeDown(sender: UISwipeGestureRecognizer) {
@@ -270,9 +271,9 @@ class ViewController: UIViewController {
             }
 
         }
-        else {
-            menuView.isHidden.toggle()
-        }
+//        else {
+//            menuView.isHidden.toggle()
+//        }
     }
     
     @objc func longPressPKCanvasView(sender: UILongPressGestureRecognizer) {
