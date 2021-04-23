@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import Logging
 
 class ExportViewController: UIViewController {
     weak var viewController: ViewController? = nil
 
     @IBOutlet weak var dateStart: UIDatePicker!
     @IBOutlet weak var dateEnd: UIDatePicker!
+    
+    let logger = Logger()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +35,20 @@ class ExportViewController: UIViewController {
         if dateStart.date < dateEnd.date {
             let aPCDCalendar = APCDCalendar()
             if let url = aPCDCalendar.export(fromDate: dateStart.date, toDate: dateEnd.date, displayCalendars: self.viewController!.displayCalendars) {
+                let activityViewController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+                activityViewController.modalPresentationStyle = .popover
+                activityViewController.popoverPresentationController?.sourceRect = (sender as! UIButton).frame
+                activityViewController.popoverPresentationController?.sourceView = self.view
+                present(activityViewController, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    @IBAction func tapFileExport(_ sender: Any) {
+        logger.info()
+        if dateStart.date < dateEnd.date {
+            let aPCDCalendar = APCDCalendar()
+            if let url = aPCDCalendar.exportFileAllPencilKitData() {
                 let activityViewController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
                 activityViewController.modalPresentationStyle = .popover
                 activityViewController.popoverPresentationController?.sourceRect = (sender as! UIButton).frame

@@ -6,14 +6,30 @@
 //  Copyright © 2020 shi-n. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import PencilKit
 import EventKit
 import Algorithms
+import Logging
 
 class APCDCalendar {
     var eventStore = EKEventStore()
     var displayCalendars: [String] = []
+
+    let logger = Logger()
+    
+    func exportFileAllPencilKitData() -> URL? {
+        var result: URL? = nil
+        let pages = Pages.selectAll()
+        for page in pages {
+            if let data = Pages.select(year: page.year, week: page.week) {
+                logger.info("\(page.year)-\(page.week):\(data.count)")
+//                logger.info(data.base64EncodedString())
+            }
+        }
+        return result
+    }
 
     func export(fromDate: Date, toDate: Date, displayCalendars: [String]) -> URL? {
         var result: URL? = nil
@@ -389,3 +405,22 @@ class APCDCalendar {
     }
 
 }
+
+class PageData : NSObject, NSCoding {
+    var year: Int
+    var week: Int
+    var data: Data
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(year, forKey: "year")
+        coder.encode(week, forKey: "week")
+        coder.encode(data, forKey: "data")
+    }
+    
+    required init?(coder: NSCoder) {
+        <#code#>
+    }
+    
+    
+}
+

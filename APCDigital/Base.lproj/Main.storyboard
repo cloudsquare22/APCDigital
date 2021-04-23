@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad12_9rounded" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -786,10 +785,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zp7-Pq-mu6">
-                                <rect key="frame" x="265" y="296" width="71" height="42"/>
+                                <rect key="frame" x="240" y="296" width="121" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="Export"/>
+                                <state key="normal" title="PDF Export"/>
                                 <connections>
                                     <action selector="tapExport:" destination="RJv-VJ-BV5" eventType="touchUpInside" id="1Ib-Rw-ubr"/>
                                 </connections>
@@ -801,6 +800,15 @@
                                 <state key="normal" title="Pencil Data Delete"/>
                                 <connections>
                                     <action selector="tapPKDataDelete:" destination="RJv-VJ-BV5" eventType="touchUpInside" id="WuA-D5-RLc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4qN-CN-GeX">
+                                <rect key="frame" x="116" y="460" width="368" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="File Export(only All Pencil Kit Data)"/>
+                                <connections>
+                                    <action selector="tapFileExport:" destination="RJv-VJ-BV5" eventType="touchUpInside" id="K3u-Vr-Ga8"/>
                                 </connections>
                             </button>
                         </subviews>
