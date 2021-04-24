@@ -22,10 +22,37 @@ class APCDCalendar {
     func exportFileAllPencilKitData() -> URL? {
         var result: URL? = nil
         let pages = Pages.selectAll()
+        var pageDatas: [PageData] = []
         for page in pages {
             if let data = Pages.select(year: page.year, week: page.week) {
                 logger.info("\(page.year)-\(page.week):\(data.count)")
-//                logger.info(data.base64EncodedString())
+                let pageData = PageData(year: page.year, week: page.week, data: data)
+                pageDatas.append(pageData)
+            }
+            logger.info("pageDatas:\(pageDatas.count)")
+            let filename = "APCDigital_All_PencilKitData.data"
+            if let documentDirectories = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first {
+                do {
+                    let files = try FileManager.default.contentsOfDirectory(atPath: documentDirectories)
+                    print(files)
+                    for file in files {
+                        try FileManager.default.removeItem(atPath: documentDirectories + "/" + file)
+                    }
+                }
+                catch {
+                    let nserror = error as NSError
+                    fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                }
+                let documentsFileName = documentDirectories + "/" + filename
+
+                result = URL(fileURLWithPath: documentsFileName)
+                let success = NSKeyedArchiver.archivedData(withRootObject: pageDatas)
+                do {
+                    try success.write(to: result!)
+                }
+                catch {
+                    result = nil
+                }
             }
         }
         return result
@@ -411,6 +438,12 @@ class PageData : NSObject, NSCoding {
     var week: Int
     var data: Data
     
+    init(year: Int, week:Int, data: Data) {
+        self.year = year
+        self.week = week
+        self.data = data
+    }
+    
     func encode(with coder: NSCoder) {
         coder.encode(year, forKey: "year")
         coder.encode(week, forKey: "week")
@@ -418,7 +451,9 @@ class PageData : NSObject, NSCoding {
     }
     
     required init?(coder: NSCoder) {
-        <#code#>
+        self.year = coder.decodeObject(forKey: "year") as? Int ?? -1
+        self.week = coder.decodeObject(forKey: "week") as? Int ?? -1
+        self.data = coder.decodeObject(forKey: "data") as? Data ?? Data()
     }
     
     
