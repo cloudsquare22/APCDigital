@@ -61,7 +61,7 @@ class ExportViewController: UIViewController {
     
     @IBAction func tapFileImport(_ sender: Any) {
         logger.info("start")
-        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [UTType(filenameExtension: "apcd")!])
+        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [UTType.apcd])
         documentPicker.delegate = self
         self.present(documentPicker, animated: true, completion: nil)
     }
@@ -102,4 +102,10 @@ extension ExportViewController: UIDocumentPickerDelegate {
         logger.info(urls.debugDescription)
 //        self.delegate?.selectDocument(url: urls[0])
     }
+}
+
+extension UTType {
+  static var apcd: UTType {
+    UTType(exportedAs: "jp.cloudsquare.document.apcd")
+  }
 }
