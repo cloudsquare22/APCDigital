@@ -8,6 +8,7 @@
 
 import UIKit
 import Logging
+import UniformTypeIdentifiers
 
 class ExportViewController: UIViewController {
     weak var viewController: ViewController? = nil
@@ -58,6 +59,13 @@ class ExportViewController: UIViewController {
         }
     }
     
+    @IBAction func tapFileImport(_ sender: Any) {
+        logger.info("start")
+        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [UTType(filenameExtension: "apcd")!])
+        documentPicker.delegate = self
+        self.present(documentPicker, animated: true, completion: nil)
+    }
+    
     @IBAction func tapPKDataDelete(_ sender: Any) {
         if dateStart.date < dateEnd.date {
             var dateCurrent = dateStart.date
@@ -83,4 +91,15 @@ class ExportViewController: UIViewController {
     }
     */
 
+}
+
+extension ExportViewController: UIDocumentPickerDelegate {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        logger.info("start")
+        guard urls.count != 0 else {
+            return
+        }
+        logger.info(urls.debugDescription)
+//        self.delegate?.selectDocument(url: urls[0])
+    }
 }

@@ -29,33 +29,37 @@ class APCDCalendar {
                 let pageData = PageData(year: page.year, week: page.week, data: data)
                 pageDatas.append(pageData)
             }
-            logger.info("pageDatas:\(pageDatas.count)")
-            let filename = "APCDigital_All_PencilKitData.data"
-            if let documentDirectories = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first {
-                do {
-                    let files = try FileManager.default.contentsOfDirectory(atPath: documentDirectories)
-                    print(files)
-                    for file in files {
-                        try FileManager.default.removeItem(atPath: documentDirectories + "/" + file)
-                    }
+        }
+        logger.info("pageDatas:\(pageDatas.count)")
+        let filename = "APCDigital_All_PencilKitData.apcd"
+        if let documentDirectories = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first {
+            do {
+                let files = try FileManager.default.contentsOfDirectory(atPath: documentDirectories)
+                print(files)
+                for file in files {
+                    try FileManager.default.removeItem(atPath: documentDirectories + "/" + file)
                 }
-                catch {
-                    let nserror = error as NSError
-                    fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-                }
-                let documentsFileName = documentDirectories + "/" + filename
+            }
+            catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+            let documentsFileName = documentDirectories + "/" + filename
 
-                result = URL(fileURLWithPath: documentsFileName)
-                let success = NSKeyedArchiver.archivedData(withRootObject: pageDatas)
-                do {
-                    try success.write(to: result!)
-                }
-                catch {
-                    result = nil
-                }
+            result = URL(fileURLWithPath: documentsFileName)
+            let success = NSKeyedArchiver.archivedData(withRootObject: pageDatas)
+            do {
+                try success.write(to: result!)
+            }
+            catch {
+                result = nil
             }
         }
         return result
+    }
+    
+    func importFileAllPencilKitData(url: URL) {
+        
     }
 
     func export(fromDate: Date, toDate: Date, displayCalendars: [String]) -> URL? {

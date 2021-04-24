@@ -811,6 +811,15 @@
                                     <action selector="tapFileExport:" destination="RJv-VJ-BV5" eventType="touchUpInside" id="K3u-Vr-Ga8"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fmh-cZ-ljB">
+                                <rect key="frame" x="116" y="510" width="369" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="File Import(onle All Pencil Kit Data)"/>
+                                <connections>
+                                    <action selector="tapFileImport:" destination="RJv-VJ-BV5" eventType="touchUpInside" id="BgU-66-gc4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dMZ-il-aLa"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
