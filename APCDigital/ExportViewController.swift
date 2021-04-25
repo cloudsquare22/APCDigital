@@ -101,6 +101,9 @@ extension ExportViewController: UIDocumentPickerDelegate {
         }
         logger.info(urls.debugDescription)
 //        self.delegate?.selectDocument(url: urls[0])
+        let aPCDCalendar = APCDCalendar()
+        aPCDCalendar.importFileAllPencilKitData(url: urls[0])
+        self.viewController!.updateDays()        
     }
 }
 

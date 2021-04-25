@@ -49,6 +49,7 @@ class APCDCalendar {
             result = URL(fileURLWithPath: documentsFileName)
             let success = NSKeyedArchiver.archivedData(withRootObject: pageDatas)
             do {
+                logger.info("Data count:\(success.count)")
                 try success.write(to: result!)
             }
             catch {
@@ -59,7 +60,22 @@ class APCDCalendar {
     }
     
     func importFileAllPencilKitData(url: URL) {
-        
+        var pageDatas: [PageData] = []
+        do {
+            url.startAccessingSecurityScopedResource()
+            let readData = try Data(contentsOf: url)
+            logger.info("Data count:\(readData.count)")
+            pageDatas = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(readData) as! [PageData]
+            logger.info("pageDatas:\(pageDatas.count)")
+            for pageData in pageDatas {
+                logger.info("upsert:\(pageData.year)-\(pageData.week)")
+                Pages.upsert(year: pageData.year, week: pageData.week, page: pageData.data)
+            }
+        }
+        catch {
+            logger.error("読込異常")
+            logger.error(error.localizedDescription)
+        }
     }
 
     func export(fromDate: Date, toDate: Date, displayCalendars: [String]) -> URL? {
@@ -455,8 +471,8 @@ class PageData : NSObject, NSCoding {
     }
     
     required init?(coder: NSCoder) {
-        self.year = coder.decodeObject(forKey: "year") as? Int ?? -1
-        self.week = coder.decodeObject(forKey: "week") as? Int ?? -1
+        self.year = coder.decodeInteger(forKey: "year")
+        self.week = coder.decodeInteger(forKey: "week")
         self.data = coder.decodeObject(forKey: "data") as? Data ?? Data()
     }
     
