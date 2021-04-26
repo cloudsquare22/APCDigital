@@ -243,7 +243,14 @@ class CalendarView: UIView {
         if texts.isEmpty == false {
             label.isHidden = false
             for (index, schedule) in texts.indexed() {
-                label.text?.append(contentsOf: schedule)
+                var appendText = schedule
+                if texts.count > 1 {
+                    appendText = String(schedule.prefix(20))
+                    if schedule.count > 20 {
+                        appendText = appendText + "…"
+                    }
+                }
+                label.text?.append(contentsOf: appendText)
                 if index + 1 != texts.count {
                     label.text?.append(contentsOf: "\n")
                 }
