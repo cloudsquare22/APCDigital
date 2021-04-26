@@ -243,23 +243,19 @@ class CalendarView: UIView {
         if texts.isEmpty == false {
             label.isHidden = false
             for (index, schedule) in texts.indexed() {
-                var appendText = schedule
-                if texts.count > 1 {
-                    appendText = String(schedule.prefix(20))
-                    if schedule.count > 20 {
-                        appendText = appendText + "…"
-                    }
-                }
+                var appendText = texts.count > 1 ? self.abbreviationScheduleText(schedule) : schedule
+                appendText = appendText + (index + 1 != texts.count ? "\n" : "")
                 label.text?.append(contentsOf: appendText)
-                if index + 1 != texts.count {
-                    label.text?.append(contentsOf: "\n")
-                }
             }
 //            label.sizeToFit()
         }
         else {
             label.isHidden = true
         }
+    }
+    
+    func abbreviationScheduleText(_ text: String) -> String {
+        return String(text.prefix(20)) + (text.count > 20 ? "…" : "")
     }
     
     func dispOutSchedule(startH: Int = 0, startM: Int = 0, weekday: Int, event: EKEvent, base: ViewController, isAllday: Bool = false) {
