@@ -57,9 +57,14 @@ class PKDataViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         logger.info("Index:\(indexPath.row):\(self.pages[indexPath.row])")
-        let dataComponents = DateComponents(weekOfYear: self.pages[indexPath.row].week, yearForWeekOfYear: self.pages[indexPath.row].year)
-        let date = Calendar.current.date(from: dataComponents) // 日曜日の0:00
-        logger.info("Date:\(date?.description)")
+        let dataComponents = DateComponents(weekday: 6, weekOfYear: self.pages[indexPath.row].week, yearForWeekOfYear: self.pages[indexPath.row].year)
+        if let date = Calendar.current.date(from: dataComponents) {
+            logger.info("Date:\(date.description)")
+            self.viewController?.pageUpsert()
+            self.viewController?.pageMonday = date
+            self.viewController?.updateDays()
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 
 }
