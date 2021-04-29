@@ -57,7 +57,7 @@ class PKDataViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         logger.info("Index:\(indexPath.row):\(self.pages[indexPath.row])")
-        let dataComponents = DateComponents(weekday: 6, weekOfYear: self.pages[indexPath.row].week, yearForWeekOfYear: self.pages[indexPath.row].year)
+        let dataComponents = DateComponents(weekday: 2, weekOfYear: self.pages[indexPath.row].week, yearForWeekOfYear: self.pages[indexPath.row].year)
         if let date = Calendar.current.date(from: dataComponents) {
             logger.info("Date:\(date.description)")
             self.viewController?.pageUpsert()
