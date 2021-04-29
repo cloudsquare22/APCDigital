@@ -47,10 +47,10 @@ class APCDCalendar {
             let documentsFileName = documentDirectories + "/" + filename
 
             result = URL(fileURLWithPath: documentsFileName)
-            let success = NSKeyedArchiver.archivedData(withRootObject: pageDatas)
+            let data = NSKeyedArchiver.archivedData(withRootObject: pageDatas)
             do {
-                logger.info("Data count:\(success.count)")
-                try success.write(to: result!)
+                logger.info("Data count:\(data.count)")
+                try data.write(to: result!)
             }
             catch {
                 result = nil
@@ -453,7 +453,7 @@ class APCDCalendar {
 
 }
 
-class PageData : NSObject, NSCoding {
+class PageData: NSObject, NSCoding {
     var year: Int
     var week: Int
     var data: Data
@@ -475,7 +475,5 @@ class PageData : NSObject, NSCoding {
         self.week = coder.decodeInteger(forKey: "week")
         self.data = coder.decodeObject(forKey: "data") as? Data ?? Data()
     }
-    
-    
 }
 
