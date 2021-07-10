@@ -24,6 +24,7 @@ class EditScheduleViewController: UIViewController {
     @IBOutlet weak var startDatePicker: UIDatePicker!
     @IBOutlet weak var endDatePicker: UIDatePicker!
     @IBOutlet weak var calendarPicker: UIPickerView!
+    @IBOutlet weak var todoSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,7 +88,8 @@ class EditScheduleViewController: UIViewController {
             return
         }
         let event = EKEvent(eventStore: eventStore)
-        event.title = self.titleText.text
+        event.title = self.todoSwitch.isOn == true ? "□" : ""
+        event.title = event.title + self.titleText.text!
         event.location = self.locationText.text
         event.startDate = self.startDatePicker.date
         event.endDate = self.endDatePicker.date
