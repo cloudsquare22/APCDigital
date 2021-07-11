@@ -259,15 +259,24 @@ class ViewController: UIViewController {
     @objc func tapPKCanvasView(sender: UITapGestureRecognizer) {
         logger.info()
         let point = sender.location(in: self.pKCanvasView)
+        if (1170.0 < point.x) && (point.x < 1170.0 + 145.0) && (31.0 < point.y) && (point.y < 31.0 + 87.0 + 21.0) {
+            logger.info("Year Monthly calendar")
+            if let yearCalendarViewController = storyBoard.instantiateViewController(withIdentifier: "YearCalendarView") as? YearCalendarViewController {
+                yearCalendarViewController.viewController = self
+                self.setPopoverPresentationController(size: CGSize(width: 475, height: 460),
+                                                      rect: CGRect(x: 1170.0 + 145.0 / 2, y: 31.0 + 87.0, width: 1, height: 1),
+                                                      controller: yearCalendarViewController)
+                present(yearCalendarViewController, animated: false, completion: nil)
+            }
+        }
         if (1170.0 < point.x) && (point.x < 1170.0 + 145.0) && (168.0 < point.y) && (point.y < 168.0 + (105.0 * 2)) {
             logger.info("Touch Monthly calendar")
-            let selectJumpDayViewController = storyBoard.instantiateViewController(withIdentifier: "SelectJumpDayView") as? SelectJumpDayViewController
-            if let controller = selectJumpDayViewController {
-                controller.viewController = self
+            if let selectJumpDayViewController = storyBoard.instantiateViewController(withIdentifier: "SelectJumpDayView") as? SelectJumpDayViewController {
+                selectJumpDayViewController.viewController = self
                 self.setPopoverPresentationController(size: CGSize(width: 300, height: 300),
                                                       rect: CGRect(x: 1170.0, y: 168.0 + 105.0, width: 1, height: 1),
-                                                      controller: controller)
-                present(controller, animated: false, completion: nil)
+                                                      controller: selectJumpDayViewController)
+                present(selectJumpDayViewController, animated: false, completion: nil)
             }
 
         }

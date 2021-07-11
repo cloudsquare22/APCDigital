@@ -13,6 +13,7 @@
 		8D13775024C42CE900A6938C /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D13774F24C42CE900A6938C /* AboutViewController.swift */; };
 		8D25655C24EFE61D00359BE3 /* EditScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D25655B24EFE61D00359BE3 /* EditScheduleViewController.swift */; };
 		8D3B40E4259A9F0200C08035 /* EventFilterViewAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3B40E3259A9F0200C08035 /* EventFilterViewAddCell.swift */; };
+		8D3E7203269B01E9007AFFD7 /* YearCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E7202269B01E9007AFFD7 /* YearCalendarViewController.swift */; };
 		8D3F112624DE961E00D40FA3 /* APCDCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3F112524DE961E00D40FA3 /* APCDCalendar.swift */; };
 		8D3F112824E1199700D40FA3 /* ExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3F112724E1199700D40FA3 /* ExportViewController.swift */; };
 		8D3F112A24E1345800D40FA3 /* PKDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3F112924E1345800D40FA3 /* PKDataViewController.swift */; };
@@ -52,6 +53,7 @@
 		8D13774F24C42CE900A6938C /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		8D25655B24EFE61D00359BE3 /* EditScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleViewController.swift; sourceTree = "<group>"; };
 		8D3B40E3259A9F0200C08035 /* EventFilterViewAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFilterViewAddCell.swift; sourceTree = "<group>"; };
+		8D3E7202269B01E9007AFFD7 /* YearCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearCalendarViewController.swift; sourceTree = "<group>"; };
 		8D3F112524DE961E00D40FA3 /* APCDCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APCDCalendar.swift; sourceTree = "<group>"; };
 		8D3F112724E1199700D40FA3 /* ExportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportViewController.swift; sourceTree = "<group>"; };
 		8D3F112924E1345800D40FA3 /* PKDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKDataViewController.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				8DAF7A9A259A011400BDF2C8 /* EventFilterViewCell.swift */,
 				8D3B40E3259A9F0200C08035 /* EventFilterViewAddCell.swift */,
 				8DAF7A9E259C9EBE00BDF2C8 /* EventFilter.swift */,
+				8D3E7202269B01E9007AFFD7 /* YearCalendarViewController.swift */,
 			);
 			path = APCDigital;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				8D0E63F724B1A9CF00D47A47 /* ScheduleView.swift in Sources */,
 				8D8BF03725557F730003F82F /* Enum.swift in Sources */,
 				8D3F112824E1199700D40FA3 /* ExportViewController.swift in Sources */,
+				8D3E7203269B01E9007AFFD7 /* YearCalendarViewController.swift in Sources */,
 				8DECD8AF24BDD2EF005062B1 /* CalendarSelectViewCell.swift in Sources */,
 				8D9EEF7324AFF6F700E855C4 /* Pages.swift in Sources */,
 				8D9EEF5C24AE8D0000E855C4 /* AppDelegate.swift in Sources */,
