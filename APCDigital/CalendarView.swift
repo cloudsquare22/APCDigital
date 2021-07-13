@@ -255,13 +255,42 @@ class CalendarView: UIView {
     }
     
     func abbreviationScheduleText(_ text: String) -> String {
-        return String(text.prefix(20)) + (text.count > 20 ? "…" : "")
+        var count = 0
+        var index = 0
+        var disp = ""
+        for c in text {
+            if String(c).data(using: .ascii, allowLossyConversion: false) != nil {
+                count = count + 1
+                print("\(c):1バイト文字")
+            }
+            else {
+                count = count + 2
+                print("\(c):2バイト文字")
+            }
+            disp.append(c)
+            index = index + 1
+            if count >= 24 {
+                break
+            }
+        }
+        if index < text.count {
+            disp = disp + "…"
+        }
+        
+//        var result = ""
+//        if text.data(using: .ascii, allowLossyConversion: false) != nil {
+//            result = String(text.prefix(24)) + (text.count > 24 ? "…" : "")
+//        }
+//        else {
+//            result = String(text.prefix(13)) + (text.count > 13 ? "…" : "")
+//        }
+        return disp
     }
     
     func dispOutSchedule(startH: Int = 0, startM: Int = 0, weekday: Int, event: EKEvent, base: ViewController, isAllday: Bool = false) {
         var outSchedule = ""
         if isAllday == false {
-            outSchedule = String(format: "%d:%02d〜", startH, startM) + event.title
+            outSchedule = String(format: "%d:%02d ", startH, startM) + event.title
         }
         else {
             outSchedule = event.title
