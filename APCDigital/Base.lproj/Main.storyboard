@@ -1155,11 +1155,11 @@
             <objects>
                 <viewController storyboardIdentifier="YearCalendarView" id="DK2-Oi-co7" customClass="YearCalendarViewController" customModule="Action_Planner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zSt-Lg-yvg">
-                        <rect key="frame" x="0.0" y="0.0" width="475" height="460"/>
+                        <rect key="frame" x="0.0" y="0.0" width="475" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8aj-Yw-IuL">
-                                <rect key="frame" x="20" y="20" width="435" height="420"/>
+                                <rect key="frame" x="20" y="35" width="435" height="420"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
@@ -1167,7 +1167,7 @@
                         <viewLayoutGuide key="safeArea" id="FqO-rn-rf5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <size key="freeformSize" width="475" height="460"/>
+                    <size key="freeformSize" width="475" height="480"/>
                     <connections>
                         <outlet property="baseView" destination="8aj-Yw-IuL" id="s7b-n1-0Dt"/>
                     </connections>
