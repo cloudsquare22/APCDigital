@@ -218,7 +218,8 @@ class PencilCaseView: UIView {
         case .blue:
             result = .blue
         case .green:
-            result = .green
+//            result = .green
+            result = UIColor(named: "Basic Color Green")!
         case .orange:
             result = .orange
         case .purple:
