@@ -44,6 +44,7 @@
 		8DDF9848252F3DC5008152F9 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 8DDF9847252F3DC5008152F9 /* Algorithms */; };
 		8DECD8AD24BDD099005062B1 /* CalendarSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DECD8AC24BDD099005062B1 /* CalendarSelectViewController.swift */; };
 		8DECD8AF24BDD2EF005062B1 /* CalendarSelectViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DECD8AE24BDD2EF005062B1 /* CalendarSelectViewCell.swift */; };
+		8DFEF13B26A6FF1F00AEBB55 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFEF13A26A6FF1F00AEBB55 /* Device.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +86,7 @@
 		8DDC86A024F70EAD00B850E5 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8DECD8AC24BDD099005062B1 /* CalendarSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSelectViewController.swift; sourceTree = "<group>"; };
 		8DECD8AE24BDD2EF005062B1 /* CalendarSelectViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSelectViewCell.swift; sourceTree = "<group>"; };
+		8DFEF13A26A6FF1F00AEBB55 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 				8D3B40E3259A9F0200C08035 /* EventFilterViewAddCell.swift */,
 				8DAF7A9E259C9EBE00BDF2C8 /* EventFilter.swift */,
 				8D3E7202269B01E9007AFFD7 /* YearCalendarViewController.swift */,
+				8DFEF13A26A6FF1F00AEBB55 /* Device.swift */,
 			);
 			path = APCDigital;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				8D0E63ED24B16F6500D47A47 /* CalendarView.swift in Sources */,
 				8D3F112A24E1345800D40FA3 /* PKDataViewController.swift in Sources */,
 				8DDC869924F24C8C00B850E5 /* EditEventsViewCell.swift in Sources */,
+				8DFEF13B26A6FF1F00AEBB55 /* Device.swift in Sources */,
 				8D0E63F724B1A9CF00D47A47 /* ScheduleView.swift in Sources */,
 				8D8BF03725557F730003F82F /* Enum.swift in Sources */,
 				8D3F112824E1199700D40FA3 /* ExportViewController.swift in Sources */,
