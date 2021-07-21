@@ -12,5 +12,13 @@ import UIKit
 class Device {
     static func getDevie() {
         print("Device:\(UIScreen.main.bounds.size)")
+        switch UIScreen.main.bounds.size.width {
+        case 1366.0:
+            print("iPad Pro 12.9inch")
+        case 1024.0:
+            print("iPad mini")
+        default:
+            print("???")
+        }
     }
 }
