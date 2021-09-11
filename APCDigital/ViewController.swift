@@ -381,7 +381,7 @@ class ViewController: UIViewController {
     func pageUpsert() {
         logger.info()
         let saveWeek = Calendar.current.dateComponents(in: .current, from: pageMonday)
-        logger.info("year: \(saveWeek.year!) week:\(saveWeek.weekOfYear!)")
+        logger.info("year: \(saveWeek.yearForWeekOfYear!) week:\(saveWeek.weekOfYear!)")
         Pages.upsert(year: saveWeek.year!, week: saveWeek.weekOfYear!, page: self.pKCanvasView.drawing.dataRepresentation())
     }
     
@@ -433,7 +433,7 @@ class ViewController: UIViewController {
     func dispPKDrawing() {
         logger.info()
         let monday = self.weekDaysDateComponents[WeekDay1stMonday.monday.rawValue]
-        if let page = Pages.select(year: monday.year!, week: monday.weekOfYear!) {
+        if let page = Pages.select(year: monday.yearForWeekOfYear!, week: monday.weekOfYear!) {
             logger.info("select page")
             do {
                 logger.info("Page count: \(page.count)")
