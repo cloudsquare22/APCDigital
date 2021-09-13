@@ -262,7 +262,7 @@ class CalendarView: UIView {
             count = count + (String(c).data(using: .ascii, allowLossyConversion: false) != nil ? 1 : 2)
             result.append(c)
             index = index + 1
-            if count >= 22 {
+            if count >= 21 {
                 break
             }
         }
