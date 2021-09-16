@@ -47,8 +47,8 @@ class APCDCalendar {
             let documentsFileName = documentDirectories + "/" + filename
 
             result = URL(fileURLWithPath: documentsFileName)
-            let data = NSKeyedArchiver.archivedData(withRootObject: pageDatas)
             do {
+                let data = try NSKeyedArchiver.archivedData(withRootObject: pageDatas, requiringSecureCoding: true)
                 logger.info("Data count:\(data.count)")
                 try data.write(to: result!)
             }
@@ -62,7 +62,7 @@ class APCDCalendar {
     func importFileAllPencilKitData(url: URL) {
         var pageDatas: [PageData] = []
         do {
-            url.startAccessingSecurityScopedResource()
+            let _ = url.startAccessingSecurityScopedResource()
             let readData = try Data(contentsOf: url)
             logger.info("Data count:\(readData.count)")
             pageDatas = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(readData) as! [PageData]
