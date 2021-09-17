@@ -438,17 +438,19 @@ class APCDCalendar {
     
     func createPKCanvasView(view: UIView, dateComponentsWeek: [DateComponents]) {
         if let page = Pages.select(year: dateComponentsWeek[0].year!, week: dateComponentsWeek[0].weekOfYear!) {
-            do {
-                print(page.count)
-                let drawaing = try PKDrawing(data: page).image(from: CGRect(x: 0.0, y: 0.0, width: 1366.0, height: 1024.0), scale: 3.0)
-                let image = UIImageView(image: drawaing)
-                image.frame = CGRect(x: 0.0, y: 0.0, width: 1366.0, height: 1024.0)
-                image.contentMode = .scaleAspectFit
-                view.addSubview(image)
-            }
-            catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            autoreleasepool {
+                do {
+                    print(page.count)
+                    let drawaing = try PKDrawing(data: page).image(from: CGRect(x: 0.0, y: 0.0, width: 1366.0, height: 1024.0), scale: 3.0)
+                    let image = UIImageView(image: drawaing)
+                    image.frame = CGRect(x: 0.0, y: 0.0, width: 1366.0, height: 1024.0)
+                    image.contentMode = .scaleAspectFit
+                    view.addSubview(image)
+                }
+                catch {
+                    let nserror = error as NSError
+                    fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                }
             }
         }
         else {
