@@ -89,9 +89,15 @@ class APCDCalendar {
 
         var dateCurrent = fromDate
         while dateCurrent < toDate {
-            let view = createWeeklyCalendar(date: dateCurrent)
-            UIGraphicsBeginPDFPage()
-            view.layer.render(in: pdfContext)
+            autoreleasepool {
+                let view = createWeeklyCalendar(date: dateCurrent)
+                UIGraphicsBeginPDFPage()
+                view.layer.render(in: pdfContext)
+//                for subview in view.subviews {
+//                    subview.removeFromSuperview()
+//                }
+//                view.removeFromSuperview()
+            }
             dateCurrent = Calendar.current.nextDate(after: dateCurrent, matching: ViewController.matching, matchingPolicy: .nextTime, direction: .forward)!
         }
         
