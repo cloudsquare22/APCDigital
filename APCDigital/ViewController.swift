@@ -14,7 +14,7 @@ import Logging
 class ViewController: UIViewController {
 
     @IBOutlet weak var calendarView: CalendarView!
-    @IBOutlet weak var pKCanvasView: PKCanvasView!
+    @IBOutlet weak var pKCanvasView: RapPKCanvasView!
     @IBOutlet weak var month: UILabel!
     @IBOutlet weak var day1: UILabel!
     @IBOutlet weak var day2: UILabel!
@@ -494,7 +494,7 @@ class ViewController: UIViewController {
     
     func dispPencilCase() {
         logger.info()
-        self.view.addSubview(PencilCaseView(frame: CGRect(x: 570, y: 16, width: 610, height: 35), pKCanvasView: self.pKCanvasView))
+        self.view.addSubview(PencilCaseView(frame: CGRect(x: 540, y: 16, width: 640, height: 35), pKCanvasView: self.pKCanvasView))
     }
     
     @IBAction func tapCalendarSelect(_ sender: Any) {

@@ -11,6 +11,7 @@
 		8D0E63F524B1A9A000D47A47 /* ScheduleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D0E63F424B1A9A000D47A47 /* ScheduleView.xib */; };
 		8D0E63F724B1A9CF00D47A47 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E63F624B1A9CF00D47A47 /* ScheduleView.swift */; };
 		8D13775024C42CE900A6938C /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D13774F24C42CE900A6938C /* AboutViewController.swift */; };
+		8D1B669126F5FDB200D5A48E /* RapPKCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1B669026F5FDB200D5A48E /* RapPKCanvasView.swift */; };
 		8D25655C24EFE61D00359BE3 /* EditScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D25655B24EFE61D00359BE3 /* EditScheduleViewController.swift */; };
 		8D3B40E4259A9F0200C08035 /* EventFilterViewAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3B40E3259A9F0200C08035 /* EventFilterViewAddCell.swift */; };
 		8D3E7203269B01E9007AFFD7 /* YearCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3E7202269B01E9007AFFD7 /* YearCalendarViewController.swift */; };
@@ -52,6 +53,7 @@
 		8D0E63F424B1A9A000D47A47 /* ScheduleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScheduleView.xib; sourceTree = "<group>"; };
 		8D0E63F624B1A9CF00D47A47 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		8D13774F24C42CE900A6938C /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		8D1B669026F5FDB200D5A48E /* RapPKCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapPKCanvasView.swift; sourceTree = "<group>"; };
 		8D25655B24EFE61D00359BE3 /* EditScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleViewController.swift; sourceTree = "<group>"; };
 		8D3B40E3259A9F0200C08035 /* EventFilterViewAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFilterViewAddCell.swift; sourceTree = "<group>"; };
 		8D3E7202269B01E9007AFFD7 /* YearCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearCalendarViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				8DAF7A9E259C9EBE00BDF2C8 /* EventFilter.swift */,
 				8D3E7202269B01E9007AFFD7 /* YearCalendarViewController.swift */,
 				8DFEF13A26A6FF1F00AEBB55 /* Device.swift */,
+				8D1B669026F5FDB200D5A48E /* RapPKCanvasView.swift */,
 			);
 			path = APCDigital;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				8D3F112A24E1345800D40FA3 /* PKDataViewController.swift in Sources */,
 				8DDC869924F24C8C00B850E5 /* EditEventsViewCell.swift in Sources */,
 				8DFEF13B26A6FF1F00AEBB55 /* Device.swift in Sources */,
+				8D1B669126F5FDB200D5A48E /* RapPKCanvasView.swift in Sources */,
 				8D0E63F724B1A9CF00D47A47 /* ScheduleView.swift in Sources */,
 				8D8BF03725557F730003F82F /* Enum.swift in Sources */,
 				8D3F112824E1199700D40FA3 /* ExportViewController.swift in Sources */,

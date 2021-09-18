@@ -10,7 +10,7 @@ import UIKit
 import PencilKit
 
 class PencilCaseView: UIView {
-    var pKCanvasView: PKCanvasView? = nil
+    var pKCanvasView: RapPKCanvasView? = nil
 
     let pencilInteraction = UIPencilInteraction()
     
@@ -30,6 +30,7 @@ class PencilCaseView: UIView {
     var onPencil = false
     var onMarker = false
     var onErase = false
+    var onTaskbox = false
 
     @IBOutlet weak var inkBlack: UIButton!
     @IBOutlet weak var inkRed: UIButton!
@@ -44,6 +45,7 @@ class PencilCaseView: UIView {
     @IBOutlet weak var marker: UIButton!
     @IBOutlet weak var ruler: UIButton!
     @IBOutlet weak var undo: UIButton!
+    @IBOutlet weak var taskbox: UIButton!
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -55,7 +57,7 @@ class PencilCaseView: UIView {
         loadNib()
     }
     
-    convenience init(frame: CGRect, pKCanvasView: PKCanvasView) {
+    convenience init(frame: CGRect, pKCanvasView: RapPKCanvasView) {
         self.init(frame: frame)
         self.pKCanvasView = pKCanvasView
         self.pKCanvasView!.tool = PKInkingTool(.pen, color: .black, width: PKInkingTool.InkType.pen.defaultWidth)
@@ -189,6 +191,16 @@ class PencilCaseView: UIView {
         }
     }
 
+    @IBAction func tapTaskbox(_ sender: Any) {
+        self.onTaskbox.toggle()
+        let color: UIColor = self.onTaskbox ? .blue : .black
+        self.taskbox.tintColor = color
+        if let pkcanvasview = self.pKCanvasView {
+            pkcanvasview.onTaskbox = self.onTaskbox
+            pkcanvasview.taskBoxColor = self.selectInkToUIColor()
+        }
+    }
+    
     func updateInk(ink: Ink? = nil) {
         if let ink = ink {
             self.saveInk = self.selectInk
@@ -205,6 +217,9 @@ class PencilCaseView: UIView {
         }
         else {
             self.pKCanvasView!.tool = PKInkingTool(.pen, color: selectInkToUIColor(), width: PKInkingTool.InkType.pen.defaultWidth)
+        }
+        if self.onTaskbox == true {
+            self.pKCanvasView!.taskBoxColor = selectInkToUIColor()
         }
     }
     
