@@ -56,6 +56,7 @@ class RapPKCanvasView: PKCanvasView {
                 startStrokePoint = strokePoint
             }
         }
+        print("strokes:\(strokes.count)")
         self.drawing.strokes.append(contentsOf: strokes)
         
         self.undoManager!.registerUndo(withTarget: self, selector: #selector(undoStrocke), object: self.drawing.strokes)
