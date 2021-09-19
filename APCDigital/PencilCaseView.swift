@@ -194,7 +194,9 @@ class PencilCaseView: UIView {
     @IBAction func tapTaskbox(_ sender: Any) {
         self.onTaskbox.toggle()
         let color: UIColor = self.onTaskbox ? .blue : .black
+        let colorBG: UIColor = self.onTaskbox ? .systemGray5 : .clear
         self.taskbox.tintColor = color
+        self.taskbox.backgroundColor = colorBG
         if let pkcanvasview = self.pKCanvasView {
             pkcanvasview.onTaskbox = self.onTaskbox
             pkcanvasview.taskBoxColor = self.selectInkToUIColor()

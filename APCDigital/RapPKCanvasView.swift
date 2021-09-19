@@ -57,5 +57,14 @@ class RapPKCanvasView: PKCanvasView {
             }
         }
         self.drawing.strokes.append(contentsOf: strokes)
+        
+        self.undoManager!.registerUndo(withTarget: self, selector: #selector(undoStrocke), object: self.drawing.strokes)
     }
+    
+    @objc func undoStrocke() {
+        for _ in 1...5 {
+            self.drawing.strokes.removeLast()
+        }
+    }
+    
 }
