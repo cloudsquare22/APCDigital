@@ -242,8 +242,9 @@ class CalendarView: UIView {
         label.text = ""
         if texts.isEmpty == false {
             label.isHidden = false
+            let limit: Int = texts.count == 2 ? 42 : 21
             for (index, schedule) in texts.indexed() {
-                var appendText = texts.count > 1 ? self.abbreviationScheduleText(schedule) : schedule
+                var appendText = texts.count > 1 ? self.abbreviationScheduleText(schedule, limit) : schedule
                 appendText = appendText + (index + 1 != texts.count ? "\n" : "")
                 label.text?.append(contentsOf: appendText)
             }
@@ -257,7 +258,7 @@ class CalendarView: UIView {
         }
     }
     
-    func abbreviationScheduleText(_ text: String) -> String {
+    func abbreviationScheduleText(_ text: String, _ limit: Int = 21) -> String {
         var count = 0
         var index = 0
         var result = ""
@@ -265,7 +266,7 @@ class CalendarView: UIView {
             count = count + (String(c).data(using: .ascii, allowLossyConversion: false) != nil ? 1 : 2)
             result.append(c)
             index = index + 1
-            if count >= 21 {
+            if count >= limit {
                 break
             }
         }
