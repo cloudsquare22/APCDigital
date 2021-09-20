@@ -260,18 +260,20 @@ class CalendarView: UIView {
     
     func abbreviationScheduleText(_ text: String, _ limit: Int = 21) -> String {
         var count = 0
-        var index = 0
         var result = ""
+        
+        let testLabel: UILabel = UILabel()
+        testLabel.font = UIFont.systemFont(ofSize: 10.0, weight: .medium)
         for c in text {
             count = count + (String(c).data(using: .ascii, allowLossyConversion: false) != nil ? 1 : 2)
             result.append(c)
-            index = index + 1
-            if count >= limit {
+
+            testLabel.text = result
+            testLabel.sizeToFit()
+            if testLabel.frame.size.width > 135 {
+                result.removeLast()
                 break
             }
-        }
-        if index < text.count {
-            result = result + "…"
         }
         return result
     }
