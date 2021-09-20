@@ -242,9 +242,9 @@ class CalendarView: UIView {
         label.text = ""
         if texts.isEmpty == false {
             label.isHidden = false
-            let limit: Int = texts.count == 2 ? 42 : 21
+            let lineMax: Int = texts.count == 2 || texts.count == 3 ? 2 : 1
             for (index, schedule) in texts.indexed() {
-                var appendText = texts.count > 1 ? self.abbreviationScheduleText(schedule, limit) : schedule
+                var appendText = texts.count > 1 ? self.abbreviationScheduleText(schedule, lineMax) : schedule
                 appendText = appendText + (index + 1 != texts.count ? "\n" : "")
                 label.text?.append(contentsOf: appendText)
             }
@@ -258,22 +258,46 @@ class CalendarView: UIView {
         }
     }
     
-    func abbreviationScheduleText(_ text: String, _ limit: Int = 21) -> String {
-        var count = 0
+    func abbreviationScheduleText(_ text: String, _ lineMax: Int = 1) -> String {
         var result = ""
-        
+        var lineCount = 1
+        var lineSting = ""
+        var limit = false
+        var widthSum: CGFloat = 0.0
+        let widthMax: CGFloat = 135.0
+
         let testLabel: UILabel = UILabel()
         testLabel.font = UIFont.systemFont(ofSize: 10.0, weight: .medium)
+        
+        print(text)
         for c in text {
-            count = count + (String(c).data(using: .ascii, allowLossyConversion: false) != nil ? 1 : 2)
-            result.append(c)
+            lineSting.append(c)
 
-            testLabel.text = result
+            testLabel.text = String(c)
             testLabel.sizeToFit()
-            if testLabel.frame.size.width > 135 {
-                result.removeLast()
-                break
+            widthSum = widthSum + testLabel.frame.size.width
+            print(testLabel.frame.size.width)
+            
+            if widthSum > widthMax {
+                print("-----")
+                print(widthSum)
+                print("#####")
+                widthSum = testLabel.frame.size.width
+                lineSting.removeLast()
+                result.append(lineSting)
+                if lineCount < lineMax {
+                    lineCount = lineCount + 1
+                    lineSting = ""
+                    lineSting.append(c)
+                }
+                else {
+                    limit = true
+                    break
+                }
             }
+        }
+        if limit == false, lineCount <= lineMax {
+            result.append(lineSting)
         }
         return result
     }
