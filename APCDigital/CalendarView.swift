@@ -247,7 +247,10 @@ class CalendarView: UIView {
                 appendText = appendText + (index + 1 != texts.count ? "\n" : "")
                 label.text?.append(contentsOf: appendText)
             }
-//            label.sizeToFit()
+            var fixedFrame = label.frame
+            label.sizeToFit()
+            fixedFrame.size.height = label.frame.size.height
+            label.frame = fixedFrame
         }
         else {
             label.isHidden = true
