@@ -522,7 +522,8 @@ class ViewController: UIViewController {
     
     @IBAction func tapCalendar(_ sender: Any) {
         logger.info()
-        if let url = URL(string: "calshow:") {
+        let interval = self.pageMonday.timeIntervalSinceReferenceDate
+        if let url = URL(string: "calshow:\(interval)") {
             UIApplication.shared.open(url)
         }
     }
