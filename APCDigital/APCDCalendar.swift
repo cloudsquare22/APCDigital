@@ -53,6 +53,7 @@ class APCDCalendar {
                 try data.write(to: result!)
             }
             catch {
+                logger.error(error.localizedDescription)
                 result = nil
             }
         }
