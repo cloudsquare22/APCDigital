@@ -243,11 +243,25 @@ class CalendarView: UIView {
         if texts.isEmpty == false {
             label.isHidden = false
             let lineMax: Int = texts.count == 2 || texts.count == 3 ? 2 : 1
+            var htmlText = ""
             for (index, schedule) in texts.indexed() {
                 var appendText = texts.count > 1 ? self.abbreviationScheduleText(schedule, lineMax) : schedule
-                appendText = appendText + (index + 1 != texts.count ? "\n" : "")
+                appendText = appendText + (index + 1 != texts.count ? "<br>" : "")
+                htmlText.append(contentsOf: appendText)
                 label.text?.append(contentsOf: appendText)
             }
+            
+            guard let data = htmlText.data(using: .utf8) else {
+                return
+            }
+            do {
+                let option: [NSAttributedString.DocumentReadingOptionKey: Any] = [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue]
+                let attrString = try NSMutableAttributedString(data: data, options: option, documentAttributes: nil)
+//                label.attributedText = attrString
+            } catch {
+                print(error.localizedDescription)
+            }
+            
             var fixedFrame = label.frame
             label.sizeToFit()
             fixedFrame.size.height = label.frame.size.height
@@ -305,6 +319,7 @@ class CalendarView: UIView {
     func dispOutSchedule(startH: Int = 0, startM: Int = 0, weekday: Int, event: EKEvent, base: ViewController, isAllday: Bool = false) {
         var outSchedule = ""
         if isAllday == false {
+//            outSchedule = String(format: "<font color=\"blue\">%d:%02d</font> ", startH, startM) + event.title
             outSchedule = String(format: "%d:%02d ", startH, startM) + event.title
         }
         else {
