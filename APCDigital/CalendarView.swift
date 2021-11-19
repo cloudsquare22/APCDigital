@@ -247,8 +247,19 @@ class CalendarView: UIView {
             for (index, schedule) in texts.indexed() {
                 var appendText = texts.count > 1 ? self.abbreviationScheduleText(schedule, lineMax) : schedule
                 appendText = appendText + (index + 1 != texts.count ? "<br>" : "")
+                do {
+                    let regex = try NSRegularExpression(pattern: "^([0-9]?[0-9]:[0-9][0-9])( .*)")
+                    appendText = regex.stringByReplacingMatches(in: appendText,
+                                                                options: [],
+                                                                range: NSRange(location: 0, length: appendText.count),
+                                                                withTemplate: "<font color=\"#008F00\">$1</font>$2")
+                    print("regex.stringByReplacingMatches:\(appendText)")
+                }
+                catch {
+                     print(error)
+                }
                 htmlText.append(contentsOf: appendText)
-                label.text?.append(contentsOf: appendText)
+//                label.text?.append(contentsOf: appendText)
             }
             
             guard let data = htmlText.data(using: .utf8) else {
@@ -257,7 +268,9 @@ class CalendarView: UIView {
             do {
                 let option: [NSAttributedString.DocumentReadingOptionKey: Any] = [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue]
                 let attrString = try NSMutableAttributedString(data: data, options: option, documentAttributes: nil)
-//                label.attributedText = attrString
+                label.attributedText = attrString
+                label.font = UIFont.systemFont(ofSize: 9, weight: .medium)
+                label.lineBreakMode = .byCharWrapping
             } catch {
                 print(error.localizedDescription)
             }
@@ -281,7 +294,7 @@ class CalendarView: UIView {
         let widthMax: CGFloat = 135.0
 
         let testLabel: UILabel = UILabel()
-        testLabel.font = UIFont.systemFont(ofSize: 10.0, weight: .medium)
+        testLabel.font = UIFont.systemFont(ofSize: 9.0, weight: .medium)
         
         print(text)
         for c in text {
@@ -319,7 +332,7 @@ class CalendarView: UIView {
     func dispOutSchedule(startH: Int = 0, startM: Int = 0, weekday: Int, event: EKEvent, base: ViewController, isAllday: Bool = false) {
         var outSchedule = ""
         if isAllday == false {
-//            outSchedule = String(format: "<font color=\"blue\">%d:%02d</font> ", startH, startM) + event.title
+//            outSchedule = String(format: "<font color=\"#008F00\">%d:%02d</font> ", startH, startM) + event.title
             outSchedule = String(format: "%d:%02d ", startH, startM) + event.title
         }
         else {
