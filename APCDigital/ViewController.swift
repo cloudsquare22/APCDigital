@@ -82,12 +82,7 @@ class ViewController: UIViewController {
         checkAuthorization()
         
         menuView.isHidden = true
-        if #available(iOS 14.0, *) {
-            pKCanvasView.drawingPolicy = .pencilOnly
-        }
-        else {
-            pKCanvasView.allowsFingerDrawing = false
-        }
+        pKCanvasView.allowsFingerDrawing = false
         pKCanvasView.isOpaque = false
         pKCanvasView.backgroundColor = .clear
         pKCanvasView.overrideUserInterfaceStyle = .light
@@ -134,42 +129,13 @@ class ViewController: UIViewController {
         print(PKInkingTool.InkType.marker.validWidthRange)
         print(PKInkingTool.InkType.pen.defaultWidth)
         print(PKInkingTool.InkType.pen.validWidthRange)
-
-//        if #available(iOS 14.0, *) {
-//            toolPicker = PKToolPicker()
-//            toolPicker.showsDrawingPolicyControls = false
-//        }
-//        else {
-//            let window = parent?.view.window
-//            toolPicker = PKToolPicker.shared(for: window!)
-//        }
-//        toolPicker.addObserver(pKCanvasView)
-//        toolPicker.addObserver(self)
-//        toolPicker.setVisible(true, forFirstResponder: pKCanvasView)
-//        toolPicker.overrideUserInterfaceStyle = .light
-//        pKCanvasView.becomeFirstResponder()
-//        logger.info("PKToolPicker Set")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         logger.info()
 
-//        if #available(iOS 14.0, *) {
-//            toolPicker = PKToolPicker()
-//            toolPicker.showsDrawingPolicyControls = false
-//        }
-//        else {
-//            let window = parent?.view.window
-//            toolPicker = PKToolPicker.shared(for: window!)
-//        }
-//        toolPicker.addObserver(pKCanvasView)
-//        toolPicker.addObserver(self)
-//        toolPicker.setVisible(true, forFirstResponder: pKCanvasView)
-//        toolPicker.overrideUserInterfaceStyle = .light
         pKCanvasView.becomeFirstResponder()
-//        logger.info("PKToolPicker Set")
-        
         updateDays()
     }
     
