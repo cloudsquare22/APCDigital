@@ -348,7 +348,7 @@ class ViewController: UIViewController {
         logger.info()
         let saveWeek = Calendar.current.dateComponents(in: .current, from: pageMonday)
         logger.info("year: \(saveWeek.yearForWeekOfYear!) week:\(saveWeek.weekOfYear!)")
-        Pages.upsert(year: saveWeek.year!, week: saveWeek.weekOfYear!, page: self.pKCanvasView.drawing.dataRepresentation())
+        Pages.upsert(year: saveWeek.yearForWeekOfYear!, week: saveWeek.weekOfYear!, page: self.pKCanvasView.drawing.dataRepresentation())
     }
     
     func checkAuthorization() {

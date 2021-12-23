@@ -157,6 +157,8 @@ class CalendarView: UIView {
                             }
                             else {
                                 event.title = event.title + String(format: "\n〜%d:%02d", endH, endM)
+                                endDateComponents.year = startDateComponents.year
+                                endDateComponents.month = startDateComponents.month
                                 endDateComponents.day = startDateComponents.day
                                 endDateComponents.hour = 23
                                 endDateComponents.minute = 30
