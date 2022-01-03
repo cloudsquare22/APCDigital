@@ -15,14 +15,6 @@ import Algorithms
 class CalendarView: UIView {
     let logger = Logger()
 
-    var day1outPeriod: [String] = []
-    var day2outPeriod: [String] = []
-    var day3outPeriod: [String] = []
-    var day4outPeriod: [String] = []
-    var day5outPeriod: [String] = []
-    var day6outPeriod: [String] = []
-    var day7outPeriod: [String] = []
-
     func clearSchedule() {
         logger.info()
         for subview in self.subviews {
@@ -33,15 +25,9 @@ class CalendarView: UIView {
     func dispSchedule(eventArray: [EKEvent], base: ViewController) {
         logger.info("eventArray Count: \(eventArray.count)")
         logger.debug("eventArray: \(eventArray) base: \(base)")
+        var dayOutPeriod: [[String]] = .init(repeating: [], count: 8)
         let movementSymmbolList: [String] = APCDCalendarUtil.instance.makeMovementSymmbolList()
         let eventFilters: [(calendar: String, filterString: String)] = EventFilter.selectAll()
-        self.day1outPeriod = []
-        self.day2outPeriod = []
-        self.day3outPeriod = []
-        self.day4outPeriod = []
-        self.day5outPeriod = []
-        self.day6outPeriod = []
-        self.day7outPeriod = []
         base.day1Holiday.isHidden = true
         base.day2Holiday.isHidden = true
         base.day3Holiday.isHidden = true
@@ -121,7 +107,8 @@ class CalendarView: UIView {
                     if let startH = startDateComponents.hour, let startM = startDateComponents.minute,
                         let endH = endDateComponents.hour, let endM = endDateComponents.minute {
                         if startH < 6 && (endH < 6 || (endH <= 6 && endM == 0)) {
-                            self.dispOutSchedule(startH: startH, startM: startM, weekday: startDateComponents.weekday!, event: event, base: base)
+                            let outSchedule = String(format: "%d:%02d ", startH, startM) + event.title
+                            dayOutPeriod[startDateComponents.weekday!].append(outSchedule)
                             continue
                         }
                         else if startH < 6 , 6 <= endH {
@@ -133,7 +120,8 @@ class CalendarView: UIView {
                         }
                         else if startH <= 23, 0 <= endH, startDateComponents.day != endDateComponents.day {
                             if startH == 23, 30 <= startM {
-                                self.dispOutSchedule(startH: startH, startM: startM, weekday: startDateComponents.weekday!, event: event, base: base)
+                                let outSchedule = String(format: "%d:%02d ", startH, startM) + event.title
+                                dayOutPeriod[startDateComponents.weekday!].append(outSchedule)
                                 continue
                             }
                             else {
@@ -158,49 +146,41 @@ class CalendarView: UIView {
                 else {
                     let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
                     if event.title != nil {
-                        self.dispOutSchedule(weekday: startDateComponents.weekday!, event: event, base: base, isAllday: true)
+                        let outSchedule = event.title!
+                        dayOutPeriod[startDateComponents.weekday!].append(outSchedule)
                     }
                 }
             }
         }
+        for index in 1...7 {
+            if dayOutPeriod[index].isEmpty == false {
+                print("dayOutPeriod weekday:\(index)")
+                print(dayOutPeriod[index])
+                self.dispOutSchedule(weekday: index, texts: dayOutPeriod[index], base: base)
+            }
+        }
     }
     
-    func dispOutSchedule(startH: Int = 0, startM: Int = 0, weekday: Int, event: EKEvent, base: ViewController, isAllday: Bool = false) {
-        var outSchedule = ""
-        if isAllday == false {
-//            outSchedule = String(format: "<font color=\"#008F00\">%d:%02d</font> ", startH, startM) + event.title
-            outSchedule = String(format: "%d:%02d ", startH, startM) + event.title
-        }
-        else {
-            outSchedule = event.title
-        }
+    func dispOutSchedule(weekday: Int, texts: [String], base: ViewController) {
         switch weekday {
         case 2:
-            self.day1outPeriod.append(outSchedule)
-            APCDCalendarUtil.instance.dispOutPeriod(label: base.day1outPeriod, texts: day1outPeriod)
+            APCDCalendarUtil.instance.dispOutPeriod(label: base.day1outPeriod, texts: texts)
         case 3:
-            self.day2outPeriod.append(outSchedule)
-            APCDCalendarUtil.instance.dispOutPeriod(label: base.day2outPeriod, texts: day2outPeriod)
+            APCDCalendarUtil.instance.dispOutPeriod(label: base.day2outPeriod, texts: texts)
         case 4:
-            self.day3outPeriod.append(outSchedule)
-            APCDCalendarUtil.instance.dispOutPeriod(label: base.day3outPeriod, texts: day3outPeriod)
+            APCDCalendarUtil.instance.dispOutPeriod(label: base.day3outPeriod, texts: texts)
         case 5:
-            self.day4outPeriod.append(outSchedule)
-            APCDCalendarUtil.instance.dispOutPeriod(label: base.day4outPeriod, texts: day4outPeriod)
+            APCDCalendarUtil.instance.dispOutPeriod(label: base.day4outPeriod, texts: texts)
         case 6:
-            self.day5outPeriod.append(outSchedule)
-            APCDCalendarUtil.instance.dispOutPeriod(label: base.day5outPeriod, texts: day5outPeriod)
+            APCDCalendarUtil.instance.dispOutPeriod(label: base.day5outPeriod, texts: texts)
         case 7:
-            self.day6outPeriod.append(outSchedule)
-            APCDCalendarUtil.instance.dispOutPeriod(label: base.day6outPeriod, texts: day6outPeriod)
+            APCDCalendarUtil.instance.dispOutPeriod(label: base.day6outPeriod, texts: texts)
         case 1:
-            self.day7outPeriod.append(outSchedule)
-            APCDCalendarUtil.instance.dispOutPeriod(label: base.day7outPeriod, texts: day7outPeriod)
+            APCDCalendarUtil.instance.dispOutPeriod(label: base.day7outPeriod, texts: texts)
         default:
             break
         }
     }
-    
     
     override func draw(_ rect: CGRect) {
 //        let rectangle = UIBezierPath(rect: CGRect(x: 100.0, y: 100.0, width: 300, height: 100))
