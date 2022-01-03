@@ -343,25 +343,25 @@ class CalendarView: UIView {
         switch weekday {
         case 2:
             self.day1outPeriod.append(outSchedule)
-            dispOutPeriod(label: base.day1outPeriod, texts: day1outPeriod)
+            APCDCalendarUtil.instance.dispOutPeriod(label: base.day1outPeriod, texts: day1outPeriod)
         case 3:
             self.day2outPeriod.append(outSchedule)
-            dispOutPeriod(label: base.day2outPeriod, texts: day2outPeriod)
+            APCDCalendarUtil.instance.dispOutPeriod(label: base.day2outPeriod, texts: day2outPeriod)
         case 4:
             self.day3outPeriod.append(outSchedule)
-            dispOutPeriod(label: base.day3outPeriod, texts: day3outPeriod)
+            APCDCalendarUtil.instance.dispOutPeriod(label: base.day3outPeriod, texts: day3outPeriod)
         case 5:
             self.day4outPeriod.append(outSchedule)
-            dispOutPeriod(label: base.day4outPeriod, texts: day4outPeriod)
+            APCDCalendarUtil.instance.dispOutPeriod(label: base.day4outPeriod, texts: day4outPeriod)
         case 6:
             self.day5outPeriod.append(outSchedule)
-            dispOutPeriod(label: base.day5outPeriod, texts: day5outPeriod)
+            APCDCalendarUtil.instance.dispOutPeriod(label: base.day5outPeriod, texts: day5outPeriod)
         case 7:
             self.day6outPeriod.append(outSchedule)
-            dispOutPeriod(label: base.day6outPeriod, texts: day6outPeriod)
+            APCDCalendarUtil.instance.dispOutPeriod(label: base.day6outPeriod, texts: day6outPeriod)
         case 1:
             self.day7outPeriod.append(outSchedule)
-            dispOutPeriod(label: base.day7outPeriod, texts: day7outPeriod)
+            APCDCalendarUtil.instance.dispOutPeriod(label: base.day7outPeriod, texts: day7outPeriod)
         default:
             break
         }

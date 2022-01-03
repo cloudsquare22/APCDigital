@@ -384,7 +384,14 @@ class APCDCalendar {
             }
         }
         if dayOutPeriod.isEmpty == false {
-            view.addSubview(self.createOutPeriod(texts: dayOutPeriod, startPoint: startPoint))
+            let outPeriod = UILabel(frame: CGRect(x: startPoint + 2.0, y: 107.0, width: 135.0, height: 50.0))
+            outPeriod.backgroundColor = UIColor(named: "Basic Color Gray Light")
+            outPeriod.numberOfLines = 0
+            outPeriod.lineBreakMode = .byCharWrapping
+            APCDCalendarUtil.instance.dispOutPeriod(label: outPeriod, texts: dayOutPeriod)
+            view.addSubview(outPeriod)
+//
+//            view.addSubview(self.createOutPeriod(texts: dayOutPeriod, startPoint: startPoint))
         }
     }
     

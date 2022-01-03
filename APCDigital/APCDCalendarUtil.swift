@@ -12,6 +12,8 @@ import Logging
 
 class APCDCalendarUtil {
     let logger = Logger()
+    
+    static let instance = APCDCalendarUtil()
 
     func dispOutPeriod(label: UILabel, texts: [String]) {
         logger.debug("label: \(label) texts: \(texts)")
