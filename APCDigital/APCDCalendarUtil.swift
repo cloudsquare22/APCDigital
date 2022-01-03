@@ -106,5 +106,28 @@ class APCDCalendarUtil {
         }
         return result
     }
+    
+    func createMinuteSFSymbol(startDateComponents: DateComponents, startLineHidden: Bool) -> UIImage? {
+        var minuteSFSymbol = "circle"
+        switch startDateComponents.minute {
+        case 0, 30:
+            minuteSFSymbol = "circle"
+        case 51, 52, 53, 54, 55, 56, 57, 58, 59:
+            minuteSFSymbol = "circle"
+        default:
+            minuteSFSymbol = String(startDateComponents.minute!) + ".circle"
+        }
+        if startLineHidden == true {
+            minuteSFSymbol = "arrowtriangle.down"
+        }
+        return UIImage(systemName: minuteSFSymbol)
+    }
+    
+    func cgToUIColor(cgColor: CGColor, alpha: CGFloat) -> UIColor {
+        return UIColor(red: cgColor.components![0],
+                       green: cgColor.components![1],
+                       blue: cgColor.components![2],
+                       alpha: 0.3)
+    }
 
 }

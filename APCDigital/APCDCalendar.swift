@@ -281,7 +281,7 @@ class APCDCalendar {
                         let endH = endDateComponents.hour, let endM = endDateComponents.minute {
                         if startH < 6 && (endH < 6 || (endH <= 6 && endM == 0)) {
                             print("Out range")
-                            let outSchedule = String(format: "%d:%02d〜", startH, startM) + event.title
+                            let outSchedule = String(format: "%d:%02d ", startH, startM) + event.title
                             dayOutPeriod.append(outSchedule)
                             continue
                         }
@@ -302,6 +302,8 @@ class APCDCalendar {
                             }
                             else {
                                 event.title = event.title + String(format: "\n〜%d:%02d", endH, endM)
+                                endDateComponents.year = startDateComponents.year
+                                endDateComponents.month = startDateComponents.month
                                 endDateComponents.day = startDateComponents.day
                                 endDateComponents.hour = 23
                                 endDateComponents.minute = 30
@@ -343,29 +345,14 @@ class APCDCalendar {
                     print(y)
                     let diff = endDate.timeIntervalSince(startDate) / 900
                     let scheduleView = ScheduleView(frame: CGRect(x: x, y: y, width: 140.0 + widthAdd, height: 11.375 * diff))
-                    scheduleView.baseView.backgroundColor = UIColor(red: event.calendar.cgColor.components![0],
-                                                                    green: event.calendar.cgColor.components![1],
-                                                                    blue: event.calendar.cgColor.components![2],
-                                                                    alpha: 0.3)
+                    scheduleView.baseView.backgroundColor = APCDCalendarUtil.instance.cgToUIColor(cgColor: event.calendar.cgColor, alpha: 0.3)
                     scheduleView.label.text = event.title
                     scheduleView.label.numberOfLines = 0
                     var labelFrame = scheduleView.label.frame
                     scheduleView.label.sizeToFit()
                     labelFrame.size.height = scheduleView.label.frame.size.height
                     scheduleView.label.frame = labelFrame
-                    var minuteSFSymbol = "circle"
-                    switch startDateComponents.minute {
-                    case 0, 30:
-                        minuteSFSymbol = "circle"
-                    case 51, 52, 53, 54, 55, 56, 57, 58, 59:
-                        minuteSFSymbol = "circle"
-                    default:
-                        minuteSFSymbol = String(startDateComponents.minute!) + ".circle"
-                    }
-                    if startLineHidden == true {
-                        minuteSFSymbol = "arrowtriangle.down"
-                    }
-                    scheduleView.minute.image = UIImage(systemName: minuteSFSymbol)
+                    scheduleView.minute.image = APCDCalendarUtil.instance.createMinuteSFSymbol(startDateComponents: startDateComponents, startLineHidden: startLineHidden)
                     scheduleView.endTime.frame = CGRect(x: -8.0, y: 11.375 * diff - 2, width: 16, height: 16)
 
                     if movementSymmbolList.contains(String(event.title.prefix(1))) == true {
@@ -445,7 +432,7 @@ class APCDCalendar {
     }
     
     func createPKCanvasView(view: UIView, dateComponentsWeek: [DateComponents]) {
-        if let page = Pages.select(year: dateComponentsWeek[0].year!, week: dateComponentsWeek[0].weekOfYear!) {
+        if let page = Pages.select(year: dateComponentsWeek[0].yearForWeekOfYear!, week: dateComponentsWeek[0].weekOfYear!) {
             autoreleasepool {
                 do {
                     print(page.count)
