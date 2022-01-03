@@ -33,12 +33,7 @@ class CalendarView: UIView {
     func dispSchedule(eventArray: [EKEvent], base: ViewController) {
         logger.info("eventArray Count: \(eventArray.count)")
         logger.debug("eventArray: \(eventArray) base: \(base)")
-        var movementSymmbolList: [String] = []
-        if let symbols = UserDefaults.standard.string(forKey: "movementSymbols") {
-            for symbol in symbols {
-                movementSymmbolList.append(String(symbol))
-            }
-        }
+        let movementSymmbolList: [String] = APCDCalendarUtil.instance.makeMovementSymmbolList()
         let eventFilters: [(calendar: String, filterString: String)] = EventFilter.selectAll()
         self.day1outPeriod = []
         self.day2outPeriod = []
@@ -95,9 +90,6 @@ class CalendarView: UIView {
                 continue
             }
             if base.displayCalendars.contains(event.calendar.title) == true {
-//            if base.calendars.contains(event.calendar) == true {
-//
-//            if event.calendar.title == "work" || event.calendar.title == "oneself" || event.calendar.title == "FC Barcelona" || event.calendar.title == "2020 FIA Formula One World Championship Race Calendar" || event.calendar.title == "buy" {
                 let isEventFilter = eventFilters.contains(where: { (calendar, filterString) in
                     var result = false
                     if event.calendar.title == calendar {
@@ -110,20 +102,9 @@ class CalendarView: UIView {
                 if isEventFilter == true {
                     continue
                 }
-//                if event.calendar.title == "2020 FIA Formula One World Championship Race Calendar" {
-//                    if (event.title.contains("PRACTICE") == true) || (event.title.contains("QUALIFYING") == true) {
-//                        continue
-//                    }
-//                }
-//                if event.calendar.title == "FC Barcelona" {
-//                    if event.title.contains("Challenge") == true {
-//                        continue
-//                    }
-//                }
-                if let location = event.structuredLocation?.title, location.isEmpty == false {
-                    let locations = location.split(separator: "\n")
-                    event.title = String(format: "%@(%@)", event.title, String(locations[0]))
-                }
+
+                // add Location
+                event.title = APCDCalendarUtil.instance.addLocationEventTitle(event: event)
 
                 if event.isAllDay == false {
                     var startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
@@ -167,52 +148,12 @@ class CalendarView: UIView {
                             }
                         }
                     }
-
-                    var x = 55.0
-                    var widthAdd = 0.0
-                    switch startDateComponents.weekday! {
-                    case 2:
-                        x = 55.0
-                    case 3:
-                        x = 55.0 + 148.0
-                    case 4:
-                        x = 55.0 + 148.0 * 2.0
-                    case 5:
-                        x = 55.0 + 148.0 * 3.0
-                        widthAdd = 3.5
-                    case 6:
-                        x = 55.0 + 73 + 148.0 * 4.0
-                    case 7:
-                        x = 55.0 + 73 + 148.0 * 5.0
-                    case 1:
-                        x = 55.0 + 73 + 148.0 * 6.0
-                        widthAdd = 3.5
-                    default:
-                        x = 0.0
-                    }
-                    var y: Double = 169.0 + 45.5 * Double(startDateComponents.hour! - 6)
-                    if let minutes = startDateComponents.minute {
-                        if minutes != 0 {
-                            y = y + 45.5 * (Double(minutes) / Double(60))
-                        }
-                    }
-                    let diff = endDate.timeIntervalSince(startDate) / 900
-                    let scheduleView = ScheduleView(frame: CGRect(x: x, y: y, width: 140.0 + widthAdd, height: 11.375 * diff))
-//                    scheduleView.baseView.backgroundColor = UIColor(red: 1, green: 0.58, blue: 0, alpha: 0.3)
-//                    scheduleView.baseView.backgroundColor = UIColor(cgColor: event.calendar.cgColor)
-                    scheduleView.baseView.backgroundColor = APCDCalendarUtil.instance.cgToUIColor(cgColor: event.calendar.cgColor, alpha: 0.3)
-                    scheduleView.label.text = event.title
-                    scheduleView.minute.image = APCDCalendarUtil.instance.createMinuteSFSymbol(startDateComponents: startDateComponents, startLineHidden: startLineHidden)
-                    scheduleView.endTime.frame = CGRect(x: -8.0, y: 11.375 * diff - 2, width: 16, height: 16)
-                    
-                    if movementSymmbolList.contains(String(event.title.prefix(1))) == true {
-                        scheduleView.addLine(isMove: true, isStartLineHidden: startLineHidden, isEndLineHidden: endLineHidden)
-                    }
-                    else {
-                        scheduleView.addLine(isMove: false, isStartLineHidden: startLineHidden, isEndLineHidden: endLineHidden)
-                    }
-                    self.addSubview(scheduleView)
-
+                    self.addSubview(APCDCalendarUtil.instance.createScheduleView(event: event,
+                                                                                 startDate: startDate,
+                                                                                 endDate: endDate,
+                                                                                 startLineHidden: startLineHidden,
+                                                                                 endLineHidden: endLineHidden,
+                                                                                 movementSymmbolList: movementSymmbolList))
                 }
                 else {
                     let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)

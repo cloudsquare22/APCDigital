@@ -224,12 +224,7 @@ class APCDCalendar {
     func addEvent(view: UIView, day: DateComponents, startPoint: CGFloat) {
         var dayOutPeriod: [String] = []
 
-        var movementSymmbolList: [String] = []
-        if let symbols = UserDefaults.standard.string(forKey: "movementSymbols") {
-            for symbol in symbols {
-                movementSymmbolList.append(String(symbol))
-            }
-        }
+        let movementSymmbolList: [String] = APCDCalendarUtil.instance.makeMovementSymmbolList()
         let eventFilters: [(calendar: String, filterString: String)] = EventFilter.selectAll()
 
         let eventArray = self.events(day: day)
@@ -238,12 +233,6 @@ class APCDCalendar {
                 view.addSubview(self.createHolidayView(event: event, startPoint: startPoint))
             }
             if self.displayCalendars.contains(event.calendar.title) == true {
-                // Special
-//                if event.calendar.title == "2020 FIA Formula One World Championship Race Calendar" {
-//                    if event.title.contains("PRACTICE") == true {
-//                        continue
-//                    }
-//                }
                 let isEventFilter = eventFilters.contains(where: { (calendar, filterString) in
                     var result = false
                     if event.calendar.title == calendar {
@@ -258,10 +247,7 @@ class APCDCalendar {
                 }
 
                 // add Location
-                if let location = event.structuredLocation?.title, location.isEmpty == false {
-                    let locations = location.split(separator: "\n")
-                    event.title = String(format: "%@(%@)", event.title, String(locations[0]))
-                }
+                event.title = APCDCalendarUtil.instance.addLocationEventTitle(event: event)
 
                 if event.isAllDay == false {
                     var startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
@@ -312,56 +298,12 @@ class APCDCalendar {
                             }
                         }
                     }
-
-                    print(startDateComponents.weekday!)
-                    var x = 55.0
-                    var widthAdd = 0.0
-                    switch startDateComponents.weekday! {
-                    case 2:
-                        x = 55.0
-                    case 3:
-                        x = 55.0 + 148.0
-                    case 4:
-                        x = 55.0 + 148.0 * 2.0
-                    case 5:
-                        x = 55.0 + 148.0 * 3.0
-                        widthAdd = 3.5
-                    case 6:
-                        x = 55.0 + 73 + 148.0 * 4.0
-                    case 7:
-                        x = 55.0 + 73 + 148.0 * 5.0
-                    case 1:
-                        x = 55.0 + 73 + 148.0 * 6.0
-                        widthAdd = 3.5
-                    default:
-                        x = 0.0
-                    }
-                    var y: Double = 169.0 + 45.5 * Double(startDateComponents.hour! - 6)
-                    if let minutes = startDateComponents.minute {
-                        if minutes != 0 {
-                            y = y + 45.5 * (Double(minutes) / Double(60))
-                        }
-                    }
-                    print(y)
-                    let diff = endDate.timeIntervalSince(startDate) / 900
-                    let scheduleView = ScheduleView(frame: CGRect(x: x, y: y, width: 140.0 + widthAdd, height: 11.375 * diff))
-                    scheduleView.baseView.backgroundColor = APCDCalendarUtil.instance.cgToUIColor(cgColor: event.calendar.cgColor, alpha: 0.3)
-                    scheduleView.label.text = event.title
-                    scheduleView.label.numberOfLines = 0
-                    var labelFrame = scheduleView.label.frame
-                    scheduleView.label.sizeToFit()
-                    labelFrame.size.height = scheduleView.label.frame.size.height
-                    scheduleView.label.frame = labelFrame
-                    scheduleView.minute.image = APCDCalendarUtil.instance.createMinuteSFSymbol(startDateComponents: startDateComponents, startLineHidden: startLineHidden)
-                    scheduleView.endTime.frame = CGRect(x: -8.0, y: 11.375 * diff - 2, width: 16, height: 16)
-
-                    if movementSymmbolList.contains(String(event.title.prefix(1))) == true {
-                        scheduleView.addLine(isMove: true, isStartLineHidden: startLineHidden, isEndLineHidden: endLineHidden)
-                    }
-                    else {
-                        scheduleView.addLine(isMove: false, isStartLineHidden: startLineHidden, isEndLineHidden: endLineHidden)
-                    }
-                    view.addSubview(scheduleView)
+                    view.addSubview(APCDCalendarUtil.instance.createScheduleView(event: event,
+                                                                                 startDate: startDate,
+                                                                                 endDate: endDate,
+                                                                                 startLineHidden: startLineHidden,
+                                                                                 endLineHidden: endLineHidden,
+                                                                                 movementSymmbolList: movementSymmbolList))
                 }
                 else {
                     if let outSchedule = event.title {
