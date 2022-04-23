@@ -86,6 +86,7 @@ class ViewController: UIViewController {
         pKCanvasView.isOpaque = false
         pKCanvasView.backgroundColor = .clear
         pKCanvasView.overrideUserInterfaceStyle = .light
+        pKCanvasView.isRulerActive = false
 
         let tapPKCanvasView = UITapGestureRecognizer(target: self, action: #selector(self.tapPKCanvasView(sender:)))
         tapPKCanvasView.numberOfTapsRequired = 1
