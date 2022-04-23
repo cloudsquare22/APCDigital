@@ -82,7 +82,7 @@ class ViewController: UIViewController {
         checkAuthorization()
         
         menuView.isHidden = true
-        pKCanvasView.allowsFingerDrawing = false
+        pKCanvasView.drawingPolicy = .pencilOnly
         pKCanvasView.isOpaque = false
         pKCanvasView.backgroundColor = .clear
         pKCanvasView.overrideUserInterfaceStyle = .light
