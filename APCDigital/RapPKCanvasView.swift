@@ -20,9 +20,12 @@ class RapPKCanvasView: PKCanvasView {
         }
         print(#function)
         let touch = touches.first
-        if let location = touch?.location(in: self) {
+        if let location = touch?.location(in: self), let type = touch?.type {
+            print("type:\(type)")
             print("x:\(location.x) y:\(location.y)")
-            self.strokeRectangle(location: location)
+            if type == .pencil {
+                self.strokeRectangle(location: location)
+            }
         }
     }
 
