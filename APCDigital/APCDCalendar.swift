@@ -48,7 +48,7 @@ class APCDCalendar {
 
             result = URL(fileURLWithPath: documentsFileName)
             do {
-                let data = try NSKeyedArchiver.archivedData(withRootObject: pageDatas, requiringSecureCoding: true)
+                let data = try NSKeyedArchiver.archivedData(withRootObject: pageDatas, requiringSecureCoding: false)
                 logger.info("Data count:\(data.count)")
                 try data.write(to: result!)
             }
