@@ -12,9 +12,13 @@ import PencilKit
 class RapPKCanvasView: PKCanvasView {
     
     var onTaskbox: Bool = false
+    var onErase: Bool = false
     var taskBoxColor: UIColor = .black
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard self.onErase == false else {
+            return
+        }
         guard self.onTaskbox == true else {
             return
         }
