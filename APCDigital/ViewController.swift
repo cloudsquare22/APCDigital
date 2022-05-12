@@ -93,7 +93,7 @@ class ViewController: UIViewController {
         pKCanvasView.addGestureRecognizer(tapPKCanvasView)
         
         let longPressPKCanvasView = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressPKCanvasView(sender:)))
-        longPressPKCanvasView.minimumPressDuration = 0.5
+        longPressPKCanvasView.minimumPressDuration = 0.7
         pKCanvasView.addGestureRecognizer(longPressPKCanvasView)
 
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeLeft(sender:)))
