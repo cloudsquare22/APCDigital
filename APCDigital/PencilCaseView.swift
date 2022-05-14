@@ -160,7 +160,7 @@ class PencilCaseView: UIView {
             self.marker.tintColor = .black
             self.marker.backgroundColor = .clear
         }
-        let color: UIColor = self.onPencil ? .blue : .black
+        let color: UIColor = self.onPencil ? self.selectInkToUIColor() : .black
         let colorBG: UIColor = self.onPencil ? .systemGray5 : .clear
         self.pencil.tintColor = color
         self.pencil.backgroundColor = colorBG
@@ -174,7 +174,7 @@ class PencilCaseView: UIView {
             self.pencil.tintColor = .black
             self.pencil.backgroundColor = .clear
         }
-        let color: UIColor = self.onMarker ? .blue : .black
+        let color: UIColor = self.onMarker ? self.selectInkToUIColor() : .black
         let colorBG: UIColor = self.onMarker ? .systemGray5 : .clear
         self.marker.tintColor = color
         self.marker.backgroundColor = colorBG
@@ -196,7 +196,7 @@ class PencilCaseView: UIView {
 
     @IBAction func tapTaskbox(_ sender: Any) {
         self.onTaskbox.toggle()
-        let color: UIColor = self.onTaskbox ? .blue : .black
+        let color: UIColor = self.onTaskbox ? self.selectInkToUIColor() : .black
         let colorBG: UIColor = self.onTaskbox ? .systemGray5 : .clear
         self.taskbox.tintColor = color
         self.taskbox.backgroundColor = colorBG
@@ -215,15 +215,18 @@ class PencilCaseView: UIView {
             self.pKCanvasView!.tool = PKEraserTool(.vector)
         }
         else if self.onPencil == true {
+            self.pencil.tintColor = self.selectInkToUIColor()
             self.pKCanvasView!.tool = PKInkingTool(.pencil, color: selectInkToUIColor(), width: PKInkingTool.InkType.pencil.defaultWidth)
         }
         else if self.onMarker == true {
+            self.marker.tintColor = self.selectInkToUIColor()
             self.pKCanvasView!.tool = PKInkingTool(.marker, color: selectInkToUIColor(), width: PKInkingTool.InkType.marker.defaultWidth)
         }
         else {
             self.pKCanvasView!.tool = PKInkingTool(.pen, color: selectInkToUIColor(), width: PKInkingTool.InkType.pen.defaultWidth)
         }
         if self.onTaskbox == true {
+            self.taskbox.tintColor = self.selectInkToUIColor()
             self.pKCanvasView!.taskBoxColor = selectInkToUIColor()
         }
     }
