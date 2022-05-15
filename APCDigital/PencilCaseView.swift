@@ -183,7 +183,7 @@ class PencilCaseView: UIView {
     
     @IBAction func tapRuler(_ sender: Any) {
         self.pKCanvasView?.isRulerActive.toggle()
-        let color: UIColor = self.pKCanvasView!.isRulerActive ? .blue : .black
+        let color: UIColor = self.pKCanvasView!.isRulerActive ? self.selectInkToUIColor() : .black
         self.ruler.tintColor = color
     }
     
