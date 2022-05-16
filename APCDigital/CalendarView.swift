@@ -144,10 +144,16 @@ class CalendarView: UIView {
                                                                                  movementSymmbolList: movementSymmbolList))
                 }
                 else {
-                    let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
-                    if event.title != nil {
-                        let outSchedule = event.title!
-                        dayOutPeriod[startDateComponents.weekday!].append(outSchedule)
+                    var startDate = event.startDate!
+                    let endDate = event.endDate!
+                    while startDate <= endDate {
+                        let startDateComponents = Calendar.current.dateComponents(in: .current, from: startDate)
+                        print(startDateComponents.weekday!)
+                        if event.title != nil {
+                            let outSchedule = event.title!
+                            dayOutPeriod[startDateComponents.weekday!].append(outSchedule)
+                        }
+                        startDate = startDate + TimeInterval(24 * 60 * 60)
                     }
                 }
             }
