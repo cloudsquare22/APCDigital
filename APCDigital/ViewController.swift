@@ -64,6 +64,8 @@ class ViewController: UIViewController {
     var displayCalendars: [String] = []
     var nationalHolidayCalendarName = "日本の祝日"
     
+    var scheduleViews: [(x: Double, y: Double, w: Double, h: Double, event: EKEvent)] = []
+    
     var eventStore = EKEventStore()
     let storyBoard = UIStoryboard(name: "Main", bundle: nil)
 
@@ -309,6 +311,8 @@ class ViewController: UIViewController {
     func updateDays() {
         logger.info()
         
+        self.scheduleViews = []
+        
         // Data Initial
         self.updateCalendars()
         self.setWeekDaysDateComponents(monday: pageMonday)
@@ -322,6 +326,8 @@ class ViewController: UIViewController {
         self.dispMonthLabel()
         self.dispMonthlyCalendar()
         self.dispWeekOfYear()
+        
+        logger.info("scheduleViews:\(self.scheduleViews.count)")
     }
         
     func setWeekDaysDateComponents(monday: Date) {

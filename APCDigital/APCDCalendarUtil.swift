@@ -136,7 +136,8 @@ class APCDCalendarUtil {
                             endDate: Date,
                             startLineHidden: Bool,
                             endLineHidden: Bool,
-                            movementSymmbolList: [String]) -> ScheduleView {
+                            movementSymmbolList: [String],
+                            base: ViewController? = nil) -> ScheduleView {
         let startDateComponents = Calendar.current.dateComponents(in: .current, from: startDate)
         var x = 55.0
         var widthAdd = 0.0
@@ -183,6 +184,10 @@ class APCDCalendarUtil {
         }
         else {
             scheduleView.addLine(isMove: false, isStartLineHidden: startLineHidden, isEndLineHidden: endLineHidden)
+        }
+        
+        if let base = base {
+            base.scheduleViews.append((x: x, y: y, w: 140.0 + widthAdd, h: 11.375 * diff, event: event))
         }
 
         return scheduleView

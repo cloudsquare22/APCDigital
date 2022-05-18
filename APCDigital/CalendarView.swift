@@ -141,7 +141,8 @@ class CalendarView: UIView {
                                                                                  endDate: endDate,
                                                                                  startLineHidden: startLineHidden,
                                                                                  endLineHidden: endLineHidden,
-                                                                                 movementSymmbolList: movementSymmbolList))
+                                                                                 movementSymmbolList: movementSymmbolList,
+                                                                                 base: base))
                 }
                 else {
                     var startDate = event.startDate! < base.pageMonday ? base.pageMonday : event.startDate!
