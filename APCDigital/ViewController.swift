@@ -258,6 +258,16 @@ class ViewController: UIViewController {
         logger.info()
         let point = sender.location(in: self.pKCanvasView)
         
+        for scheduleView in scheduleViews {
+            if scheduleView.x <= point.x &&
+                point.x <= scheduleView.x + scheduleView.w &&
+                scheduleView.y <= point.y &&
+                point.y <= scheduleView.y + scheduleView.h {
+                print(scheduleView.event.title!)
+                break
+            }
+        }
+        
         var weekDayIndex = -1
         let weekDayIndexX: [CGFloat] = [55.0, 203.0, 351.0, 499.0, 647.0, 720.0, 868.0, 1016.0, 1164.0]
         switch point.x {
