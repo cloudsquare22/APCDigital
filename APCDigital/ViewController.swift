@@ -95,7 +95,7 @@ class ViewController: UIViewController {
         pKCanvasView.addGestureRecognizer(tapPKCanvasView)
         
         let longPressPKCanvasView = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressPKCanvasView(sender:)))
-        longPressPKCanvasView.minimumPressDuration = 0.7
+        longPressPKCanvasView.minimumPressDuration = 0.6
         pKCanvasView.addGestureRecognizer(longPressPKCanvasView)
 
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeLeft(sender:)))
@@ -270,6 +270,17 @@ class ViewController: UIViewController {
         }
         if let event = event {
             print(event.title!)
+            let editScheduleViewController = storyBoard.instantiateViewController(withIdentifier: "EditScheduleView") as? EditScheduleViewController
+            if let controller = editScheduleViewController {
+                controller.viewController = self
+                controller.startDate = event.startDate
+                controller.endDate = event.endDate
+                controller.baseEvent = event
+                self.setPopoverPresentationController(size: CGSize(width: 600, height: 400),
+                                                      rect: CGRect(x: self.view.frame.width / 2, y: 10, width: 1, height: 1),
+                                                      controller: controller)
+                present(controller, animated: false, completion: nil)
+            }
         }
         else {
             dispEditScheduleView(point: point)

@@ -15,6 +15,7 @@ class EditScheduleViewController: UIViewController {
     var allday = false
     var startDate: Date? = nil
     var endDate: Date? = nil
+    var baseEvent: EKEvent? = nil
 
     var eventStore = EKEventStore()
 
@@ -34,6 +35,10 @@ class EditScheduleViewController: UIViewController {
         if allday == true {
             self.startDatePicker.datePickerMode = .date
             self.endDatePicker.datePickerMode = .date
+        }
+        
+        if let event = baseEvent {
+            self.titleText.text = event.title
         }
         
         self.calendarPicker.delegate = self
