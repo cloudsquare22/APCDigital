@@ -29,16 +29,21 @@ class EditScheduleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let event = baseEvent {
+            self.titleText.text = event.title
+            self.locationText.text = event.location
+            if event.isAllDay == true {
+                self.allday = true
+            }
+        }
+        
         self.startDatePicker.date = startDate!
         self.endDatePicker.date = endDate!
         
         if allday == true {
             self.startDatePicker.datePickerMode = .date
             self.endDatePicker.datePickerMode = .date
-        }
-        
-        if let event = baseEvent {
-            self.titleText.text = event.title
         }
         
         self.calendarPicker.delegate = self
