@@ -97,7 +97,7 @@ class EditScheduleViewController: UIViewController {
             present(alert, animated: true, completion: nil)
             return
         }
-        let event = EKEvent(eventStore: eventStore)
+        let event = self.baseEvent == nil ? EKEvent(eventStore: eventStore) : self.baseEvent!
         event.title = self.todoSwitch.isOn == true ? "□" : ""
         event.title = event.title + self.titleText.text!
         event.location = self.locationText.text
