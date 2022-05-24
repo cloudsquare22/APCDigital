@@ -30,12 +30,15 @@ class EditScheduleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var selectCalendar = eventStore.defaultCalendarForNewEvents?.title
+        
         if let event = baseEvent {
             self.titleText.text = event.title
             self.locationText.text = event.location
             if event.isAllDay == true {
                 self.allday = true
             }
+            selectCalendar = baseEvent?.calendar.title
         }
         
         self.startDatePicker.date = startDate!
@@ -50,7 +53,7 @@ class EditScheduleViewController: UIViewController {
         self.calendarPicker.dataSource = self
         
         for index in 0..<(self.viewController?.calendars.count)! {
-            if self.viewController?.calendars[index].title == eventStore.defaultCalendarForNewEvents?.title {
+            if self.viewController?.calendars[index].title == selectCalendar {
                 self.calendarPicker.selectRow(index, inComponent: 0, animated: true)
                 break
             }
@@ -97,7 +100,7 @@ class EditScheduleViewController: UIViewController {
             present(alert, animated: true, completion: nil)
             return
         }
-        let event = self.baseEvent == nil ? EKEvent(eventStore: eventStore) : self.baseEvent!
+        let event = EKEvent(eventStore: eventStore)
         event.title = self.todoSwitch.isOn == true ? "□" : ""
         event.title = event.title + self.titleText.text!
         event.location = self.locationText.text
@@ -119,6 +122,9 @@ class EditScheduleViewController: UIViewController {
             event.alarms = [alarmEvent, alarm5Minute]
         }
         do {
+            if let baseEvent = self.baseEvent {
+                try eventStore.remove(baseEvent, span: .thisEvent)
+            }
             try eventStore.save(event, span: .thisEvent)
             self.viewController?.pageUpsert()
             self.viewController?.updateDays()

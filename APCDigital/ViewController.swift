@@ -276,6 +276,7 @@ class ViewController: UIViewController {
                 controller.startDate = event.startDate
                 controller.endDate = event.endDate
                 controller.baseEvent = event
+                controller.eventStore = self.eventStore
                 self.setPopoverPresentationController(size: CGSize(width: 600, height: 400),
                                                       rect: CGRect(x: self.view.frame.width / 2, y: 10, width: 1, height: 1),
                                                       controller: controller)
