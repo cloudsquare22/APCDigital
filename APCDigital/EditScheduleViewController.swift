@@ -39,6 +39,9 @@ class EditScheduleViewController: UIViewController {
                 self.allday = true
             }
             selectCalendar = baseEvent?.calendar.title
+            if self.titleText.text?.hasPrefix("□") == true {
+                self.todoSwitch.isOn = true
+            }
         }
         
         self.startDatePicker.date = startDate!
