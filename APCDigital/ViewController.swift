@@ -277,7 +277,7 @@ class ViewController: UIViewController {
                 controller.endDate = event.endDate
                 controller.baseEvent = event
                 controller.eventStore = self.eventStore
-                self.setPopoverPresentationController(size: CGSize(width: 600, height: 400),
+                self.setPopoverPresentationController(size: CGSize(width: 600, height: 450),
                                                       rect: CGRect(x: self.view.frame.width / 2, y: 10, width: 1, height: 1),
                                                       controller: controller)
                 present(controller, animated: false, completion: nil)
@@ -332,7 +332,7 @@ class ViewController: UIViewController {
             controller.viewController = self
             controller.startDate = Calendar.current.date(from: startDateComponents)
             controller.endDate = controller.startDate! + (60 * 60)
-            self.setPopoverPresentationController(size: CGSize(width: 600, height: 400),
+            self.setPopoverPresentationController(size: CGSize(width: 600, height: 450),
                                                   rect: CGRect(x: self.view.frame.width / 2, y: 10, width: 1, height: 1),
                                                   controller: controller)
             present(controller, animated: false, completion: nil)

@@ -949,7 +949,7 @@
             <objects>
                 <viewController storyboardIdentifier="EditScheduleView" id="eLd-sw-egX" customClass="EditScheduleViewController" customModule="Action_Planner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7f2-ah-Gu2">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="450"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yNM-G9-cWU">
@@ -984,16 +984,6 @@
                                     <action selector="changeAllDaySwitch:" destination="eLd-sw-egX" eventType="valueChanged" id="Ovo-ea-AFi"/>
                                 </connections>
                             </switch>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1H-mb-BA6">
-                                <rect key="frame" x="272" y="335" width="56" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="calendar.badge.plus" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="32" scale="large"/>
-                                </state>
-                                <connections>
-                                    <action selector="addCalendar:" destination="eLd-sw-egX" eventType="touchUpInside" id="879-8r-Wox"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vmn-bx-CRg">
                                 <rect key="frame" x="16" y="104" width="268" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1011,16 +1001,38 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notification" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PGs-Fl-duR">
+                                <rect key="frame" x="292" y="322" width="88" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Svm-jD-NGG">
+                                <rect key="frame" x="388" y="317" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1H-mb-BA6">
+                                <rect key="frame" x="272" y="385" width="56" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="calendar.badge.plus" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="32" scale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="addCalendar:" destination="eLd-sw-egX" eventType="touchUpInside" id="879-8r-Wox"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fUf-d1-JVe"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <size key="freeformSize" width="600" height="400"/>
+                    <size key="freeformSize" width="600" height="450"/>
                     <connections>
                         <outlet property="allDaySwitch" destination="Sm4-av-chj" id="cZ6-AC-gG4"/>
                         <outlet property="calendarPicker" destination="fiq-W5-Uyq" id="5fy-pe-xUr"/>
                         <outlet property="endDatePicker" destination="U3A-TN-oeC" id="VvM-Ct-nSN"/>
                         <outlet property="locationText" destination="vmn-bx-CRg" id="1jg-z9-auL"/>
+                        <outlet property="notificationSwitch" destination="Svm-jD-NGG" id="0bB-sI-mRV"/>
                         <outlet property="startDatePicker" destination="v4L-Ht-d5l" id="1AR-W3-ggD"/>
                         <outlet property="titleText" destination="yNM-G9-cWU" id="6Fx-yr-7zi"/>
                         <outlet property="todoSwitch" destination="Pjw-b5-uGB" id="9UH-Ia-n8l"/>
@@ -1028,7 +1040,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VGs-28-9P9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2150" y="-46"/>
+            <point key="canvasLocation" x="2149.6339677891651" y="-46.2890625"/>
         </scene>
         <!--Edit Events View Controller-->
         <scene sceneID="Rpq-wk-dV2">

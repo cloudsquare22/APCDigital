@@ -26,6 +26,7 @@ class EditScheduleViewController: UIViewController {
     @IBOutlet weak var endDatePicker: UIDatePicker!
     @IBOutlet weak var calendarPicker: UIPickerView!
     @IBOutlet weak var todoSwitch: UISwitch!
+    @IBOutlet weak var notificationSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,15 +115,19 @@ class EditScheduleViewController: UIViewController {
         if allday == true {
             event.isAllDay = true
 
-            let dateAllDayH = UserDefaults.standard.integer(forKey: "dateAllDayH")
-            let dateAllDayM = UserDefaults.standard.integer(forKey: "dateAllDayM")
-            let alarmToday = EKAlarm(relativeOffset: (60 * 60 * Double(dateAllDayH) + (60 * Double(dateAllDayM))))
-            event.alarms = [alarmToday]
+            if self.notificationSwitch.isOn == true {
+                let dateAllDayH = UserDefaults.standard.integer(forKey: "dateAllDayH")
+                let dateAllDayM = UserDefaults.standard.integer(forKey: "dateAllDayM")
+                let alarmToday = EKAlarm(relativeOffset: (60 * 60 * Double(dateAllDayH) + (60 * Double(dateAllDayM))))
+                event.alarms = [alarmToday]
+            }
         }
         else {
-            let alarmEvent = EKAlarm(relativeOffset: 0)
-            let alarm5Minute = EKAlarm(relativeOffset: 60 * -5)
-            event.alarms = [alarmEvent, alarm5Minute]
+            if self.notificationSwitch.isOn == true {
+                let alarmEvent = EKAlarm(relativeOffset: 0)
+                let alarm5Minute = EKAlarm(relativeOffset: 60 * -5)
+                event.alarms = [alarmEvent, alarm5Minute]
+            }
         }
         do {
             if let baseEvent = self.baseEvent {
