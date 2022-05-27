@@ -67,23 +67,23 @@ class EditEventsViewController: UITableViewController {
     */
 
     // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            print("Event Delete")
-            do {
-                try self.eventStore.remove(eventStore.event(withIdentifier: self.events[indexPath.row].eventIdentifier)!, span: .thisEvent)
-                self.viewController?.pageUpsert()
-                self.viewController?.updateDays()
-                self.setEvents()
-            }
-            catch {
-                let nserror = error as NSError
-                print(nserror)
-            }
-        }
-        self.tableView.reloadData()
-    }
+//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            // Delete the row from the data source
+//            print("Event Delete")
+//            do {
+//                try self.eventStore.remove(eventStore.event(withIdentifier: self.events[indexPath.row].eventIdentifier)!, span: .thisEvent)
+//                self.viewController?.pageUpsert()
+//                self.viewController?.updateDays()
+//                self.setEvents()
+//            }
+//            catch {
+//                let nserror = error as NSError
+//                print(nserror)
+//            }
+//        }
+//        self.tableView.reloadData()
+//    }
     
     func setEvents() {
         self.events = []
@@ -100,6 +100,41 @@ class EditEventsViewController: UITableViewController {
                 break
             }
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let editAction = UIContextualAction(style: .normal  , title: "edit") {
+                    (ctxAction, view, completionHandler) in
+                     print("編集を実行する")
+                    completionHandler(true)
+                }
+        let editImage = UIImage(systemName: "pencil")?.withTintColor(UIColor.white, renderingMode: .alwaysTemplate)
+        editAction.image = editImage
+        editAction.backgroundColor = UIColor(red: 0/255, green: 125/255, blue: 255/255, alpha: 1)
+
+        let deleteAction = UIContextualAction(style: .destructive, title:"delete") { (ctxAction, view, completionHandler) in
+            print("Event Delete")
+            do {
+                try self.eventStore.remove(self.eventStore.event(withIdentifier: self.events[indexPath.row].eventIdentifier)!, span: .thisEvent)
+                self.viewController?.pageUpsert()
+                self.viewController?.updateDays()
+                self.setEvents()
+            }
+            catch {
+                let nserror = error as NSError
+                print(nserror)
+            }
+            completionHandler(true)
+            self.tableView.reloadData()
+        }
+        let trashImage = UIImage(systemName: "trash.fill")?.withTintColor(UIColor.white , renderingMode: .alwaysTemplate)
+        deleteAction.image = trashImage
+        deleteAction.backgroundColor = UIColor(red: 255/255, green: 0/255, blue: 0/255, alpha: 1)
+        
+        let swipeAction = UISwipeActionsConfiguration(actions:[deleteAction, editAction])
+        swipeAction.performsFirstActionWithFullSwipe = false
+                
+        return swipeAction
     }
 
     /*
