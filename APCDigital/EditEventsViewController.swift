@@ -15,6 +15,8 @@ class EditEventsViewController: UITableViewController {
     var eventStore = EKEventStore()
     var events = [EKEvent]()
 
+    let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -105,7 +107,22 @@ class EditEventsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let editAction = UIContextualAction(style: .normal  , title: "edit") {
                     (ctxAction, view, completionHandler) in
-                     print("編集を実行する")
+            
+                     print("edit")
+            self.dismiss(animated: true)
+            let editScheduleViewController = self.storyBoard.instantiateViewController(withIdentifier: "EditScheduleView") as? EditScheduleViewController
+            if let controller = editScheduleViewController {
+                let event = self.events[indexPath.row]
+                controller.viewController = self.viewController
+                controller.startDate = event.startDate
+                controller.endDate = event.endDate
+                controller.baseEvent = event
+                controller.eventStore = self.eventStore
+                self.viewController!.setPopoverPresentationController(size: CGSize(width: 600, height: 450),
+                                                      rect: CGRect(x: self.view.frame.width / 2, y: 10, width: 1, height: 1),
+                                                      controller: controller)
+                self.viewController!.present(controller, animated: false, completion: nil)
+            }
                     completionHandler(true)
                 }
         let editImage = UIImage(systemName: "pencil")?.withTintColor(UIColor.white, renderingMode: .alwaysTemplate)
