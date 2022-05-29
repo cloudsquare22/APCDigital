@@ -59,6 +59,20 @@ class EditEventsViewController: UITableViewController {
         cell.startDate.text = dateFormatter.string(from: events[indexPath.row].startDate)
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let editScheduleViewController = self.storyBoard.instantiateViewController(withIdentifier: "EditScheduleView") as? EditScheduleViewController
+        if let controller = editScheduleViewController {
+            let event = self.events[indexPath.row]
+            controller.viewController = self.viewController
+            controller.startDate = event.startDate
+            controller.endDate = event.endDate
+            controller.baseEvent = event
+            controller.eventStore = self.eventStore
+            controller.preferredContentSize = CGSize(width: 600, height: 450)
+            self.present(controller, animated: true)
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.
