@@ -61,6 +61,11 @@ class EditEventsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.dispEditScheduleView(indexPath: indexPath)
+    }
+    
+    func dispEditScheduleView(indexPath: IndexPath) {
+        self.dismiss(animated: true)
         let editScheduleViewController = self.storyBoard.instantiateViewController(withIdentifier: "EditScheduleView") as? EditScheduleViewController
         if let controller = editScheduleViewController {
             let event = self.events[indexPath.row]
@@ -69,8 +74,10 @@ class EditEventsViewController: UITableViewController {
             controller.endDate = event.endDate
             controller.baseEvent = event
             controller.eventStore = self.eventStore
-            controller.preferredContentSize = CGSize(width: 600, height: 450)
-            self.present(controller, animated: true)
+            self.viewController!.setPopoverPresentationController(size: CGSize(width: 600, height: 450),
+                                                  rect: CGRect(x: self.view.frame.width / 2, y: 10, width: 1, height: 1),
+                                                  controller: controller)
+            self.viewController!.present(controller, animated: false, completion: nil)
         }
     }
 
@@ -121,24 +128,10 @@ class EditEventsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let editAction = UIContextualAction(style: .normal  , title: "edit") {
                     (ctxAction, view, completionHandler) in
-            
-                     print("edit")
-            self.dismiss(animated: true)
-            let editScheduleViewController = self.storyBoard.instantiateViewController(withIdentifier: "EditScheduleView") as? EditScheduleViewController
-            if let controller = editScheduleViewController {
-                let event = self.events[indexPath.row]
-                controller.viewController = self.viewController
-                controller.startDate = event.startDate
-                controller.endDate = event.endDate
-                controller.baseEvent = event
-                controller.eventStore = self.eventStore
-                self.viewController!.setPopoverPresentationController(size: CGSize(width: 600, height: 450),
-                                                      rect: CGRect(x: self.view.frame.width / 2, y: 10, width: 1, height: 1),
-                                                      controller: controller)
-                self.viewController!.present(controller, animated: false, completion: nil)
-            }
-                    completionHandler(true)
-                }
+            print("edit")
+            self.dispEditScheduleView(indexPath: indexPath)
+            completionHandler(true)
+        }
         let editImage = UIImage(systemName: "pencil")?.withTintColor(UIColor.white, renderingMode: .alwaysTemplate)
         editAction.image = editImage
         editAction.backgroundColor = UIColor(red: 0/255, green: 125/255, blue: 255/255, alpha: 1)

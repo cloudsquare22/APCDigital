@@ -323,7 +323,7 @@
                                         <rect key="frame" x="170" y="30" width="56" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="tintColor" name="Basic Color Green"/>
-                                        <state key="normal" image="calendar.badge.minus" catalog="system">
+                                        <state key="normal" image="calendar.badge.clock" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="32" scale="large"/>
                                         </state>
                                         <connections>
@@ -1224,7 +1224,7 @@
         <image name="arrow.left.arrow.right.circle" catalog="system" width="128" height="121"/>
         <image name="arrow.up.doc" catalog="system" width="115" height="128"/>
         <image name="calendar" catalog="system" width="128" height="106"/>
-        <image name="calendar.badge.minus" catalog="system" width="128" height="108"/>
+        <image name="calendar.badge.clock" catalog="system" width="128" height="108"/>
         <image name="calendar.badge.plus" catalog="system" width="128" height="108"/>
         <image name="calendar.circle" catalog="system" width="128" height="121"/>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
