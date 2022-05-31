@@ -75,7 +75,7 @@ class EditEventsViewController: UITableViewController {
             controller.baseEvent = event
             controller.eventStore = self.eventStore
             self.viewController!.setPopoverPresentationController(size: CGSize(width: 600, height: 450),
-                                                  rect: CGRect(x: self.view.frame.width / 2, y: 10, width: 1, height: 1),
+                                                                  rect: CGRect(x: self.viewController!.view.frame.width / 2, y: 64, width: 1, height: 1),
                                                   controller: controller)
             self.viewController!.present(controller, animated: false, completion: nil)
         }
