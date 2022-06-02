@@ -27,6 +27,7 @@ class EditScheduleViewController: UIViewController {
     @IBOutlet weak var calendarPicker: UIPickerView!
     @IBOutlet weak var todoSwitch: UISwitch!
     @IBOutlet weak var notificationSwitch: UISwitch!
+    @IBOutlet weak var eventDeleteButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +44,7 @@ class EditScheduleViewController: UIViewController {
             if self.titleText.text?.hasPrefix("□") == true {
                 self.todoSwitch.isOn = true
             }
+            eventDeleteButton.isHidden = false
         }
         
         self.startDatePicker.date = startDate!
@@ -143,6 +145,9 @@ class EditScheduleViewController: UIViewController {
             let nserror = error as NSError
             print(nserror)
         }
+    }
+    
+    @IBAction func deleteCalendar(_ sender: Any) {
     }
     
     /*

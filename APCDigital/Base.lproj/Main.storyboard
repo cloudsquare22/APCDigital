@@ -1022,6 +1022,18 @@
                                     <action selector="addCalendar:" destination="eLd-sw-egX" eventType="touchUpInside" id="879-8r-Wox"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="veG-pp-DIV">
+                                <rect key="frame" x="17" y="382" width="75" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemRedColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="calendar.badge.minus" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="32" scale="large"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="deleteCalendar:" destination="eLd-sw-egX" eventType="touchUpInside" id="0iy-rN-JQu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fUf-d1-JVe"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1031,6 +1043,7 @@
                         <outlet property="allDaySwitch" destination="Sm4-av-chj" id="cZ6-AC-gG4"/>
                         <outlet property="calendarPicker" destination="fiq-W5-Uyq" id="5fy-pe-xUr"/>
                         <outlet property="endDatePicker" destination="U3A-TN-oeC" id="VvM-Ct-nSN"/>
+                        <outlet property="eventDeleteButton" destination="veG-pp-DIV" id="CNo-ue-fhg"/>
                         <outlet property="locationText" destination="vmn-bx-CRg" id="1jg-z9-auL"/>
                         <outlet property="notificationSwitch" destination="Svm-jD-NGG" id="0bB-sI-mRV"/>
                         <outlet property="startDatePicker" destination="v4L-Ht-d5l" id="1AR-W3-ggD"/>
@@ -1225,6 +1238,7 @@
         <image name="arrow.up.doc" catalog="system" width="115" height="128"/>
         <image name="calendar" catalog="system" width="128" height="106"/>
         <image name="calendar.badge.clock" catalog="system" width="128" height="108"/>
+        <image name="calendar.badge.minus" catalog="system" width="128" height="108"/>
         <image name="calendar.badge.plus" catalog="system" width="128" height="108"/>
         <image name="calendar.circle" catalog="system" width="128" height="121"/>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
@@ -1241,6 +1255,9 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
