@@ -35,15 +35,17 @@ class EditScheduleViewController: UIViewController {
         var selectCalendar = eventStore.defaultCalendarForNewEvents?.title
         
         if let event = baseEvent {
-            self.titleText.text = event.title
             self.locationText.text = event.location
             if event.isAllDay == true {
                 self.allday = true
             }
             selectCalendar = baseEvent?.calendar.title
-            if self.titleText.text?.hasPrefix("□") == true {
+            var title = event.title
+            if title!.hasPrefix("□") == true {
                 self.todoSwitch.isOn = true
+                title!.removeFirst()
             }
+            self.titleText.text = title
             eventDeleteButton.isHidden = false
         }
         
