@@ -150,6 +150,17 @@ class EditScheduleViewController: UIViewController {
     }
     
     @IBAction func deleteCalendar(_ sender: Any) {
+        print("Event Delete")
+        do {
+            try self.eventStore.remove(self.eventStore.event(withIdentifier: self.baseEvent!.eventIdentifier)!, span: .thisEvent)
+            self.viewController?.pageUpsert()
+            self.viewController?.updateDays()
+            self.dismiss(animated: true, completion: nil)
+        }
+        catch {
+            let nserror = error as NSError
+            print(nserror)
+        }
     }
     
     /*
