@@ -298,7 +298,8 @@ class APCDCalendar {
                             }
                         }
                     }
-                    view.addSubview(APCDCalendarUtil.instance.createScheduleView(event: event,
+                    view.addSubview(APCDCalendarUtil.instance.createScheduleView(title: event.title,
+                                                                                 event: event,
                                                                                  startDate: startDate,
                                                                                  endDate: endDate,
                                                                                  startLineHidden: startLineHidden,

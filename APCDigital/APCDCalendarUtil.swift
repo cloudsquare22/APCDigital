@@ -131,7 +131,8 @@ class APCDCalendarUtil {
                        alpha: 0.3)
     }
     
-    func createScheduleView(event: EKEvent,
+    func createScheduleView(title: String,
+                            event: EKEvent,
                             startDate: Date,
                             endDate: Date,
                             startLineHidden: Bool,
@@ -170,7 +171,7 @@ class APCDCalendarUtil {
         let diff = endDate.timeIntervalSince(startDate) / 900
         let scheduleView = ScheduleView(frame: CGRect(x: x, y: y, width: 140.0 + widthAdd, height: 11.375 * diff))
         scheduleView.baseView.backgroundColor = APCDCalendarUtil.instance.cgToUIColor(cgColor: event.calendar.cgColor, alpha: 0.3)
-        scheduleView.label.text = event.title
+        scheduleView.label.text = title
         scheduleView.label.numberOfLines = 0
         var labelFrame = scheduleView.label.frame
         scheduleView.label.sizeToFit()
@@ -179,7 +180,7 @@ class APCDCalendarUtil {
         scheduleView.minute.image = APCDCalendarUtil.instance.createMinuteSFSymbol(startDateComponents: startDateComponents, startLineHidden: startLineHidden)
         scheduleView.endTime.frame = CGRect(x: -8.0, y: 11.375 * diff - 2, width: 16, height: 16)
         
-        if movementSymmbolList.contains(String(event.title.prefix(1))) == true {
+        if movementSymmbolList.contains(String(title.prefix(1))) == true {
             scheduleView.addLine(isMove: true, isStartLineHidden: startLineHidden, isEndLineHidden: endLineHidden)
         }
         else {

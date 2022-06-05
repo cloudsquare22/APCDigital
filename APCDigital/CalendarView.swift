@@ -90,7 +90,7 @@ class CalendarView: UIView {
                 }
 
                 // add Location
-                event.title = APCDCalendarUtil.instance.addLocationEventTitle(event: event)
+                var title = APCDCalendarUtil.instance.addLocationEventTitle(event: event)!
 
                 if event.isAllDay == false {
                     var startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
@@ -107,25 +107,25 @@ class CalendarView: UIView {
                     if let startH = startDateComponents.hour, let startM = startDateComponents.minute,
                         let endH = endDateComponents.hour, let endM = endDateComponents.minute {
                         if startH < 6 && (endH < 6 || (endH <= 6 && endM == 0)) {
-                            let outSchedule = String(format: "%d:%02d ", startH, startM) + event.title
+                            let outSchedule = String(format: "%d:%02d ", startH, startM) + title
                             dayOutPeriod[startDateComponents.weekday!].append(outSchedule)
                             continue
                         }
                         else if startH < 6 , 6 <= endH {
                             startDateComponents.hour = 6
                             startDateComponents.minute = 0
-                            event.title = String(format: "%d:%02d〜", startH, startM) + event.title
+                            title = String(format: "%d:%02d〜", startH, startM) + title
                             startDate = Calendar.current.date(from: startDateComponents)!
                             startLineHidden = true
                         }
                         else if startH <= 23, 0 <= endH, startDateComponents.day != endDateComponents.day {
                             if startH == 23, 30 <= startM {
-                                let outSchedule = String(format: "%d:%02d ", startH, startM) + event.title
+                                let outSchedule = String(format: "%d:%02d ", startH, startM) + title
                                 dayOutPeriod[startDateComponents.weekday!].append(outSchedule)
                                 continue
                             }
                             else {
-                                event.title = event.title + String(format: "\n〜%d:%02d", endH, endM)
+                                title = title + String(format: "\n〜%d:%02d", endH, endM)
                                 endDateComponents.year = startDateComponents.year
                                 endDateComponents.month = startDateComponents.month
                                 endDateComponents.day = startDateComponents.day
@@ -136,7 +136,8 @@ class CalendarView: UIView {
                             }
                         }
                     }
-                    self.addSubview(APCDCalendarUtil.instance.createScheduleView(event: event,
+                    self.addSubview(APCDCalendarUtil.instance.createScheduleView(title: title,
+                                                                                 event: event,
                                                                                  startDate: startDate,
                                                                                  endDate: endDate,
                                                                                  startLineHidden: startLineHidden,
@@ -150,10 +151,8 @@ class CalendarView: UIView {
                     while startDate <= endDate {
                         let startDateComponents = Calendar.current.dateComponents(in: .current, from: startDate)
                         print(startDateComponents.weekday!)
-                        if event.title != nil {
-                            let outSchedule = event.title!
-                            dayOutPeriod[startDateComponents.weekday!].append(outSchedule)
-                        }
+                        let outSchedule = title
+                        dayOutPeriod[startDateComponents.weekday!].append(outSchedule)
                         if startDateComponents.weekday! == 1 {
                             break
                         }
