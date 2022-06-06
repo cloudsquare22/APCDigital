@@ -38,6 +38,7 @@ class EditScheduleViewController: UIViewController {
             self.locationText.text = event.location
             if event.isAllDay == true {
                 self.allday = true
+                self.allDaySwitch.isOn = true
             }
             selectCalendar = baseEvent?.calendar.title
             var title = event.title
