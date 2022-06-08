@@ -283,8 +283,9 @@ class APCDCalendar {
                         else if startH <= 23, 0 <= endH, startDateComponents.day != endDateComponents.day {
                             if startH == 23, 30 <= startM {
                                 print("Out range 23:30")
-                                let outSchedule = String(format: "%d:%02d〜", startH, startM) + event.title
+                                let outSchedule = String(format: "%d:%02d ", startH, startM) + event.title
                                 dayOutPeriod.append(outSchedule)
+                                continue
                             }
                             else {
                                 event.title = event.title + String(format: "\n〜%d:%02d", endH, endM)
