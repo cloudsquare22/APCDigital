@@ -45,34 +45,7 @@ class CalendarView: UIView {
         let nationalHoliday = base.nationalHolidayCalendarName
         for event in eventArray {
             if event.calendar.title == nationalHoliday {
-                let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
-                if let title = event.title {
-                    switch startDateComponents.weekday {
-                    case 2:
-                        base.day1Holiday.text = title
-                        base.day1Holiday.isHidden = false
-                    case 3:
-                        base.day2Holiday.text = title
-                        base.day2Holiday.isHidden = false
-                    case 4:
-                        base.day3Holiday.text = title
-                        base.day3Holiday.isHidden = false
-                    case 5:
-                        base.day4Holiday.text = title
-                        base.day4Holiday.isHidden = false
-                    case 6:
-                        base.day5Holiday.text = title
-                        base.day5Holiday.isHidden = false
-                    case 7:
-                        base.day6Holiday.text = title
-                        base.day6Holiday.isHidden = false
-                    case 1:
-                        base.day7Holiday.text = title
-                        base.day7Holiday.isHidden = false
-                    default:
-                        break
-                    }
-                }
+                dispNationalHoliday(event: event, base: base)
                 continue
             }
             if base.displayCalendars.contains(event.calendar.title) == true {
@@ -166,6 +139,37 @@ class CalendarView: UIView {
                 print("dayOutPeriod weekday:\(index)")
                 print(dayOutPeriod[index])
                 self.dispOutSchedule(weekday: index, texts: dayOutPeriod[index], base: base)
+            }
+        }
+    }
+    
+    func dispNationalHoliday(event: EKEvent, base: ViewController) {
+        let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
+        if let title = event.title {
+            switch startDateComponents.weekday {
+            case 2:
+                base.day1Holiday.text = title
+                base.day1Holiday.isHidden = false
+            case 3:
+                base.day2Holiday.text = title
+                base.day2Holiday.isHidden = false
+            case 4:
+                base.day3Holiday.text = title
+                base.day3Holiday.isHidden = false
+            case 5:
+                base.day4Holiday.text = title
+                base.day4Holiday.isHidden = false
+            case 6:
+                base.day5Holiday.text = title
+                base.day5Holiday.isHidden = false
+            case 7:
+                base.day6Holiday.text = title
+                base.day6Holiday.isHidden = false
+            case 1:
+                base.day7Holiday.text = title
+                base.day7Holiday.isHidden = false
+            default:
+                break
             }
         }
     }
