@@ -16,6 +16,7 @@ class RapPKCanvasView: PKCanvasView {
     var taskBoxColor: UIColor = .black
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("onTaskbox:\(onTaskbox), onErase:\(onErase)")
         guard self.onErase == false else {
             return
         }

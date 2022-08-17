@@ -266,5 +266,8 @@ extension PencilCaseView: UIPencilInteractionDelegate {
         self.inkErase.tintColor = color
         self.inkErase.backgroundColor = colorBG
         self.updateInk()
+        if let pkcanvasview = self.pKCanvasView {
+            pkcanvasview.onErase = self.onErase
+        }
     }
 }
