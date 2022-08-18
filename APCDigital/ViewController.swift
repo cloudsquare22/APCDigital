@@ -325,13 +325,15 @@ class ViewController: UIViewController {
         }
         var startDateComponents = Calendar.current.dateComponents(in: .current, from: pageMonday + Double(86400 * weekDayIndex))
         startDateComponents.hour = startH
-        startDateComponents.minute = startM
-
+        startDateComponents.minute = startM        
         let editScheduleViewController = storyBoard.instantiateViewController(withIdentifier: "EditScheduleView") as? EditScheduleViewController
         if let controller = editScheduleViewController {
             controller.viewController = self
             controller.startDate = Calendar.current.date(from: startDateComponents)
             controller.endDate = controller.startDate! + (60 * 60)
+            if startH == 0 {
+                controller.allday = true
+            }
             self.setPopoverPresentationController(size: CGSize(width: 600, height: 450),
                                                   rect: CGRect(x: self.view.frame.width / 2, y: 64, width: 1, height: 1),
                                                   controller: controller)
