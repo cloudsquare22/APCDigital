@@ -17,7 +17,7 @@ class EditScheduleViewController: UIViewController {
     var endDate: Date? = nil
     var baseEvent: EKEvent? = nil
 
-    var eventStore = EKEventStore()
+    var eventStore: EKEventStore = EKEventStore()
 
     @IBOutlet weak var titleText: UITextField!
     @IBOutlet weak var locationText: UITextField!
@@ -31,6 +31,8 @@ class EditScheduleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.eventStore = self.viewController!.eventStore
         
         var selectCalendar = eventStore.defaultCalendarForNewEvents?.title
         
