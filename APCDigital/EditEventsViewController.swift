@@ -20,6 +20,7 @@ class EditEventsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.eventStore = self.viewController!.eventStore
         self.setEvents()
     }
 
