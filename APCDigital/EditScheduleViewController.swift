@@ -28,6 +28,7 @@ class EditScheduleViewController: UIViewController {
     @IBOutlet weak var todoSwitch: UISwitch!
     @IBOutlet weak var notificationSwitch: UISwitch!
     @IBOutlet weak var eventDeleteButton: UIButton!
+    @IBOutlet weak var actionitemTexts: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +71,11 @@ class EditScheduleViewController: UIViewController {
                 break
             }
         }
+        
+        self.actionitemTexts.layer.borderColor = UIColor.systemGray5.cgColor
+        self.actionitemTexts.layer.borderWidth = 1
+        self.actionitemTexts.layer.cornerRadius = 8
+        self.actionitemTexts.layer.masksToBounds = true
         
         let notification = NotificationCenter.default
         notification.addObserver(self, selector: #selector(keyboardWillShow(_:)),
