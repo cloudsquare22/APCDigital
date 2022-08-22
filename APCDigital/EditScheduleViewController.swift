@@ -51,6 +51,9 @@ class EditScheduleViewController: UIViewController {
             }
             self.titleText.text = title
             eventDeleteButton.isHidden = false
+            if let notes = event.notes {
+                self.actionitemTexts.text = notes
+            }
         }
         
         self.startDatePicker.date = startDate!
