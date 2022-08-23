@@ -129,6 +129,7 @@ class EditScheduleViewController: UIViewController {
         event.endDate = self.endDatePicker.date
         let calendar = self.viewController?.calendars[calendarPicker.selectedRow(inComponent: 0)]
         event.calendar = eventStore.calendar(withIdentifier: calendar!.calendarIdentifier)
+        event.notes = self.actionitemTexts.text
         if allday == true {
             event.isAllDay = true
 
