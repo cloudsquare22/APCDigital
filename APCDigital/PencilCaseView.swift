@@ -224,6 +224,7 @@ class PencilCaseView: UIView {
         }
         else {
             self.pKCanvasView!.tool = PKInkingTool(.pen, color: selectInkToUIColor(), width: PKInkingTool.InkType.pen.defaultWidth)
+            print("Pencil width:\(PKInkingTool.InkType.pen.defaultWidth)")
         }
         if self.onTaskbox == true {
             self.taskbox.tintColor = self.selectInkToUIColor()
