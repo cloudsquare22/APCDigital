@@ -268,6 +268,19 @@ class ViewController: UIViewController {
                 break
             }
         }
+        var events: [EKEvent] = []
+        for scheduleView in scheduleViews {
+            if scheduleView.event.calendar.type != .calDAV {
+                continue
+            }
+            if scheduleView.x <= point.x &&
+                point.x <= scheduleView.x + scheduleView.w &&
+                scheduleView.y <= point.y &&
+                point.y <= scheduleView.y + scheduleView.h {
+                events.append(event!)
+            }
+        }
+        print("count:\(events.count)")
         if let event = event {
             print(event.title!)
             print(event.calendar.type.rawValue)
