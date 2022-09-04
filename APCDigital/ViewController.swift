@@ -270,6 +270,10 @@ class ViewController: UIViewController {
         }
         if let event = event {
             print(event.title!)
+            print(event.calendar.type.rawValue)
+            guard  event.calendar.type == .calDAV else {
+                return
+            }
             let editScheduleViewController = storyBoard.instantiateViewController(withIdentifier: "EditScheduleView") as? EditScheduleViewController
             if let controller = editScheduleViewController {
                 controller.viewController = self
