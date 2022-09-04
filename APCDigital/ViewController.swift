@@ -258,16 +258,6 @@ class ViewController: UIViewController {
         logger.info()
         let point = sender.location(in: self.pKCanvasView)
         
-        var event: EKEvent? = nil
-        for scheduleView in scheduleViews {
-            if scheduleView.x <= point.x &&
-                point.x <= scheduleView.x + scheduleView.w &&
-                scheduleView.y <= point.y &&
-                point.y <= scheduleView.y + scheduleView.h {
-                event = scheduleView.event
-                break
-            }
-        }
         var events: [EKEvent] = []
         for scheduleView in scheduleViews {
             if scheduleView.event.calendar.type != .calDAV {
@@ -277,31 +267,47 @@ class ViewController: UIViewController {
                 point.x <= scheduleView.x + scheduleView.w &&
                 scheduleView.y <= point.y &&
                 point.y <= scheduleView.y + scheduleView.h {
-                events.append(event!)
+                events.append(scheduleView.event)
             }
         }
         print("count:\(events.count)")
-        if let event = event {
-            print(event.title!)
-            print(event.calendar.type.rawValue)
-            guard  event.calendar.type == .calDAV else {
-                return
+        if events.count > 0 {
+            let alert = UIAlertController(title: "Event Action", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "* New events *", style: .default, handler: { _ in
+                self.dispEditScheduleView(point: point)
+            }))
+            for event in events {
+                alert.addAction(UIAlertAction(title: event.title, style: .default, handler: { _ in
+                    self.openEditScheduleView(event: event)
+                }))
             }
-            let editScheduleViewController = storyBoard.instantiateViewController(withIdentifier: "EditScheduleView") as? EditScheduleViewController
-            if let controller = editScheduleViewController {
-                controller.viewController = self
-                controller.startDate = event.startDate
-                controller.endDate = event.endDate
-                controller.baseEvent = event
-                controller.eventStore = self.eventStore
-                self.setPopoverPresentationController(size: CGSize(width: 600, height: 450),
-                                                      rect: CGRect(x: self.view.frame.width / 2, y: 64, width: 1, height: 1),
-                                                      controller: controller)
-                present(controller, animated: false, completion: nil)
-            }
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                print("cancel")
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
         else {
             dispEditScheduleView(point: point)
+        }
+    }
+    
+    func openEditScheduleView(event: EKEvent) {
+        print(event.title!)
+        print(event.calendar.type.rawValue)
+        guard  event.calendar.type == .calDAV else {
+            return
+        }
+        let editScheduleViewController = storyBoard.instantiateViewController(withIdentifier: "EditScheduleView") as? EditScheduleViewController
+        if let controller = editScheduleViewController {
+            controller.viewController = self
+            controller.startDate = event.startDate
+            controller.endDate = event.endDate
+            controller.baseEvent = event
+            controller.eventStore = self.eventStore
+            self.setPopoverPresentationController(size: CGSize(width: 600, height: 450),
+                                                  rect: CGRect(x: self.view.frame.width / 2, y: 64, width: 1, height: 1),
+                                                  controller: controller)
+            present(controller, animated: false, completion: nil)
         }
     }
     
