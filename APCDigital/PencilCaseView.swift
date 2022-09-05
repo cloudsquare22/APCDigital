@@ -179,6 +179,9 @@ class PencilCaseView: UIView {
         self.marker.tintColor = color
         self.marker.backgroundColor = colorBG
         self.updateInk()
+        if let pkcanvasview = self.pKCanvasView {
+            pkcanvasview.onMarker = self.onMarker
+        }
     }
     
     @IBAction func tapRuler(_ sender: Any) {
