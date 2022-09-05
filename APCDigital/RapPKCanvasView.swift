@@ -38,8 +38,8 @@ class RapPKCanvasView: PKCanvasView {
         if let touch = touches.first {
             print("touchesMoved: \(touch.precisePreviousLocation(in: self)) - \(touch.preciseLocation(in: self))")
 //            self.strokeRectangle(location: touch.preciseLocation(in: self))
-            let startPoint = PKStrokePoint(location: touch.precisePreviousLocation(in: self), timeOffset: 0, size: CGSize(width: 2.2, height: 2.2), opacity: 2, force: 1, azimuth: 1, altitude: 1)
-            let endPoint = PKStrokePoint(location: touch.preciseLocation(in: self), timeOffset: 0, size: CGSize(width: 2.2, height: 2.2), opacity: 2, force: 1, azimuth: 1, altitude: 1)
+            let startPoint = PKStrokePoint(location: touch.precisePreviousLocation(in: self), timeOffset: 0, size: CGSize(width: 2.2, height: 2.2), opacity: 2, force: 0, azimuth: 0, altitude: 0)
+            let endPoint = PKStrokePoint(location: touch.preciseLocation(in: self), timeOffset: 0, size: CGSize(width: 2.2, height: 2.2), opacity: 2, force: 0, azimuth: 0, altitude: 0)
             let ink = PKInk(.pen, color: .red)
             let path = PKStrokePath(controlPoints: [startPoint, endPoint], creationDate: Date())
             let stroke =  PKStroke(ink: ink, path: path)
