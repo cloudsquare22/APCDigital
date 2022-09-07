@@ -89,7 +89,7 @@ class ViewController: UIViewController {
         pKCanvasView.backgroundColor = .clear
         pKCanvasView.overrideUserInterfaceStyle = .light
         pKCanvasView.isRulerActive = false
-
+        
         let tapPKCanvasView = UITapGestureRecognizer(target: self, action: #selector(self.tapPKCanvasView(sender:)))
         tapPKCanvasView.numberOfTapsRequired = 1
         pKCanvasView.addGestureRecognizer(tapPKCanvasView)
@@ -113,7 +113,9 @@ class ViewController: UIViewController {
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeDown(sender:)))
         swipeDown.direction = .down
         pKCanvasView.addGestureRecognizer(swipeDown)
-        
+
+        print(pKCanvasView.gestureRecognizers!)
+
         self.setPageMonday(direction: .today)
 
         self.dispPencilCase()
