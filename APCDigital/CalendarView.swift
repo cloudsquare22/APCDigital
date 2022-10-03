@@ -72,13 +72,23 @@ class CalendarView: UIView {
                     if base.days.contains(startDateComponents.day!) == false {
                         continue
                     }
+                    
 
                     var startDate: Date = event.startDate
                     var endDate: Date = event.endDate
                     var startLineHidden = false
                     var endLineHidden = false
+                    
                     if let startH = startDateComponents.hour, let startM = startDateComponents.minute,
                         let endH = endDateComponents.hour, let endM = endDateComponents.minute {
+                        
+                        // 期間外エリア表示指定カレンダー処理
+                        if base.displayOutCalendars.contains(event.calendar.title) == true {
+                            let outSchedule = String(format: "%d:%02d ", startH, startM) + title
+                            dayOutPeriod[startDateComponents.weekday!].append(outSchedule)
+                            continue
+                        }
+                        
                         if startH < 6 && (endH < 6 || (endH <= 6 && endM == 0)) {
                             let outSchedule = String(format: "%d:%02d ", startH, startM) + title
                             dayOutPeriod[startDateComponents.weekday!].append(outSchedule)
