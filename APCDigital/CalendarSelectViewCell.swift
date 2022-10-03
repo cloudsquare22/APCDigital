@@ -12,7 +12,8 @@ class CalendarSelectViewCell: UITableViewCell {
 
     @IBOutlet weak var display: UISwitch!
     @IBOutlet weak var title: UILabel!
-    
+    @IBOutlet weak var inOut: UISegmentedControl!
+
     var index: Int = 0
     weak var tableView: CalendarSelectViewController? = nil
     
@@ -30,4 +31,6 @@ class CalendarSelectViewCell: UITableViewCell {
         tableView?.displayOnOff[index] = self.display.isOn
     }
     
+    @IBAction func tapInOut(_ sender: Any) {
+    }
 }

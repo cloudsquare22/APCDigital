@@ -62,6 +62,7 @@ class ViewController: UIViewController {
     var weekDaysDateComponents: [DateComponents] = []
     var calendars: [EKCalendar] = []
     var displayCalendars: [String] = []
+    var displayOutCalendars: [String] = ["Tampa Bay Buccaneers"]
     var nationalHolidayCalendarName = "日本の祝日"
     
     var scheduleViews: [(x: Double, y: Double, w: Double, h: Double, event: EKEvent)] = []

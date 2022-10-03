@@ -13,6 +13,7 @@ class CalendarSelectViewController: UITableViewController {
     weak var viewController: ViewController? = nil
     
     var displayOnOff: [Bool] = []
+    var displayOut: [Bool] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +72,12 @@ class CalendarSelectViewController: UITableViewController {
             cell.display.isOn = false
             self.displayOnOff.append(false)
 
+        }
+        if viewController!.displayOutCalendars.contains(viewController!.calendars[indexPath.row].title) == true {
+            cell.inOut.selectedSegmentIndex = 1
+        }
+        else {
+            cell.inOut.selectedSegmentIndex = 0
         }
         return cell
     }

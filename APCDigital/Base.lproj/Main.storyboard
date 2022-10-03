@@ -440,16 +440,28 @@
                                             </connections>
                                         </switch>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Calendar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tZS-cu-5T8">
-                                            <rect key="frame" x="75" y="11" width="505" height="21"/>
+                                            <rect key="frame" x="75" y="11" width="434" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="4nS-mV-iF3">
+                                            <rect key="frame" x="517" y="6" width="63" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="in"/>
+                                                <segment title="out"/>
+                                            </segments>
+                                            <connections>
+                                                <action selector="tapInOut:" destination="IsS-3q-Ewu" eventType="valueChanged" id="Erl-z5-EoY"/>
+                                            </connections>
+                                        </segmentedControl>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="display" destination="n06-QT-5Rh" id="8cw-cR-2GG"/>
+                                    <outlet property="inOut" destination="4nS-mV-iF3" id="7fM-ci-McL"/>
                                     <outlet property="title" destination="tZS-cu-5T8" id="zi7-ck-Lfa"/>
                                 </connections>
                             </tableViewCell>
