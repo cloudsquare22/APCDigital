@@ -62,7 +62,7 @@ class ViewController: UIViewController {
     var weekDaysDateComponents: [DateComponents] = []
     var calendars: [EKCalendar] = []
     var displayCalendars: [String] = []
-    var displayOutCalendars: [String] = ["Tampa Bay Buccaneers"]
+    var displayOutCalendars: [String] = []
     var nationalHolidayCalendarName = "日本の祝日"
     
     var scheduleViews: [(x: Double, y: Double, w: Double, h: Double, event: EKEvent)] = []
@@ -192,6 +192,10 @@ class ViewController: UIViewController {
             for calendar in self.calendars {
                 self.displayCalendars.append(calendar.title)
             }
+        }
+
+        if let displays = UserDefaults.standard.stringArray(forKey: "displayOutCalendars") {
+            self.displayOutCalendars = displays
         }
     }
     

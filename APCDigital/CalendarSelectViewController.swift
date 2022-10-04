@@ -45,7 +45,8 @@ class CalendarSelectViewController: UITableViewController {
             }
         }
         print(self.viewController!.displayOutCalendars)
-    
+        UserDefaults.standard.set(self.viewController!.displayOutCalendars, forKey: "displayOutCalendars")
+
         self.viewController!.updateDays()
     }
 
