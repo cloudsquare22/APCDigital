@@ -32,5 +32,11 @@ class CalendarSelectViewCell: UITableViewCell {
     }
     
     @IBAction func tapInOut(_ sender: Any) {
+        if self.inOut.selectedSegmentIndex == 0 {
+            self.tableView?.displayOut[index] = false
+        }
+        else {
+            self.tableView?.displayOut[index] = true
+        }
     }
 }

@@ -36,6 +36,16 @@ class CalendarSelectViewController: UITableViewController {
         }
         print(viewController!.displayCalendars)
         UserDefaults.standard.set(viewController!.displayCalendars, forKey: "displayCalendars")
+        
+        print(self.displayOut)
+        self.viewController!.displayOutCalendars = []
+        for (index, calendar) in self.viewController!.calendars.indexed() {
+            if self.displayOut[index] == true {
+                self.viewController!.displayOutCalendars.append(calendar.title)
+            }
+        }
+        print(self.viewController!.displayOutCalendars)
+    
         self.viewController!.updateDays()
     }
 
@@ -75,9 +85,11 @@ class CalendarSelectViewController: UITableViewController {
         }
         if viewController!.displayOutCalendars.contains(viewController!.calendars[indexPath.row].title) == true {
             cell.inOut.selectedSegmentIndex = 1
+            self.displayOut.append(true)
         }
         else {
             cell.inOut.selectedSegmentIndex = 0
+            self.displayOut.append(false)
         }
         return cell
     }
