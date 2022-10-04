@@ -35,7 +35,10 @@ class ExportViewController: UIViewController {
     @IBAction func tapExport(_ sender: Any) {
         if dateStart.date < dateEnd.date {
             let aPCDCalendar = APCDCalendar()
-            if let url = aPCDCalendar.export(fromDate: dateStart.date, toDate: dateEnd.date, displayCalendars: self.viewController!.displayCalendars) {
+            if let url = aPCDCalendar.export(fromDate: dateStart.date,
+                                             toDate: dateEnd.date,
+                                             displayCalendars: self.viewController!.displayCalendars,
+                                             displayOutCalendars: self.viewController!.displayOutCalendars) {
                 let activityViewController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
                 activityViewController.modalPresentationStyle = .popover
                 activityViewController.popoverPresentationController?.sourceRect = (sender as! UIButton).frame

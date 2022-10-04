@@ -16,6 +16,7 @@ import Logging
 class APCDCalendar {
     var eventStore = EKEventStore()
     var displayCalendars: [String] = []
+    var displayOutCalendars: [String] = []
 
     let logger = Logger()
     
@@ -79,9 +80,10 @@ class APCDCalendar {
         }
     }
 
-    func export(fromDate: Date, toDate: Date, displayCalendars: [String]) -> URL? {
+    func export(fromDate: Date, toDate: Date, displayCalendars: [String], displayOutCalendars: [String]) -> URL? {
         var result: URL? = nil
         self.displayCalendars = displayCalendars
+        self.displayOutCalendars = displayOutCalendars
         
         print("Export start \(Date())")
         let pdfData = NSMutableData()
@@ -265,6 +267,14 @@ class APCDCalendar {
                     var endLineHidden = false
                     if let startH = startDateComponents.hour, let startM = startDateComponents.minute,
                         let endH = endDateComponents.hour, let endM = endDateComponents.minute {
+                        
+                        // 期間外エリア表示指定カレンダー処理
+                        if self.displayOutCalendars.contains(event.calendar.title) == true {
+                            let outSchedule = String(format: "%d:%02d ", startH, startM) + event.title
+                            dayOutPeriod.append(outSchedule)
+                            continue
+                        }
+
                         if startH < 6 && (endH < 6 || (endH <= 6 && endM == 0)) {
                             print("Out range")
                             let outSchedule = String(format: "%d:%02d ", startH, startM) + event.title
