@@ -84,14 +84,12 @@ class CalendarView: UIView {
                         
                         // 期間外エリア表示指定カレンダー処理
                         if base.displayOutCalendars.contains(event.calendar.title) == true {
-                            let outSchedule = String(format: "%d:%02d ", startH, startM) + title
-                            dayOutPeriod[startDateComponents.weekday!].append(outSchedule)
+                            dayOutPeriod[startDateComponents.weekday!].append(createOutScheduleString(startH: startH, startM: startM, title: title))
                             continue
                         }
                         
                         if startH < 6 && (endH < 6 || (endH <= 6 && endM == 0)) {
-                            let outSchedule = String(format: "%d:%02d ", startH, startM) + title
-                            dayOutPeriod[startDateComponents.weekday!].append(outSchedule)
+                            dayOutPeriod[startDateComponents.weekday!].append(createOutScheduleString(startH: startH, startM: startM, title: title))
                             continue
                         }
                         else if startH < 6 , 6 <= endH {
@@ -103,8 +101,7 @@ class CalendarView: UIView {
                         }
                         else if startH <= 23, 0 <= endH, startDateComponents.day != endDateComponents.day {
                             if startH == 23, 30 <= startM {
-                                let outSchedule = String(format: "%d:%02d ", startH, startM) + title
-                                dayOutPeriod[startDateComponents.weekday!].append(outSchedule)
+                                dayOutPeriod[startDateComponents.weekday!].append(createOutScheduleString(startH: startH, startM: startM, title: title))
                                 continue
                             }
                             else {
@@ -151,6 +148,11 @@ class CalendarView: UIView {
                 self.dispOutSchedule(weekday: index, texts: dayOutPeriod[index], base: base)
             }
         }
+    }
+    
+    func createOutScheduleString(startH: Int, startM: Int, title: String) -> String {
+        let outSchedule = String(format: "%d:%02d ", startH, startM) + title
+        return outSchedule
     }
     
     func dispNationalHoliday(event: EKEvent, base: ViewController) {
