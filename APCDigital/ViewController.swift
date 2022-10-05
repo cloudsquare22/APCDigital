@@ -489,8 +489,8 @@ class ViewController: UIViewController {
     func dispEvent() {
         logger.info()
         self.calendarView.clearSchedule()
-        let eventArray = self.getEvents()
-        self.calendarView.dispSchedule(eventArray: eventArray, base: self)
+        let eKEventList = self.getEvents()
+        self.calendarView.dispSchedule(eKEventList: eKEventList, base: self)
     }
     
     func getEvents() -> [EKEvent] {

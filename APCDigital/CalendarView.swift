@@ -22,9 +22,9 @@ class CalendarView: UIView {
         }
     }
     
-    func dispSchedule(eventArray: [EKEvent], base: ViewController) {
-        logger.info("eventArray Count: \(eventArray.count)")
-        logger.debug("eventArray: \(eventArray) base: \(base)")
+    func dispSchedule(eKEventList: [EKEvent], base: ViewController) {
+        logger.info("eventArray Count: \(eKEventList.count)")
+        logger.debug("eventArray: \(eKEventList) base: \(base)")
         var dayOutPeriod: [[String]] = .init(repeating: [], count: 8)
         let movementSymmbolList: [String] = APCDCalendarUtil.instance.makeMovementSymmbolList()
         let eventFilters: [(calendar: String, filterString: String)] = EventFilter.selectAll()
@@ -43,7 +43,7 @@ class CalendarView: UIView {
         base.day6outPeriod.isHidden = true
         base.day7outPeriod.isHidden = true
         let nationalHoliday = base.nationalHolidayCalendarName
-        for event in eventArray {
+        for event in eKEventList {
             if event.calendar.title == nationalHoliday {
                 dispNationalHoliday(event: event, base: base)
                 continue
