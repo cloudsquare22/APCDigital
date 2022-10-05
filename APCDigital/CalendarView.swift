@@ -22,12 +22,7 @@ class CalendarView: UIView {
         }
     }
     
-    func dispSchedule(eKEventList: [EKEvent], base: ViewController) {
-        logger.info("eventArray Count: \(eKEventList.count)")
-        logger.debug("eventArray: \(eKEventList) base: \(base)")
-        var dayOutPeriod: [[String]] = .init(repeating: [], count: 8)
-        let movementSymmbolList: [String] = APCDCalendarUtil.instance.makeMovementSymmbolList()
-        let eventFilters: [(calendar: String, filterString: String)] = EventFilter.selectAll()
+    func hiddenBaseParts(base: ViewController) {
         base.day1Holiday.isHidden = true
         base.day2Holiday.isHidden = true
         base.day3Holiday.isHidden = true
@@ -42,6 +37,15 @@ class CalendarView: UIView {
         base.day5outPeriod.isHidden = true
         base.day6outPeriod.isHidden = true
         base.day7outPeriod.isHidden = true
+    }
+    
+    func dispSchedule(eKEventList: [EKEvent], base: ViewController) {
+        logger.info("eventArray Count: \(eKEventList.count)")
+        logger.debug("eventArray: \(eKEventList) base: \(base)")
+        var dayOutPeriod: [[String]] = .init(repeating: [], count: 8)
+        let movementSymmbolList: [String] = APCDCalendarUtil.instance.makeMovementSymmbolList()
+        let eventFilters: [(calendar: String, filterString: String)] = EventFilter.selectAll()
+        self.hiddenBaseParts(base: base)
         let nationalHoliday = base.nationalHolidayCalendarName
         for event in eKEventList {
             if event.calendar.title == nationalHoliday {
