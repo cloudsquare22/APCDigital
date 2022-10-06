@@ -86,13 +86,16 @@ class CalendarView: UIView {
                     if let startH = startDateComponents.hour, let startM = startDateComponents.minute,
                         let endH = endDateComponents.hour, let endM = endDateComponents.minute {
                         
-                        print(event.calendar.cgColor.components![0])
-                        let r = Int(floor(event.calendar.cgColor.components![0] * 100) / 100 * 255)
-                        print("r:\(r)")
-                        let g = Int(floor(event.calendar.cgColor.components![1] * 100) / 100 * 255)
-                        print("g:\(g)")
-                        let b = Int(floor(event.calendar.cgColor.components![2] * 100) / 100 * 255)
-                        print("b:\(b)")
+                        // RGB抽出、255形式変換
+                        if let rgba = event.calendar.cgColor.components {
+                            print(event.calendar.cgColor.components![0])
+                            let r = Int(floor(rgba[0] * 100) / 100 * 255)
+                            print("r:\(r)")
+                            let g = Int(floor(rgba[1] * 100) / 100 * 255)
+                            print("g:\(g)")
+                            let b = Int(floor(rgba[2] * 100) / 100 * 255)
+                            print("b:\(b)")
+                        }
 
                         // 期間外エリア表示指定カレンダー処理
                         if base.displayOutCalendars.contains(event.calendar.title) == true {
