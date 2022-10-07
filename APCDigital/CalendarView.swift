@@ -86,16 +86,8 @@ class CalendarView: UIView {
                     if let startH = startDateComponents.hour, let startM = startDateComponents.minute,
                         let endH = endDateComponents.hour, let endM = endDateComponents.minute {
                         
-                        // RGB抽出、255形式変換
-                        if let rgba = event.calendar.cgColor.components {
-                            print(event.calendar.cgColor.components![0])
-                            let r = Int(floor(rgba[0] * 100) / 100 * 255)
-                            print("r:\(r)")
-                            let g = Int(floor(rgba[1] * 100) / 100 * 255)
-                            print("g:\(g)")
-                            let b = Int(floor(rgba[2] * 100) / 100 * 255)
-                            print("b:\(b)")
-                        }
+                        let rgb = event.calendar.cgColor.getRGBInt()
+                        print("rgb:\(rgb)")
 
                         // 期間外エリア表示指定カレンダー処理
                         if base.displayOutCalendars.contains(event.calendar.title) == true {
@@ -227,5 +219,22 @@ class CalendarView: UIView {
 //        UIColor(ciColor: .green).setStroke()
 //        rectangle.lineWidth = 1.0
 //        rectangle.stroke()
+    }
+}
+
+extension CGColor {
+    func getRGBInt() -> (Int, Int, Int) {
+        var result = (0, 0, 0)
+        // RGB抽出、255形式変換
+        if let rgba = self.components {
+            let r = Int(floor(rgba[0] * 100) / 100 * 255)
+            print("r:\(r)")
+            let g = Int(floor(rgba[1] * 100) / 100 * 255)
+            print("g:\(g)")
+            let b = Int(floor(rgba[2] * 100) / 100 * 255)
+            print("b:\(b)")
+            result = (r, g, b)
+        }
+        return result
     }
 }
