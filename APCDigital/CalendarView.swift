@@ -43,6 +43,7 @@ class CalendarView: UIView {
         logger.info("eventArray Count: \(eKEventList.count)")
         logger.debug("eventArray: \(eKEventList) base: \(base)")
         var dayOutPeriod: [[String]] = .init(repeating: [], count: 8)
+        var dayOutPeriodEvent: [[EKEvent]] = .init(repeating: [], count: 8)
         let movementSymmbolList: [String] = APCDCalendarUtil.instance.makeMovementSymmbolList()
         let eventFilters: [(calendar: String, filterString: String)] = EventFilter.selectAll()
         self.hiddenBaseParts(base: base)
@@ -92,6 +93,7 @@ class CalendarView: UIView {
                         // 期間外エリア表示指定カレンダー処理
                         if base.displayOutCalendars.contains(event.calendar.title) == true {
                             dayOutPeriod[startDateComponents.weekday!].append(createOutScheduleString(startH: startH, startM: startM, title: title))
+                            dayOutPeriodEvent[startDateComponents.weekday!].append(event)
                             continue
                         }
                         
@@ -109,6 +111,7 @@ class CalendarView: UIView {
                         else if startH <= 23, 0 <= endH, startDateComponents.day != endDateComponents.day {
                             if startH == 23, 30 <= startM {
                                 dayOutPeriod[startDateComponents.weekday!].append(createOutScheduleString(startH: startH, startM: startM, title: title))
+                                dayOutPeriodEvent[startDateComponents.weekday!].append(event)
                                 continue
                             }
                             else {
