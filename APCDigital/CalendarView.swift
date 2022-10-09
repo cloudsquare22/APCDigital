@@ -42,8 +42,14 @@ class CalendarView: UIView {
     func dispSchedule(eKEventList: [EKEvent], base: ViewController) {
         logger.info("eventArray Count: \(eKEventList.count)")
         logger.debug("eventArray: \(eKEventList) base: \(base)")
-        var dayOutPeriod: [[String]] = .init(repeating: [], count: 8)
-        var dayOutPeriodEvent: [[EKEvent]] = .init(repeating: [], count: 8)
+        var dayOutPeriodEvent: [[EKEvent]] = .init(repeating: [], count: 7)
+        var dayOutPeriodLavel = [base.day1outPeriod,
+                                 base.day2outPeriod,
+                                 base.day3outPeriod,
+                                 base.day4outPeriod,
+                                 base.day5outPeriod,
+                                 base.day6outPeriod,
+                                 base.day7outPeriod]
         let movementSymmbolList: [String] = APCDCalendarUtil.instance.makeMovementSymmbolList()
         let eventFilters: [(calendar: String, filterString: String)] = EventFilter.selectAll()
         self.hiddenBaseParts(base: base)
@@ -92,13 +98,12 @@ class CalendarView: UIView {
 
                         // 期間外エリア表示指定カレンダー処理
                         if base.displayOutCalendars.contains(event.calendar.title) == true {
-                            dayOutPeriod[startDateComponents.weekday!].append(createOutScheduleString(startH: startH, startM: startM, title: title))
-                            dayOutPeriodEvent[startDateComponents.weekday!].append(event)
+                            dayOutPeriodEvent[startDateComponents.weekendStartMonday - 1].append(event)
                             continue
                         }
                         
                         if startH < 6 && (endH < 6 || (endH <= 6 && endM == 0)) {
-                            dayOutPeriod[startDateComponents.weekday!].append(createOutScheduleString(startH: startH, startM: startM, title: title))
+                            dayOutPeriodEvent[startDateComponents.weekendStartMonday - 1].append(event)
                             continue
                         }
                         else if startH < 6 , 6 <= endH {
@@ -110,8 +115,7 @@ class CalendarView: UIView {
                         }
                         else if startH <= 23, 0 <= endH, startDateComponents.day != endDateComponents.day {
                             if startH == 23, 30 <= startM {
-                                dayOutPeriod[startDateComponents.weekday!].append(createOutScheduleString(startH: startH, startM: startM, title: title))
-                                dayOutPeriodEvent[startDateComponents.weekday!].append(event)
+                                dayOutPeriodEvent[startDateComponents.weekendStartMonday - 1].append(event)
                                 continue
                             }
                             else {
@@ -141,8 +145,7 @@ class CalendarView: UIView {
                     while startDate <= endDate {
                         let startDateComponents = Calendar.current.dateComponents(in: .current, from: startDate)
                         print(startDateComponents.weekday!)
-                        let outSchedule = title
-                        dayOutPeriod[startDateComponents.weekday!].append(outSchedule)
+                        dayOutPeriodEvent[startDateComponents.weekendStartMonday - 1].append(event)
                         if startDateComponents.weekday! == 1 {
                             break
                         }
@@ -151,18 +154,15 @@ class CalendarView: UIView {
                 }
             }
         }
-        for index in 1...7 {
-            if dayOutPeriod[index].isEmpty == false {
+        // 期間外ラベル表示
+        for index in 0..<7 {
+            if dayOutPeriodEvent[index].isEmpty == false {
                 print("dayOutPeriod weekday:\(index)")
-                print(dayOutPeriod[index])
-                self.dispOutSchedule(weekday: index, texts: dayOutPeriod[index], base: base)
+                print(dayOutPeriodEvent[index])
+                APCDCalendarUtil.instance.dispOutPeriod(label: dayOutPeriodLavel[index]!,
+                                                        events: dayOutPeriodEvent[index])
             }
         }
-    }
-    
-    func createOutScheduleString(startH: Int, startM: Int, title: String) -> String {
-        let outSchedule = String(format: "%d:%02d ", startH, startM) + title
-        return outSchedule
     }
     
     func dispNationalHoliday(event: EKEvent, base: ViewController) {
@@ -195,28 +195,7 @@ class CalendarView: UIView {
             }
         }
     }
-    
-    func dispOutSchedule(weekday: Int, texts: [String], base: ViewController) {
-        switch weekday {
-        case 2:
-            APCDCalendarUtil.instance.dispOutPeriod(label: base.day1outPeriod, texts: texts)
-        case 3:
-            APCDCalendarUtil.instance.dispOutPeriod(label: base.day2outPeriod, texts: texts)
-        case 4:
-            APCDCalendarUtil.instance.dispOutPeriod(label: base.day3outPeriod, texts: texts)
-        case 5:
-            APCDCalendarUtil.instance.dispOutPeriod(label: base.day4outPeriod, texts: texts)
-        case 6:
-            APCDCalendarUtil.instance.dispOutPeriod(label: base.day5outPeriod, texts: texts)
-        case 7:
-            APCDCalendarUtil.instance.dispOutPeriod(label: base.day6outPeriod, texts: texts)
-        case 1:
-            APCDCalendarUtil.instance.dispOutPeriod(label: base.day7outPeriod, texts: texts)
-        default:
-            break
-        }
-    }
-    
+        
     override func draw(_ rect: CGRect) {
 //        let rectangle = UIBezierPath(rect: CGRect(x: 100.0, y: 100.0, width: 300, height: 100))
 //        UIColor(ciColor: .green).setStroke()
@@ -237,6 +216,16 @@ extension CGColor {
             let b = Int(floor(rgba[2] * 100) / 100 * 255)
             print("b:\(b)")
             result = (r, g, b)
+        }
+        return result
+    }
+}
+
+extension DateComponents {
+    var weekendStartMonday: Int {
+        var result = 1
+        if let weekday = self.weekday {
+            result = weekday == 1 ? 7 : weekday - 1
         }
         return result
     }

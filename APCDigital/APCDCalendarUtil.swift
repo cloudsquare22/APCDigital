@@ -16,6 +16,66 @@ class APCDCalendarUtil {
     
     static let instance = APCDCalendarUtil()
 
+    func dispOutPeriod(label: UILabel, events: [EKEvent]) {
+        logger.debug("label: \(label) events: \(events.count)")
+        label.text = ""
+        if events.isEmpty == false {
+            label.isHidden = false
+            let lineMax: Int = events.count == 2 || events.count == 3 ? 2 : 1
+            var htmlText = ""
+            for (index, event) in events.indexed() {
+                let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
+                if let startH = startDateComponents.hour, let startM = startDateComponents.minute {
+                    var title = self.addLocationEventTitle(event: event)!
+                    if event.isAllDay == false {
+                        title = self.createOutScheduleString(startH: startH,
+                                                             startM: startM,
+                                                             title: title)
+                    }
+                    var appendText = events.count > 1 ? self.abbreviationScheduleText(title, lineMax) : title
+                    appendText = appendText + (index + 1 != events.count ? "<br>" : "")
+                    do {
+                        let regex = try NSRegularExpression(pattern: "^([0-9]?[0-9]:[0-9][0-9])( .*)")
+                        appendText = regex.stringByReplacingMatches(in: appendText,
+                                                                    options: [],
+                                                                    range: NSRange(location: 0, length: appendText.count),
+                                                                    withTemplate: "<font color=\"#008F00\">$1</font>$2")
+                        print("regex.stringByReplacingMatches:\(appendText)")
+                    }
+                    catch {
+                         print(error)
+                    }
+                    htmlText.append(contentsOf: appendText)
+                }
+            }
+            guard let data = htmlText.data(using: .utf8) else {
+                return
+            }
+            do {
+                let option: [NSAttributedString.DocumentReadingOptionKey: Any] = [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue]
+                let attrString = try NSMutableAttributedString(data: data, options: option, documentAttributes: nil)
+                label.attributedText = attrString
+                label.font = UIFont.systemFont(ofSize: 9, weight: .medium)
+                label.lineBreakMode = .byCharWrapping
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+            var fixedFrame = label.frame
+            label.sizeToFit()
+            fixedFrame.size.height = label.frame.size.height
+            label.frame = fixedFrame
+        }
+        else {
+            label.isHidden = true
+        }
+    }
+
+    func createOutScheduleString(startH: Int, startM: Int, title: String) -> String {
+        let outSchedule = String(format: "%d:%02d ", startH, startM) + title
+        return outSchedule
+    }
+
     func dispOutPeriod(label: UILabel, texts: [String]) {
         logger.debug("label: \(label) texts: \(texts)")
         label.text = ""
