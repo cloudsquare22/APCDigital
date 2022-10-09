@@ -32,14 +32,28 @@ class APCDCalendarUtil {
                                                              startM: startM,
                                                              title: title)
                     }
+                    title = "●" + title
                     var appendText = events.count > 1 ? self.abbreviationScheduleText(title, lineMax) : title
                     appendText = appendText + (index + 1 != events.count ? "<br>" : "")
+                    let rgb = event.calendar.cgColor.getRGBInt()
+                    print("rgb:\(rgb)")
+                    let colormark = String(format: "<font color=\"#%0X%0X%0X\">●</font>", rgb.0, rgb.1, rgb.2)
+                    print("rgb:\(colormark)")
                     do {
-                        let regex = try NSRegularExpression(pattern: "^([0-9]?[0-9]:[0-9][0-9])( .*)")
-                        appendText = regex.stringByReplacingMatches(in: appendText,
-                                                                    options: [],
-                                                                    range: NSRange(location: 0, length: appendText.count),
-                                                                    withTemplate: "<font color=\"#008F00\">$1</font>$2")
+                        if event.isAllDay == true {
+                            let regex = try NSRegularExpression(pattern: "^(●)(.*)")
+                            appendText = regex.stringByReplacingMatches(in: appendText,
+                                                                        options: [],
+                                                                        range: NSRange(location: 0, length: appendText.count),
+                                                                        withTemplate: "\(colormark)$2")
+                        }
+                        else {
+                            let regex = try NSRegularExpression(pattern: "^(●)([0-9]?[0-9]:[0-9][0-9])( .*)")
+                            appendText = regex.stringByReplacingMatches(in: appendText,
+                                                                        options: [],
+                                                                        range: NSRange(location: 0, length: appendText.count),
+                                                                        withTemplate: "\(colormark)<font color=\"#008F00\">$2</font>$3")
+                        }
                         print("regex.stringByReplacingMatches:\(appendText)")
                     }
                     catch {

@@ -93,9 +93,6 @@ class CalendarView: UIView {
                     if let startH = startDateComponents.hour, let startM = startDateComponents.minute,
                         let endH = endDateComponents.hour, let endM = endDateComponents.minute {
                         
-                        let rgb = event.calendar.cgColor.getRGBInt()
-                        print("rgb:\(rgb)")
-
                         // 期間外エリア表示指定カレンダー処理
                         if base.displayOutCalendars.contains(event.calendar.title) == true {
                             dayOutPeriodEvent[startDateComponents.weekendStartMonday - 1].append(event)
