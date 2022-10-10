@@ -117,23 +117,13 @@ class CalendarView: UIView {
                             }
                             else {
                                 title = title + String(format: "\n〜%d:%02d", endH, endM)
-                                endDateComponents.year = startDateComponents.year
-                                endDateComponents.month = startDateComponents.month
-                                endDateComponents.day = startDateComponents.day
-                                endDateComponents.hour = 23
-                                endDateComponents.minute = 30
-                                endDate = Calendar.current.date(from: endDateComponents)!
+                                endDate = self.createDayoverEnd(startDateComponents: startDateComponents)
                                 endLineHidden = true
                             }
                         }
                         else if endH == 23, endM > 30, startDateComponents.day == endDateComponents.day {
                             title = title + String(format: "\n〜%d:%02d", endH, endM)
-                            endDateComponents.year = startDateComponents.year
-                            endDateComponents.month = startDateComponents.month
-                            endDateComponents.day = startDateComponents.day
-                            endDateComponents.hour = 23
-                            endDateComponents.minute = 30
-                            endDate = Calendar.current.date(from: endDateComponents)!
+                            endDate = self.createDayoverEnd(startDateComponents: startDateComponents)
                             endLineHidden = true
                         }
                     }
@@ -170,6 +160,13 @@ class CalendarView: UIView {
                                                         events: dayOutPeriodEvent[index])
             }
         }
+    }
+    
+    func createDayoverEnd(startDateComponents: DateComponents) -> Date {
+        var endDateComponents: DateComponents = startDateComponents
+        endDateComponents.hour = 23
+        endDateComponents.minute = 30
+        return Calendar.current.date(from: endDateComponents)!
     }
     
     func dispNationalHoliday(event: EKEvent, base: ViewController) {
