@@ -305,15 +305,15 @@ class APCDCalendar {
                                 continue
                             }
                             else {
-                                event.title = event.title + String(format: "\n〜%d:%02d", endH, endM)
-                                endDateComponents.year = startDateComponents.year
-                                endDateComponents.month = startDateComponents.month
-                                endDateComponents.day = startDateComponents.day
-                                endDateComponents.hour = 23
-                                endDateComponents.minute = 30
-                                endDate = Calendar.current.date(from: endDateComponents)!
+                                event.title = APCDCalendarUtil.instance.createDayoverTitle(title: event.title, endH: endH, endM: endM)
+                                endDate = APCDCalendarUtil.instance.createDayoverEnd(startDateComponents: startDateComponents)
                                 endLineHidden = true
                             }
+                        }
+                        else if endH == 23, endM > 30, startDateComponents.day == endDateComponents.day {
+                            event.title = APCDCalendarUtil.instance.createDayoverTitle(title: event.title, endH: endH, endM: endM)
+                            endDate = APCDCalendarUtil.instance.createDayoverEnd(startDateComponents: startDateComponents)
+                            endLineHidden = true
                         }
                     }
                     view.addSubview(APCDCalendarUtil.instance.createScheduleView(title: event.title,
