@@ -34,7 +34,7 @@ class ExportViewController: UIViewController {
     
     @IBAction func tapExport(_ sender: Any) {
         if dateStart.date < dateEnd.date {
-            let aPCDCalendar = APCDCalendar()
+            let aPCDCalendar = APCDCalendar(base: self.viewController)
             if let url = aPCDCalendar.export(fromDate: dateStart.date,
                                              toDate: dateEnd.date,
                                              displayCalendars: self.viewController!.displayCalendars,
@@ -51,7 +51,7 @@ class ExportViewController: UIViewController {
     @IBAction func tapFileExport(_ sender: Any) {
         logger.info()
         if dateStart.date < dateEnd.date {
-            let aPCDCalendar = APCDCalendar()
+            let aPCDCalendar = APCDCalendar(base: self.viewController)
             if let url = aPCDCalendar.exportFileAllPencilKitData() {
                 let activityViewController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
                 activityViewController.modalPresentationStyle = .popover
@@ -104,7 +104,7 @@ extension ExportViewController: UIDocumentPickerDelegate {
         }
         logger.info(urls.debugDescription)
 //        self.delegate?.selectDocument(url: urls[0])
-        let aPCDCalendar = APCDCalendar()
+        let aPCDCalendar = APCDCalendar(base: self.viewController)
         aPCDCalendar.importFileAllPencilKitData(url: urls[0])
         self.viewController!.updateDays()        
     }

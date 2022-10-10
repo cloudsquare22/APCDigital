@@ -17,8 +17,14 @@ class APCDCalendar {
     var eventStore = EKEventStore()
     var displayCalendars: [String] = []
     var displayOutCalendars: [String] = []
+    
+    weak var base: ViewController? = nil
 
     let logger = Logger()
+    
+    init(base: ViewController?) {
+        self.base = base
+    }
     
     func exportFileAllPencilKitData() -> URL? {
         var result: URL? = nil
@@ -230,8 +236,9 @@ class APCDCalendar {
         let eventFilters: [(calendar: String, filterString: String)] = EventFilter.selectAll()
 
         let eventArray = self.events(day: day)
+        let nationalHoliday = self.base!.nationalHolidayCalendarName
         for event in eventArray {
-            if event.calendar.title == "日本の祝日" {
+            if event.calendar.title == nationalHoliday {
                 view.addSubview(self.createHolidayView(event: event, startPoint: startPoint))
             }
             if self.displayCalendars.contains(event.calendar.title) == true {

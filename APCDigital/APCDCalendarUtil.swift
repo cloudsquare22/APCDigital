@@ -287,4 +287,15 @@ class APCDCalendarUtil {
         return result
     }
 
+    func createDayoverTitle(title: String, endH: Int, endM :Int) -> String {
+        return title + String(format: "\n〜%d:%02d", endH, endM)
+    }
+    
+    func createDayoverEnd(startDateComponents: DateComponents) -> Date {
+        var endDateComponents: DateComponents = startDateComponents
+        endDateComponents.hour = 23
+        endDateComponents.minute = 30
+        return Calendar.current.date(from: endDateComponents)!
+    }
+    
 }
