@@ -230,11 +230,9 @@ class APCDCalendar {
     }
     
     func addEvent(view: UIView, day: DateComponents, startPoint: CGFloat) {
-        var dayOutPeriod: [String] = []
         var dayOutPeriodEvent: [EKEvent] = []
 
         let movementSymmbolList: [String] = APCDCalendarUtil.instance.makeMovementSymmbolList()
-        let eventFilters: [(calendar: String, filterString: String)] = EventFilter.selectAll()
 
         let eventArray = self.events(day: day)
         let nationalHoliday = self.base!.nationalHolidayCalendarName
@@ -243,16 +241,7 @@ class APCDCalendar {
                 view.addSubview(self.createHolidayView(event: event, startPoint: startPoint))
             }
             if self.displayCalendars.contains(event.calendar.title) == true {
-                let isEventFilter = eventFilters.contains(where: { (calendar, filterString) in
-                    var result = false
-                    if event.calendar.title == calendar {
-                        if event.title.contains(filterString) == true {
-                            result = true
-                        }
-                    }
-                    return result
-                })
-                if isEventFilter == true {
+                if APCDCalendarUtil.instance.isEventFilter(event: event) == true {
                     continue
                 }
 
@@ -332,7 +321,6 @@ class APCDCalendar {
             outPeriod.backgroundColor = UIColor(named: "Basic Color Gray Light")
             outPeriod.numberOfLines = 0
             outPeriod.lineBreakMode = .byCharWrapping
-            APCDCalendarUtil.instance.dispOutPeriod(label: outPeriod, texts: dayOutPeriod)
             APCDCalendarUtil.instance.dispOutPeriod(label: outPeriod,
                                                     events: dayOutPeriodEvent)
             view.addSubview(outPeriod)

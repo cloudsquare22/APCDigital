@@ -298,4 +298,18 @@ class APCDCalendarUtil {
         return Calendar.current.date(from: endDateComponents)!
     }
     
+    func isEventFilter(event: EKEvent) -> Bool {
+        let eventFilters: [(calendar: String, filterString: String)] = EventFilter.selectAll()
+        let isEventFilter = eventFilters.contains(where: { (calendar, filterString) in
+            var result = false
+            if event.calendar.title == calendar {
+                if event.title.contains(filterString) == true {
+                    result = true
+                }
+            }
+            return result
+        })
+        return isEventFilter
+    }
+    
 }

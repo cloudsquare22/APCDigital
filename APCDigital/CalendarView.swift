@@ -51,7 +51,6 @@ class CalendarView: UIView {
                                  base.day6outPeriod,
                                  base.day7outPeriod]
         let movementSymmbolList: [String] = APCDCalendarUtil.instance.makeMovementSymmbolList()
-        let eventFilters: [(calendar: String, filterString: String)] = EventFilter.selectAll()
         self.hiddenBaseParts(base: base)
         let nationalHoliday = base.nationalHolidayCalendarName
         for event in eKEventList {
@@ -60,16 +59,7 @@ class CalendarView: UIView {
                 continue
             }
             if base.displayCalendars.contains(event.calendar.title) == true {
-                let isEventFilter = eventFilters.contains(where: { (calendar, filterString) in
-                    var result = false
-                    if event.calendar.title == calendar {
-                        if event.title.contains(filterString) == true {
-                            result = true
-                        }
-                    }
-                    return result
-                })
-                if isEventFilter == true {
+                if APCDCalendarUtil.instance.isEventFilter(event: event) == true {
                     continue
                 }
 
