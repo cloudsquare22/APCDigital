@@ -342,7 +342,6 @@ class APCDCalendar {
     
     func createOutPeriodView(startPoint: CGFloat) -> UILabel {
         let outPeriodView = UILabel(frame: CGRect(x: startPoint + 2.0, y: 107.0, width: 135.0, height: 50.0))
-//        outPeriodView.backgroundColor = UIColor(named: "Basic Color Gray Light")
         outPeriodView.numberOfLines = 0
         outPeriodView.lineBreakMode = .byCharWrapping
         return outPeriodView
