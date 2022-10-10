@@ -116,13 +116,13 @@ class CalendarView: UIView {
                                 continue
                             }
                             else {
-                                title = title + String(format: "\n〜%d:%02d", endH, endM)
+                                title = self.createDayoverTitle(title: title, endH: endH, endM: endM)
                                 endDate = self.createDayoverEnd(startDateComponents: startDateComponents)
                                 endLineHidden = true
                             }
                         }
                         else if endH == 23, endM > 30, startDateComponents.day == endDateComponents.day {
-                            title = title + String(format: "\n〜%d:%02d", endH, endM)
+                            title = self.createDayoverTitle(title: title, endH: endH, endM: endM)
                             endDate = self.createDayoverEnd(startDateComponents: startDateComponents)
                             endLineHidden = true
                         }
@@ -160,6 +160,10 @@ class CalendarView: UIView {
                                                         events: dayOutPeriodEvent[index])
             }
         }
+    }
+    
+    func createDayoverTitle(title: String, endH: Int, endM :Int) -> String {
+        return title + String(format: "\n〜%d:%02d", endH, endM)
     }
     
     func createDayoverEnd(startDateComponents: DateComponents) -> Date {
