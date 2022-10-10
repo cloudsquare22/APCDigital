@@ -126,6 +126,16 @@ class CalendarView: UIView {
                                 endLineHidden = true
                             }
                         }
+                        else if endH == 23, endM > 30, startDateComponents.day == endDateComponents.day {
+                            title = title + String(format: "\n〜%d:%02d", endH, endM)
+                            endDateComponents.year = startDateComponents.year
+                            endDateComponents.month = startDateComponents.month
+                            endDateComponents.day = startDateComponents.day
+                            endDateComponents.hour = 23
+                            endDateComponents.minute = 30
+                            endDate = Calendar.current.date(from: endDateComponents)!
+                            endLineHidden = true
+                        }
                     }
                     self.addSubview(APCDCalendarUtil.instance.createScheduleView(title: title,
                                                                                  event: event,
