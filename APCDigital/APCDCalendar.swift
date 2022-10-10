@@ -317,15 +317,10 @@ class APCDCalendar {
             }
         }
         if dayOutPeriodEvent.isEmpty == false {
-            let outPeriod = UILabel(frame: CGRect(x: startPoint + 2.0, y: 107.0, width: 135.0, height: 50.0))
-            outPeriod.backgroundColor = UIColor(named: "Basic Color Gray Light")
-            outPeriod.numberOfLines = 0
-            outPeriod.lineBreakMode = .byCharWrapping
-            APCDCalendarUtil.instance.dispOutPeriod(label: outPeriod,
+            let outPeriodView = self.createOutPeriodView(startPoint: startPoint)
+            APCDCalendarUtil.instance.dispOutPeriod(label: outPeriodView,
                                                     events: dayOutPeriodEvent)
-            view.addSubview(outPeriod)
-//
-//            view.addSubview(self.createOutPeriod(texts: dayOutPeriod, startPoint: startPoint))
+            view.addSubview(outPeriodView)
         }
     }
     
@@ -345,6 +340,14 @@ class APCDCalendar {
         return eventArray
     }
     
+    func createOutPeriodView(startPoint: CGFloat) -> UILabel {
+        let outPeriodView = UILabel(frame: CGRect(x: startPoint + 2.0, y: 107.0, width: 135.0, height: 50.0))
+//        outPeriodView.backgroundColor = UIColor(named: "Basic Color Gray Light")
+        outPeriodView.numberOfLines = 0
+        outPeriodView.lineBreakMode = .byCharWrapping
+        return outPeriodView
+    }
+    
     func createHolidayView(event: EKEvent, startPoint: CGFloat) -> UILabel {
         let holidayView = UILabel(frame: CGRect(x: startPoint + 39.0, y: 93.0, width: 99.0, height: 13.0))
         holidayView.text = event.title!
@@ -352,24 +355,6 @@ class APCDCalendar {
         holidayView.textColor = UIColor(named: "Basic Color Green")
         holidayView.textAlignment = .right
         return holidayView
-    }
-    
-    func createOutPeriod(texts: [String], startPoint: CGFloat) -> UILabel {
-//        print("--^--\(texts)")
-        let outPeriod = UILabel(frame: CGRect(x: startPoint + 2.0, y: 107.0, width: 135.0, height: 50.0))
-        outPeriod.font = UIFont.systemFont(ofSize: 10.0, weight: .medium)
-        outPeriod.textColor = .black
-        outPeriod.backgroundColor = UIColor(named: "Basic Color Gray Light")
-        outPeriod.textAlignment = .left
-        outPeriod.text = ""
-        outPeriod.numberOfLines = 0
-        for (index, schedule) in texts.indexed() {
-            outPeriod.text?.append(contentsOf: schedule)
-            if index + 1 != texts.count {
-                outPeriod.text?.append(contentsOf: "\n")
-            }
-        }
-        return outPeriod
     }
     
     func createMonthlyCalrendar(view: UIView, monday: Date) {
