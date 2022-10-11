@@ -43,7 +43,7 @@ class CalendarView: UIView {
         logger.info("eventArray Count: \(eKEventList.count)")
         logger.debug("eventArray: \(eKEventList) base: \(base)")
         var dayOutPeriodEvent: [[EKEvent]] = .init(repeating: [], count: 7)
-        var dayOutPeriodLavel = [base.day1outPeriod,
+        let dayOutPeriodLavel = [base.day1outPeriod,
                                  base.day2outPeriod,
                                  base.day3outPeriod,
                                  base.day4outPeriod,
@@ -68,7 +68,7 @@ class CalendarView: UIView {
 
                 if event.isAllDay == false {
                     var startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
-                    var endDateComponents = Calendar.current.dateComponents(in: .current, from: event.endDate)
+                    let endDateComponents = Calendar.current.dateComponents(in: .current, from: event.endDate)
 
                     if base.days.contains(startDateComponents.day!) == false {
                         continue

@@ -251,7 +251,7 @@ class APCDCalendar {
                 if event.isAllDay == false {
                     var startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
                     print(startDateComponents)
-                    var endDateComponents = Calendar.current.dateComponents(in: .current, from: event.endDate)
+                    let endDateComponents = Calendar.current.dateComponents(in: .current, from: event.endDate)
                     print(endDateComponents)
                     
                     if day.day != startDateComponents.day {
