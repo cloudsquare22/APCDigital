@@ -15,8 +15,6 @@ import Logging
 
 class APCDCalendar {
     var eventStore = EKEventStore()
-    var displayCalendars: [String] = []
-    var displayOutCalendars: [String] = []
     
     weak var base: ViewController? = nil
 
@@ -86,10 +84,8 @@ class APCDCalendar {
         }
     }
 
-    func export(fromDate: Date, toDate: Date, displayCalendars: [String], displayOutCalendars: [String]) -> URL? {
+    func export(fromDate: Date, toDate: Date) -> URL? {
         var result: URL? = nil
-        self.displayCalendars = displayCalendars
-        self.displayOutCalendars = displayOutCalendars
         
         print("Export start \(Date())")
         let pdfData = NSMutableData()
@@ -102,10 +98,6 @@ class APCDCalendar {
                 let view = createWeeklyCalendar(date: dateCurrent)
                 UIGraphicsBeginPDFPage()
                 view.layer.render(in: pdfContext)
-//                for subview in view.subviews {
-//                    subview.removeFromSuperview()
-//                }
-//                view.removeFromSuperview()
             }
             dateCurrent = Calendar.current.nextDate(after: dateCurrent, matching: ViewController.matching, matchingPolicy: .nextTime, direction: .forward)!
         }
@@ -240,7 +232,7 @@ class APCDCalendar {
             if event.calendar.title == nationalHoliday {
                 view.addSubview(self.createHolidayView(event: event, startPoint: startPoint))
             }
-            if self.displayCalendars.contains(event.calendar.title) == true {
+            if self.base!.displayCalendars.contains(event.calendar.title) == true {
                 if APCDCalendarUtil.instance.isEventFilter(event: event) == true {
                     continue
                 }
@@ -266,7 +258,7 @@ class APCDCalendar {
                         let endH = endDateComponents.hour, let endM = endDateComponents.minute {
                         
                         // 期間外エリア表示指定カレンダー処理
-                        if self.displayOutCalendars.contains(event.calendar.title) == true {
+                        if self.base!.displayOutCalendars.contains(event.calendar.title) == true {
                             dayOutPeriodEvent.append(event)
                             continue
                         }

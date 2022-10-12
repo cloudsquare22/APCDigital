@@ -36,9 +36,7 @@ class ExportViewController: UIViewController {
         if dateStart.date < dateEnd.date {
             let aPCDCalendar = APCDCalendar(base: self.viewController)
             if let url = aPCDCalendar.export(fromDate: dateStart.date,
-                                             toDate: dateEnd.date,
-                                             displayCalendars: self.viewController!.displayCalendars,
-                                             displayOutCalendars: self.viewController!.displayOutCalendars) {
+                                             toDate: dateEnd.date) {
                 let activityViewController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
                 activityViewController.modalPresentationStyle = .popover
                 activityViewController.popoverPresentationController?.sourceRect = (sender as! UIButton).frame
