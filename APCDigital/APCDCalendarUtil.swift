@@ -198,7 +198,9 @@ class APCDCalendarUtil {
         let scheduleView = ScheduleView(frame: CGRect(x: x, y: y, width: 140.0 + widthAdd, height: 11.375 * diff))
         scheduleView.baseView.backgroundColor = APCDCalendarUtil.instance.cgToUIColor(cgColor: event.calendar.cgColor, alpha: 0.3)
         scheduleView.label.text = title
-        scheduleView.label.numberOfLines = 0
+        let lines = Int(floor(diff))
+        print("diff:\(diff) lines:\(lines)")
+        scheduleView.label.numberOfLines = lines
         var labelFrame = scheduleView.label.frame
         scheduleView.label.sizeToFit()
         labelFrame.size.height = scheduleView.label.frame.size.height
