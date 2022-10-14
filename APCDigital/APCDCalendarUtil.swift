@@ -198,6 +198,7 @@ class APCDCalendarUtil {
         let scheduleView = ScheduleView(frame: CGRect(x: x, y: y, width: 140.0 + widthAdd, height: 11.375 * diff))
         scheduleView.baseView.backgroundColor = APCDCalendarUtil.instance.cgToUIColor(cgColor: event.calendar.cgColor, alpha: 0.3)
         scheduleView.label.text = title
+        scheduleView.label.font = UIFont.systemFont(ofSize: 10, weight: .medium)
         let lines = Int(floor(diff))
         print("diff:\(diff) lines:\(lines)")
         scheduleView.label.numberOfLines = lines
