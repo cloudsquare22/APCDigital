@@ -31,10 +31,10 @@ class AboutViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         var rows = 0
         if section == 0 {
-            rows = 5
+            rows = 7
         }
         else if section == 1 {
-            rows = 3
+            rows = 2
         }
         return rows
     }
