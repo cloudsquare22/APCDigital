@@ -28,7 +28,7 @@ class EditScheduleViewController: UIViewController {
     @IBOutlet weak var todoSwitch: UISwitch!
     @IBOutlet weak var notificationSwitch: UISwitch!
     @IBOutlet weak var eventDeleteButton: UIButton!
-    @IBOutlet weak var actionitemTexts: UITextView!
+    @IBOutlet weak var memoTexts: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +52,7 @@ class EditScheduleViewController: UIViewController {
             self.titleText.text = title
             eventDeleteButton.isHidden = false
             if let notes = event.notes {
-                self.actionitemTexts.text = notes
+                self.memoTexts.text = notes
             }
         }
         
@@ -75,10 +75,10 @@ class EditScheduleViewController: UIViewController {
             }
         }
         
-        self.actionitemTexts.layer.borderColor = UIColor.systemGray5.cgColor
-        self.actionitemTexts.layer.borderWidth = 1
-        self.actionitemTexts.layer.cornerRadius = 8
-        self.actionitemTexts.layer.masksToBounds = true
+        self.memoTexts.layer.borderColor = UIColor.systemGray5.cgColor
+        self.memoTexts.layer.borderWidth = 1
+        self.memoTexts.layer.cornerRadius = 8
+        self.memoTexts.layer.masksToBounds = true
         
         let notification = NotificationCenter.default
         notification.addObserver(self, selector: #selector(keyboardWillShow(_:)),
@@ -129,7 +129,7 @@ class EditScheduleViewController: UIViewController {
         event.endDate = self.endDatePicker.date
         let calendar = self.viewController?.calendars[calendarPicker.selectedRow(inComponent: 0)]
         event.calendar = eventStore.calendar(withIdentifier: calendar!.calendarIdentifier)
-        event.notes = self.actionitemTexts.text
+        event.notes = self.memoTexts.text
         if allday == true {
             event.isAllDay = true
 

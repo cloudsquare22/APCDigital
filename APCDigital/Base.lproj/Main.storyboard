@@ -1055,8 +1055,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Action Item" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7BZ-6M-2ua">
-                                <rect key="frame" x="20" y="232" width="87" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="memo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7BZ-6M-2ua">
+                                <rect key="frame" x="20" y="232" width="48" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -1078,12 +1078,12 @@
                     </view>
                     <size key="freeformSize" width="600" height="450"/>
                     <connections>
-                        <outlet property="actionitemTexts" destination="nHP-YB-WcQ" id="pSU-i8-mli"/>
                         <outlet property="allDaySwitch" destination="Sm4-av-chj" id="cZ6-AC-gG4"/>
                         <outlet property="calendarPicker" destination="fiq-W5-Uyq" id="5fy-pe-xUr"/>
                         <outlet property="endDatePicker" destination="U3A-TN-oeC" id="VvM-Ct-nSN"/>
                         <outlet property="eventDeleteButton" destination="veG-pp-DIV" id="CNo-ue-fhg"/>
                         <outlet property="locationText" destination="vmn-bx-CRg" id="1jg-z9-auL"/>
+                        <outlet property="memoTexts" destination="nHP-YB-WcQ" id="pSU-i8-mli"/>
                         <outlet property="notificationSwitch" destination="Svm-jD-NGG" id="0bB-sI-mRV"/>
                         <outlet property="startDatePicker" destination="v4L-Ht-d5l" id="1AR-W3-ggD"/>
                         <outlet property="titleText" destination="yNM-G9-cWU" id="6Fx-yr-7zi"/>
