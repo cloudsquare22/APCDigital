@@ -202,6 +202,7 @@ class APCDCalendarUtil {
         let lines = Int(floor(diff))
         print("diff:\(diff) lines:\(lines)")
         scheduleView.label.numberOfLines = lines
+        scheduleView.label.lineBreakMode = .byTruncatingTail
         var labelFrame = scheduleView.label.frame
         scheduleView.label.sizeToFit()
         labelFrame.size.height = scheduleView.label.frame.size.height
