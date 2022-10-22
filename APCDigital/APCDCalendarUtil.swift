@@ -209,8 +209,10 @@ class APCDCalendarUtil {
         scheduleView.label.frame = labelFrame
         scheduleView.minute.image = APCDCalendarUtil.instance.createMinuteSFSymbol(startDateComponents: startDateComponents, startLineHidden: startLineHidden)
         scheduleView.endTime.frame = CGRect(x: -8.0, y: 11.375 * diff - 2, width: 16, height: 16)
-        
-        if movementSymmbolList.contains(String(title.prefix(1))) == true {
+
+        let startIndex = title.index(title.startIndex, offsetBy: 2)
+        if movementSymmbolList.contains(String(title.prefix(1))) == true ||
+            (("□" == String(title.prefix(1))) && (movementSymmbolList.contains(String(title[title.index(title.startIndex, offsetBy: 1)])) == true)){
             scheduleView.addLine(isMove: true, isStartLineHidden: startLineHidden, isEndLineHidden: endLineHidden)
         }
         else {
