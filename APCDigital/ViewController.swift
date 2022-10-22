@@ -283,25 +283,23 @@ class ViewController: UIViewController {
             }
         }
         print("count:\(events.count)")
-        DispatchQueue.main.async {
-            if events.count > 0 {
-                let alert = UIAlertController(title: "Event Action", message: "", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "* New events *", style: .default, handler: { _ in
-                    self.dispEditScheduleView(point: point)
-                }))
-                for event in events {
-                    alert.addAction(UIAlertAction(title: event.title, style: .default, handler: { _ in
-                        self.openEditScheduleView(event: event)
-                    }))
-                }
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
-                    print("cancel")
-                }))
-                self.present(alert, animated: true, completion: nil)
-            }
-            else {
+        if events.count > 0 {
+            let alert = UIAlertController(title: "Event Action", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "* New events *", style: .default, handler: { _ in
                 self.dispEditScheduleView(point: point)
+            }))
+            for event in events {
+                alert.addAction(UIAlertAction(title: event.title, style: .default, handler: { _ in
+                    self.openEditScheduleView(event: event)
+                }))
             }
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                print("cancel")
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else {
+            self.dispEditScheduleView(point: point)
         }
     }
     
