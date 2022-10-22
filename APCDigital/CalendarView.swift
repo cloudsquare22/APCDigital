@@ -148,6 +148,13 @@ class CalendarView: UIView {
                 print(dayOutPeriodEvent[index])
                 APCDCalendarUtil.instance.dispOutPeriod(label: dayOutPeriodLavel[index]!,
                                                         events: dayOutPeriodEvent[index])
+                let x = dayOutPeriodLavel[index]!.frame.origin.x
+                let y = dayOutPeriodLavel[index]!.frame.origin.y
+                let w = dayOutPeriodLavel[index]!.frame.size.width
+                let h = dayOutPeriodLavel[index]!.frame.size.height
+                for event in dayOutPeriodEvent[index] {
+                    base.scheduleViews.append((x: x, y: y, w: w, h: h, event: event))
+                }
             }
         }
     }

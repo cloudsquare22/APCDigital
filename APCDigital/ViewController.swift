@@ -263,6 +263,11 @@ class ViewController: UIViewController {
     
     @objc func longPressPKCanvasView(sender: UILongPressGestureRecognizer) {
         logger.info()
+
+        guard sender.state == UIGestureRecognizer.State.began else {
+            return
+        }
+        
         let point = sender.location(in: self.pKCanvasView)
         
         var events: [EKEvent] = []
@@ -278,23 +283,25 @@ class ViewController: UIViewController {
             }
         }
         print("count:\(events.count)")
-        if events.count > 0 {
-            let alert = UIAlertController(title: "Event Action", message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "* New events *", style: .default, handler: { _ in
-                self.dispEditScheduleView(point: point)
-            }))
-            for event in events {
-                alert.addAction(UIAlertAction(title: event.title, style: .default, handler: { _ in
-                    self.openEditScheduleView(event: event)
+        DispatchQueue.main.async {
+            if events.count > 0 {
+                let alert = UIAlertController(title: "Event Action", message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "* New events *", style: .default, handler: { _ in
+                    self.dispEditScheduleView(point: point)
                 }))
+                for event in events {
+                    alert.addAction(UIAlertAction(title: event.title, style: .default, handler: { _ in
+                        self.openEditScheduleView(event: event)
+                    }))
+                }
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                    print("cancel")
+                }))
+                self.present(alert, animated: true, completion: nil)
             }
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
-                print("cancel")
-            }))
-            self.present(alert, animated: true, completion: nil)
-        }
-        else {
-            dispEditScheduleView(point: point)
+            else {
+                self.dispEditScheduleView(point: point)
+            }
         }
     }
     
