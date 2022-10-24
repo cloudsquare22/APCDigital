@@ -283,6 +283,17 @@ class APCDCalendarUtil {
         return result
     }
     
+    func createMonthString(monday: DateComponents, sunday: DateComponents) -> String {
+        var result = ""
+        if monday.month! == sunday.month! {
+            result = String(monday.month!)
+        }
+        else {
+            result = String(monday.month!) + "/" + String(sunday.month!)
+        }
+        return result
+    }
+    
     func createWeekOfYearString(monday: Date) -> String {
         return String(Calendar.current.component(.weekOfYear, from: monday)) + " week"
     }

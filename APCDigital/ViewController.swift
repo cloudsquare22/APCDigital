@@ -496,12 +496,7 @@ class ViewController: UIViewController {
         logger.info()
         let monday = self.weekDaysDateComponents[WeekDay1stMonday.monday.rawValue]
         let sunday = self.weekDaysDateComponents[WeekDay1stMonday.sunday.rawValue]
-        if monday.month! == sunday.month! {
-            self.month.text = String(monday.month!)
-        }
-        else {
-            self.month.text = String(monday.month!) + "/" + String(sunday.month!)
-        }
+        self.month.text = APCDCalendarUtil.instance.createMonthString(monday: monday, sunday: sunday)
         self.fromDay.text = APCDCalendarUtil.instance.createWeekFromDayString(monday: monday)
         self.toDay.text = APCDCalendarUtil.instance.createWeekToDayString(sunday: sunday)
     }

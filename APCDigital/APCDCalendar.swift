@@ -151,12 +151,7 @@ class APCDCalendar {
         view.addSubview(templateView)
         
         let month = UILabel(frame: CGRect(x: 1170.0, y: 31.0, width: 145.0, height: 87.0))
-        if dateComponentsWeek.first!.month == dateComponentsWeek.last!.month {
-            month.text = String(dateComponentsWeek.first!.month!)
-        }
-        else {
-            month.text = String(dateComponentsWeek.first!.month!) + "/" + String(dateComponentsWeek.last!.month!)
-        }
+        month.text = APCDCalendarUtil.instance.createMonthString(monday: dateComponentsWeek.first!, sunday: dateComponentsWeek.last!)
         month.font = UIFont.systemFont(ofSize: 48.0, weight: .semibold)
         month.textColor = UIColor(named: "Basic Color Green")
         month.textAlignment = .center
