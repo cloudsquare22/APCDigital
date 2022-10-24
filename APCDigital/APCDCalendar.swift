@@ -198,7 +198,7 @@ class APCDCalendar {
             dayView.textColor = UIColor(named: "Basic Color Green")
 
             let remainingView = UILabel(frame: CGRect(x: dayX[day] + 32.0, y: 83.0, width: 99.0, height: 13.0))
-            remainingView.text = countElapsedRemaining(day: dateComponentsWeek[day].date!)
+            remainingView.text = APCDCalendarUtil.instance.countElapsedRemaining(day: dateComponentsWeek[day].date!)
             remainingView.font = UIFont.systemFont(ofSize: 10.0, weight: .semibold)
             remainingView.textColor = UIColor(named: "Basic Color Green")
 
@@ -208,19 +208,6 @@ class APCDCalendar {
         }
     }
 
-    func countElapsedRemaining(day: Date) -> String {
-        var result = ""
-        let dayComponentes = Calendar.current.dateComponents(in: .current, from: day)
-        let dateYearFirst = Calendar.current.date(from: DateComponents(year: dayComponentes.year, month: 1, day: 1))!
-        let dateYearEnd = Calendar.current.date(from: DateComponents(year: dayComponentes.year, month: 12, day: 31))!
-
-        let elapsed = Calendar.current.dateComponents([.day], from: dateYearFirst, to: day)
-        let remaining = Calendar.current.dateComponents([.day], from: day, to: dateYearEnd)
-        
-        result = String(format: "%d-%d", elapsed.day! + 1, remaining.day!)
-        return result
-    }
-    
     func addEvent(view: UIView, day: DateComponents, startPoint: CGFloat) {
         var dayOutPeriodEvent: [EKEvent] = []
 

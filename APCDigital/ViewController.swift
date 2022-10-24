@@ -445,20 +445,6 @@ class ViewController: UIViewController {
         }
     }
     
-    func countElapsedRemaining(day: Date) -> String {
-        logger.info("day: \(day.debugDescription)")
-        var result = ""
-        let dayComponentes = Calendar.current.dateComponents(in: .current, from: day)
-        let dateYearFirst = Calendar.current.date(from: DateComponents(year: dayComponentes.year, month: 1, day: 1))!
-        let dateYearEnd = Calendar.current.date(from: DateComponents(year: dayComponentes.year, month: 12, day: 31))!
-
-        let elapsed = Calendar.current.dateComponents([.day], from: dateYearFirst, to: day)
-        let remaining = Calendar.current.dateComponents([.day], from: day, to: dateYearEnd)
-        
-        result = String(format: "%d-%d", elapsed.day! + 1, remaining.day!)
-        return result
-    }
-    
     func dispDayLabel() {
         logger.info()
         let dayLabels = [self.day1, self.day2, self.day3, self.day4, self.day5, self.day6, self.day7]
@@ -467,7 +453,7 @@ class ViewController: UIViewController {
         for weekday in WeekDay1stMonday.monday.rawValue...WeekDay1stMonday.sunday.rawValue {
             dayLabels[weekday]?.text = String(self.weekDaysDateComponents[weekday].day!)
             self.days.append(self.weekDaysDateComponents[weekday].day!)
-            dayRemainings[weekday]?.text = countElapsedRemaining(day: self.weekDaysDateComponents[weekday].date!)
+            dayRemainings[weekday]?.text = APCDCalendarUtil.instance.countElapsedRemaining(day: self.weekDaysDateComponents[weekday].date!)
         }
     }
     
