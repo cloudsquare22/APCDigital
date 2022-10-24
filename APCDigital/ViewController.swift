@@ -503,7 +503,7 @@ class ViewController: UIViewController {
             self.month.text = String(monday.month!) + "/" + String(sunday.month!)
         }
         self.fromDay.text = Calendar.shortMonthSymbols(local: Locale(identifier: "en"))[monday.month! - 1].uppercased() + " " + String(monday.day!)
-        self.toDay.text = "to " + Calendar.shortMonthSymbols(local: Locale(identifier: "en"))[sunday.month! - 1].uppercased() + " " + String(sunday.day!)
+        self.toDay.text = APCDCalendarUtil.instance.createWeekToDayString(sunday: sunday)
     }
     
     func dispMonthlyCalendar() {

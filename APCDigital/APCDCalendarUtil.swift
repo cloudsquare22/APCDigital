@@ -286,4 +286,8 @@ class APCDCalendarUtil {
     func createWeekOfYearString(monday: Date) -> String {
         return String(Calendar.current.component(.weekOfYear, from: monday)) + " week"
     }
+    
+    func createWeekToDayString(sunday: DateComponents) -> String {
+        return "to " + Calendar.shortMonthSymbols(local: Locale(identifier: "en"))[sunday.month! - 1].uppercased() + " " + String(sunday.day!)
+    }
 }
