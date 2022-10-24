@@ -177,7 +177,7 @@ class APCDCalendar {
         view.addSubview(to)
 
         let weekOfYear = UILabel(frame: CGRect(x: 1170.0, y: 380.0, width: 145.0, height: 16.0))
-        weekOfYear.text = String(Calendar.current.component(.weekOfYear, from: monday)) + " week"
+        weekOfYear.text = APCDCalendarUtil.instance.createWeekOfYearString(monday: monday)
         weekOfYear.font = UIFont.systemFont(ofSize: 13.0, weight: .regular)
         weekOfYear.textColor = UIColor(named: "Basic Color Green")
         weekOfYear.textAlignment = .center

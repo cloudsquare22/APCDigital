@@ -282,4 +282,8 @@ class APCDCalendarUtil {
         result = String(format: "%d-%d", elapsed.day! + 1, remaining.day!)
         return result
     }
+    
+    func createWeekOfYearString(monday: Date) -> String {
+        return String(Calendar.current.component(.weekOfYear, from: monday)) + " week"
+    }
 }

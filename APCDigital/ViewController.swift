@@ -515,8 +515,7 @@ class ViewController: UIViewController {
     
     func dispWeekOfYear() {
         logger.info()
-        let monday = self.weekDaysDateComponents[WeekDay1stMonday.monday.rawValue]
-        self.weekOfYear.text = String(Calendar.current.component(.weekOfYear, from: monday.date!)) + " week"
+        self.weekOfYear.text = APCDCalendarUtil.instance.createWeekOfYearString(monday: self.weekDaysDateComponents[WeekDay1stMonday.monday.rawValue].date!)
     }
     
     func dispPencilCase() {
