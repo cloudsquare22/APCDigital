@@ -163,7 +163,7 @@ class APCDCalendar {
         view.addSubview(month)
         
         let from = UILabel(frame: CGRect(x: 1170.0, y: 105.0, width: 145.0, height: 21.0))
-        from.text = Calendar.shortMonthSymbols(local: Locale(identifier: "en"))[dateComponentsWeek.first!.month! - 1].uppercased() + " " + String(dateComponentsWeek.first!.day!)
+        from.text = APCDCalendarUtil.instance.createWeekFromDayString(monday: dateComponentsWeek.first!)
         from.font = UIFont.systemFont(ofSize: 15.0, weight: .regular)
         from.textColor = UIColor(named: "Basic Color Green")
         from.textAlignment = .center

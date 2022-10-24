@@ -502,7 +502,7 @@ class ViewController: UIViewController {
         else {
             self.month.text = String(monday.month!) + "/" + String(sunday.month!)
         }
-        self.fromDay.text = Calendar.shortMonthSymbols(local: Locale(identifier: "en"))[monday.month! - 1].uppercased() + " " + String(monday.day!)
+        self.fromDay.text = APCDCalendarUtil.instance.createWeekFromDayString(monday: monday)
         self.toDay.text = APCDCalendarUtil.instance.createWeekToDayString(sunday: sunday)
     }
     
