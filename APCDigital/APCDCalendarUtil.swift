@@ -15,6 +15,7 @@ class APCDCalendarUtil {
     let logger = Logger()
     
     static let instance = APCDCalendarUtil()
+    let dayX = [60.0, 208.0, 356.0, 504.0, 725.0, 872.0, 1020.0]
 
     func dispOutPeriod(label: UILabel, events: [EKEvent]) {
         logger.debug("label: \(label) events: \(events.count)")
@@ -57,7 +58,7 @@ class APCDCalendarUtil {
                         print("regex.stringByReplacingMatches:\(appendText)")
                     }
                     catch {
-                         print(error)
+                        print(error)
                     }
                     htmlText.append(contentsOf: appendText)
                 }
@@ -84,12 +85,12 @@ class APCDCalendarUtil {
             label.isHidden = true
         }
     }
-
+    
     func createOutScheduleString(startH: Int, startM: Int, title: String) -> String {
         let outSchedule = String(format: "%d:%02d ", startH, startM) + title
         return outSchedule
     }
-
+    
     func abbreviationScheduleText(_ text: String, _ lineMax: Int = 1) -> String {
         var result = ""
         var lineCount = 1
@@ -97,14 +98,14 @@ class APCDCalendarUtil {
         var limit = false
         var widthSum: CGFloat = 0.0
         let widthMax: CGFloat = 135.0
-
+        
         let testLabel: UILabel = UILabel()
         testLabel.font = UIFont.systemFont(ofSize: 9.0, weight: .medium)
         
         print(text)
         for c in text {
             lineSting.append(c)
-
+            
             testLabel.text = String(c)
             testLabel.sizeToFit()
             widthSum = widthSum + testLabel.frame.size.width
@@ -209,7 +210,7 @@ class APCDCalendarUtil {
         scheduleView.label.frame = labelFrame
         scheduleView.minute.image = APCDCalendarUtil.instance.createMinuteSFSymbol(startDateComponents: startDateComponents, startLineHidden: startLineHidden)
         scheduleView.endTime.frame = CGRect(x: -8.0, y: 11.375 * diff - 2, width: 16, height: 16)
-
+        
         if movementSymmbolList.contains(String(title.prefix(1))) == true ||
             (("□" == String(title.prefix(1))) && (movementSymmbolList.contains(String(title[title.index(title.startIndex, offsetBy: 1)])) == true)){
             scheduleView.addLine(isMove: true, isStartLineHidden: startLineHidden, isEndLineHidden: endLineHidden)
@@ -221,7 +222,7 @@ class APCDCalendarUtil {
         if let base = base {
             base.scheduleViews.append((x: x, y: y, w: 140.0 + widthAdd, h: 11.375 * diff, event: event))
         }
-
+        
         return scheduleView
     }
     
@@ -243,7 +244,7 @@ class APCDCalendarUtil {
         }
         return result
     }
-
+    
     func createDayoverTitle(title: String, endH: Int, endM :Int) -> String {
         return title + String(format: "\n〜%d:%02d", endH, endM)
     }
@@ -275,7 +276,7 @@ class APCDCalendarUtil {
         let dayComponentes = Calendar.current.dateComponents(in: .current, from: day)
         let dateYearFirst = Calendar.current.date(from: DateComponents(year: dayComponentes.year, month: 1, day: 1))!
         let dateYearEnd = Calendar.current.date(from: DateComponents(year: dayComponentes.year, month: 12, day: 31))!
-
+        
         let elapsed = Calendar.current.dateComponents([.day], from: dateYearFirst, to: day)
         let remaining = Calendar.current.dateComponents([.day], from: day, to: dateYearEnd)
         
@@ -304,5 +305,21 @@ class APCDCalendarUtil {
     
     func createWeekToDayString(sunday: DateComponents) -> String {
         return "to " + Calendar.shortMonthSymbols(local: Locale(identifier: "en"))[sunday.month! - 1].uppercased() + " " + String(sunday.day!)
+    }
+    
+    func addEvent(event: EKEvent, base: ViewController) {
+        let nationalHoliday = base.nationalHolidayCalendarName
+        
+    }
+    
+    func createHolidayView(event: EKEvent) -> UILabel {
+        let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
+        let startPoint = self.dayX[startDateComponents.weekendStartMonday - 1]
+        let holidayView = UILabel(frame: CGRect(x: startPoint + 39.0, y: 93.0, width: 99.0, height: 13.0))
+        holidayView.text = event.title!
+        holidayView.font = UIFont.systemFont(ofSize: 10.0, weight: .semibold)
+        holidayView.textColor = UIColor(named: "Basic Color Green")
+        holidayView.textAlignment = .right
+        return holidayView
     }
 }

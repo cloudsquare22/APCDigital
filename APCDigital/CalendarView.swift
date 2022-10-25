@@ -15,9 +15,12 @@ import Algorithms
 class CalendarView: UIView {
     let logger = Logger()
 
-    func clearSchedule() {
+    func clearSchedule(base: ViewController) {
         logger.info()
         for subview in self.subviews {
+            subview.removeFromSuperview()
+        }
+        for subview in base.holidayLabelList {
             subview.removeFromSuperview()
         }
     }
@@ -55,7 +58,10 @@ class CalendarView: UIView {
         let nationalHoliday = base.nationalHolidayCalendarName
         for event in eKEventList {
             if event.calendar.title == nationalHoliday {
-                dispNationalHoliday(event: event, base: base)
+//                dispNationalHoliday(event: event, base: base)
+                let holidayView = APCDCalendarUtil.instance.createHolidayView(event: event)
+                base.pKCanvasView.addSubview(holidayView)
+                base.holidayLabelList.append(holidayView)
                 continue
             }
             if base.displayCalendars.contains(event.calendar.title) == true {

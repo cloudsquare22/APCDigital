@@ -50,6 +50,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var day7Remaining: UILabel!
     
     var toolPicker: PKToolPicker!
+    
+    var holidayLabelList: [UILabel] = []
 
     var pageMonday = Date()
     enum PageMondayDirection {
@@ -479,7 +481,7 @@ class ViewController: UIViewController {
     
     func dispEvent() {
         logger.info()
-        self.calendarView.clearSchedule()
+        self.calendarView.clearSchedule(base: self)
         let eKEventList = self.getEvents()
         self.calendarView.dispSchedule(eKEventList: eKEventList, base: self)
     }
