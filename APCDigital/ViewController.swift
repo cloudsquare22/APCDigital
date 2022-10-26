@@ -34,13 +34,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var day5outPeriod: UILabel!
     @IBOutlet weak var day6outPeriod: UILabel!
     @IBOutlet weak var day7outPeriod: UILabel!
-    @IBOutlet weak var day1Holiday: UILabel!
-    @IBOutlet weak var day2Holiday: UILabel!
-    @IBOutlet weak var day3Holiday: UILabel!
-    @IBOutlet weak var day4Holiday: UILabel!
-    @IBOutlet weak var day5Holiday: UILabel!
-    @IBOutlet weak var day6Holiday: UILabel!
-    @IBOutlet weak var day7Holiday: UILabel!
     @IBOutlet weak var day1Remaining: UILabel!
     @IBOutlet weak var day2Remaining: UILabel!
     @IBOutlet weak var day3Remaining: UILabel!

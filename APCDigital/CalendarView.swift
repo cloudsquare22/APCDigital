@@ -20,19 +20,13 @@ class CalendarView: UIView {
         for subview in self.subviews {
             subview.removeFromSuperview()
         }
+        // HolidayLabel削除
         for subview in base.holidayLabelList {
             subview.removeFromSuperview()
         }
     }
     
     func hiddenBaseParts(base: ViewController) {
-        base.day1Holiday.isHidden = true
-        base.day2Holiday.isHidden = true
-        base.day3Holiday.isHidden = true
-        base.day4Holiday.isHidden = true
-        base.day5Holiday.isHidden = true
-        base.day6Holiday.isHidden = true
-        base.day7Holiday.isHidden = true
         base.day1outPeriod.isHidden = true
         base.day2outPeriod.isHidden = true
         base.day3outPeriod.isHidden = true
@@ -58,7 +52,6 @@ class CalendarView: UIView {
         let nationalHoliday = base.nationalHolidayCalendarName
         for event in eKEventList {
             if event.calendar.title == nationalHoliday {
-//                dispNationalHoliday(event: event, base: base)
                 let holidayView = APCDCalendarUtil.instance.createHolidayView(event: event)
                 base.pKCanvasView.addSubview(holidayView)
                 base.holidayLabelList.append(holidayView)
@@ -164,38 +157,7 @@ class CalendarView: UIView {
             }
         }
     }
-    
-    func dispNationalHoliday(event: EKEvent, base: ViewController) {
-        let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
-        if let title = event.title {
-            switch startDateComponents.weekday {
-            case 2:
-                base.day1Holiday.text = title
-                base.day1Holiday.isHidden = false
-            case 3:
-                base.day2Holiday.text = title
-                base.day2Holiday.isHidden = false
-            case 4:
-                base.day3Holiday.text = title
-                base.day3Holiday.isHidden = false
-            case 5:
-                base.day4Holiday.text = title
-                base.day4Holiday.isHidden = false
-            case 6:
-                base.day5Holiday.text = title
-                base.day5Holiday.isHidden = false
-            case 7:
-                base.day6Holiday.text = title
-                base.day6Holiday.isHidden = false
-            case 1:
-                base.day7Holiday.text = title
-                base.day7Holiday.isHidden = false
-            default:
-                break
-            }
-        }
-    }
-        
+            
     override func draw(_ rect: CGRect) {
 //        let rectangle = UIBezierPath(rect: CGRect(x: 100.0, y: 100.0, width: 300, height: 100))
 //        UIColor(ciColor: .green).setStroke()
