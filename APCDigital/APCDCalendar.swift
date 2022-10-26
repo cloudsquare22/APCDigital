@@ -212,7 +212,8 @@ class APCDCalendar {
         let nationalHoliday = self.base!.nationalHolidayCalendarName
         for event in eventArray {
             if event.calendar.title == nationalHoliday {
-                view.addSubview(self.createHolidayView(event: event, startPoint: startPoint))
+                let holidayView = APCDCalendarUtil.instance.createHolidayView(event: event)
+                view.addSubview(holidayView)
             }
             if self.base!.displayCalendars.contains(event.calendar.title) == true {
                 if APCDCalendarUtil.instance.isEventFilter(event: event) == true {
@@ -319,15 +320,6 @@ class APCDCalendar {
         outPeriodView.numberOfLines = 0
         outPeriodView.lineBreakMode = .byCharWrapping
         return outPeriodView
-    }
-    
-    func createHolidayView(event: EKEvent, startPoint: CGFloat) -> UILabel {
-        let holidayView = UILabel(frame: CGRect(x: startPoint + 39.0, y: 93.0, width: 99.0, height: 13.0))
-        holidayView.text = event.title!
-        holidayView.font = UIFont.systemFont(ofSize: 10.0, weight: .semibold)
-        holidayView.textColor = UIColor(named: "Basic Color Green")
-        holidayView.textAlignment = .right
-        return holidayView
     }
     
     func createMonthlyCalrendar(view: UIView, monday: Date) {
