@@ -60,7 +60,7 @@ class PencilCaseView: UIView {
     convenience init(frame: CGRect, pKCanvasView: RapPKCanvasView) {
         self.init(frame: frame)
         self.pKCanvasView = pKCanvasView
-        self.pKCanvasView!.tool = PKInkingTool(.pen, color: .black, width: PKInkingTool.InkType.pen.defaultWidth)
+        self.pKCanvasView!.tool = PKInkingTool(.pen, color: .black, width: PKInkingTool.InkType.pen.minWidth())
         self.inkBlack.backgroundColor = .systemGray5
     }
 
@@ -219,14 +219,14 @@ class PencilCaseView: UIView {
         }
         else if self.onPencil == true {
             self.pencil.tintColor = self.selectInkToUIColor()
-            self.pKCanvasView!.tool = PKInkingTool(.pencil, color: selectInkToUIColor(), width: PKInkingTool.InkType.pencil.defaultWidth)
+            self.pKCanvasView!.tool = PKInkingTool(.pencil, color: selectInkToUIColor(), width: PKInkingTool.InkType.pencil.minWidth())
         }
         else if self.onMarker == true {
             self.marker.tintColor = self.selectInkToUIColor()
-            self.pKCanvasView!.tool = PKInkingTool(.marker, color: selectInkToUIColor(), width: PKInkingTool.InkType.marker.defaultWidth)
+            self.pKCanvasView!.tool = PKInkingTool(.marker, color: selectInkToUIColor(), width: PKInkingTool.InkType.marker.minWidth())
         }
         else {
-            self.pKCanvasView!.tool = PKInkingTool(.pen, color: selectInkToUIColor(), width: PKInkingTool.InkType.pen.defaultWidth)
+            self.pKCanvasView!.tool = PKInkingTool(.pen, color: selectInkToUIColor(), width: PKInkingTool.InkType.pen.minWidth())
             print("Pencil width:\(PKInkingTool.InkType.pen.defaultWidth)")
         }
         if self.onTaskbox == true {
@@ -273,5 +273,11 @@ extension PencilCaseView: UIPencilInteractionDelegate {
         if let pkcanvasview = self.pKCanvasView {
             pkcanvasview.onErase = self.onErase
         }
+    }
+}
+
+extension PKInkingTool.InkType {
+    func minWidth() -> CGFloat {
+        return self.validWidthRange.lowerBound
     }
 }

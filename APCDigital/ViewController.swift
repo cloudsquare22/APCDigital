@@ -130,6 +130,7 @@ class ViewController: UIViewController {
         print(PKInkingTool.InkType.marker.validWidthRange)
         print(PKInkingTool.InkType.pen.defaultWidth)
         print(PKInkingTool.InkType.pen.validWidthRange)
+        print(PKInkingTool.InkType.pen.minWidth())
     }
     
     override func viewDidAppear(_ animated: Bool) {
