@@ -177,6 +177,26 @@ class EditScheduleViewController: UIViewController {
         }
     }
     
+    @IBAction func addEnd0_5(_ sender: Any) {
+        let start = self.startDatePicker.date
+        self.endDatePicker.date = Calendar.current.date(byAdding: .minute, value: 30, to: start)!
+    }
+    
+    @IBAction func addEnd1_0(_ sender: Any) {
+        let start = self.startDatePicker.date
+        self.endDatePicker.date = Calendar.current.date(byAdding: .minute, value: 60, to: start)!
+    }
+    
+    @IBAction func addEnd1_5(_ sender: Any) {
+        let start = self.startDatePicker.date
+        self.endDatePicker.date = Calendar.current.date(byAdding: .minute, value: 90, to: start)!
+    }
+    
+    @IBAction func addEnd2_0(_ sender: Any) {
+        let start = self.startDatePicker.date
+        self.endDatePicker.date = Calendar.current.date(byAdding: .minute, value: 120, to: start)!
+    }
+
     /*
     // MARK: - Navigation
 
