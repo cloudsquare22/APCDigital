@@ -206,8 +206,6 @@ class APCDCalendar {
     func addEvent(view: UIView, day: DateComponents, startPoint: CGFloat) {
         var dayOutPeriodEvent: [EKEvent] = []
 
-        let movementSymmbolList: [String] = APCDCalendarUtil.instance.makeMovementSymmbolList()
-
         let eventArray = self.events(day: day)
         let nationalHoliday = self.base!.nationalHolidayCalendarName
         for event in eventArray {
@@ -283,8 +281,7 @@ class APCDCalendar {
                                                                                  startDate: startDate,
                                                                                  endDate: endDate,
                                                                                  startLineHidden: startLineHidden,
-                                                                                 endLineHidden: endLineHidden,
-                                                                                 movementSymmbolList: movementSymmbolList))
+                                                                                 endLineHidden: endLineHidden))
                 }
                 else {
                     dayOutPeriodEvent.append(event)

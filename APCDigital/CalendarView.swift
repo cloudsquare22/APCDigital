@@ -47,7 +47,6 @@ class CalendarView: UIView {
                                  base.day5outPeriod,
                                  base.day6outPeriod,
                                  base.day7outPeriod]
-        let movementSymmbolList: [String] = APCDCalendarUtil.instance.makeMovementSymmbolList()
         self.hiddenBaseParts(base: base)
         let nationalHoliday = base.nationalHolidayCalendarName
         for event in eKEventList {
@@ -121,9 +120,13 @@ class CalendarView: UIView {
                                                                                  startDate: startDate,
                                                                                  endDate: endDate,
                                                                                  startLineHidden: startLineHidden,
-                                                                                 endLineHidden: endLineHidden,
-                                                                                 movementSymmbolList: movementSymmbolList,
-                                                                                 base: base))
+                                                                                 endLineHidden: endLineHidden))
+                    let scheduleView = self.subviews.last!
+                    let x = scheduleView.frame.origin.x
+                    let y = scheduleView.frame.origin.y
+                    let w = scheduleView.frame.width
+                    let h = scheduleView.frame.height
+                    base.scheduleViews.append((x: x, y: y, w: w, h: h, event: event))
                 }
                 else {
                     var startDate = event.startDate! < base.pageMonday ? base.pageMonday : event.startDate!
