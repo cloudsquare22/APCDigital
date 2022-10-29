@@ -19,12 +19,8 @@ class SettingViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let symbols = UserDefaults.standard.string(forKey: "movementSymbols") {
-            movementSymbols.text = symbols
-        }
-        if let title = UserDefaults.standard.string(forKey: "nationalHoliday") {
-            nationalHoliday.text = title
-        }
+        self.movementSymbols.text = APCDData.instance.movementSymbols
+        self.nationalHoliday.text = APCDData.instance.nationalHoliday
         let dateAllDayH = UserDefaults.standard.integer(forKey: "dateAllDayH")
         let dateAllDayM = UserDefaults.standard.integer(forKey: "dateAllDayM")
         var dateComponentsAllDay = Calendar.current.dateComponents(in: .current, from: Date())
@@ -48,11 +44,11 @@ class SettingViewController: UITableViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if let symbols = self.movementSymbols.text {
-            UserDefaults.standard.set(symbols, forKey: "movementSymbols")
+        if let movementSymbols = self.movementSymbols.text {
+            APCDData.instance.setMovementSymbols(movementSymbols: movementSymbols)
         }
-        if let title = self.nationalHoliday.text {
-            APCDData.instance.setNationalHoliday(nationalHoliday: title)
+        if let nationalHoliday = self.nationalHoliday.text {
+            APCDData.instance.setNationalHoliday(nationalHoliday: nationalHoliday)
         }
         let dateComponentsAllDay = Calendar.current.dateComponents(in: .current, from: self.dateAllDay.date)
         UserDefaults.standard.set(dateComponentsAllDay.hour, forKey: "dateAllDayH")

@@ -165,7 +165,7 @@ class APCDCalendarUtil {
                             startLineHidden: Bool,
                             endLineHidden: Bool) -> ScheduleView {
         let startDateComponents = Calendar.current.dateComponents(in: .current, from: startDate)
-        let movementSymmbolList: [String] = APCDCalendarUtil.instance.makeMovementSymmbolList()
+        let movementSymbols = APCDData.instance.movementSymbols
         var x = 55.0
         var widthAdd = 0.0
         switch startDateComponents.weekday! {
@@ -210,8 +210,8 @@ class APCDCalendarUtil {
         scheduleView.minute.image = APCDCalendarUtil.instance.createMinuteSFSymbol(startDateComponents: startDateComponents, startLineHidden: startLineHidden)
         scheduleView.endTime.frame = CGRect(x: -8.0, y: 11.375 * diff - 2, width: 16, height: 16)
         
-        if movementSymmbolList.contains(String(title.prefix(1))) == true ||
-            (("□" == String(title.prefix(1))) && (movementSymmbolList.contains(String(title[title.index(title.startIndex, offsetBy: 1)])) == true)){
+        if movementSymbols.contains(String(title.prefix(1))) == true ||
+            (("□" == String(title.prefix(1))) && (movementSymbols.contains(String(title[title.index(title.startIndex, offsetBy: 1)])) == true)){
             scheduleView.addLine(isMove: true, isStartLineHidden: startLineHidden, isEndLineHidden: endLineHidden)
         }
         else {
@@ -219,16 +219,6 @@ class APCDCalendarUtil {
         }
                 
         return scheduleView
-    }
-    
-    func makeMovementSymmbolList() -> [String] {
-        var movementSymmbolList: [String] = []
-        if let symbols = UserDefaults.standard.string(forKey: "movementSymbols") {
-            for symbol in symbols {
-                movementSymmbolList.append(String(symbol))
-            }
-        }
-        return movementSymmbolList
     }
     
     func addLocationEventTitle(event: EKEvent) -> String? {
