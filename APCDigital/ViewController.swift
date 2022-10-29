@@ -58,7 +58,6 @@ class ViewController: UIViewController {
     var calendars: [EKCalendar] = []
     var displayCalendars: [String] = []
     var displayOutCalendars: [String] = []
-    var nationalHolidayCalendarName = "日本の祝日"
     
     var scheduleViews: [(x: Double, y: Double, w: Double, h: Double, event: EKEvent)] = []
     
@@ -165,13 +164,12 @@ class ViewController: UIViewController {
     
     func updateCalendars() {
         logger.info()
-        self.setNationalHolidayCalendarName()
         let calendarAll = eventStore.calendars(for: .event)
         self.calendars = []
         for calendar in calendarAll {
             switch calendar.type {
             case .local, .calDAV,
-                 .subscription where calendar.title != nationalHolidayCalendarName:
+                    .subscription where calendar.title != APCDData.instance.nationalHoliday:
                 self.calendars.append(calendar)
             default:
                 break
@@ -195,13 +193,6 @@ class ViewController: UIViewController {
         }
     }
     
-    func setNationalHolidayCalendarName() {
-        nationalHolidayCalendarName = "日本の祝日"
-        if let title = UserDefaults.standard.string(forKey: "nationalHoliday") {
-            nationalHolidayCalendarName = title
-        }
-    }
-
     @objc func swipeLeft(sender: UISwipeGestureRecognizer) {
         logger.info()
         self.pageUpsert()

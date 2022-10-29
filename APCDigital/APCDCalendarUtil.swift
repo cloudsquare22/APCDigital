@@ -302,8 +302,7 @@ class APCDCalendarUtil {
         return "to " + Calendar.shortMonthSymbols(local: Locale(identifier: "en"))[sunday.month! - 1].uppercased() + " " + String(sunday.day!)
     }
     
-    func addEvent(event: EKEvent, base: ViewController) {
-        let nationalHoliday = base.nationalHolidayCalendarName
+    func addEventDay(event: EKEvent, base: ViewController) {
         
     }
     

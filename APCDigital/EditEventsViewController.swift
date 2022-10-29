@@ -112,9 +112,8 @@ class EditEventsViewController: UITableViewController {
     func setEvents() {
         self.events = []
         let eventArray = self.viewController!.getEvents()
-        let nationalHoliday = self.viewController!.nationalHolidayCalendarName
         for event in eventArray {
-            if event.calendar.title == nationalHoliday {
+            if event.calendar.title == APCDData.instance.nationalHoliday {
                 continue
             }
             switch event.calendar.type {

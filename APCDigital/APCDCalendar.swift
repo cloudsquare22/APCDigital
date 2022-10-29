@@ -207,9 +207,8 @@ class APCDCalendar {
         var dayOutPeriodEvent: [EKEvent] = []
 
         let eventArray = self.events(day: day)
-        let nationalHoliday = self.base!.nationalHolidayCalendarName
         for event in eventArray {
-            if event.calendar.title == nationalHoliday {
+            if event.calendar.title == APCDData.instance.nationalHoliday {
                 let holidayView = APCDCalendarUtil.instance.createHolidayView(event: event)
                 view.addSubview(holidayView)
             }

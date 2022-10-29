@@ -48,9 +48,8 @@ class CalendarView: UIView {
                                  base.day6outPeriod,
                                  base.day7outPeriod]
         self.hiddenBaseParts(base: base)
-        let nationalHoliday = base.nationalHolidayCalendarName
         for event in eKEventList {
-            if event.calendar.title == nationalHoliday {
+            if event.calendar.title == APCDData.instance.nationalHoliday {
                 let holidayView = APCDCalendarUtil.instance.createHolidayView(event: event)
                 base.pKCanvasView.addSubview(holidayView)
                 base.holidayLabelList.append(holidayView)

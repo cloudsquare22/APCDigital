@@ -52,8 +52,7 @@ class SettingViewController: UITableViewController {
             UserDefaults.standard.set(symbols, forKey: "movementSymbols")
         }
         if let title = self.nationalHoliday.text {
-            UserDefaults.standard.set(title, forKey: "nationalHoliday")
-            self.viewController?.nationalHolidayCalendarName = title
+            APCDData.instance.setNationalHoliday(nationalHoliday: title)
         }
         let dateComponentsAllDay = Calendar.current.dateComponents(in: .current, from: self.dateAllDay.date)
         UserDefaults.standard.set(dateComponentsAllDay.hour, forKey: "dateAllDayH")
