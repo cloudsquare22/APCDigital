@@ -29,7 +29,7 @@ class APCDCalendarUtil {
 
     func dispOutPeriod(events: [EKEvent]) -> UILabel {
         logger.debug("events: \(events.count)")
-        var label = self.createOutPeriodView(event: events.first!)
+        let label = self.createOutPeriodView(event: events.first!)
         if events.isEmpty == false {
             label.isHidden = false
             let lineMax: Int = events.count == 2 || events.count == 3 ? 2 : 1
