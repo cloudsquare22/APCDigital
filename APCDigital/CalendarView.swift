@@ -20,10 +20,6 @@ class CalendarView: UIView {
         for subview in self.subviews {
             subview.removeFromSuperview()
         }
-        // HolidayLabel削除
-        for subview in base.holidayLabelList {
-            subview.removeFromSuperview()
-        }
     }
     
     func hiddenBaseParts(base: ViewController) {
@@ -51,8 +47,7 @@ class CalendarView: UIView {
         for event in eKEventList {
             if event.calendar.title == APCDData.instance.nationalHoliday {
                 let holidayView = APCDCalendarUtil.instance.createHolidayView(event: event)
-                base.pKCanvasView.addSubview(holidayView)
-                base.holidayLabelList.append(holidayView)
+                self.addSubview(holidayView)
                 continue
             }
             if base.displayCalendars.contains(event.calendar.title) == true {

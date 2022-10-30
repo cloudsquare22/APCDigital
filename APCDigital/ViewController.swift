@@ -44,8 +44,6 @@ class ViewController: UIViewController {
     
     var toolPicker: PKToolPicker!
     
-    var holidayLabelList: [UILabel] = []
-
     var pageMonday = Date()
     enum PageMondayDirection {
         case today
