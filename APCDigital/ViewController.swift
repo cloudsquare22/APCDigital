@@ -27,13 +27,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var toDay: UILabel!
     @IBOutlet weak var weekOfYear: UILabel!
     @IBOutlet weak var menuView: UIView!
-    @IBOutlet weak var day1outPeriod: UILabel!
-    @IBOutlet weak var day2outPeriod: UILabel!
-    @IBOutlet weak var day3outPeriod: UILabel!
-    @IBOutlet weak var day4outPeriod: UILabel!
-    @IBOutlet weak var day5outPeriod: UILabel!
-    @IBOutlet weak var day6outPeriod: UILabel!
-    @IBOutlet weak var day7outPeriod: UILabel!
     @IBOutlet weak var day1Remaining: UILabel!
     @IBOutlet weak var day2Remaining: UILabel!
     @IBOutlet weak var day3Remaining: UILabel!

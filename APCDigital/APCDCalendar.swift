@@ -288,9 +288,7 @@ class APCDCalendar {
             }
         }
         if dayOutPeriodEvent.isEmpty == false {
-            let outPeriodView = self.createOutPeriodView(startPoint: startPoint)
-            APCDCalendarUtil.instance.dispOutPeriod(label: outPeriodView,
-                                                    events: dayOutPeriodEvent)
+            let outPeriodView = APCDCalendarUtil.instance.dispOutPeriod(events: dayOutPeriodEvent)
             view.addSubview(outPeriodView)
         }
     }
@@ -310,14 +308,7 @@ class APCDCalendar {
         let eventArray = eventStore.events(matching: predicate)
         return eventArray
     }
-    
-    func createOutPeriodView(startPoint: CGFloat) -> UILabel {
-        let outPeriodView = UILabel(frame: CGRect(x: startPoint + 2.0, y: 107.0, width: 135.0, height: 50.0))
-        outPeriodView.numberOfLines = 0
-        outPeriodView.lineBreakMode = .byCharWrapping
-        return outPeriodView
-    }
-    
+        
     func createMonthlyCalrendar(view: UIView, monday: Date) {
         view.addSubview(MonthlyCarendarView(frame: CGRect(x: 1170, y: 168, width: 145, height: 105), day: monday).view)
         let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: monday)

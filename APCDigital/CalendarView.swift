@@ -22,28 +22,10 @@ class CalendarView: UIView {
         }
     }
     
-    func hiddenBaseParts(base: ViewController) {
-        base.day1outPeriod.isHidden = true
-        base.day2outPeriod.isHidden = true
-        base.day3outPeriod.isHidden = true
-        base.day4outPeriod.isHidden = true
-        base.day5outPeriod.isHidden = true
-        base.day6outPeriod.isHidden = true
-        base.day7outPeriod.isHidden = true
-    }
-    
     func dispSchedule(eKEventList: [EKEvent], base: ViewController) {
         logger.info("eventArray Count: \(eKEventList.count)")
         logger.debug("eventArray: \(eKEventList) base: \(base)")
         var dayOutPeriodEvent: [[EKEvent]] = .init(repeating: [], count: 7)
-        let dayOutPeriodLavel = [base.day1outPeriod,
-                                 base.day2outPeriod,
-                                 base.day3outPeriod,
-                                 base.day4outPeriod,
-                                 base.day5outPeriod,
-                                 base.day6outPeriod,
-                                 base.day7outPeriod]
-        self.hiddenBaseParts(base: base)
         for event in eKEventList {
             if event.calendar.title == APCDData.instance.nationalHoliday {
                 let holidayView = APCDCalendarUtil.instance.createHolidayView(event: event)
@@ -142,12 +124,12 @@ class CalendarView: UIView {
             if dayOutPeriodEvent[index].isEmpty == false {
                 print("dayOutPeriod weekday:\(index)")
                 print(dayOutPeriodEvent[index])
-                APCDCalendarUtil.instance.dispOutPeriod(label: dayOutPeriodLavel[index]!,
-                                                        events: dayOutPeriodEvent[index])
-                let x = dayOutPeriodLavel[index]!.frame.origin.x
-                let y = dayOutPeriodLavel[index]!.frame.origin.y
-                let w = dayOutPeriodLavel[index]!.frame.size.width
-                let h = dayOutPeriodLavel[index]!.frame.size.height
+                let dayOutPeriodLavel = APCDCalendarUtil.instance.dispOutPeriod(events: dayOutPeriodEvent[index])
+                self.addSubview(dayOutPeriodLavel)
+                let x = dayOutPeriodLavel.frame.origin.x
+                let y = dayOutPeriodLavel.frame.origin.y
+                let w = dayOutPeriodLavel.frame.size.width
+                let h = dayOutPeriodLavel.frame.size.height
                 for event in dayOutPeriodEvent[index] {
                     base.scheduleViews.append((x: x, y: y, w: w, h: h, event: event))
                 }

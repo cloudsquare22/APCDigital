@@ -17,9 +17,19 @@ class APCDCalendarUtil {
     static let instance = APCDCalendarUtil()
     let dayX = [60.0, 208.0, 356.0, 504.0, 725.0, 872.0, 1020.0]
 
-    func dispOutPeriod(label: UILabel, events: [EKEvent]) {
-        logger.debug("label: \(label) events: \(events.count)")
-        label.text = ""
+    func createOutPeriodView(event: EKEvent) -> UILabel {
+        let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
+        let startPoint = self.dayX[startDateComponents.weekendStartMonday - 1]
+        let outPeriodView = UILabel(frame: CGRect(x: startPoint + 2.0, y: 107.0, width: 135.0, height: 50.0))
+        outPeriodView.numberOfLines = 0
+        outPeriodView.lineBreakMode = .byCharWrapping
+        outPeriodView.isHidden = true
+        return outPeriodView
+    }
+
+    func dispOutPeriod(events: [EKEvent]) -> UILabel {
+        logger.debug("events: \(events.count)")
+        var label = self.createOutPeriodView(event: events.first!)
         if events.isEmpty == false {
             label.isHidden = false
             let lineMax: Int = events.count == 2 || events.count == 3 ? 2 : 1
@@ -64,7 +74,7 @@ class APCDCalendarUtil {
                 }
             }
             guard let data = htmlText.data(using: .utf8) else {
-                return
+                return label
             }
             do {
                 let option: [NSAttributedString.DocumentReadingOptionKey: Any] = [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue]
@@ -81,9 +91,7 @@ class APCDCalendarUtil {
             fixedFrame.size.height = label.frame.size.height
             label.frame = fixedFrame
         }
-        else {
-            label.isHidden = true
-        }
+        return label
     }
     
     func createOutScheduleString(startH: Int, startM: Int, title: String) -> String {
