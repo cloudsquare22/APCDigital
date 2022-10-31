@@ -26,6 +26,14 @@ class CalendarView: UIView {
         logger.info("eventArray Count: \(eKEventList.count)")
         logger.debug("eventArray: \(eKEventList) base: \(base)")
         var dayOutPeriodEvent: [[EKEvent]] = .init(repeating: [], count: 7)
+
+        // 1週間分のイベントリストを日毎に展開
+        var dayOfEKEventList: [[EKEvent]] = .init(repeating: [], count: 7)
+        for event in eKEventList {
+            var startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
+            dayOfEKEventList[startDateComponents.weekendStartMonday - 1].append(event)
+        }
+        
         for event in eKEventList {
             if event.calendar.title == APCDData.instance.nationalHoliday {
                 let holidayView = APCDCalendarUtil.instance.createHolidayView(event: event)
