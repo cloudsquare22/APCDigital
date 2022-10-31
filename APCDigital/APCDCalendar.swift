@@ -211,6 +211,7 @@ class APCDCalendar {
             if event.calendar.title == APCDData.instance.nationalHoliday {
                 let holidayView = APCDCalendarUtil.instance.createHolidayView(event: event)
                 view.addSubview(holidayView)
+                continue
             }
             if self.base!.displayCalendars.contains(event.calendar.title) == true {
                 if APCDCalendarUtil.instance.isEventFilter(event: event) == true {
