@@ -68,8 +68,8 @@ class EditScheduleViewController: UIViewController {
         self.calendarPicker.delegate = self
         self.calendarPicker.dataSource = self
         
-        for index in 0..<(self.viewController?.calendars.count)! {
-            if self.viewController?.calendars[index].title == selectCalendar {
+        for index in 0..<(APCDData.instance.calendars.count) {
+            if APCDData.instance.calendars[index].title == selectCalendar {
                 self.calendarPicker.selectRow(index, inComponent: 0, animated: true)
                 break
             }
@@ -127,8 +127,8 @@ class EditScheduleViewController: UIViewController {
         event.location = self.locationText.text
         event.startDate = self.startDatePicker.date
         event.endDate = self.endDatePicker.date
-        let calendar = self.viewController?.calendars[calendarPicker.selectedRow(inComponent: 0)]
-        event.calendar = eventStore.calendar(withIdentifier: calendar!.calendarIdentifier)
+        let calendar = APCDData.instance.calendars[calendarPicker.selectedRow(inComponent: 0)]
+        event.calendar = eventStore.calendar(withIdentifier: calendar.calendarIdentifier)
         event.notes = self.memoTexts.text
         if allday == true {
             event.isAllDay = true
@@ -215,11 +215,11 @@ extension EditScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSour
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        (self.viewController?.calendars.count)!
+        (APCDData.instance.calendars.count)
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        self.viewController?.calendars[row].title
+        APCDData.instance.calendars[row].title
     }
     
 }

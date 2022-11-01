@@ -35,8 +35,8 @@ class EventFilterViewAddCell: UITableViewCell {
         guard self.filterString.text?.isEmpty == false else {
             return
         }
-        let calendarString = self.viewController?.calendars[self.calendars.selectedRow(inComponent: 0)].title
-        EventFilter.insert(calendar: calendarString!, filterString: self.filterString.text!)
+        let calendarString = APCDData.instance.calendars[self.calendars.selectedRow(inComponent: 0)].title
+        EventFilter.insert(calendar: calendarString, filterString: self.filterString.text!)
         self.eventFilterViewController?.reload()
         self.filterString.text = ""
     }
@@ -49,11 +49,11 @@ extension EventFilterViewAddCell: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if self.viewController?.calendars == nil {
+        if APCDData.instance.calendars == nil {
             return 0
         }
         else {
-            return (self.viewController?.calendars.count)!
+            return (APCDData.instance.calendars.count)
         }
     }
     
@@ -62,11 +62,11 @@ extension EventFilterViewAddCell: UIPickerViewDelegate, UIPickerViewDataSource {
 //    }
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let color = UIColor(red: self.viewController!.calendars[row].cgColor.components![0],
-                            green: self.viewController!.calendars[row].cgColor.components![1],
-                            blue: self.viewController!.calendars[row].cgColor.components![2],
+        let color = UIColor(red: APCDData.instance.calendars[row].cgColor.components![0],
+                            green: APCDData.instance.calendars[row].cgColor.components![1],
+                            blue: APCDData.instance.calendars[row].cgColor.components![2],
                             alpha: 1.0)
-        let attribute = NSAttributedString(string: (self.viewController?.calendars[row].title)!,
+        let attribute = NSAttributedString(string: (APCDData.instance.calendars[row].title),
                                            attributes: [NSAttributedString.Key.foregroundColor: color])
         return attribute
     }

@@ -40,7 +40,7 @@ class CalendarView: UIView {
                 self.addSubview(holidayView)
                 continue
             }
-            if base.displayCalendars.contains(event.calendar.title) == true {
+            if APCDData.instance.displayCalendars.contains(event.calendar.title) == true {
                 if APCDCalendarUtil.instance.isEventFilter(event: event) == true {
                     continue
                 }
@@ -66,7 +66,7 @@ class CalendarView: UIView {
                         let endH = endDateComponents.hour, let endM = endDateComponents.minute {
                         
                         // 期間外エリア表示指定カレンダー処理
-                        if base.displayOutCalendars.contains(event.calendar.title) == true {
+                        if APCDData.instance.displayOutCalendars.contains(event.calendar.title) == true {
                             dayOutPeriodEvent[startDateComponents.weekendStartMonday - 1].append(event)
                             continue
                         }

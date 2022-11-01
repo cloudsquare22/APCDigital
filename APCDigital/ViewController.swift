@@ -46,9 +46,6 @@ class ViewController: UIViewController {
     var days: [Int] = []
 
     var weekDaysDateComponents: [DateComponents] = []
-    var calendars: [EKCalendar] = []
-    var displayCalendars: [String] = []
-    var displayOutCalendars: [String] = []
     
     var scheduleViews: [(x: Double, y: Double, w: Double, h: Double, event: EKEvent)] = []
     
@@ -150,37 +147,6 @@ class ViewController: UIViewController {
             pageMonday = Calendar.current.nextDate(after: pageMonday, matching: ViewController.matching, matchingPolicy: .nextTime, direction: .forward)!
         case .back:
             pageMonday = Calendar.current.nextDate(after: pageMonday, matching: ViewController.matching, matchingPolicy: .nextTime, direction: .backward)!
-        }
-    }
-    
-    func updateCalendars() {
-        logger.info()
-        let calendarAll = eventStore.calendars(for: .event)
-        self.calendars = []
-        for calendar in calendarAll {
-            switch calendar.type {
-            case .local, .calDAV,
-                    .subscription where calendar.title != APCDData.instance.nationalHoliday:
-                self.calendars.append(calendar)
-            default:
-                break
-            }
-        }
-        self.calendars.sort() {
-            $0.title < $1.title
-        }
-        
-        if let displays = UserDefaults.standard.stringArray(forKey: "displayCalendars") {
-            self.displayCalendars = displays
-        }
-        else {
-            for calendar in self.calendars {
-                self.displayCalendars.append(calendar.title)
-            }
-        }
-
-        if let displays = UserDefaults.standard.stringArray(forKey: "displayOutCalendars") {
-            self.displayOutCalendars = displays
         }
     }
     
@@ -360,8 +326,8 @@ class ViewController: UIViewController {
         self.scheduleViews = []
         
         // Data Initial
-        self.updateCalendars()
         self.setWeekDaysDateComponents(monday: pageMonday)
+        APCDData.instance.loadData()
         
         // Main Area
         self.dispDayLabel()

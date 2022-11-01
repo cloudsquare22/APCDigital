@@ -213,7 +213,7 @@ class APCDCalendar {
                 view.addSubview(holidayView)
                 continue
             }
-            if self.base!.displayCalendars.contains(event.calendar.title) == true {
+            if APCDData.instance.displayCalendars.contains(event.calendar.title) == true {
                 if APCDCalendarUtil.instance.isEventFilter(event: event) == true {
                     continue
                 }
@@ -239,7 +239,7 @@ class APCDCalendar {
                         let endH = endDateComponents.hour, let endM = endDateComponents.minute {
                         
                         // 期間外エリア表示指定カレンダー処理
-                        if self.base!.displayOutCalendars.contains(event.calendar.title) == true {
+                        if APCDData.instance.displayOutCalendars.contains(event.calendar.title) == true {
                             dayOutPeriodEvent.append(event)
                             continue
                         }
