@@ -118,7 +118,7 @@ class CalendarView: UIView {
                     while startDate <= endDate {
                         let startDateComponents = Calendar.current.dateComponents(in: .current, from: startDate)
                         print(startDateComponents.weekday!)
-                        var copyEvent = event.copy() as! EKEvent
+                        let copyEvent = event.copy() as! EKEvent
                         copyEvent.startDate = startDate
                         dayOutPeriodEvent[startDateComponents.weekendStartMonday - 1].append(copyEvent)
                         if startDateComponents.weekday! == 1 {
