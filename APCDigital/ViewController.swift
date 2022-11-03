@@ -15,7 +15,6 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var calendarView: CalendarView!
     @IBOutlet weak var pKCanvasView: RapPKCanvasView!
-    @IBOutlet weak var fromDay: UILabel!
     @IBOutlet weak var toDay: UILabel!
     @IBOutlet weak var weekOfYear: UILabel!
     @IBOutlet weak var menuView: UIView!
@@ -413,7 +412,9 @@ class ViewController: UIViewController {
         let monthView = APCDCalendarUtil.instance.createMonthView(monday: monday, sunday: sunday)
         self.calendarView.addSubview(monthView)
 
-        self.fromDay.text = APCDCalendarUtil.instance.createWeekFromDayString(monday: monday)
+        let fromView = APCDCalendarUtil.instance.createFromView(monday: monday)
+        self.calendarView.addSubview(fromView)
+
         self.toDay.text = APCDCalendarUtil.instance.createWeekToDayString(sunday: sunday)
     }
     
