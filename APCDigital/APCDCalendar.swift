@@ -150,12 +150,8 @@ class APCDCalendar {
         templateView.contentMode = .scaleAspectFit
         view.addSubview(templateView)
         
-        let month = UILabel(frame: CGRect(x: 1170.0, y: 31.0, width: 145.0, height: 87.0))
-        month.text = APCDCalendarUtil.instance.createMonthString(monday: dateComponentsWeek.first!, sunday: dateComponentsWeek.last!)
-        month.font = UIFont.systemFont(ofSize: 48.0, weight: .semibold)
-        month.textColor = UIColor(named: "Basic Color Green")
-        month.textAlignment = .center
-        view.addSubview(month)
+        let monthView = APCDCalendarUtil.instance.createMonthView(monday: dateComponentsWeek.first!, sunday: dateComponentsWeek.last!)
+        view.addSubview(monthView)
         
         let from = UILabel(frame: CGRect(x: 1170.0, y: 105.0, width: 145.0, height: 21.0))
         from.text = APCDCalendarUtil.instance.createWeekFromDayString(monday: dateComponentsWeek.first!)

@@ -27,13 +27,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZzT-sx-gQf" customClass="RapPKCanvasView" customModule="Action_Planner" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="88" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sNn-CJ-hKd">
-                                        <rect key="frame" x="1170" y="31" width="145" height="87"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="48"/>
-                                        <color key="textColor" name="Basic Color Green"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="XXX XX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rhs-U2-0Ze">
                                         <rect key="frame" x="1170" y="105" width="145" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -175,7 +168,6 @@
                         <outlet property="calendarView" destination="omt-Zi-HtB" id="BuX-UM-0kM"/>
                         <outlet property="fromDay" destination="Rhs-U2-0Ze" id="Wdx-Xf-b9o"/>
                         <outlet property="menuView" destination="V51-NI-Mzf" id="lUI-U5-4fF"/>
-                        <outlet property="month" destination="sNn-CJ-hKd" id="d1L-ZG-cH1"/>
                         <outlet property="pKCanvasView" destination="ZzT-sx-gQf" id="aCO-X9-aWg"/>
                         <outlet property="toDay" destination="DrL-Uq-ZWk" id="0Nn-Vi-uJj"/>
                         <outlet property="weekOfYear" destination="HRm-K2-QHA" id="owo-jX-DWU"/>

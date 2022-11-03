@@ -33,6 +33,15 @@ class APCDCalendarUtil {
         return remainingView
     }
     
+    func createMonthView(monday: DateComponents, sunday: DateComponents) -> UILabel {
+        let month = UILabel(frame: CGRect(x: 1170.0, y: 31.0, width: 145.0, height: 87.0))
+        month.text = APCDCalendarUtil.instance.createMonthString(monday: monday, sunday: sunday)
+        month.font = UIFont.systemFont(ofSize: 48.0, weight: .semibold)
+        month.textColor = UIColor(named: "Basic Color Green")
+        month.textAlignment = .center
+        return month
+    }
+    
     func createOutPeriodView(event: EKEvent) -> UILabel {
         let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
         let startPoint = self.dayX[startDateComponents.weekendStartMonday - 1]
