@@ -26,15 +26,6 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZzT-sx-gQf" customClass="RapPKCanvasView" customModule="Action_Planner" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="xx week" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRm-K2-QHA">
-                                        <rect key="frame" x="1170" y="380" width="145" height="16"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <color key="textColor" name="Basic Color Green"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view alpha="0.90000000000000002" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V51-NI-Mzf">
@@ -154,7 +145,6 @@
                         <outlet property="calendarView" destination="omt-Zi-HtB" id="BuX-UM-0kM"/>
                         <outlet property="menuView" destination="V51-NI-Mzf" id="lUI-U5-4fF"/>
                         <outlet property="pKCanvasView" destination="ZzT-sx-gQf" id="aCO-X9-aWg"/>
-                        <outlet property="weekOfYear" destination="HRm-K2-QHA" id="owo-jX-DWU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

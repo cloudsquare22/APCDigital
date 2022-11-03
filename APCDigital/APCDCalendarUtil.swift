@@ -60,6 +60,15 @@ class APCDCalendarUtil {
         return to
     }
     
+    func createWeekOfYearView(monday: DateComponents) -> UILabel {
+        let weekOfYear = UILabel(frame: CGRect(x: 1170.0, y: 380.0, width: 145.0, height: 16.0))
+        weekOfYear.text = APCDCalendarUtil.instance.createWeekOfYearString(monday: monday.date!)
+        weekOfYear.font = UIFont.systemFont(ofSize: 13.0, weight: .regular)
+        weekOfYear.textColor = UIColor(named: "Basic Color Green")
+        weekOfYear.textAlignment = .center
+        return weekOfYear
+    }
+    
     func createOutPeriodView(event: EKEvent) -> UILabel {
         let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
         let startPoint = self.dayX[startDateComponents.weekendStartMonday - 1]

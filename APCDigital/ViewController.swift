@@ -15,7 +15,6 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var calendarView: CalendarView!
     @IBOutlet weak var pKCanvasView: RapPKCanvasView!
-    @IBOutlet weak var weekOfYear: UILabel!
     @IBOutlet weak var menuView: UIView!
     
     var toolPicker: PKToolPicker!
@@ -427,7 +426,8 @@ class ViewController: UIViewController {
     
     func dispWeekOfYear() {
         logger.info()
-        self.weekOfYear.text = APCDCalendarUtil.instance.createWeekOfYearString(monday: self.weekDaysDateComponents[WeekDay1stMonday.monday.rawValue].date!)
+        let weekOfYearView = APCDCalendarUtil.instance.createWeekOfYearView(monday: self.weekDaysDateComponents[WeekDay1stMonday.monday.rawValue])
+        self.calendarView.addSubview(weekOfYearView)
     }
     
     func dispPencilCase() {
