@@ -156,12 +156,8 @@ class APCDCalendar {
         let fromView = APCDCalendarUtil.instance.createFromView(monday: dateComponentsWeek.first!)
         view.addSubview(fromView)
 
-        let to = UILabel(frame: CGRect(x: 1170.0, y: 124.0, width: 145.0, height: 21.0))
-        to.text = APCDCalendarUtil.instance.createWeekToDayString(sunday: dateComponentsWeek.last!)
-        to.font = UIFont.systemFont(ofSize: 15.0, weight: .regular)
-        to.textColor = UIColor(named: "Basic Color Green")
-        to.textAlignment = .center
-        view.addSubview(to)
+        let toView = APCDCalendarUtil.instance.createToView(sunday: dateComponentsWeek.last!)
+        view.addSubview(toView)
 
         let weekOfYear = UILabel(frame: CGRect(x: 1170.0, y: 380.0, width: 145.0, height: 16.0))
         weekOfYear.text = APCDCalendarUtil.instance.createWeekOfYearString(monday: monday)
