@@ -185,7 +185,6 @@ class APCDCalendar {
     }
     
     func createDay(view: UIView, dateComponentsWeek: [DateComponents]) {
-        let dayX = [60.0, 208.0, 356.0, 504.0, 725.0, 872.0, 1020.0]
         for day in 0..<7 {
             let dayView = APCDCalendarUtil.instance.createDayView(dateComponents: dateComponentsWeek[day])
 
