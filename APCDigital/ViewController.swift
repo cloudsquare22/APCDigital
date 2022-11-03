@@ -16,13 +16,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var calendarView: CalendarView!
     @IBOutlet weak var pKCanvasView: RapPKCanvasView!
     @IBOutlet weak var month: UILabel!
-    @IBOutlet weak var day1: UILabel!
-    @IBOutlet weak var day2: UILabel!
-    @IBOutlet weak var day3: UILabel!
-    @IBOutlet weak var day4: UILabel!
-    @IBOutlet weak var day5: UILabel!
-    @IBOutlet weak var day6: UILabel!
-    @IBOutlet weak var day7: UILabel!
     @IBOutlet weak var fromDay: UILabel!
     @IBOutlet weak var toDay: UILabel!
     @IBOutlet weak var weekOfYear: UILabel!
@@ -391,12 +384,8 @@ class ViewController: UIViewController {
     
     func dispDayLabel() {
         logger.info()
-        let dayLabels = [self.day1, self.day2, self.day3, self.day4, self.day5, self.day6, self.day7]
         let dayRemainings = [self.day1Remaining, self.day2Remaining, self.day3Remaining, self.day4Remaining, self.day5Remaining, self.day6Remaining, self.day7Remaining]
-        self.days = []
         for weekday in WeekDay1stMonday.monday.rawValue...WeekDay1stMonday.sunday.rawValue {
-            dayLabels[weekday]?.text = String(self.weekDaysDateComponents[weekday].day!)
-            self.days.append(self.weekDaysDateComponents[weekday].day!)
             dayRemainings[weekday]?.text = APCDCalendarUtil.instance.countElapsedRemaining(day: self.weekDaysDateComponents[weekday].date!)
         }
     }
@@ -424,6 +413,7 @@ class ViewController: UIViewController {
     func dispEvent() {
         logger.info()
         self.calendarView.clearSchedule(base: self)
+        self.calendarView.dispDayLabel(base: self)
         let eKEventList = self.getEvents()
         self.calendarView.dispSchedule(eKEventList: eKEventList, base: self)
     }

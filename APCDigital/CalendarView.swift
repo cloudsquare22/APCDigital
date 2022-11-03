@@ -21,7 +21,17 @@ class CalendarView: UIView {
             subview.removeFromSuperview()
         }
     }
-    
+
+    func dispDayLabel(base: ViewController) {
+        logger.info()
+        base.days = []
+        for weekday in WeekDay1stMonday.monday.rawValue...WeekDay1stMonday.sunday.rawValue {
+            let dayView = APCDCalendarUtil.instance.createDayView(dateComponents: base.weekDaysDateComponents[weekday])
+            self.addSubview(dayView)
+            base.days.append(base.weekDaysDateComponents[weekday].day!)
+        }
+    }
+
     func dispSchedule(eKEventList: [EKEvent], base: ViewController) {
         logger.info("eventArray Count: \(eKEventList.count)")
         logger.debug("eventArray: \(eKEventList) base: \(base)")

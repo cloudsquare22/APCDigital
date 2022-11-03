@@ -187,10 +187,7 @@ class APCDCalendar {
     func createDay(view: UIView, dateComponentsWeek: [DateComponents]) {
         let dayX = [60.0, 208.0, 356.0, 504.0, 725.0, 872.0, 1020.0]
         for day in 0..<7 {
-            let dayView = UILabel(frame: CGRect(x: dayX[day], y: 80.0, width: 32.0, height: 29.0))
-            dayView.text = String(dateComponentsWeek[day].day!)
-            dayView.font = UIFont.systemFont(ofSize: 24.0, weight: .semibold)
-            dayView.textColor = UIColor(named: "Basic Color Green")
+            let dayView = APCDCalendarUtil.instance.createDayView(dateComponents: dateComponentsWeek[day])
 
             let remainingView = UILabel(frame: CGRect(x: dayX[day] + 32.0, y: 83.0, width: 99.0, height: 13.0))
             remainingView.text = APCDCalendarUtil.instance.countElapsedRemaining(day: dateComponentsWeek[day].date!)

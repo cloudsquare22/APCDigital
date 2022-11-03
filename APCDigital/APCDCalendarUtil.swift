@@ -17,6 +17,14 @@ class APCDCalendarUtil {
     static let instance = APCDCalendarUtil()
     let dayX = [60.0, 208.0, 356.0, 504.0, 725.0, 872.0, 1020.0]
     
+    func createDayView(dateComponents: DateComponents) -> UILabel {
+        let dayView = UILabel(frame: CGRect(x: dayX[dateComponents.weekendStartMonday - 1], y: 80.0, width: 32.0, height: 29.0))
+        dayView.text = String(dateComponents.day!)
+        dayView.font = UIFont.systemFont(ofSize: 24.0, weight: .semibold)
+        dayView.textColor = UIColor(named: "Basic Color Green")
+        return dayView
+    }
+    
     func createOutPeriodView(event: EKEvent) -> UILabel {
         let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
         let startPoint = self.dayX[startDateComponents.weekendStartMonday - 1]
