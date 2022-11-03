@@ -311,7 +311,7 @@ class APCDCalendarUtil {
         return holidayView
     }
     
-    func addEvent(eKEventList: [EKEvent], view: UIView) {
+    func addEvent(eKEventList: [EKEvent], view: UIView, base: ViewController? = nil) {
         var dayOutPeriodEvent: [EKEvent] = []
 
         for event in eKEventList {
@@ -383,12 +383,20 @@ class APCDCalendarUtil {
                             endLineHidden = true
                         }
                     }
-                    view.addSubview(APCDCalendarUtil.instance.createScheduleView(title: title,
+                    let eventView = APCDCalendarUtil.instance.createScheduleView(title: title,
                                                                                  event: event,
                                                                                  startDate: startDate,
                                                                                  endDate: endDate,
                                                                                  startLineHidden: startLineHidden,
-                                                                                 endLineHidden: endLineHidden))
+                                                                                 endLineHidden: endLineHidden)
+                    view.addSubview(eventView)
+                    if let base = base {
+                        let x = eventView.frame.origin.x
+                        let y = eventView.frame.origin.y
+                        let w = eventView.frame.width
+                        let h = eventView.frame.height
+                        base.scheduleViews.append((x: x, y: y, w: w, h: h, event: event))
+                    }
                 }
                 else {
                     dayOutPeriodEvent.append(event)
@@ -398,6 +406,15 @@ class APCDCalendarUtil {
         if dayOutPeriodEvent.isEmpty == false {
             let outPeriodView = APCDCalendarUtil.instance.dispOutPeriod(events: dayOutPeriodEvent)
             view.addSubview(outPeriodView)
+            if let base = base {
+                let x = outPeriodView.frame.origin.x
+                let y = outPeriodView.frame.origin.y
+                let w = outPeriodView.frame.size.width
+                let h = outPeriodView.frame.size.height
+                for event in dayOutPeriodEvent {
+                    base.scheduleViews.append((x: x, y: y, w: w, h: h, event: event))
+                }
+            }
         }
     }
     

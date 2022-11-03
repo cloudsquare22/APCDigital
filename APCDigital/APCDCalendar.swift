@@ -199,98 +199,20 @@ class APCDCalendar {
 
             view.addSubview(dayView)
             view.addSubview(remainingView)
-            self.addEvent(view: view, day: dateComponentsWeek[day], startPoint: CGFloat(dayX[day]))
-        }
-    }
 
-    func addEvent(view: UIView, day: DateComponents, startPoint: CGFloat) {
-        var dayOutPeriodEvent: [EKEvent] = []
-
-        let eventArray = self.events(day: day)
-        for event in eventArray {
-            if event.calendar.title == APCDData.instance.nationalHoliday {
-                let holidayView = APCDCalendarUtil.instance.createHolidayView(event: event)
-                view.addSubview(holidayView)
-                continue
-            }
-            if APCDData.instance.displayCalendars.contains(event.calendar.title) == true {
-                if APCDCalendarUtil.instance.isEventFilter(event: event) == true {
-                    continue
-                }
-
-                // add Location
-                var title = APCDCalendarUtil.instance.addLocationEventTitle(event: event)!
-
-                if event.isAllDay == false {
-                    var startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
-                    print(startDateComponents)
-                    let endDateComponents = Calendar.current.dateComponents(in: .current, from: event.endDate)
-                    print(endDateComponents)
-                    
-                    if day.day != startDateComponents.day {
-                        continue
-                    }
-
-                    var startDate: Date = event.startDate
-                    var endDate: Date = event.endDate
-                    var startLineHidden = false
-                    var endLineHidden = false
-                    if let startH = startDateComponents.hour, let startM = startDateComponents.minute,
-                        let endH = endDateComponents.hour, let endM = endDateComponents.minute {
-                        
-                        // 期間外エリア表示指定カレンダー処理
-                        if APCDData.instance.displayOutCalendars.contains(event.calendar.title) == true {
-                            dayOutPeriodEvent.append(event)
-                            continue
-                        }
-
-                        if startH < 6 && (endH < 6 || (endH <= 6 && endM == 0)) {
-                            print("Out range")
-                            dayOutPeriodEvent.append(event)
-                            continue
-                        }
-                        else if startH < 6 , 6 <= endH {
-                            startDateComponents.hour = 6
-                            title = String(format: "%d:%02d〜", startH, startM) + title
-                            print("start Out range")
-                            print(startDateComponents)
-                            startDate = Calendar.current.date(from: startDateComponents)!
-                            print(startDate)
-                            startLineHidden = true
-                        }
-                        else if startH <= 23, 0 <= endH, startDateComponents.day != endDateComponents.day {
-                            if startH == 23, 30 <= startM {
-                                print("Out range 23:30")
-                                dayOutPeriodEvent.append(event)
-                                continue
-                            }
-                            else {
-                                title = APCDCalendarUtil.instance.createDayoverTitle(title: title, endH: endH, endM: endM)
-                                endDate = APCDCalendarUtil.instance.createDayoverEnd(startDateComponents: startDateComponents)
-                                endLineHidden = true
-                            }
-                        }
-                        else if endH == 23, endM > 30, startDateComponents.day == endDateComponents.day {
-                            title = APCDCalendarUtil.instance.createDayoverTitle(title: title, endH: endH, endM: endM)
-                            endDate = APCDCalendarUtil.instance.createDayoverEnd(startDateComponents: startDateComponents)
-                            endLineHidden = true
-                        }
-                    }
-                    view.addSubview(APCDCalendarUtil.instance.createScheduleView(title: title,
-                                                                                 event: event,
-                                                                                 startDate: startDate,
-                                                                                 endDate: endDate,
-                                                                                 startLineHidden: startLineHidden,
-                                                                                 endLineHidden: endLineHidden))
+            let eKEventList = self.events(day: dateComponentsWeek[day])
+            var dayOfEKEventList: [EKEvent] = []
+            for event in eKEventList {
+                if event.isAllDay == true {
+                    let copyEvent = event.copy() as! EKEvent
+                    copyEvent.startDate = dateComponentsWeek[day].date
+                    dayOfEKEventList.append(copyEvent)
                 }
                 else {
-                    dayOutPeriodEvent.append(event)
+                    dayOfEKEventList.append(event)
                 }
             }
-        }
-        if dayOutPeriodEvent.isEmpty == false {
-            let outPeriodView = APCDCalendarUtil.instance.dispOutPeriod(events: dayOutPeriodEvent)
-            view.addSubview(outPeriodView)
+            APCDCalendarUtil.instance.addEvent(eKEventList: dayOfEKEventList, view: view)
         }
     }
     
