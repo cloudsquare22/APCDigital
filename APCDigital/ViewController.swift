@@ -20,13 +20,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var toDay: UILabel!
     @IBOutlet weak var weekOfYear: UILabel!
     @IBOutlet weak var menuView: UIView!
-    @IBOutlet weak var day1Remaining: UILabel!
-    @IBOutlet weak var day2Remaining: UILabel!
-    @IBOutlet weak var day3Remaining: UILabel!
-    @IBOutlet weak var day4Remaining: UILabel!
-    @IBOutlet weak var day5Remaining: UILabel!
-    @IBOutlet weak var day6Remaining: UILabel!
-    @IBOutlet weak var day7Remaining: UILabel!
     
     var toolPicker: PKToolPicker!
     
@@ -323,7 +316,6 @@ class ViewController: UIViewController {
         APCDData.instance.loadData()
         
         // Main Area
-        self.dispDayLabel()
         self.dispPKDrawing()
         self.dispEvent()
         
@@ -337,22 +329,9 @@ class ViewController: UIViewController {
         
     func setWeekDaysDateComponents(monday: Date) {
         self.weekDaysDateComponents = []
-        for weekday in WeekDay1stMonday.monday.rawValue...WeekDay1stMonday.sunday.rawValue {
-            let date = monday + TimeInterval((86400 * weekday))
-            var dateComponents = Calendar.current.dateComponents(in: .current, from: date)
-            if weekday == WeekDay1stMonday.sunday.rawValue {
-                dateComponents.hour = 23
-                dateComponents.minute = 59
-                dateComponents.second = 59
-                dateComponents.nanosecond = 999
-            }
-            else {
-                dateComponents.hour = 0
-                dateComponents.minute = 0
-                dateComponents.second = 0
-                dateComponents.nanosecond = 0
-            }
-            self.weekDaysDateComponents.append(dateComponents)
+        for index in 0..<7 {
+            let dateComponentsDay = Calendar.current.dateComponents(in: .current, from: monday + TimeInterval((86400 * index)))
+            self.weekDaysDateComponents.append(dateComponentsDay)
         }
     }
     
@@ -381,15 +360,7 @@ class ViewController: UIViewController {
             }
         }
     }
-    
-    func dispDayLabel() {
-        logger.info()
-        let dayRemainings = [self.day1Remaining, self.day2Remaining, self.day3Remaining, self.day4Remaining, self.day5Remaining, self.day6Remaining, self.day7Remaining]
-        for weekday in WeekDay1stMonday.monday.rawValue...WeekDay1stMonday.sunday.rawValue {
-            dayRemainings[weekday]?.text = APCDCalendarUtil.instance.countElapsedRemaining(day: self.weekDaysDateComponents[weekday].date!)
-        }
-    }
-    
+        
     func dispPKDrawing() {
         logger.info()
         let monday = self.weekDaysDateComponents[WeekDay1stMonday.monday.rawValue]
@@ -414,13 +385,22 @@ class ViewController: UIViewController {
         logger.info()
         self.calendarView.clearSchedule(base: self)
         self.calendarView.dispDayLabel(base: self)
+        self.calendarView.dispReamingLabel(base: self)
         let eKEventList = self.getEvents()
         self.calendarView.dispSchedule(eKEventList: eKEventList, base: self)
     }
     
     func getEvents() -> [EKEvent] {
-        let monday = self.weekDaysDateComponents[WeekDay1stMonday.monday.rawValue]
-        let sunday = self.weekDaysDateComponents[WeekDay1stMonday.sunday.rawValue]
+        var monday = self.weekDaysDateComponents[WeekDay1stMonday.monday.rawValue]
+        monday.hour = 0
+        monday.minute = 0
+        monday.second = 0
+        monday.nanosecond = 0
+        var sunday = self.weekDaysDateComponents[WeekDay1stMonday.sunday.rawValue]
+        sunday.hour = 23
+        sunday.minute = 59
+        sunday.second = 59
+        sunday.nanosecond = 999
         let predicate = eventStore.predicateForEvents(withStart: monday.date!, end: sunday.date!, calendars: nil)
         let eventArray = eventStore.events(matching: predicate)
         return eventArray

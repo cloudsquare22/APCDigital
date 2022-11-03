@@ -32,6 +32,14 @@ class CalendarView: UIView {
         }
     }
 
+    func dispReamingLabel(base: ViewController) {
+        logger.info()
+        for weekday in WeekDay1stMonday.monday.rawValue...WeekDay1stMonday.sunday.rawValue {
+            let remainingView = APCDCalendarUtil.instance.crateRemainingView(dateComponents: base.weekDaysDateComponents[weekday])
+            self.addSubview(remainingView)
+        }
+    }
+
     func dispSchedule(eKEventList: [EKEvent], base: ViewController) {
         logger.info("eventArray Count: \(eKEventList.count)")
         logger.debug("eventArray: \(eKEventList) base: \(base)")
@@ -62,7 +70,7 @@ class CalendarView: UIView {
         
         // イベント追加
         for index in 0..<7 {
-            APCDCalendarUtil.instance.addEvent(eKEventList: dayOfEKEventList[index], view: self, base: base)
+            APCDCalendarUtil.instance.addEvent(day: base.days[index], eKEventList: dayOfEKEventList[index], view: self, base: base)
         }
     }
             

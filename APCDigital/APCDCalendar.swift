@@ -189,10 +189,7 @@ class APCDCalendar {
         for day in 0..<7 {
             let dayView = APCDCalendarUtil.instance.createDayView(dateComponents: dateComponentsWeek[day])
 
-            let remainingView = UILabel(frame: CGRect(x: dayX[day] + 32.0, y: 83.0, width: 99.0, height: 13.0))
-            remainingView.text = APCDCalendarUtil.instance.countElapsedRemaining(day: dateComponentsWeek[day].date!)
-            remainingView.font = UIFont.systemFont(ofSize: 10.0, weight: .semibold)
-            remainingView.textColor = UIColor(named: "Basic Color Green")
+            let remainingView = APCDCalendarUtil.instance.crateRemainingView(dateComponents: dateComponentsWeek[day])
 
             view.addSubview(dayView)
             view.addSubview(remainingView)
@@ -209,7 +206,7 @@ class APCDCalendar {
                     dayOfEKEventList.append(event)
                 }
             }
-            APCDCalendarUtil.instance.addEvent(eKEventList: dayOfEKEventList, view: view)
+            APCDCalendarUtil.instance.addEvent(day: dateComponentsWeek[day].day!, eKEventList: dayOfEKEventList, view: view)
         }
     }
     

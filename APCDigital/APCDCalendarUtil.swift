@@ -25,6 +25,14 @@ class APCDCalendarUtil {
         return dayView
     }
     
+    func crateRemainingView(dateComponents: DateComponents) -> UILabel {
+        let remainingView = UILabel(frame: CGRect(x: dayX[dateComponents.weekendStartMonday - 1] + 32.0, y: 83.0, width: 99.0, height: 13.0))
+        remainingView.text = APCDCalendarUtil.instance.countElapsedRemaining(day: dateComponents.date!)
+        remainingView.font = UIFont.systemFont(ofSize: 10.0, weight: .semibold)
+        remainingView.textColor = UIColor(named: "Basic Color Green")
+        return remainingView
+    }
+    
     func createOutPeriodView(event: EKEvent) -> UILabel {
         let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
         let startPoint = self.dayX[startDateComponents.weekendStartMonday - 1]
@@ -319,7 +327,7 @@ class APCDCalendarUtil {
         return holidayView
     }
     
-    func addEvent(eKEventList: [EKEvent], view: UIView, base: ViewController? = nil) {
+    func addEvent(day: Int, eKEventList: [EKEvent], view: UIView, base: ViewController? = nil) {
         var dayOutPeriodEvent: [EKEvent] = []
 
         for event in eKEventList {
@@ -342,9 +350,9 @@ class APCDCalendarUtil {
                     let endDateComponents = Calendar.current.dateComponents(in: .current, from: event.endDate)
                     print(endDateComponents)
                     
-//                    if day.day != startDateComponents.day {
-//                        continue
-//                    }
+                    if day != startDateComponents.day {
+                        continue
+                    }
 
                     var startDate: Date = event.startDate
                     var endDate: Date = event.endDate
