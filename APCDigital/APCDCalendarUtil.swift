@@ -358,6 +358,7 @@ class APCDCalendarUtil {
                         }
                         else if startH < 6 , 6 <= endH {
                             startDateComponents.hour = 6
+                            startDateComponents.minute = 0
                             title = String(format: "%d:%02d〜", startH, startM) + title
                             print("start Out range")
                             print(startDateComponents)
