@@ -228,21 +228,21 @@ class APCDCalendarUtil {
         let movementSymbols = APCDData.instance.movementSymbols
         var x = 55.0
         var widthAdd = 0.0
-        switch startDateComponents.weekday! {
-        case 2:
+        switch startDateComponents.weekendStartMonday {
+        case 1:
             x = 55.0
-        case 3:
+        case 2:
             x = 55.0 + 148.0
-        case 4:
+        case 3:
             x = 55.0 + 148.0 * 2.0
-        case 5:
+        case 4:
             x = 55.0 + 148.0 * 3.0
             widthAdd = 3.5
-        case 6:
+        case 5:
             x = 55.0 + 148.0 * 3.0 + 73.0 + 148.0 * 1.0
-        case 7:
+        case 6:
             x = 55.0 + 148.0 * 3.0 + 73.0 + 148.0 * 2.0
-        case 1:
+        case 7:
             x = 55.0 + 148.0 * 3.0 + 73.0 + 148.0 * 3.0
             widthAdd = 3.5
         default:
