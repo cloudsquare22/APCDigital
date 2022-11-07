@@ -15,7 +15,7 @@ class APCDCalendarUtil {
     let logger = Logger()
     
     static let instance = APCDCalendarUtil()
-    let dayX = [60.0, 208.0, 356.0, 504.0, 725.0, 872.0, 1020.0]
+    let dayX = [60.0, 208.0, 356.0, 504.0, 725.0, 873.0, 1021.0]
     
     // 曜日座標範囲 |<-start   end->|+widthadd->|
     let weekDayIndexX: [(start: CGFloat, end: CGFloat, widthadd: CGFloat)] = [
