@@ -15,7 +15,6 @@ class APCDCalendarUtil {
     let logger = Logger()
     
     static let instance = APCDCalendarUtil()
-    let dayX = [60.0, 208.0, 356.0, 504.0, 725.0, 873.0, 1021.0]
     
     // 曜日座標範囲 |<-start   end->|+widthadd->|
     let weekDayIndexX: [(start: CGFloat, end: CGFloat, widthadd: CGFloat)] = [
@@ -29,7 +28,7 @@ class APCDCalendarUtil {
     ]
 
     func createDayView(dateComponents: DateComponents) -> UILabel {
-        let dayView = UILabel(frame: CGRect(x: dayX[dateComponents.weekendStartMonday - 1], y: 80.0, width: 32.0, height: 29.0))
+        let dayView = UILabel(frame: CGRect(x: self.weekDayIndexX[dateComponents.weekendStartMonday - 1].start + 5.0, y: 80.0, width: 32.0, height: 29.0))
         dayView.text = String(dateComponents.day!)
         dayView.font = UIFont.systemFont(ofSize: 24.0, weight: .semibold)
         dayView.textColor = UIColor(named: "Basic Color Green")
@@ -37,7 +36,7 @@ class APCDCalendarUtil {
     }
     
     func crateRemainingView(dateComponents: DateComponents) -> UILabel {
-        let remainingView = UILabel(frame: CGRect(x: dayX[dateComponents.weekendStartMonday - 1] + 32.0, y: 83.0, width: 99.0, height: 13.0))
+        let remainingView = UILabel(frame: CGRect(x: self.weekDayIndexX[dateComponents.weekendStartMonday - 1].start + 5.0 + 32.0, y: 83.0, width: 99.0, height: 13.0))
         remainingView.text = APCDCalendarUtil.instance.countElapsedRemaining(day: dateComponents.date!)
         remainingView.font = UIFont.systemFont(ofSize: 10.0, weight: .semibold)
         remainingView.textColor = UIColor(named: "Basic Color Green")
@@ -82,7 +81,7 @@ class APCDCalendarUtil {
     
     func createOutPeriodView(event: EKEvent) -> UILabel {
         let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
-        let startPoint = self.dayX[startDateComponents.weekendStartMonday - 1]
+        let startPoint = self.weekDayIndexX[startDateComponents.weekendStartMonday - 1].start + 5.0
         let outPeriodView = UILabel(frame: CGRect(x: startPoint + 2.0, y: 107.0, width: 135.0, height: 50.0))
         outPeriodView.numberOfLines = 0
         outPeriodView.lineBreakMode = .byCharWrapping
@@ -345,7 +344,7 @@ class APCDCalendarUtil {
     
     func createHolidayView(event: EKEvent) -> UILabel {
         let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
-        let startPoint = self.dayX[startDateComponents.weekendStartMonday - 1]
+        let startPoint = self.weekDayIndexX[startDateComponents.weekendStartMonday - 1].start + 5.0
         let holidayView = UILabel(frame: CGRect(x: startPoint + 39.0, y: 93.0, width: 99.0, height: 13.0))
         holidayView.text = event.title!
         holidayView.font = UIFont.systemFont(ofSize: 10.0, weight: .semibold)
