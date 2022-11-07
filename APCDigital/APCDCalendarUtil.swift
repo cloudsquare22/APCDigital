@@ -17,14 +17,15 @@ class APCDCalendarUtil {
     static let instance = APCDCalendarUtil()
     let dayX = [60.0, 208.0, 356.0, 504.0, 725.0, 872.0, 1020.0]
     
-    let weekDayIndexX: [(start: CGFloat, end: CGFloat)] = [
-        (55.0 , 203.0), // monday
-        (203.0, 351.0), // tuesday
-        (351.0, 499.0), // wednesday
-        (499.0, 647.0), // thursday
-        (720.0, 868.0), // friday
-        (868.0, 1016.0), // saturday
-        (1016.0, 1164.0), //sunday
+    // 曜日座標範囲 |<-start   end->|+widthadd->|
+    let weekDayIndexX: [(start: CGFloat, end: CGFloat, widthadd: CGFloat)] = [
+        (55.0 , 203.0, 0.0), // monday
+        (203.0, 351.0, 0.0), // tuesday
+        (351.0, 499.0, 0.0), // wednesday
+        (499.0, 647.0, 3.5), // thursday
+        (720.0, 868.0, 0.0), // friday
+        (868.0, 1016.0, 0.0), // saturday
+        (1016.0, 1164.0, 3.5), //sunday
     ]
 
     func createDayView(dateComponents: DateComponents) -> UILabel {
@@ -236,28 +237,8 @@ class APCDCalendarUtil {
                             endLineHidden: Bool) -> ScheduleView {
         let startDateComponents = Calendar.current.dateComponents(in: .current, from: startDate)
         let movementSymbols = APCDData.instance.movementSymbols
-        var x = 55.0
-        var widthAdd = 0.0
-        switch startDateComponents.weekendStartMonday {
-        case 1:
-            x = 55.0
-        case 2:
-            x = 55.0 + 148.0
-        case 3:
-            x = 55.0 + 148.0 * 2.0
-        case 4:
-            x = 55.0 + 148.0 * 3.0
-            widthAdd = 3.5
-        case 5:
-            x = 55.0 + 148.0 * 3.0 + 73.0 + 148.0 * 1.0
-        case 6:
-            x = 55.0 + 148.0 * 3.0 + 73.0 + 148.0 * 2.0
-        case 7:
-            x = 55.0 + 148.0 * 3.0 + 73.0 + 148.0 * 3.0
-            widthAdd = 3.5
-        default:
-            x = 0.0
-        }
+        var x = self.weekDayIndexX[startDateComponents.weekendStartMonday - 1].start
+        var widthAdd = self.weekDayIndexX[startDateComponents.weekendStartMonday - 1].widthadd
         var y: Double = 169.0 + 45.5 * Double(startDateComponents.hour! - 6)
         if let minutes = startDateComponents.minute {
             if minutes != 0 {
