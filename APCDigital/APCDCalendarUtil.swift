@@ -237,8 +237,8 @@ class APCDCalendarUtil {
                             endLineHidden: Bool) -> ScheduleView {
         let startDateComponents = Calendar.current.dateComponents(in: .current, from: startDate)
         let movementSymbols = APCDData.instance.movementSymbols
-        var x = self.weekDayIndexX[startDateComponents.weekendStartMonday - 1].start
-        var widthAdd = self.weekDayIndexX[startDateComponents.weekendStartMonday - 1].widthadd
+        let x = self.weekDayIndexX[startDateComponents.weekendStartMonday - 1].start
+        let widthAdd = self.weekDayIndexX[startDateComponents.weekendStartMonday - 1].widthadd
         var y: Double = 169.0 + 45.5 * Double(startDateComponents.hour! - 6)
         if let minutes = startDateComponents.minute {
             if minutes != 0 {
