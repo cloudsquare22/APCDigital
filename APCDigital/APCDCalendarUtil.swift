@@ -17,6 +17,16 @@ class APCDCalendarUtil {
     static let instance = APCDCalendarUtil()
     let dayX = [60.0, 208.0, 356.0, 504.0, 725.0, 872.0, 1020.0]
     
+    let weekDayIndexX: [(start: CGFloat, end: CGFloat)] = [
+        (55.0 , 203.0), // monday
+        (203.0, 351.0), // tuesday
+        (351.0, 499.0), // wednesday
+        (499.0, 647.0), // thursday
+        (720.0, 868.0), // friday
+        (868.0, 1016.0), // saturday
+        (1016.0, 1164.0), //sunday
+    ]
+
     func createDayView(dateComponents: DateComponents) -> UILabel {
         let dayView = UILabel(frame: CGRect(x: dayX[dateComponents.weekendStartMonday - 1], y: 80.0, width: 32.0, height: 29.0))
         dayView.text = String(dateComponents.day!)

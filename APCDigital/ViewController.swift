@@ -251,25 +251,15 @@ class ViewController: UIViewController {
     
     func dispEditScheduleView(point: CGPoint) {
         var weekDayIndex = -1
-        let weekDayIndexX: [CGFloat] = [55.0, 203.0, 351.0, 499.0, 647.0, 720.0, 868.0, 1016.0, 1164.0]
-        switch point.x {
-        case weekDayIndexX[0]..<weekDayIndexX[1]:
-            weekDayIndex = 0
-        case weekDayIndexX[1]..<weekDayIndexX[2]:
-            weekDayIndex = 1
-        case weekDayIndexX[2]..<weekDayIndexX[3]:
-            weekDayIndex = 2
-        case weekDayIndexX[3]..<weekDayIndexX[4]:
-            weekDayIndex = 3
-        case weekDayIndexX[5]..<weekDayIndexX[6]:
-            weekDayIndex = 4
-        case weekDayIndexX[6]..<weekDayIndexX[7]:
-            weekDayIndex = 5
-        case weekDayIndexX[7]..<weekDayIndexX[8]:
-            weekDayIndex = 6
-        default:
-            break
+
+        // タップポイントから曜日を決定
+        for index in 0..<7 {
+            if APCDCalendarUtil.instance.weekDayIndexX[index].start <= point.x &&
+                point.x <= APCDCalendarUtil.instance.weekDayIndexX[index].end {
+                weekDayIndex = index
+            }
         }
+        
         logger.info("weekDayIndex: \(weekDayIndex)")
         guard weekDayIndex != -1 else {
             return
