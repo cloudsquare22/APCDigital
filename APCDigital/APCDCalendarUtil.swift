@@ -17,6 +17,7 @@ class APCDCalendarUtil {
     static let instance = APCDCalendarUtil()
     
     // 曜日座標範囲 |<-start   end->|+widthadd->|
+    // 上日付、期間外表示エリアのstartは+5.0
     let weekDayIndexX: [(start: CGFloat, end: CGFloat, widthadd: CGFloat)] = [
         (55.0 , 203.0, 0.0), // monday
         (203.0, 351.0, 0.0), // tuesday
