@@ -85,7 +85,6 @@ class ViewController: UIViewController {
 
         self.dispPencilCase()
         
-        //        updateDays()
         logger.info()
     }
     
@@ -113,7 +112,6 @@ class ViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         logger.info()
-//        self.pageUpsert()
     }
     
     func setPageMonday(direction: PageMondayDirection) {
@@ -182,9 +180,6 @@ class ViewController: UIViewController {
             }
 
         }
-//        else {
-//            menuView.isHidden.toggle()
-//        }
     }
     
     @objc func longPressPKCanvasView(sender: UILongPressGestureRecognizer) {
