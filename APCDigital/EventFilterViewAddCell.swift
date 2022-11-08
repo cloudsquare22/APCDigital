@@ -49,12 +49,7 @@ extension EventFilterViewAddCell: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if APCDData.instance.calendars == nil {
-            return 0
-        }
-        else {
-            return (APCDData.instance.calendars.count)
-        }
+        APCDData.instance.calendars.count
     }
     
 //    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
