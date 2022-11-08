@@ -106,8 +106,8 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
         logger.info()
 
-        pKCanvasView.becomeFirstResponder()
-        updateDays()
+        self.pKCanvasView.becomeFirstResponder()
+        self.updateDays()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -485,7 +485,7 @@ class ViewController: UIViewController {
         let exportViewController = storyBoard.instantiateViewController(withIdentifier: "ExportView") as? ExportViewController
         if let controller = exportViewController {
             controller.viewController = self
-            self.setPopoverPresentationController(size: CGSize(width: 600, height: 800),
+            self.setPopoverPresentationController(size: CGSize(width: 600, height: 500),
                                                   rect: (sender as! UIButton).frame,
                                                   controller: controller)
             present(controller, animated: false, completion: nil)
