@@ -47,7 +47,7 @@
                                         <rect key="frame" x="63" y="24" width="42" height="48"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="tintColor" name="Basic Color Green"/>
-                                        <state key="normal" image="doc.plaintext" catalog="system">
+                                        <state key="normal" image="character.book.closed" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="32" scale="large"/>
                                         </state>
                                         <connections>
@@ -1058,8 +1058,8 @@
         <image name="calendar.badge.minus" catalog="system" width="128" height="108"/>
         <image name="calendar.badge.plus" catalog="system" width="128" height="108"/>
         <image name="calendar.circle" catalog="system" width="128" height="123"/>
+        <image name="character.book.closed" catalog="system" width="115" height="128"/>
         <image name="checkmark.circle" catalog="system" width="128" height="123"/>
-        <image name="doc.plaintext" catalog="system" width="115" height="128"/>
         <image name="eye.slash" catalog="system" width="128" height="84"/>
         <image name="gear" catalog="system" width="128" height="122"/>
         <image name="minus.circle" catalog="system" width="128" height="123"/>
