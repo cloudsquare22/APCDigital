@@ -310,8 +310,8 @@ class APCDCalendarUtil {
         logger.info("day: \(day.debugDescription)")
         var result = ""
         let dayComponentes = Calendar.current.dateComponents(in: .current, from: day)
-        let dateYearFirst = Calendar.current.date(from: DateComponents(year: dayComponentes.year, month: 1, day: 1))!
-        let dateYearEnd = Calendar.current.date(from: DateComponents(year: dayComponentes.year, month: 12, day: 31))!
+        let dateYearFirst = Calendar.current.date(from: DateComponents(year: dayComponentes.year, month: 1, day: 1, hour: 0, minute: 0, second: 0))!
+        let dateYearEnd = Calendar.current.date(from: DateComponents(year: dayComponentes.year, month: 12, day: 31, hour: 23, minute: 59, second: 59))!
         
         let elapsed = Calendar.current.dateComponents([.day], from: dateYearFirst, to: day)
         let remaining = Calendar.current.dateComponents([.day], from: day, to: dateYearEnd)
