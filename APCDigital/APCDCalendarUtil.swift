@@ -36,18 +36,27 @@ class APCDCalendarUtil {
         (868.0, 1016.0, 0.0), // saturday
         (1016.0, 1164.0, 3.5), //sunday
     ]
+    
+    func getStart(weekendStartMonday: Int) -> CGFloat {
+        var start: CGFloat = 0.0
+        switch Device.getDevie() {
+        case .etc:
+            start = self.weekDayIndexX[weekendStartMonday - 1].start
+        case .ipad_12_9_more_space:
+            start = self.weekDayIndexX[weekendStartMonday - 1 + 7].start
+        }
+        return start
+    }
 
     func createDayView(dateComponents: DateComponents) -> UILabel {
-        var x: CGFloat = 0.0
+        var x: CGFloat = self.getStart(weekendStartMonday: dateComponents.weekendStartMonday)
         var y: CGFloat = 0.0
         let dtype: Device.DType = Device.getDevie()
         switch dtype {
         case .etc:
-            x = self.weekDayIndexX[dateComponents.weekendStartMonday - 1].start
             y = 80.0
         case .ipad_12_9_more_space:
-            x = self.weekDayIndexX[dateComponents.weekendStartMonday - 1 + 7].start
-            y = 93
+            y = 93.0
         }
         let dayView = UILabel(frame: CGRect(x: x + 5.0, y: y, width: 32.0, height: 29.0))
         dayView.text = String(dateComponents.day!)
@@ -57,7 +66,16 @@ class APCDCalendarUtil {
     }
     
     func crateRemainingView(dateComponents: DateComponents) -> UILabel {
-        let remainingView = UILabel(frame: CGRect(x: self.weekDayIndexX[dateComponents.weekendStartMonday - 1].start + 5.0 + 32.0, y: 83.0, width: 99.0, height: 13.0))
+        var x: CGFloat = self.getStart(weekendStartMonday: dateComponents.weekendStartMonday)
+        var y: CGFloat = 0.0
+        let dtype: Device.DType = Device.getDevie()
+        switch dtype {
+        case .etc:
+            y = 83.0
+        case .ipad_12_9_more_space:
+            y = 97
+        }
+        let remainingView = UILabel(frame: CGRect(x: x + 5.0 + 32.0, y: y, width: 99.0, height: 13.0))
         remainingView.text = APCDCalendarUtil.instance.countElapsedRemaining(day: dateComponents.date!)
         remainingView.font = UIFont.systemFont(ofSize: 10.0, weight: .semibold)
         remainingView.textColor = UIColor(named: "Basic Color Green")
