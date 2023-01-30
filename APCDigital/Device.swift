@@ -10,11 +10,17 @@ import Foundation
 import UIKit
 
 class Device {
-    static func getDevie() {
+    enum DType {
+        case ipad_12_9_more_space
+        case etc
+    }
+    static func getDevie() -> DType {
         print("Device:\(UIScreen.main.bounds.size)")
+        var dtype: DType = .etc
         switch UIScreen.main.bounds.size.width {
         case 1590.0:
             print("iPad Pro 12.9inch スペースを拡大")
+            dtype = .ipad_12_9_more_space
         case 1366.0:
             print("iPad Pro 12.9inch デフォルト")
         case 1024.0:
@@ -22,5 +28,6 @@ class Device {
         default:
             print("???")
         }
+        return dtype
     }
 }

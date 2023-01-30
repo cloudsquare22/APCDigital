@@ -26,10 +26,30 @@ class APCDCalendarUtil {
         (720.0, 868.0, 0.0), // friday
         (868.0, 1016.0, 0.0), // saturday
         (1016.0, 1164.0, 3.5), //sunday
+
+        // iPad Pro 12.9 More Space
+        (65.0 , 237.0, 0.0), // monday
+        (237.0, 409.0, 0.0), // tuesday
+        (409.0, 499.0, 0.0), // wednesday
+        (499.0, 647.0, 3.5), // thursday
+        (720.0, 868.0, 0.0), // friday
+        (868.0, 1016.0, 0.0), // saturday
+        (1016.0, 1164.0, 3.5), //sunday
     ]
 
     func createDayView(dateComponents: DateComponents) -> UILabel {
-        let dayView = UILabel(frame: CGRect(x: self.weekDayIndexX[dateComponents.weekendStartMonday - 1].start + 5.0, y: 80.0, width: 32.0, height: 29.0))
+        var x: CGFloat = 0.0
+        var y: CGFloat = 0.0
+        let dtype: Device.DType = Device.getDevie()
+        switch dtype {
+        case .etc:
+            x = self.weekDayIndexX[dateComponents.weekendStartMonday - 1].start
+            y = 80.0
+        case .ipad_12_9_more_space:
+            x = self.weekDayIndexX[dateComponents.weekendStartMonday - 1 + 7].start
+            y = 93
+        }
+        let dayView = UILabel(frame: CGRect(x: x + 5.0, y: y, width: 32.0, height: 29.0))
         dayView.text = String(dateComponents.day!)
         dayView.font = UIFont.systemFont(ofSize: 24.0, weight: .semibold)
         dayView.textColor = UIColor(named: "Basic Color Green")
