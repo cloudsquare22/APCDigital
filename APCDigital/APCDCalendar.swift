@@ -71,7 +71,8 @@ class APCDCalendar {
             let _ = url.startAccessingSecurityScopedResource()
             let readData = try Data(contentsOf: url)
             logger.info("Data count:\(readData.count)")
-            pageDatas = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(readData) as! [PageData]
+//            pageDatas = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(readData) as! [PageData]
+            pageDatas = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSArray.self, from: readData)! as! [PageData]
             logger.info("pageDatas:\(pageDatas.count)")
             for pageData in pageDatas {
                 logger.info("upsert:\(pageData.year)-\(pageData.week)")
