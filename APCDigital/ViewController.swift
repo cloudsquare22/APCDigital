@@ -92,13 +92,27 @@ class ViewController: UIViewController {
         super.viewWillAppear(animated)
         logger.info()
         print("-^--^-")
+        print("pencil")
         print(PKInkingTool.InkType.pencil.defaultWidth)
         print(PKInkingTool.InkType.pencil.validWidthRange)
+        print("maker")
         print(PKInkingTool.InkType.marker.defaultWidth)
         print(PKInkingTool.InkType.marker.validWidthRange)
+        print("pen")
         print(PKInkingTool.InkType.pen.defaultWidth)
         print(PKInkingTool.InkType.pen.validWidthRange)
-        print(PKInkingTool.InkType.pen.minWidth())
+        print("crayon")
+        print(PKInkingTool.InkType.crayon.defaultWidth)
+        print(PKInkingTool.InkType.crayon.validWidthRange)
+        print("fountainPen")
+        print(PKInkingTool.InkType.fountainPen.defaultWidth)
+        print(PKInkingTool.InkType.fountainPen.validWidthRange)
+        print("monoline")
+        print(PKInkingTool.InkType.monoline.defaultWidth)
+        print(PKInkingTool.InkType.monoline.validWidthRange)
+        print("watercolor")
+        print(PKInkingTool.InkType.watercolor.defaultWidth)
+        print(PKInkingTool.InkType.watercolor.validWidthRange)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -349,6 +363,7 @@ class ViewController: UIViewController {
             logger.info("select page")
             do {
                 logger.info("Page count: \(page.count)")
+                self.pKCanvasView.drawing = PKDrawing()
                 self.pKCanvasView.drawing = try PKDrawing(data: page)
             }
             catch {
