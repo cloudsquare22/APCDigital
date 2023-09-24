@@ -60,7 +60,7 @@ class PencilCaseView: UIView {
     convenience init(frame: CGRect, pKCanvasView: RapPKCanvasView) {
         self.init(frame: frame)
         self.pKCanvasView = pKCanvasView
-        self.pKCanvasView!.tool = PKInkingTool(.pen, color: .black, width: PKInkingTool.InkType.pen.minWidth())
+        self.pKCanvasView!.tool = PKInkingTool(.monoline, color: .black, width: PKInkingTool.InkType.monoline.minWidth())
         self.inkBlack.backgroundColor = .systemGray5
     }
 
@@ -223,11 +223,10 @@ class PencilCaseView: UIView {
         }
         else if self.onMarker == true {
             self.marker.tintColor = self.selectInkToUIColor()
-            self.pKCanvasView!.tool = PKInkingTool(.marker, color: selectInkToUIColor(), width: PKInkingTool.InkType.marker.minWidth())
+            self.pKCanvasView!.tool = PKInkingTool(.pen, color: selectInkToUIColor(), width: PKInkingTool.InkType.pen.minWidth())
         }
         else {
-            self.pKCanvasView!.tool = PKInkingTool(.pen, color: selectInkToUIColor(), width: PKInkingTool.InkType.pen.minWidth())
-            print("Pencil width:\(PKInkingTool.InkType.pen.defaultWidth)")
+            self.pKCanvasView!.tool = PKInkingTool(.monoline, color: selectInkToUIColor(), width: PKInkingTool.InkType.monoline.minWidth())
         }
         if self.onTaskbox == true {
             self.taskbox.tintColor = self.selectInkToUIColor()
