@@ -49,7 +49,7 @@ class APCDCalendarUtil {
     }
 
     func createDayView(dateComponents: DateComponents) -> UILabel {
-        var x: CGFloat = self.getStart(weekendStartMonday: dateComponents.weekendStartMonday)
+        let x: CGFloat = self.getStart(weekendStartMonday: dateComponents.weekendStartMonday)
         var y: CGFloat = 0.0
         let dtype: Device.DType = Device.getDevie()
         switch dtype {
@@ -66,7 +66,7 @@ class APCDCalendarUtil {
     }
     
     func crateRemainingView(dateComponents: DateComponents) -> UILabel {
-        var x: CGFloat = self.getStart(weekendStartMonday: dateComponents.weekendStartMonday)
+        let x: CGFloat = self.getStart(weekendStartMonday: dateComponents.weekendStartMonday)
         var y: CGFloat = 0.0
         let dtype: Device.DType = Device.getDevie()
         switch dtype {

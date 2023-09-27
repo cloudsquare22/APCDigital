@@ -341,18 +341,18 @@ class ViewController: UIViewController {
         logger.info()
         let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
 
-        if status == .authorized {
+        if status == .fullAccess {
             logger.info("Access OK")
         }
         else if status == .notDetermined {
-            eventStore.requestAccess(to: EKEntityType.event) { (granted, error) in
+            eventStore.requestFullAccessToEvents(completion: { (granted, error) in
                 if granted {
                     self.logger.info("Accessible")
                 }
                 else {
                     self.logger.info("Access denied")
                 }
-            }
+            })
         }
     }
         
