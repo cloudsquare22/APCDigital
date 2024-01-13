@@ -365,6 +365,7 @@ class ViewController: UIViewController {
                 logger.info("Page count: \(page.count)")
                 self.pKCanvasView.drawing = PKDrawing()
                 self.pKCanvasView.drawing = try PKDrawing(data: page)
+                self.pKCanvasView.setNeedsDisplay()
             }
             catch {
                 let nserror = error as NSError
