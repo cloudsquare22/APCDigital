@@ -29,6 +29,7 @@ class EditScheduleViewController: UIViewController {
     @IBOutlet weak var notificationSwitch: UISwitch!
     @IBOutlet weak var eventDeleteButton: UIButton!
     @IBOutlet weak var memoTexts: UITextView!
+    @IBOutlet weak var memoDispSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +54,9 @@ class EditScheduleViewController: UIViewController {
             eventDeleteButton.isHidden = false
             if let notes = event.notes {
                 self.memoTexts.text = notes
+                if notes.starts(with: "【memo on】") {
+                    self.memoDispSwitch.isOn = true
+                }
             }
         }
         
