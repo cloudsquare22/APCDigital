@@ -54,8 +54,10 @@ class EditScheduleViewController: UIViewController {
             eventDeleteButton.isHidden = false
             if let notes = event.notes {
                 self.memoTexts.text = notes
-                if notes.starts(with: "【memo on】") {
+                if notes.starts(with: "【memo on】\n") {
                     self.memoDispSwitch.isOn = true
+                    let text = notes.replacingOccurrences(of: "【memo on】\n", with: "")
+                    self.memoTexts.text = text
                 }
             }
         }
@@ -133,7 +135,12 @@ class EditScheduleViewController: UIViewController {
         event.endDate = self.endDatePicker.date
         let calendar = APCDData.instance.calendars[calendarPicker.selectedRow(inComponent: 0)]
         event.calendar = eventStore.calendar(withIdentifier: calendar.calendarIdentifier)
-        event.notes = self.memoTexts.text
+        if self.memoDispSwitch.isOn == true {
+            event.notes = "【memo on】\n" + self.memoTexts.text
+        }
+        else {
+            event.notes = self.memoTexts.text
+        }
         if allday == true {
             event.isAllDay = true
 
