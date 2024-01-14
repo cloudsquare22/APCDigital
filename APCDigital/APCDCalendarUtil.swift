@@ -138,7 +138,7 @@ class APCDCalendarUtil {
             for (index, event) in events.indexed() {
                 let startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
                 if let startH = startDateComponents.hour, let startM = startDateComponents.minute {
-                    var title = self.addLocationEventTitle(event: event)!
+                    var title = self.addLocationAndMemoEventTitle(event: event)!
                     if event.isAllDay == false {
                         title = self.createOutScheduleString(startH: startH,
                                                              startM: startM,
@@ -310,15 +310,26 @@ class APCDCalendarUtil {
         return scheduleView
     }
     
-    func addLocationEventTitle(event: EKEvent) -> String? {
+    func addLocationAndMemoEventTitle(event: EKEvent) -> String? {
         var result = event.title
+        
+        // Location
         if let location = event.structuredLocation?.title, location.isEmpty == false {
             let locations = location.split(separator: "\n")
             result = String(format: "%@(%@)", event.title, String(locations[0]))
         }
+
+        // Memo
+        if let notes = event.notes {
+            if notes.starts(with: "【memo on】\n") == true {
+                let text = notes.replacingOccurrences(of: "【memo on】\n", with: "")
+                result = result! + "\n" + text
+            }
+        }
+        
         return result
     }
-    
+
     func createDayoverTitle(title: String, endH: Int, endM :Int) -> String {
         return title + String(format: "\n〜%d:%02d", endH, endM)
     }
@@ -407,7 +418,7 @@ class APCDCalendarUtil {
                 }
 
                 // add Location
-                var title = APCDCalendarUtil.instance.addLocationEventTitle(event: event)!
+                var title = APCDCalendarUtil.instance.addLocationAndMemoEventTitle(event: event)!
 
                 if event.isAllDay == false {
                     var startDateComponents = Calendar.current.dateComponents(in: .current, from: event.startDate)
