@@ -132,9 +132,14 @@ class ViewController: UIViewController {
         logger.info()
         switch direction {
         case .today:
-            pageMonday = Date()
-            let weekday = Calendar.current.component(.weekday, from: Date())
-            if weekday != 2 {
+            var dateComponents = Calendar.current.dateComponents(in: .current, from: Date.now)
+            dateComponents.hour = 0
+            dateComponents.minute = 0
+            dateComponents.second = 0
+            dateComponents.nanosecond = 0
+            print(dateComponents)
+            pageMonday = dateComponents.date!
+            if dateComponents.weekday != 2 {
                 pageMonday = Calendar.current.nextDate(after: pageMonday, matching: ViewController.matching, matchingPolicy: .nextTime, direction: .backward)!
             }
         case .next:
