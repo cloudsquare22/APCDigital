@@ -552,6 +552,9 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func tapLogsView(_ sender: Any) {
+        self.logview.isHidden.toggle()
+    }
 }
 
 extension ViewController: UIPopoverPresentationControllerDelegate {

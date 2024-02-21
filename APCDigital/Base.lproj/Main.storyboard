@@ -27,7 +27,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="logview" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MWJ-u1-cCl">
-                                        <rect key="frame" x="403" y="218" width="640" height="666"/>
+                                        <rect key="frame" x="363" y="90" width="640" height="855"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <color key="textColor" systemColor="labelColor"/>
@@ -127,6 +127,17 @@
                                         </state>
                                         <connections>
                                             <action selector="tapFilter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vNY-Zl-EsN"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="llf-HP-Oza">
+                                        <rect key="frame" x="298" y="27" width="56" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" name="Basic Color Green"/>
+                                        <state key="normal" image="text.viewfinder" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="32" scale="large"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="tapLogsView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lOW-fp-Rm8"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1079,6 +1090,7 @@
         <image name="gear" catalog="system" width="128" height="122"/>
         <image name="minus.circle" catalog="system" width="128" height="123"/>
         <image name="plus.circle" catalog="system" width="128" height="123"/>
+        <image name="text.viewfinder" catalog="system" width="128" height="115"/>
         <namedColor name="Basic Color Gray Light">
             <color red="0.92100000381469727" green="0.92100000381469727" blue="0.92100000381469727" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
