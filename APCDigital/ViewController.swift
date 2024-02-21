@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var calendarView: CalendarView!
     @IBOutlet weak var pKCanvasView: RapPKCanvasView!
     @IBOutlet weak var menuView: UIView!
+    @IBOutlet weak var logview: UITextView!
     
     var toolPicker: PKToolPicker!
     
@@ -35,6 +36,8 @@ class ViewController: UIViewController {
     let storyBoard = UIStoryboard(name: "Main", bundle: nil)
 
     static let matching = DateComponents(weekday: 2)
+    
+    var memoryLogs: [String] = []
     
 //    override var prefersStatusBarHidden: Bool {
 //        return true
@@ -84,6 +87,8 @@ class ViewController: UIViewController {
         self.setPageMonday(direction: .today)
 
         self.dispPencilCase()
+        
+        self.logview.isHidden = true
         
         logger.info()
     }
@@ -360,27 +365,42 @@ class ViewController: UIViewController {
             })
         }
     }
+    
+    func addMemoryLogs(log: String) {
+        self.memoryLogs.append(log)
+        if self.memoryLogs.count > 50 {
+            self.memoryLogs.removeFirst()
+        }
+        self.logview.text = self.memoryLogs.joined(separator: "\n")
+    }
         
     func dispPKDrawing() {
         logger.info()
+        self.addMemoryLogs(log: #function)
         let monday = self.weekDaysDateComponents[WeekDay1stMonday.monday.rawValue]
         if let page = Pages.select(year: monday.yearForWeekOfYear!, week: monday.weekOfYear!) {
             logger.info("select page")
+            self.addMemoryLogs(log: "select year:\(monday.yearForWeekOfYear!) week:\(monday.weekOfYear!)")
             do {
                 logger.info("Page count: \(page.count)")
+                self.addMemoryLogs(log: "Page count: \(page.count)")
                 self.pKCanvasView.drawing = PKDrawing()
                 self.pKCanvasView.drawing = try PKDrawing(data: page)
                 self.pKCanvasView.setNeedsDisplay()
+                self.addMemoryLogs(log: "Set end.")
             }
             catch {
                 let nserror = error as NSError
+                self.addMemoryLogs(log: "catch:\(nserror)")
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
         else {
             self.pKCanvasView.drawing = PKDrawing()
             logger.info("select no page")
+            self.addMemoryLogs(log: "select no page.")
         }
+        self.addMemoryLogs(log: #function + " end")
     }
     
     func dispEvent() {

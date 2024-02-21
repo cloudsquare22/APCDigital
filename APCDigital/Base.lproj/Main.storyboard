@@ -25,6 +25,16 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZzT-sx-gQf" customClass="RapPKCanvasView" customModule="Action_Planner" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="logview" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MWJ-u1-cCl">
+                                        <rect key="frame" x="403" y="218" width="640" height="666"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view alpha="0.90000000000000002" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V51-NI-Mzf">
@@ -142,13 +152,14 @@
                     </view>
                     <connections>
                         <outlet property="calendarView" destination="omt-Zi-HtB" id="BuX-UM-0kM"/>
+                        <outlet property="logview" destination="MWJ-u1-cCl" id="gRZ-tF-5tg"/>
                         <outlet property="menuView" destination="V51-NI-Mzf" id="lUI-U5-4fF"/>
                         <outlet property="pKCanvasView" destination="ZzT-sx-gQf" id="aCO-X9-aWg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-391" y="92"/>
+            <point key="canvasLocation" x="-391.36163982430452" y="91.9921875"/>
         </scene>
         <!--Calendar Select View Controller-->
         <scene sceneID="7R5-Yx-FIr">
@@ -1081,7 +1092,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
