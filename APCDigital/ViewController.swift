@@ -384,9 +384,10 @@ class ViewController: UIViewController {
             do {
                 logger.info("Page count: \(page.count)")
                 self.addMemoryLogs(log: "Page count: \(page.count)")
-                self.pKCanvasView.drawing = PKDrawing()
+                Thread.sleep(forTimeInterval: 0.2)
                 self.pKCanvasView.drawing = try PKDrawing(data: page)
                 self.pKCanvasView.setNeedsDisplay()
+                self.pKCanvasView.layoutIfNeeded()
                 self.addMemoryLogs(log: "Set end.")
             }
             catch {
