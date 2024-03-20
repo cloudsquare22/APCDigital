@@ -69,6 +69,7 @@ class EditScheduleViewController: UIViewController {
             self.startDatePicker.datePickerMode = .date
             self.endDatePicker.datePickerMode = .date
             self.allDaySwitch.isOn = true
+            self.notificationSwitch.isOn = false
         }
         
         self.calendarPicker.delegate = self
@@ -112,6 +113,7 @@ class EditScheduleViewController: UIViewController {
         if allday == true {
             self.startDatePicker.datePickerMode = .date
             self.endDatePicker.datePickerMode = .date
+            self.notificationSwitch.isOn = false
         }
         else {
             self.startDatePicker.datePickerMode = .dateAndTime
